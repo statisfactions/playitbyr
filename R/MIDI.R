@@ -147,7 +147,7 @@ render.MIDI <- function(s) {
   for(i in 1:length(tracklist))
     x <- addTrack(x, tracklist[[i]])
 
-  outfile <-"lovely"
+  outfile <- tempfile()
 
   write.table(x, file=paste(outfile,"csv",sep="."), quote=F, sep=",", row.names=F, col.names=F, na="")
   system(paste(getCSVMIDI(), paste(outfile,"csv",sep="."), paste(outfile,"mid",sep=".")))
