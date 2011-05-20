@@ -21,7 +21,10 @@ setCSVMIDI <- function(x="csvmidi") {
   options(csvmidi = x)
 }
 
-getCSVMIDI <- function() getOption("csvmidi")
+getCSVMIDI <- function() {
+  if(is.null(getOption("csvmidi"))) {
+    "csvmidi"} else getOption("csvmidi")
+}
 
 MIDI <- function(title="R-created MIDI", bpm=60){
   ## Creates empty "MIDI" object that tracks can be inserted into
@@ -132,21 +135,26 @@ addTrack <- function(MIDIOld, MIDITrack, ...) {
   MIDINew
 }
 
-render.MIDI <- function(x) {
-  if(is.null(getMIDIPlayer())) stop("No MIDI player specified. Please set with getMIDIPlayer().")
+render.MIDI <- function(s) {
+  if(is.null(getMIDIPlayer())) stop("No MIDI player specified. Please set with setMIDIPlayer().")
 
-  if(any(sapply(1:length(y$sonlayers), function(x) getMappings(y, x)$pan) != 0.5))
+  if(any(sapply(1:length(s$sonlayers), function(y) getMappings(s, y)$pan) != 0.5))
     warning("Pan parameter not currently supported for MIDI rendering and will be ignored.")
-  df <- df.notes(x)
-  tracklist <- lapply(levels(df$sonlayer), function(x) track(df[df$sonlayer %in% x,]))
+  df <- df.notes(s)
+
+  tracklist <- lapply(levels(df$sonlayer), function(y) track(df[df$sonlayer %in% y,]))
   x <- MIDI()
   for(i in 1:length(tracklist))
     x <- addTrack(x, tracklist[[i]])
-  outfile <-tempfile()
+
+  outfile <-"lovely"
+
   write.table(x, file=paste(outfile,"csv",sep="."), quote=F, sep=",", row.names=F, col.names=F, na="")
   system(paste(getCSVMIDI(), paste(outfile,"csv",sep="."), paste(outfile,"mid",sep=".")))
-  system(paste(getMIDIPlayer(),paste(outfile,"mid",sep=".")), wait=FALSE)
-  unlink(outfile)
+  system(paste(getMIDIPlayer(),paste(outfile,"mid",sep=".")), wait=TRUE)
+
+  unlink(paste(outfile,"csv",sep="."))
+  unlink(paste(outfile,"mid",sep="."))
 }
 
 

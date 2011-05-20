@@ -52,6 +52,10 @@ shape_notes <- function(...) sonlayer("notes",...)
     for(i in names(x$scales)) {
       if(!is.null(y[[i]])) x$scales[[i]] <- y[[i]]
     }
+  } else if("sonaes" %in% class(y)) {
+    for(i in names(x$mapping)) {
+      if(!is.null(y[[i]])) x$mapping[[i]] <- y[[i]]
+    }
   } else {stop("'+' operator not supported for this operation.")}
   x
 }          
