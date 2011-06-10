@@ -1,11 +1,18 @@
 Package: playitbyr
 Type: Package
-Title: Explore data through sound
+Title: Representing and exploring data through sound
 Version: 0.0-0
-Date: 2011-05-19
+Date: 2011-06-0
 Author: Ethan Brown
-Maintainer: playitbyr
-Description:
+Maintainer: Ethan Brown <ethancbrown+playitbyr at gmail.com>
+
+Description: Play it By R is a flexible toolkit for data analysis and
+exploration in R. The functions allow the user to map data onto sonic
+parameters like pitch, tempo, and rhythm, and output sound and sound
+files.
+
+URL: http://playitbyr.r-forge.r-project.org/
+
 Depends: audio
-License: GPL-2
+License: GPL (≥ 2)
 LazyLoad: yes
