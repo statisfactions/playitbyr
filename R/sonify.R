@@ -1,12 +1,7 @@
-sonify <- function(data=NULL, mapping=sonaes(pitch=8, time=NULL, tempo=120, dur=1, vol=0.5, pan=0.5, timbre=1), rendering="MIDI", scales=scaling(), total.length=10) {
+sonify <- function(data=NULL, mapping=sonaes(), scales=scaling(), sonlayers=shape_notes(), rendering="audio") {
   ## This just puts the items in a list
-  ## Eventually, need to make this more abstract, to be more accomodating of arbitrary parameters
-  ## for Csound instruments; currently optimized for MIDI
 
-  ## One idea: include separate methods--or a separate S3 class, even?--for mapping to arbitrary Csound
-  ## instruments (and specifying by p-fields)
-
-  s <- list(data, mapping, rendering, scales, NULL)
+  s <- list(data, mapping, rendering, scales, sonlayers)
   names(s) <- c("data", "mapping", "rendering", "scales", "sonlayers") #Theres' got to be an easier way to do this
   class(s) <- c(rendering, "sonify", "list")
   s
@@ -18,9 +13,8 @@ sonify <- function(data=NULL, mapping=sonaes(pitch=8, time=NULL, tempo=120, dur=
 
 ##From manual at Csounds.com: the fraction is preceded by a whole number octave index such that 8.00 represents Middle C, 9.00 the C above, etc. Midi note number values range between 0 and 127 (inclusively) with 60 representing Middle C, and are usually whole numbers.
 
-sonaes <- function(pitch=NULL, time=NULL, tempo=NULL, dur=NULL, vol=NULL, pan=0.5, timbre=NULL) {
-  ##Similar to ggplot2 "sonaes". In fact, this should BE "sonaes", so we need some sort
-  ##of namespace
+sonaes <- function(pitch=NULL, time=NULL, tempo=NULL, dur=NULL, vol=NULL, pan=0.5, timbre="sine") {
+  ##Similar to ggplot2 "sonaes"
   
   son <- list(pitch, time, tempo, dur, vol, pan, timbre) #TODO: make this easier to add on to
   names(son) <- c("pitch", "time", "tempo", "dur", "vol", "pan", "timbre") #TODO: extract this  intelligently
@@ -38,8 +32,13 @@ sonlayer <- function(shape="notes", shape_params=NULL, stat=NULL, stat_params=NU
   l
 }
 
+rendering <- function(x) {
+  class(x) <- "sonrendering"
+  x
+}
+
 shape_notes <- function(...) sonlayer("notes",...)
-  
+
 
 "+.sonify" <- function(x, y) {
   if("sonlayer" %in% class(y)) {
@@ -56,6 +55,9 @@ shape_notes <- function(...) sonlayer("notes",...)
     for(i in names(x$mapping)) {
       if(!is.null(y[[i]])) x$mapping[[i]] <- y[[i]]
     }
+  } else if("sonrendering" %in% class(y)) {
+    x$rendering <- y
+    class(x) <- c(y, class(x)[-1])
   } else {stop("'+' operator not supported for this operation.")}
   x
 }          
@@ -83,20 +85,20 @@ print.sonify <- function(x) {
   x
 }
 
-df.notes <- function(s) {
+.dfNotes <- function(s) {
   ## s is a "sonify" object containing all notes sonlayers
   ## This function renders the "notes" shape
 
   if(is.null(s$sonlayers)) stop("Cannot render sound without any sonlayers.")
 
-  notes <- do.call(rbind, lapply(1:length(s$sonlayers), function(x) getNotes(s, x)))
+  notes <- do.call(rbind, lapply(1:length(s$sonlayers), function(x) .getNotes(s, x)))
   notes
 }
 
 
 
 
-getMappings <- function(x, sonlayernum) {
+.getMappings <- function(x, sonlayernum) {
   ## x: a sonify object, returns the current mappings as a named list
   ## 1. assign mapping based on sonlayer, and on default if sonlayer mapping not present
   if(sonlayernum > length(x$sonlayers)) stop(paste("There is no sonlayer", sonlayernum))
@@ -111,7 +113,7 @@ getMappings <- function(x, sonlayernum) {
   return(x$mapping)
 }
 
-getData <- function(x, sonlayernum) {
+.getData <- function(x, sonlayernum) {
   ## x: a sonify object, returns the current data as a data.frame
   if(sonlayernum > length(x$sonlayers)) stop(paste("There is no sonlayer", sonlayernum))
 
@@ -120,18 +122,18 @@ getData <- function(x, sonlayernum) {
 } 
 
 
-getNotes <- function(x, sonlayernum) {
+.getNotes <- function(x, sonlayernum) {
   ## Create the notes for the given sonlayer into Csound score style format
   n <- nrow(x$data) # for notes shape, every row of df is a note
   sonlayer <- rep(sonlayernum, n)
   curnotes <- data.frame(sonlayer)
   
-  map <- getMappings(x, sonlayernum)
+  map <- .getMappings(x, sonlayernum)
   
   if(is.null(map$tempo)) mapnames <- setdiff(names(map), "tempo")
   if(is.null(map$time)) mapnames <- setdiff(names(map), "time")
   
-  data <- getData(x, sonlayernum)
+  data <- .getData(x, sonlayernum)
 
   for(j in mapnames) {
     if(map[[j]] %in% names(data)) {

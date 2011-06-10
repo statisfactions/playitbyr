@@ -1,10 +1,11 @@
 Package: playitbyr
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
+Title: Explore data through sound
+Version: 0.0-0
 Date: 2011-05-19
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Ethan Brown
+Maintainer: playitbyr
+Description:
+Depends: audio
+License: GPL-2
 LazyLoad: yes

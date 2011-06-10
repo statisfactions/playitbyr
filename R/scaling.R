@@ -19,12 +19,13 @@ scaling <- function(pitch = NULL, time = NULL, tempo = NULL, dur = NULL, vol = N
   sc
 }
 
+## Convenience functions for specifying scales.
 scale_pitch_linear <- function(min, max) scaling(pitch=list(min, max, linear.scale))
 scale_time_linear <- function(min, max) scaling(time=list(min, max, linear.scale))
 scale_tempo_linear <- function(min, max) scaling(tempo=list(min, max, linear.scale))
 scale_dur_linear <- function(min, max) scaling(dur=list(min, max, linear.scale))
 scale_pan_linear <- function(min, max) scaling(pan=list(min, max, linear.scale))
-scale_vol_linear <- function(min, max) scaling(pitch=list(min, max, linear.scale))
+scale_vol_linear <- function(min, max) scaling(vol=list(min, max, linear.scale))
 
 
 
@@ -33,6 +34,7 @@ linear.scale <- function(x, min, max) {
   ## and "upper" the maximum
 
   if(min>max) {
+    ## Allow for reversed polarity
     x <- -x
     oldmin <- min
     oldmax <- max
