@@ -67,11 +67,26 @@ render.audio <- function(s) {
   ## Rescale matrix
   out <- linear.scale(out, -1, 1)
   outWave <- as.audioSample(out)
-  save.wave(outWave, "foo.wav")
   assign(".LastRendering", outWave, pos=".GlobalEnv")
-  system("aplay foo.wav")  
+  playAudioRendering(outWave)
   
 }
 
 
+playAudioRendering <- function(audioSamp) {
+  if(!(getOption("audioRendering") %in% c("tempfile", "audio::play")))
+    print('No valid option for audioRendering given:
+audioSample object saved as ".LastRendering" in user workspace.
+This can be played or saved with playLastRendering() or saveLastRendering("myfile.wav")')
+  if(getOption("audioRendering") %in% "tempfile") {
+    player <- getOption("wavPlayer")
+    file <- tempfile()
+    save.wave(audioSamp, file)
+    system2(player, file)
+    unlink(file)
+  } else {play(audioSamp)}
+}
 
+##TODO: need playLastRendering(), saveLastRendering(), and to set up all these options
+ 
+  

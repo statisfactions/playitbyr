@@ -13,6 +13,6 @@ files.
 
 URL: http://playitbyr.r-forge.r-project.org/
 
-Depends: audio
+Depends: R (>= 2.12.0), audio
 License: GPL (≥ 2)
 LazyLoad: yes
