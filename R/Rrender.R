@@ -1,11 +1,3 @@
-## So there are many complications natively rendering the
-## list of instructions included in the output of df.notes
-## I need to GENERATE each note, then I need to merge a whole bunch of notes
-## together, then I need to normalize so that I'm not out of amplitude.
-## Also, I should clip the end of each note to the nearest "0" cutoff point.
-## The most straightforward rendering strategy I can think of:
-
-
 ## start: 0s everywhere else besides the exact placement of notes
 ## pitch: convert from oct to freq, help of csound manual and previous code
 ## duration: seconds * samp.rate, then cut off at last 0
@@ -13,8 +5,6 @@
 
 ## II. Add all these matrices together, then normalize, then create
 ## audioSample
-
-all
 
 .createNote <- function(noterow, samp.rate) {
   ## Returns a matrix with 
@@ -72,13 +62,16 @@ render.audio <- function(s) {
   
 }
 
-
 playAudioRendering <- function(audioSamp) {
   if(!(getOption("audioRendering") %in% c("tempfile", "audio::play")))
     print('No valid option for audioRendering given:
 audioSample object saved as ".LastRendering" in user workspace.
-This can be played or saved with playLastRendering() or saveLastRendering("myfile.wav")')
+This can be played with playLastRendering() (which plays
+the rendering using the play function from the audio function, or
+saved with saveLastRendering("myfile.wav")')
   if(getOption("audioRendering") %in% "tempfile") {
+    if(is.null(getOption("wavPlayer")))
+      stop("Please set the wave file player you want to use with setPlayer")
     player <- getOption("wavPlayer")
     file <- tempfile()
     save.wave(audioSamp, file)
@@ -87,6 +80,18 @@ This can be played or saved with playLastRendering() or saveLastRendering("myfil
   } else {play(audioSamp)}
 }
 
-##TODO: need playLastRendering(), saveLastRendering(), and to set up all these options
+setPlayer <- function(player) {
+  if(!is.character(player) | length(player))
+    stop("*.wav file player must be character string of length 1.")
+  options(wavPlayer = player)
+}
+
+getPlayer <- function() getOption("wavPlayer")
+
+playLastRendering() <- function() play(.LastRendering)
+
+saveLastRendering() <- function(filename) save.wave(.LastRendering, filename
+
+
  
   
