@@ -11,7 +11,7 @@
   ## a note with specified start, pitch, duration, volume, and pan
   
   ## "noterow" is intended to be what is returned by a row from funciton df.notes
-  start <- round(noterow$start * samp.rate)+1
+  start <- round(noterow$start * samp.rate)
   n <- round(noterow$dur * samp.rate)
   end <- start + n-1
   note <- matrix(data=0, ncol = n, nrow = 2)
