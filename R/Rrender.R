@@ -13,7 +13,6 @@
   ## "noterow" is intended to be what is returned by a row from funciton df.notes
   start <- round(noterow$start * samp.rate)
   n <- round(noterow$dur * samp.rate)
-  end <- start + n-1
   note <- matrix(data=0, ncol = n, nrow = 2)
   freq <- octToFreq(noterow$pitch)
 
@@ -31,6 +30,7 @@
   note[1,] <- waveform * noterow$pan
   note[2,] <- waveform * (1 - noterow$pan)
 
+  end <- start+ncol(note)-1
   return(list(start=start, end=end, note=note))
 }  
 
@@ -45,13 +45,15 @@ render.audio <- function(s) {
 
   ## Calculate total number of samples and create data.frame
   ## I add on "nrow(notes)" to the total as a fudge factor
-  total <- max(notes$start + notes$dur) * samp.rate + nrow(notes) 
+  total <- ceiling(max(notes$start + notes$dur) * samp.rate + nrow(notes)*2)
   out <- matrix(data=0, ncol = total, nrow = 2)
 
   for(i in 1:nrow(notes)) {
     ## Loop to generate each note and put it into the "out" matrix
     curNote <- .createNote(notes[i,], samp.rate)
-    out[, curNote$start:curNote$end] <- out[, curNote$start:curNote$end] + curNote$note
+    numNotEqual <- ncol(curNote$note) - ncol(out[, curNote$start:(curNote$end)])
+    try(out[, curNote$start:(curNote$end + numNotEqual)] <- out[, curNote$start:(curNote$end + numNotEqual)] + curNote$note)
+
   }
 
   ## Rescale matrix
@@ -71,7 +73,7 @@ the rendering using the play function from the audio function, or
 saved with saveLastRendering("myfile.wav")')
   if(getOption("audioRendering") %in% "tempfile") {
     if(is.null(getOption("wavPlayer")))
-      stop("Please set the wave file player you want to use with setPlayer")
+n      stop("Please set the wave file player you want to use with setPlayer")
     player <- getOption("wavPlayer")
     file <- tempfile()
     save.wave(audioSamp, file)
@@ -81,17 +83,13 @@ saved with saveLastRendering("myfile.wav")')
 }
 
 setPlayer <- function(player) {
-  if(!is.character(player) | length(player))
+  if(!is.character(player) | length(player) > 1)
     stop("*.wav file player must be character string of length 1.")
   options(wavPlayer = player)
 }
 
 getPlayer <- function() getOption("wavPlayer")
 
-playLastRendering() <- function() play(.LastRendering)
+playLastRendering <- function()  play(.LastRendering)
 
-saveLastRendering() <- function(filename) save.wave(.LastRendering, filename
-
-
- 
-  
+saveLastRendering <- function(filename) save.wave(.LastRendering, filename)
