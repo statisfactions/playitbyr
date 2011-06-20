@@ -73,11 +73,11 @@ the rendering using the play function from the audio function, or
 saved with saveLastRendering("myfile.wav")')
   if(getOption("audioRendering") %in% "tempfile") {
     if(is.null(getOption("wavPlayer")))
-n      stop("Please set the wave file player you want to use with setPlayer")
+      stop("Please set the wave file player you want to use with setPlayer")
     player <- getOption("wavPlayer")
     file <- tempfile()
     save.wave(audioSamp, file)
-    system2(player, file)
+    system(paste(player, file)) ## FIXME convert to system2 call
     unlink(file)
   } else {play(audioSamp)}
 }
