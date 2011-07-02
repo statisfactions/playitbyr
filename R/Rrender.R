@@ -11,8 +11,9 @@
   ## a note with specified start, pitch, duration, volume, and pan
   
   ## "noterow" is intended to be what is returned by a row from funciton df.notes
-  start <- round(noterow$start * samp.rate)
+  start <- round(noterow$start * samp.rate)+1
   n <- round(noterow$dur * samp.rate)
+  end <- start + n-1
   note <- matrix(data=0, ncol = n, nrow = 2)
   freq <- octToFreq(noterow$pitch)
 
@@ -30,7 +31,6 @@
   note[1,] <- waveform * noterow$pan
   note[2,] <- waveform * (1 - noterow$pan)
 
-  end <- start+ncol(note)-1
   return(list(start=start, end=end, note=note))
 }  
 
@@ -45,15 +45,13 @@ render.audio <- function(s) {
 
   ## Calculate total number of samples and create data.frame
   ## I add on "nrow(notes)" to the total as a fudge factor
-  total <- ceiling(max(notes$start + notes$dur) * samp.rate + nrow(notes)*2)
+  total <- max(notes$start + notes$dur) * samp.rate + nrow(notes) 
   out <- matrix(data=0, ncol = total, nrow = 2)
 
   for(i in 1:nrow(notes)) {
     ## Loop to generate each note and put it into the "out" matrix
     curNote <- .createNote(notes[i,], samp.rate)
-    numNotEqual <- ncol(curNote$note) - ncol(out[, curNote$start:(curNote$end)])
-    try(out[, curNote$start:(curNote$end + numNotEqual)] <- out[, curNote$start:(curNote$end + numNotEqual)] + curNote$note)
-
+    out[, curNote$start:curNote$end] <- out[, curNote$start:curNote$end] + curNote$note
   }
 
   ## Rescale matrix
@@ -63,6 +61,7 @@ render.audio <- function(s) {
   playAudioRendering(outWave)
   
 }
+
 
 playAudioRendering <- function(audioSamp) {
   if(!(getOption("audioRendering") %in% c("tempfile", "audio::play")))
@@ -75,17 +74,11 @@ saved with saveLastRendering("myfile.wav")')
     if(is.null(getOption("wavPlayer")))
       stop("Please set the wave file player you want to use with setPlayer")
     player <- getOption("wavPlayer")
-    file <- tempfile()
+    file <- paste(tempfile(), ".wav", sep="")
     save.wave(audioSamp, file)
-    system(paste(player, file)) ## FIXME convert to system2 call
+    system2(player, file)
     unlink(file)
   } else {play(audioSamp)}
-}
-
-setPlayer <- function(player) {
-  if(!is.character(player) | length(player) > 1)
-    stop("*.wav file player must be character string of length 1.")
-  options(wavPlayer = player)
 }
 
 getPlayer <- function() getOption("wavPlayer")
@@ -93,3 +86,4 @@ getPlayer <- function() getOption("wavPlayer")
 playLastRendering <- function()  play(.LastRendering)
 
 saveLastRendering <- function(filename) save.wave(.LastRendering, filename)
+  
