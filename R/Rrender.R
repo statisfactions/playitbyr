@@ -83,6 +83,8 @@ saved with saveLastRendering("myfile.wav")')
 
 getPlayer <- function() getOption("wavPlayer")
 
+setPlayer <- function(player) options(wavPlayer = player)
+
 playLastRendering <- function()  play(.LastRendering)
 
 saveLastRendering <- function(filename) save.wave(.LastRendering, filename)
