@@ -78,7 +78,12 @@ saved with saveLastRendering("myfile.wav")')
     save.wave(audioSamp, file)
     system2(player, file)
     unlink(file)
-  } else {play(audioSamp)}
+  } else {
+    control <- play(audioSamp)
+
+    wait(resume(control))
+    close(control)
+  }
 }
 
 getPlayer <- function() getOption("wavPlayer")
