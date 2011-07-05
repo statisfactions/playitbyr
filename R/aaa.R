@@ -1,5 +1,7 @@
 
 if(is.null(getOption("audioRendering")))
-  options(audioRendering = "tempfile")
+    if(Sys.info()[["sysname"]] %in% "Linux") {
+    options(audioRendering = "tempfile")} else {
+        options(audioRendering = "audio::play")
 
 
