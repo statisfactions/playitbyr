@@ -17,7 +17,7 @@ sonaes <- function(pitch=NULL, time=NULL, tempo=NULL,
   \item{pitch}{a \code{data.frame} column name (of the "data" argument
     in \code{sonify}), or the desired pitch of all events, represented
     such that 8 represents middle C, 9 represents the octave above,
-    etc.}
+    etc. (This is \href{http://www.csounds.com/manual/html/cpsoct.html}{Csounds 'oct' notation}.)}
   \item{time}{a \code{data.frame} column name, or the desired start
     time of all events (in seconds)}
   \item{tempo}{a \code{data.frame} column name, or the desired tempo
@@ -25,7 +25,8 @@ sonaes <- function(pitch=NULL, time=NULL, tempo=NULL,
   \item{dur}{a \code{data.frame} column name, or the desired duration of
     all events (in seconds)}
   \item{vol}{a \code{data.frame} column name, or the desired volume of
-    all events (as a proportion of maximum possible amplitude)}
+    all events as a number between 0, silence, and 1, the maximum
+  possible amplitude}
   \item{pan}{a \code{data.frame} column name, or the desired balance
     between left and right stereo channels, where 0 is all the left
     channel, 0.5 balanced, and 1 all the right.}
@@ -37,5 +38,5 @@ sonaes <- function(pitch=NULL, time=NULL, tempo=NULL,
   object.}
 
 \seealso{
-  \code{\link{sonaes}}
+  \code{\link{sonify}}, \code{\link{scaling}}, \code{octToFreq}
 }

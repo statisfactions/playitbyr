@@ -7,8 +7,7 @@
   of parameters, and additional options.
 }
 \usage{
-sonify <- function(data=NULL, mapping=sonaes(), scales=scaling(),
-                  (sonlayers=shape_notes(), rendering="R"))
+sonify(data=NULL, mapping=sonaes(), scales=scaling())
 }
 \arguments{
   \item{data}{a \code{data.frame} with the data to be sonified
@@ -18,19 +17,21 @@ sonify <- function(data=NULL, mapping=sonaes(), scales=scaling(),
   \item{scales}{a \code{sonifyScale} object (created by \code{scaling()})
     that gives the scaling function and desired parameter range from the data to
     each sound}
-  \item{sonlayers}{a \code{sonlayer} object. Only the default value, a layer of
-    shape type "notes",  is currently supported.}
-  \item{rendering}{the method of actually realizing the sound. Only the
-    the default value, "audio", to render using the \code{audio}
-    package, is currently supported.}
+  % PLANNED BUT NOT IMPLEMENTED YET
+  % \item{sonlayers}{a \code{sonlayer} object. Only the default value, a layer of
+  %   shape type "notes",  is currently supported.}
+  % \item{rendering}{the method of actually realizing the sound. Only the
+  %   the default value, "audio", to render using the \code{audio}
+  %   package, is currently supported.}
 }
 \value{
   A \code{sonify} object, which contains what is needed to render the
   object. If the object is completely specified, it can by rendered
   simply by calling the print method for the object (i.e. simply typing
-  the name of the object at the R prompt.}
+  the name of the object at the R prompt).}
 
 \seealso{
-   \code{\link{sonaes}}
+  \code{\link{sonaes}}, \code{\link{print.sonify}}
+
 }
 

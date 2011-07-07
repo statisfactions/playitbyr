@@ -1,6 +1,12 @@
-sonify <- function(data=NULL, mapping=sonaes(), scales=scaling(), sonlayers=shape_notes(), rendering="audio") {
+sonify <- function(data=NULL, mapping=sonaes(), scales=scaling()) {
   ## This just puts the items in a list
 
+  ## TODO these will eventually be arguments in the sonify function,
+  ## but for now I'm simply assigning them since there is only one
+  ## possible value
+  sonlayers <- shape_notes()
+  rendering <- "audio"
+  
   s <- list(data, mapping, rendering, scales, sonlayers)
   names(s) <- c("data", "mapping", "rendering", "scales", "sonlayers") #Theres' got to be an easier way to do this
   class(s) <- c(rendering, "sonify", "list")
