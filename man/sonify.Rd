@@ -7,7 +7,7 @@
   of parameters, and additional options.
 }
 \usage{
-sonify(data=NULL, mapping=sonaes(), scales=scaling())
+sonify(data=NULL, mapping=sonaes(), scales=sonscaling())
 }
 \arguments{
   \item{data}{a \code{data.frame} with the data to be sonified

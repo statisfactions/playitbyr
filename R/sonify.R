@@ -1,6 +1,23 @@
 sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling()) {
   ## This just puts the items in a list
 
+  ## TODO these functions will eventually be defined separately
+  sonlayer <- function(shape="notes", shape_params=NULL, stat=NULL, stat_params=NULL, data=NULL, mapping=NULL) {
+    l <- list(list(shape, shape_params), list(stat, stat_params), data, mapping)
+    names(l) <- c("shape", "stat", "data", "mapping")
+    names(l$stat) <- c("stat", "stat_params")
+    names(l$shape) <- c("shape", "shape_params")
+    class(l) <- c("sonlayer", "list")
+    l
+  }
+  shape_notes <- function(...) sonlayer("notes",...)
+
+  rendering <- function(x) {
+    class(x) <- "sonrendering"
+    x
+  }
+
+  
   ## TODO these will eventually be arguments in the sonify function,
   ## but for now I'm simply assigning them since there is only one
   ## possible value
@@ -29,21 +46,9 @@ sonaes <- function(pitch=NULL, time=NULL, tempo=NULL, dur=NULL, vol=NULL, pan=0.
 }
 
 
-sonlayer <- function(shape="notes", shape_params=NULL, stat=NULL, stat_params=NULL, data=NULL, mapping=NULL) {
-  l <- list(list(shape, shape_params), list(stat, stat_params), data, mapping)
-  names(l) <- c("shape", "stat", "data", "mapping")
-  names(l$stat) <- c("stat", "stat_params")
-  names(l$shape) <- c("shape", "shape_params")
-  class(l) <- c("sonlayer", "list")
-  l
-}
 
-rendering <- function(x) {
-  class(x) <- "sonrendering"
-  x
-}
 
-shape_notes <- function(...) sonlayer("notes",...)
+
 
 
 "+.sonify" <- function(x, y) {
@@ -68,16 +73,16 @@ shape_notes <- function(...) sonlayer("notes",...)
   x
 }          
 
-render <- function(x) UseMethod("render")
+render <- function(s) UseMethod("render")
 
-print.sonify <- function(x) {
+print.sonify <- function(x, ...) {
   ## This currently ONLY works for "MIDI" and for JUST ONE sonlayer!
   render(x)
 }
 
 
 
-"%+%" <- function(x, y) {
+`%+%` <- function(x, y) {
   ##Another possible ggplot2 confusion/conflict
   ##Replace data.frame in x (a sonify object)
   ##with y (data.frame)

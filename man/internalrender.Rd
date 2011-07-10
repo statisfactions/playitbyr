@@ -1,4 +1,4 @@
-\name{internaldf}
+\name{internalrender}
 \alias{render}
 \alias{render.audio}
 \alias{playAudioRendering}
@@ -9,7 +9,7 @@
   and determines which method to call based on the class of the object;
   playAudioRendering plays the resulting \code{audioSample} object.}
 \usage{
-render(x)
+render(s)
 render.audio(s)
 .createNote(noterow, samp.rate)
 playAudioRendering(audioSamp)
@@ -24,7 +24,7 @@ playAudioRendering(audioSamp)
   \code{playAudioRendering} is called for its side effect, to produce
   the sound of the sonification.}
 \arguments{
-  \item{x, s}{A \code{sonify} object}
+  \item{s}{A \code{sonify} object}
   \item{noterow}{A row of the \code{data.frame} returned by
     \code{.getNotes}, spoon-fed to \code{.createNote} one by one by
     \code{render.audio}}

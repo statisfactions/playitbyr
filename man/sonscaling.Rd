@@ -35,11 +35,12 @@ NULL, pan=NULL, timbre = NULL)
     channel, 0.5 balanced, and 1 all the right. A list with three
     elements: the minimum pan, the maximum pan, and the scaling
     function.}
+  \item{timbre}{Currently no scalings are supported for this argument.}
 }
 
 \seealso{
   \code{\link{sonify}} where this is eventually used;
   \code{\link{sonaes}} for defining the which data columns get mapped
-  onto these sonic parameters; \code{\link{scalingShortcuts}} for easy
+  onto these sonic parameters; \code{\link{scaleShortcuts}} for easy
   shortcut functions for common use-cases of scaling; and
   \code{\link{linear.scale}} for an example of a scaling function.}

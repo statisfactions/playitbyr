@@ -9,7 +9,7 @@
   (or included in its construction).}
 
 \usage{
-sonaes <- function(pitch=NULL, time=NULL, tempo=NULL,
+sonaes(pitch=NULL, time=NULL, tempo=NULL,
                    dur=NULL, vol=NULL, pan=0.5, timbre="sine")
 }
 
@@ -41,5 +41,5 @@ sonaes <- function(pitch=NULL, time=NULL, tempo=NULL,
   object.}
 
 \seealso{
-  \code{\link{sonify}}, \code{\link{scaling}}, \code{octToFreq}
+  \code{\link{sonify}}, \code{\link{sonscaling}}, \code{octToFreq}
 }

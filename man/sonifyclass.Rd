@@ -6,11 +6,11 @@
 \description{Methods to print and alter sonify objects. Printing a
   sonify object renders it to sound (analogously to how printing
   \code{ggplot} objects renders them to screen in the
-  \code{\href{http://had.co.nz/ggplot2}{ggplot2}} package).}
+  \href{http://had.co.nz/ggplot2}{ggplot2} package).}
 \usage{
-\method{print}{sonify}(x)
+\method{print}{sonify}(x, \dots)
 \method{+}{sonify}(x, y)
-\method{\%+\%}{sonify}(x, y)
+x \%+\% y
 }
 \arguments{
   \item{x}{A \code{sonify} object}
@@ -19,6 +19,7 @@
     \code{sonaes()} to add to \code{x}.
 
     For \code{\%+\%}, a \code{data.frame} to add to \code{x}.}
+  \item{\dots}{Ignored.}
 }
 \value{
   \code{+} and \code{\%+\%} both return a sonify object with the

@@ -16,4 +16,5 @@
   rescaled in the desired way.}
 \seealso{
   \code{\link{sonscaling}}, \code{\link{scaleShortcuts}}
+  }
 
