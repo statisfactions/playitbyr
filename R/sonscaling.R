@@ -1,6 +1,6 @@
-scaling <- function(pitch = NULL, time = NULL, tempo = NULL, dur = NULL, vol = NULL, pan=NULL, timbre = NULL) {
+sonscaling <- function(pitch = NULL, time = NULL, tempo = NULL, dur = NULL, vol = NULL, pan=NULL, timbre = NULL) {
   ##
-  ##The sonifyScale for a sound parameter is a list with three elements: min, max, and function
+  ##The sonscaling for a sound parameter is a list with three elements: min, max, and function
   ##
   ##pitch: specified in csound oct notation, with 8.00 as middle C
   ##tempo: specified in proportional relation to total length=1 then multiplied, by default
@@ -15,17 +15,17 @@ scaling <- function(pitch = NULL, time = NULL, tempo = NULL, dur = NULL, vol = N
                  names(x) <- c("min", "max", "scaling.function")
                return(x)})
   names(sc) <- c("pitch", "time", "tempo", "dur", "vol", "pan", "timbre")
-  class(sc) <- c("sonifyScale", "list")
+  class(sc) <- c("sonscaling", "list")
   sc
 }
 
 ## Convenience functions for specifying scales.
-scale_pitch_linear <- function(min, max) scaling(pitch=list(min, max, linear.scale))
-scale_time_linear <- function(min, max) scaling(time=list(min, max, linear.scale))
-scale_tempo_linear <- function(min, max) scaling(tempo=list(min, max, linear.scale))
-scale_dur_linear <- function(min, max) scaling(dur=list(min, max, linear.scale))
-scale_pan_linear <- function(min, max) scaling(pan=list(min, max, linear.scale))
-scale_vol_linear <- function(min, max) scaling(vol=list(min, max, linear.scale))
+scale_pitch_linear <- function(min, max) sonscaling(pitch=list(min, max, linear.scale))
+scale_time_linear <- function(min, max) sonscaling(time=list(min, max, linear.scale))
+scale_tempo_linear <- function(min, max) sonscaling(tempo=list(min, max, linear.scale))
+scale_dur_linear <- function(min, max) sonscaling(dur=list(min, max, linear.scale))
+scale_pan_linear <- function(min, max) sonscaling(pan=list(min, max, linear.scale))
+scale_vol_linear <- function(min, max) sonscaling(vol=list(min, max, linear.scale))
 
 
 

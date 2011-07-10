@@ -1,4 +1,4 @@
-sonify <- function(data=NULL, mapping=sonaes(), scales=scaling()) {
+sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling()) {
   ## This just puts the items in a list
 
   ## TODO these will eventually be arguments in the sonify function,
@@ -52,7 +52,7 @@ shape_notes <- function(...) sonlayer("notes",...)
     if(is.null(x$sonlayers)) {
       x$sonlayers[[1]] <- y
     } else {x$sonlayers <- c(x$sonlayers, list(y))}
-  } else if("sonifyScale" %in% class(y)) {
+  } else if("sonscaling" %in% class(y)) {
     ## adds to or overrides scale
     for(i in names(x$scales)) {
       if(!is.null(y[[i]])) x$scales[[i]] <- y[[i]]

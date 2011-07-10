@@ -14,10 +14,13 @@ sonaes <- function(pitch=NULL, time=NULL, tempo=NULL,
 }
 
 \arguments{
+  
   \item{pitch}{a \code{data.frame} column name (of the "data" argument
     in \code{sonify}), or the desired pitch of all events, represented
     such that 8 represents middle C, 9 represents the octave above,
-    etc. (This is \href{http://www.csounds.com/manual/html/cpsoct.html}{Csounds 'oct' notation}.)}
+    etc. (This is
+    \href{http://www.csounds.com/manual/html/cpsoct.html}{Csound's
+      \sQuote{oct} notation}.)}
   \item{time}{a \code{data.frame} column name, or the desired start
     time of all events (in seconds)}
   \item{tempo}{a \code{data.frame} column name, or the desired tempo

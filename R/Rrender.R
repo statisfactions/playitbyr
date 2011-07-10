@@ -65,10 +65,10 @@ render.audio <- function(s) {
 
 playAudioRendering <- function(audioSamp) {
   if(!(getOption("audioRendering") %in% c("tempfile", "audio::play")))
-    print('No valid option for audioRendering given:
+    stop('No valid option for audioRendering given:
 audioSample object saved as ".LastRendering" in user workspace.
 This can be played with playLastRendering() (which plays
-the rendering using the play function from the audio function, or
+the rendering using the play function from the audio function), or
 saved with saveLastRendering("myfile.wav")')
   if(getOption("audioRendering") %in% "tempfile") {
     if(is.null(getOption("wavPlayer")))
@@ -90,7 +90,7 @@ getPlayer <- function() getOption("wavPlayer")
 
 setPlayer <- function(player) options(wavPlayer = player)
 
-playLastRendering <- function()  play(.LastRendering)
+playLastRendering <- function()  playAudioRendering(.LastRendering)
 
 saveLastRendering <- function(filename) save.wave(.LastRendering, filename)
   
