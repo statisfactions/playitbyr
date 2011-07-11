@@ -1,11 +1,3 @@
-## start: 0s everywhere else besides the exact placement of notes
-## pitch: convert from oct to freq, help of csound manual and previous code
-## duration: seconds * samp.rate, then cut off at last 0
-## volume, pan: each channel multiplies the sine wave by volume * pan
-
-## II. Add all these matrices together, then normalize, then create
-## audioSample
-
 .createNote <- function(noterow, samp.rate) {
   ## Returns a matrix with 
   ## a note with specified start, pitch, duration, volume, and pan
@@ -56,7 +48,7 @@ render.audio <- function(s) {
 
   ## Rescale matrix
   out <- linear.scale(out, -1, 1)
-  outWave <- as.audioSample(out)
+  outWave <- as.audioSample(out, samp.rate)
   assign(".LastRendering", outWave, pos=".GlobalEnv")
   playAudioRendering(outWave)
   
@@ -79,10 +71,7 @@ saved with saveLastRendering("myfile.wav")')
     system2(player, file)
     unlink(file)
   } else {
-    control <- play(audioSamp)
-
-    wait(resume(control))
-    close(control)
+    play(audioSamp)
   }
 }
 
