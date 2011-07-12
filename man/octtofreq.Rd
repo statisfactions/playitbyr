@@ -30,3 +30,13 @@ octToFreq(oct)
   \preformatted{440*2^(oct-8.75)}where \code{oct} is the input
   value. Note that both 440 Hz and 8.75 are tuning A.  
 }
+\examples{
+## In oct, middle c is 8.75:
+octToFreq(8.75)
+
+## An octave below tuning A:
+octToFreq(7)
+
+## A little more than that:
+octToFreq(7.0001)
+}
