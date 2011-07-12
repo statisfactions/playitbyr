@@ -27,16 +27,18 @@ setPlayer(newPlayer)
   return \code{"audio::play"}.
 
   However, \pkg{audio}'s \code{play} function does not work well on
-  Linux--for instance, it seems to cause segmentation faults--so this
-  option is not set on Linux. Instead, you can use \code{setPlayer()} to
-  specify an external wav file player. Then, when \code{print}-ing a
-  \code{sonify} object, \pkg{playitbyr} will render to a temporary file
-  and then play it using \code{\link{system2}}.
+  Linux--for instance, it seems to cause segmentation faults--so the
+  default is \href{http://linux.die.net/man/1/aplay}{aplay}, which comes
+  along with many Linux distributions. If you want to use another player,
+  you can use \code{setPlayer()} to specify an external wav file
+  player. Then, when \code{print}-ing a \code{sonify} object,
+  \pkg{playitbyr} will render to a temporary file and then play it using
+  \code{\link{system2}}.
   
-  For external players, I recommend a command-line player like
-  \href{http://linux.die.net/man/1/aplay}{aplay} to avoid having to wait
-  for a GUI to load up.
+  For external players, I recommend a command-line player to avoid
+  having to wait for a GUI to load up.
 }
+
 \seealso{
   \code{\link{print.sonify}}, \code{\link{playLastRendering}}
 }

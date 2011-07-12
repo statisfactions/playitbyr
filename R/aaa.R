@@ -6,5 +6,6 @@
       ## We only set the option if the system is NOT
       ## Linux. audio::play does not work well with Linux.
       options(player = "audio::play")
-    } 
+    } else options(play = "aplay") ## a common CLI wav player
+  
 }

@@ -10,7 +10,7 @@
 
 \usage{
 sonaes(pitch=NULL, time=NULL, tempo=NULL,
-                   dur=NULL, vol=NULL, pan=0.5, timbre="sine")
+                   dur=1, vol=1, pan=0.5, timbre="sine")
 }
 
 \arguments{
@@ -27,8 +27,11 @@ sonaes(pitch=NULL, time=NULL, tempo=NULL,
     object to be rendered.}
   \item{tempo}{a \code{data.frame} column name, or the desired tempo
     of all events (in beats per minute)}
-  \item{dur}{a \code{data.frame} column name, or the desired duration of
-    all events (in seconds)}
+  
+  \item{dur}{a \code{data.frame} column name, or the relative desired
+    duration of all events in \dfn{beats}, where 1 beat equals the
+    length of time for one event if all events were equal length.)}
+  
   \item{vol}{a \code{data.frame} column name, or the desired volume of
     all events as a number between 0, silence, and 1, the maximum
   possible amplitude}
@@ -43,12 +46,48 @@ sonaes(pitch=NULL, time=NULL, tempo=NULL,
   object.}
 
 \seealso{
-  \code{\link{sonify}}, \code{\link{sonscaling}}, \code{octToFreq}
-}
+  \code{\link{sonify}}, \code{\link{sonscaling}}, \code{\link{octToFreq}
+}}
 
 \details{
 
-  Creating mappings is the heart of making the sonification happen and
-  making it possible to render. \code{sonaes} does not check to make
-  sure that all the mappings are filled in.
-  }
+  Setting sonic parameters to \code{data.frame} columns or constant
+  values is the heart of making the sonification happen and
+  making it possible to render.
+
+  All fields, except for one of \code{time} or \code{tempo}, must be
+  assinged in the \code{sonify} before rendering to sound. \code{sonaes}
+  does not check to make sure that all mappings are filled in. since the
+  user can add on more mappings (using \code{\link{+.sonify}})
+  interectively. However, this is checked by \code{\link{checkSonify}}
+  when the object is to be rendered.
+
+  Also, every item that is mapped to a \code{data.frame} column in a
+  \code{sonify} object must also have a scale associated with it before
+  rendering; see \code{\link{sonscaling}}. 
+  
+}
+
+\examples{
+## Maps "Petal.Width" onto tempo,
+## "Sepal.Width" onto pitch,
+## and sets scalings
+## (not terribly informative, since the order is
+## arbitrary)
+x <- sonify(iris, sonaes(tempo="Petal.Width",
+            pitch="Sepal.Width"))
+x <- (x + scale_tempo_linear(200, 1000)
+        + scale_pitch_linear(3, 12))
+summary(x)
+\dontrun{x}
+
+## Map "Petal.Width" onto 'time' instead
+y <- (x + sonaes(time="Petal.Width")
+        + scale_time_linear(0, 5))
+summary(y)
+\dontrun{y}
+
+## Seems clipped, so increase duration
+\dontrun{y + sonaes(dur=4)}
+
+}

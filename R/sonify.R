@@ -39,7 +39,7 @@ sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling()) {
 
 ##From manual at Csounds.com: the fraction is preceded by a whole number octave index such that 8.00 represents Middle C, 9.00 the C above, etc. Midi note number values range between 0 and 127 (inclusively) with 60 representing Middle C, and are usually whole numbers.
 
-sonaes <- function(pitch=NULL, time=NULL, tempo=NULL, dur=NULL, vol=NULL, pan=0.5, timbre="sine") {
+sonaes <- function(pitch=NULL, time=NULL, tempo=NULL, dur=1, vol=1, pan=0.5, timbre="sine") {
   ##Similar to ggplot2 "sonaes"
   if(!(is.null(time)) && !(is.null(tempo)))
     stop("Only one of 'time' or 'tempo' can be provided.")
@@ -81,6 +81,10 @@ sonaes <- function(pitch=NULL, time=NULL, tempo=NULL, dur=NULL, vol=NULL, pan=0.
     for(i in names(x$mapping)) {
       if(!is.null(y[[i]])) x$mapping[[i]] <- y[[i]]
     }
+    if(is.null(y$time) & !is.null(x$mapping$tempo))
+      x$mapping["time"] <- list(NULL)
+    if(is.null(y$tempo) & !is.null(x$mapping$time))
+      x$mapping["tempo"] <- list(NULL)
   } else if("sonrendering" %in% class(y)) {
     x$rendering <- y
     class(x) <- c(y, class(x)[-1])
