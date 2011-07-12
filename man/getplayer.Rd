@@ -3,21 +3,21 @@
 \alias{setPlayer}
 \usage{
 getPlayer()
-setPlayer(player)
+setPlayer(newPlayer)
 }
 \title{Get and set the audio player}
 \description{This allows you to get set the method used to play the result
   of your sonification. These functions are probably only necessary on
   Linux, but work on Linux, OS X, and Windows.}
 \arguments{
-  \item{player}{A character string; either \code{\dQuote{"audio::play"}} to
+  \item{newPlayer}{A character string; either \code{"audio::play"} to
     indicate that you are using the \code{play} function from the
     \pkg{audio} package, or the path to media (\code{*.wav}) file
     player. See Details.}
 }
 \value{
   \code{setPlayer()} is called for its side effect, to set the option
-  for \dQuote{\code{player}}
+  for \code{player}.
 
   \code{getPlayer()} returns the option set by \code{setPlayer()}.
 }
@@ -36,9 +36,6 @@ setPlayer(player)
   For external players, I recommend a command-line player like
   \href{http://linux.die.net/man/1/aplay}{aplay} to avoid having to wait
   for a GUI to load up.
-
-  \pkg{playitbyr} looks for \code{aplay} on the load of the package and,
-  if it finds it, sets \code{\dQuote{aplay}} as the player.
 }
 \seealso{
   \code{\link{print.sonify}}, \code{\link{playLastRendering}}
