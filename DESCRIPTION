@@ -1,7 +1,7 @@
 Package: playitbyr
 Type: Package
 Title: Representing and exploring data through sound
-Version: 0.1-0rc
+Version: 0.1-0
 Date: 2011-07-12
 Author: Ethan Brown
 Maintainer: Ethan Brown <ethancbrown+playitbyr@gmail.com>
