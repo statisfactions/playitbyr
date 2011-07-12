@@ -1,5 +1,6 @@
 sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling()) {
   ## This just puts the items in a list
+  ## TODO much more validation is needed to make this sensible
 
   ## TODO these functions will eventually be defined separately
   sonlayer <- function(shape="notes", shape_params=NULL, stat=NULL, stat_params=NULL, data=NULL, mapping=NULL) {
@@ -23,9 +24,9 @@ sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling()) {
   ## possible value
   sonlayers <- shape_notes()
   rendering <- "audio"
-  
-  s <- list(data, mapping, rendering, scales, sonlayers)
-  names(s) <- c("data", "mapping", "rendering", "scales", "sonlayers") #Theres' got to be an easier way to do this
+  dataname <- deparse(substitute(data))
+  s <- list(data, dataname, mapping, rendering, scales, sonlayers)
+  names(s) <- c("data", "dataname", "mapping", "rendering", "scales", "sonlayers") 
   class(s) <- c(rendering, "sonify", "list")
   s
 }
@@ -76,97 +77,125 @@ sonaes <- function(pitch=NULL, time=NULL, tempo=NULL, dur=NULL, vol=NULL, pan=0.
 render <- function(s) UseMethod("render")
 
 print.sonify <- function(x, ...) {
-  ## This currently ONLY works for "MIDI" and for JUST ONE sonlayer!
   render(x)
 }
 
+summary.sonify <- function(object, ...) {
+  mins <- as.vector(lapply(object$scales, function(y) y$min), "character")
+  maxs <- as.vector(lapply(object$scales, function(y) y$max), "character")
+  firstspaces <- sapply(names(object$scales), function(y) paste(rep(" ",17 - nchar(y)), collapse=""))
+  secondspaces <- sapply(mins, function(y) paste(rep(" ",8 - nchar(y)), collapse=""))
+
+  cat((paste("Summary of sonify object '", deparse(substitute(object)), "':\n\n", sep="")))
+
+  cat("The data to be sonified:\n", paste("$dataname \n",
+                                          object$dataname, "\n\n"))
+  cat("Matchup of sonic values to data columns or constants:\n",
+      "      $mapping")
+  cat("           Column or Value\n"  )
+    cat("--------------------------------------------\n")
+  cat(paste("        $", names(object$mapping), " ",
+            firstspaces,
+            as.vector(object$mapping, "character"),
+            sep="", collapse="\n"), "\n\n")
+
+  cat("Desired min/max for sonic parameters:\n",
+      "      $scales")
+  cat("           Min      Max\n")
+  cat("--------------------------------------------\n")
+  cat(paste("        $", names(object$scales),
+            firstspaces, mins, secondspaces, maxs,
+            collapse="\n", sep=""))
+  cat("\n")
+
+}   
 
 
-`%+%` <- function(x, y) {
-  ##Another possible ggplot2 confusion/conflict
-  ##Replace data.frame in x (a sonify object)
-  ##with y (data.frame)
-  ##If mappings are already set up, the input data.frame should have the
-  ##same names, which we explicitly should check with sonthing like:
-  ##  if(!all(x$mapping[!is.null(x$mapping)] %in% names(y)))
-  ##    stop("New data.frame does not match mapping in sonify object")
-  ## THe preceding is not quite correct since it doesn't deal with the fact that some
-  ## mappings are set
-  x$data <- y
-  x
-}
+  `%+%` <- function(x, y) {
+    ##Another possible ggplot2 confusion/conflict
+    ##Replace data.frame in x (a sonify object)
+    ##with y (data.frame)
+    ##If mappings are already set up, the input data.frame should have the
+    ##same names, which we explicitly should check with sonthing like:
+    ##  if(!all(x$mapping[!is.null(x$mapping)] %in% names(y)))
+    ##    stop("New data.frame does not match mapping in sonify object")
+    ## THe preceding is not quite correct since it doesn't deal with the fact that some
+    ## mappings are set
+    x$data <- y
+    x
+  }
 
-.dfNotes <- function(s) {
-  ## s is a "sonify" object containing all notes sonlayers
-  ## This function renders the "notes" shape
+  .dfNotes <- function(s) {
+    ## s is a "sonify" object containing all notes sonlayers
+    ## This function renders the "notes" shape
 
-  if(is.null(s$sonlayers)) stop("Cannot render sound without any sonlayers.")
+    if(is.null(s$sonlayers)) stop("Cannot render sound without any sonlayers.")
 
-  notes <- do.call(rbind, lapply(1:length(s$sonlayers), function(x) .getNotes(s, x)))
-  notes
-}
-
-
+    notes <- do.call(rbind, lapply(1:length(s$sonlayers), function(x) .getNotes(s, x)))
+    notes
+  }
 
 
-.getMappings <- function(x, sonlayernum) {
-  ## x: a sonify object, returns the current mappings as a named list
-  ## 1. assign mapping based on sonlayer, and on default if sonlayer mapping not present
-  if(sonlayernum > length(x$sonlayers)) stop(paste("There is no sonlayer", sonlayernum))
 
-  sonlayermap <- x$sonlayers[[sonlayernum]]$mapping
-  if(!is.null(sonlayermap)) {
-    for(i in names(sonlayermap)) {
-      if(!is.null(sonlayermap[[i]]))
-        x$mapping[[i]] <- sonlayermap[[i]]
+
+  .getMappings <- function(x, sonlayernum) {
+    ## x: a sonify object, returns the current mappings as a named list
+    ## 1. assign mapping based on sonlayer, and on default if sonlayer mapping not present
+    if(sonlayernum > length(x$sonlayers)) stop(paste("There is no sonlayer", sonlayernum))
+
+    sonlayermap <- x$sonlayers[[sonlayernum]]$mapping
+    if(!is.null(sonlayermap)) {
+      for(i in names(sonlayermap)) {
+        if(!is.null(sonlayermap[[i]]))
+          x$mapping[[i]] <- sonlayermap[[i]]
+      }
     }
-  }
-  return(x$mapping)
-}
-
-.getData <- function(x, sonlayernum) {
-  ## x: a sonify object, returns the current data as a data.frame
-  if(sonlayernum > length(x$sonlayers)) stop(paste("There is no sonlayer", sonlayernum))
-
-  if(!is.null(x$sonlayers[[sonlayernum]]$data)){
-    return(x$sonlayers[[sonlayernum]]$data)} else {return(x$data)}
-} 
-
-
-.getNotes <- function(x, sonlayernum) {
-  ## Create the notes for the given sonlayer into Csound score style format
-  n <- nrow(x$data) # for notes shape, every row of df is a note
-  sonlayer <- rep(sonlayernum, n)
-  curnotes <- data.frame(sonlayer)
-  
-  map <- .getMappings(x, sonlayernum)
-  
-  if(is.null(map$tempo)) mapnames <- setdiff(names(map), "tempo")
-  if(is.null(map$time)) mapnames <- setdiff(names(map), "time")
-  
-  data <- .getData(x, sonlayernum)
-
-  for(j in mapnames) {
-    if(map[[j]] %in% names(data)) {
-
-      ##TODO: some sort of check here before simply assigning variables
-      curnotes[[j]] <- x$scales[[j]]$scaling.function(data[[ (map[[j]]) ]], x$scales[[j]]$min, x$scales[[j]]$max)
-    } else {curnotes[[j]] <- map[[j]]}
+    return(x$mapping)
   }
 
-  ## convert tempo data into start times and scale durations in relation to beat
-  if(!is.null(map$tempo)) {
-    beatlength <- 60/curnotes$tempo
-    curnotes$start <- c(0, cumsum(beatlength[-n]))
-    total <- curnotes$start[n]+ beatlength[n]
+  .getData <- function(x, sonlayernum) {
+    ## x: a sonify object, returns the current data as a data.frame
+    if(sonlayernum > length(x$sonlayers)) stop(paste("There is no sonlayer", sonlayernum))
 
-  } else if(!is.null(map$time)) {
-    curnotes$start <- curnotes$time
-    curnotes <- curnotes[order(curnotes$start),]
+    if(!is.null(x$sonlayers[[sonlayernum]]$data)){
+      return(x$sonlayers[[sonlayernum]]$data)} else {return(x$data)}
+  } 
+
+
+  .getNotes <- function(x, sonlayernum) {
+    ## Create the notes for the given sonlayer into Csound score style format
+    n <- nrow(x$data) # for notes shape, every row of df is a note
+    sonlayer <- rep(sonlayernum, n)
+    curnotes <- data.frame(sonlayer)
     
-    total <- curnotes$start[n] + mean(curnotes$start[-1] - curnotes$start[-n]) 
+    map <- .getMappings(x, sonlayernum)
+    
+    if(is.null(map$tempo)) mapnames <- setdiff(names(map), "tempo")
+    if(is.null(map$time)) mapnames <- setdiff(names(map), "time")
+    
+    data <- .getData(x, sonlayernum)
+
+    for(j in mapnames) {
+      if(map[[j]] %in% names(data)) {
+
+        ##TODO: some sort of check here before simply assigning variables
+        curnotes[[j]] <- x$scales[[j]]$scaling.function(data[[ (map[[j]]) ]], x$scales[[j]]$min, x$scales[[j]]$max)
+      } else {curnotes[[j]] <- map[[j]]}
+    }
+
+    ## convert tempo data into start times and scale durations in relation to beat
+    if(!is.null(map$tempo)) {
+      beatlength <- 60/curnotes$tempo
+      curnotes$start <- c(0, cumsum(beatlength[-n]))
+      total <- curnotes$start[n]+ beatlength[n]
+
+    } else if(!is.null(map$time)) {
+      curnotes$start <- curnotes$time
+      curnotes <- curnotes[order(curnotes$start),]
+      
+      total <- curnotes$start[n] + mean(curnotes$start[-1] - curnotes$start[-n]) 
+    }
+    curnotes$dur <- curnotes$dur*(total/n)
+    curnotes$sonlayer <- factor(curnotes$sonlayer)
+    curnotes[,c("sonlayer", "start", "dur", "pitch", "vol", "pan", "timbre")]
   }
-  curnotes$dur <- curnotes$dur*(total/n)
-  curnotes$sonlayer <- factor(curnotes$sonlayer)
-  curnotes[,c("sonlayer", "start", "dur", "pitch", "vol", "pan", "timbre")]
-}

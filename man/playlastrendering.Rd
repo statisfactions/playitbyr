@@ -28,23 +28,23 @@ saveLastRendering(filename)
   \code{audio} package.
 
   The behavior of \code{playLastRendering()} depends on the option
-  "audioRendering". If the option is "tempfile", \code{playLastRendering()} looks for an
+  "audioRendering". If the option is "audio::pr-for-fdsalay",
+  \code{playLastRendering()} uses the \code{play} function from the
+  \code{audio} package (which does not work well on Linux systems). If
+  the option is anything else, \code{playLastRendering()} looks for an
   audio player set with \code{setPlayer}, renders the \code{audioSample}
-  to a temporary file, and plays it with the given player. If the option
-  is "audio::play", \code{playLastRendering()} uses the \code{play}
-  function from the \code{audio} package (which does not work well on
-  Linux systems).
+  to a temporary file, and plays it with the player given by \code{\link{setPlayer}}.
 }
 
 \seealso{
   \code{\link[audio]{play}}, \code{\link[audio]{save.wave}},
   \code{\link{audioSample}}, \code{\link{setPlayer}}
-  }
+}
 
 
 
 
 
-    
+
 
 
