@@ -5,14 +5,53 @@
 getPlayer()
 setPlayer(player)
 }
-\title{Get and set wave file player}
-\description{This allows you to set the external wav file player when you are
-  rendering to a temp file. I recommend a command-line player to avoid
-  having to wait for a GUI to load up.
-}
+\title{Get and set the audio player}
+\description{This allows you to get set the method used to play the result
+  of your sonification. These functions are probably only necessary on
+  Linux, but work on Linux, OS X, and Windows.}
 \arguments{
-  \item{player}{A string containing the path to the wav file player.}
+  \item{player}{A character string; either \code{\dQuote{"audio::play"}} to
+    indicate that you are using the \code{play} function from the
+    \pkg{audio} package, or the path to media (\code{*.wav}) file
+    player. See Details.}
 }
 \value{
-  \code{getPlayer()} returns the string set by \code{setPlayer()}
-  }
+  \code{setPlayer()} is called for its side effect, to set the option
+  for \dQuote{\code{player}}
+
+  \code{getPlayer()} returns the option set by \code{setPlayer()}.
+}
+\details{
+  By default on Windows and OS X, audio is played with the \code{play}
+  function from the \pkg{audio} package. So \code{getPlayer()} will
+  return \code{"audio::play"}.
+
+  However, \pkg{audio}'s \code{play} function does not work well on
+  Linux--for instance, it seems to cause segmentation faults--so this
+  option is not set on Linux. Instead, you can use \code{setPlayer()} to
+  specify an external wav file player. Then, when \code{print}-ing a
+  \code{sonify} object, \pkg{playitbyr} will render to a temporary file
+  and then play it using \code{\link{system2}}.
+  
+  For external players, I recommend a command-line player like
+  \href{http://linux.die.net/man/1/aplay}{aplay} to avoid having to wait
+  for a GUI to load up.
+
+  \pkg{playitbyr} looks for \code{aplay} on the load of the package and,
+  if it finds it, sets \code{\dQuote{aplay}} as the player.
+}
+\seealso{
+  \code{\link{print.sonify}}, \code{\link{playLastRendering}}
+}
+\examples{
+## Get the current player
+oldPlayer <- getPlayer()
+oldPlayer
+
+## Set the current player to aplay
+setPlayer("aplay")
+getPlayer()
+
+## Reset player to the old setting
+setPlayer(oldPlayer)
+}

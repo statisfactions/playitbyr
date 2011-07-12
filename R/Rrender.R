@@ -33,7 +33,7 @@ octToFreq <- function(oct) {
 
 render.audio <- function(s) {
   notes <- .dfNotes(s)
-  samp.rate <- 10000 ## FIXME: need to have this as an option
+  samp.rate <- 10000 ## TODO: need to have this as an option
 
   ## Calculate total number of samples and create data.frame
   ## I add on "nrow(notes)" to the total as a fudge factor
@@ -56,30 +56,30 @@ render.audio <- function(s) {
 
 
 playAudioRendering <- function(audioSamp) {
-  if(!(getOption("audioRendering") %in% c("tempfile", "audio::play")))
-    stop('No valid option for audioRendering given:
-audioSample object saved as ".LastRendering" in user workspace.
-This can be played with playLastRendering() (which plays
-the rendering using the play function from the audio function), or
-saved with saveLastRendering("myfile.wav")')
-  if(getOption("audioRendering") %in% "tempfile") {
-    if(is.null(getOption("wavPlayer")))
-      stop("Please set the wave file player you want to use with setPlayer")
-    player <- getOption("wavPlayer")
+  ## Plays the file either using audio::play
+  ## or by writing to a tempfile and playing it
+  if(is.null(getPlayer())) {
+    stop("Please set the wave file player you want to use with setPlayer().
+Once you've done so, you can play the last rendering with playLastRendering().
+
+Though you can't play it yet, you can save it to file with
+saveLastRendering('path/to/file.wav').")
+  } else if(getPlayer() == "audio::play") {
+    play(audioSamp)
+  } else {
+    player <- getPlayer()
     file <- paste(tempfile(), ".wav", sep="")
     save.wave(audioSamp, file)
     system2(player, file)
     unlink(file)
-  } else {
-    play(audioSamp)
   }
 }
 
-getPlayer <- function() getOption("wavPlayer")
+getPlayer <- function() getOption("player")
 
-setPlayer <- function(player) options(wavPlayer = player)
+setPlayer <- function(newPlayer) options(player = newPlayer)
 
 playLastRendering <- function()  playAudioRendering(.LastRendering)
 
 saveLastRendering <- function(filename) save.wave(.LastRendering, filename)
-  
+
