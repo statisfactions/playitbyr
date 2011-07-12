@@ -22,7 +22,9 @@ sonaes(pitch=NULL, time=NULL, tempo=NULL,
     \href{http://www.csounds.com/manual/html/cpsoct.html}{Csound's
       \sQuote{oct} notation}.)}
   \item{time}{a \code{data.frame} column name, or the desired start
-    time of all events (in seconds)}
+    time of all events (in seconds). Either \code{time} or
+    \code{tempo} must be specified, but not both, for a \code{sonify}
+    object to be rendered.}
   \item{tempo}{a \code{data.frame} column name, or the desired tempo
     of all events (in beats per minute)}
   \item{dur}{a \code{data.frame} column name, or the desired duration of
@@ -43,3 +45,10 @@ sonaes(pitch=NULL, time=NULL, tempo=NULL,
 \seealso{
   \code{\link{sonify}}, \code{\link{sonscaling}}, \code{octToFreq}
 }
+
+\details{
+
+  Creating mappings is the heart of making the sonification happen and
+  making it possible to render. \code{sonaes} does not check to make
+  sure that all the mappings are filled in.
+  }

@@ -1,6 +1,8 @@
 sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling()) {
   ## This just puts the items in a list
   ## TODO much more validation is needed to make this sensible
+  if(!is.null(data) & !is.data.frame(data))
+    stop("'data' must be a data.frame.")
 
   ## TODO these functions will eventually be defined separately
   sonlayer <- function(shape="notes", shape_params=NULL, stat=NULL, stat_params=NULL, data=NULL, mapping=NULL) {
@@ -39,18 +41,30 @@ sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling()) {
 
 sonaes <- function(pitch=NULL, time=NULL, tempo=NULL, dur=NULL, vol=NULL, pan=0.5, timbre="sine") {
   ##Similar to ggplot2 "sonaes"
-  
+  if(!(is.null(time)) && !(is.null(tempo)))
+    stop("Only one of 'time' or 'tempo' can be provided.")
+  if(!is.null(time) && is.numeric(time))
+    warning("Since time value given in sonaes(), all events will occur at\n",
+            "time ", time, " (in seconds).")
+  if(!is.null(time) && time < 0)
+    stop("time must be greater than 0.")
+  if(!is.null(tempo) && (tempo<=0))
+    stop("tempo must be greater than 0 (bpm)")
+  if(!is.null(dur) && (dur<0))
+    stop("dur cannot be negative")
+  if(!is.null(vol) && ((vol<0) || (vol>1)))
+    stop("vol must be between 0 and 1.")
+  if(!is.null(pan) && ((pan<0) || (pan>1)))
+    stop("pan must be between 0 and 1.")
+  if(timbre != "sine")
+    stop("'sine' is the only supported timbre right now")  
+
   son <- list(pitch, time, tempo, dur, vol, pan, timbre) #TODO: make this easier to add on to
   names(son) <- c("pitch", "time", "tempo", "dur", "vol", "pan", "timbre") #TODO: extract this  intelligently
+  
   class(son) <- c("sonaes", "character")
   son
 }
-
-
-
-
-
-
 
 "+.sonify" <- function(x, y) {
   if("sonlayer" %in% class(y)) {
@@ -74,9 +88,67 @@ sonaes <- function(pitch=NULL, time=NULL, tempo=NULL, dur=NULL, vol=NULL, pan=0.
   x
 }          
 
+checkSonify <- function(x) {
+  xname <- deparse(substitute(x))
+  map <- .getMappings(x, 1)
+  ## Checks that correct mapping slots are filled
+  if(is.null(x$data))
+    stop("No data.frame provided for sonification. See ?sonify.")
+  
+  if(!xor(is.null(map$time), is.null(map$tempo)))
+    stop("Either 'time' or 'tempo' must be set, but not both. See ?sonaes.\n\n",
+         xname, "$mapping$time:  ", as.character(x$mapping$time), "\n",
+         xname, "$mapping$tempo: ", as.character(x$mapping$tempo), "\n")
+  if(is.null(map$tempo)) mapnames <- setdiff(names(map), c("tempo", "timbre"))
+  if(is.null(map$time)) mapnames <- setdiff(names(map), c("time", "timbre"))
+  
+  nullmaps <- sapply(mapnames, function(y) {
+    if(is.null(map[[y]])) return(y) else return(NA)})
+  nullmaps <- na.omit(as.vector(nullmaps, "character"))
+  nullmaps
+
+  if(length(nullmaps)>0)
+    stop("These sonic parameters need to be set to a value or \n",
+         "mapped to a data.column (see ?sonaes):\n",
+         paste(nullmaps, collapse=", "), ".")
+
+  ## Checks that any non-numeric mappings correspond to a numeric
+  ## data column  
+  nonnumericmaps <- sapply(mapnames, function(y) {
+    if(!is.numeric(map[[y]])) return((y=map[[y]])) else return(NA)})
+  nonnumericmapnames <- names(nonnumericmaps)[!is.na(nonnumericmaps)]
+  nonnumericmaps <- na.omit(as.vector(nonnumericmaps, "character"))
+  names(nonnumericmaps) <- nonnumericmapnames
+  unmatched <- nonnumericmaps[!(nonnumericmaps %in% names(x$data))]
+  if(length(unmatched)>1)
+    stop("These sonic parameters are set as nonnumeric with sonaes(),\n",
+         "so they are assumed to be columns of the data.frame for\n",
+         "sonification. BUT, they do not match any columns in the\n",
+         "given data.frame:\n\n",
+         paste(names(unmatched), ": ", unmatched, sep="", collapse="\n"), "\n\n",
+         "data.frame column names:\n", paste(names(x$data), collapse="\n"))
+
+  datatest <- sapply(na.omit(nonnumericmaps), function(y) {
+    is.numeric(x$data[,y])})
+  if(any(!datatest))
+    stop("Non-numeric columns of the dataset cannot be used in a mapping.\n\n",
+         "These columns are non-numeric and are used as mappings:\n",
+         paste(nonnumericmaps[!datatest], collapse="\n"))
+
+  ## Check that all non-numeric mappings have an associated scaling
+  scalesnull <- sapply(nonnumericmapnames, function(y) {
+    is.null(x$scales[[y]])})
+  if(any(scalesnull))
+    stop("Every mapping of a sonic parameter to a data column must also\n",
+         "have an associated scale.\n\n",
+         "Sonic parameters with missing scales:\n",
+         paste(nonnumericmapnames[scalesnull], collapse="\n"))
+}                               
+
 render <- function(s) UseMethod("render")
 
 print.sonify <- function(x, ...) {
+  checkSonify(x)
   render(x)
 }
 
@@ -138,7 +210,7 @@ summary.sonify <- function(object, ...) {
 
 
 
-  .getMappings <- function(x, sonlayernum) {
+.getMappings <- function(x, sonlayernum) {
     ## x: a sonify object, returns the current mappings as a named list
     ## 1. assign mapping based on sonlayer, and on default if sonlayer mapping not present
     if(sonlayernum > length(x$sonlayers)) stop(paste("There is no sonlayer", sonlayernum))

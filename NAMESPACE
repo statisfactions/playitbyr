@@ -1,4 +1,5 @@
 import(audio)
+export("checkSonify")
 export("%+%")
 export("getPlayer")
 export("linear.scale")
@@ -20,5 +21,3 @@ export("sonscaling")
 S3method(summary, sonify)
 S3method(print, sonify)
 export("+.sonify")
-
-

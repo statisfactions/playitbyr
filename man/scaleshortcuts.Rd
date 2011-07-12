@@ -58,27 +58,32 @@ scale_vol_linear(min, max)
 x <- sonify(data=iris, 
      mapping = sonaes(time="Petal.Width",
        pitch = "Petal.Length", 
-       timbre=1, dur=5, vol=0.75),
+       dur=5, vol=0.75),
      scales = sonscaling(
        time = list(min=0, max=3,
         scaling.function = linear.scale),
        pitch = list(min=3, max=13,
         scaling.function = linear.scale)))
 summary(x)
+\dontrun{x}
 
 ## An equivalent and much more compact way, with
 ## the shortcut functions
 y <- sonify(data=iris, 
       sonaes(time="Petal.Width",
       pitch = "Petal.Length", 
-      timbre=1, dur=5, vol=0.75))
+      dur=5, vol=0.75))
 y <- y + scale_time_linear(0, 3)
 y <- y + scale_pitch_linear(3, 13)
 summary(y)
+\dontrun{y}
 
 ## You can also change a mapping incrementally.
-## This will make the sonification 12 seconds
-## long instead of 3
-y <- y + scale_time_linear(0,12)
+## New parameters overwrite old ones, so now
+## The sonification is 12 seconds
+## long instead of 3, and the pitch is mapped to
+## a much narrower range, the octave below tuning A (440 Hz)
+y <- y + scale_time_linear(0,12) + scale_pitch_linear(7,8)
 summary(y)
+\dontrun{y}
 }
