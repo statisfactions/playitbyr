@@ -80,7 +80,7 @@ summary(y)
 
 ## You can also change a mapping incrementally.
 ## New parameters overwrite old ones, so now
-## The sonification is 12 seconds
+## the sonification is stretched to 12 seconds
 ## long instead of 3, and the pitch is mapped to
 ## a much narrower range, the octave below tuning A (440 Hz)
 y <- y + scale_time_linear(0,12) + scale_pitch_linear(7,8)

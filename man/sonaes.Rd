@@ -46,8 +46,12 @@ sonaes(pitch=NULL, time=NULL, tempo=NULL,
   object.}
 
 \seealso{
+  
   \code{\link{sonify}}, \code{\link{sonscaling}}, \code{\link{octToFreq}
-}}
+}. Also, see \code{\link[ggplot2]{aes}} from the \pkg{ggplot2} package, which
+inspired this function.
+
+}
 
 \details{
 

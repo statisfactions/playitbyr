@@ -31,12 +31,12 @@ octToFreq(oct)
   value. Note that both 440 Hz and 8.75 are tuning A.  
 }
 \examples{
-## In oct, middle c is 8.75:
-octToFreq(8.75)
+## In oct, middle c is 8
+octToFreq(8)
 
-## An octave below tuning A:
-octToFreq(7)
+## An octave below tuning A, in Hz
+octToFreq(7.75)
 
-## A little more than that:
-octToFreq(7.0001)
+## A little more than that, in Hz
+octToFreq(7.76)
 }

@@ -43,4 +43,5 @@ NULL, pan=NULL, timbre = NULL)
   \code{\link{sonaes}} for defining the which data columns get mapped
   onto these sonic parameters; \code{\link{scaleShortcuts}} for easy
   shortcut functions for common use-cases of scaling; and
-  \code{\link{linear.scale}} for an example of a scaling function.}
+  \code{\link{linear.scale}} for an example of a scaling function.
+}
