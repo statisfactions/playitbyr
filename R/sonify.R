@@ -3,7 +3,7 @@ sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling()) {
   ## TODO much more validation is needed to make this sensible
   if(!is.null(data) & !is.data.frame(data))
     stop("'data' must be a data.frame.")
-
+  
   ## TODO these functions will eventually be defined separately
   sonlayer <- function(shape="notes", shape_params=NULL, stat=NULL, stat_params=NULL, data=NULL, mapping=NULL) {
     l <- list(list(shape, shape_params), list(stat, stat_params), data, mapping)
@@ -39,28 +39,29 @@ sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling()) {
 
 ##From manual at Csounds.com: the fraction is preceded by a whole number octave index such that 8.00 represents Middle C, 9.00 the C above, etc. Midi note number values range between 0 and 127 (inclusively) with 60 representing Middle C, and are usually whole numbers.
 
-sonaes <- function(pitch=NULL, time=NULL, tempo=NULL, dur=1, vol=1, pan=0.5, timbre="sine") {
+sonaes <- function(time=0, pitch=8, dur=1, vol=1, pan=0.5, tempo=NULL, timbre="sine") {
   ##Similar to ggplot2 "sonaes"
-  if(!(is.null(time)) && !(is.null(tempo)))
+  if(!missing(time) && !missing(tempo))
     stop("Only one of 'time' or 'tempo' can be provided.")
-  if(!is.null(time) && is.numeric(time))
-    warning("Since time value given in sonaes(), all events will occur at\n",
-            "time ", time, " (in seconds).")
+  if(missing(time) && !missing(tempo))
+    time <- NULL
+  if(!missing(time) && missing(tempo))
+    tempo <- NULL
   if(!is.null(time) && time < 0)
     stop("time must be greater than 0.")
   if(!is.null(tempo) && (tempo<=0))
     stop("tempo must be greater than 0 (bpm)")
-  if(!is.null(dur) && (dur<0))
+  if(dur<0)
     stop("dur cannot be negative")
-  if(!is.null(vol) && ((vol<0) || (vol>1)))
+  if(((vol<0) || (vol>1)))
     stop("vol must be between 0 and 1.")
-  if(!is.null(pan) && ((pan<0) || (pan>1)))
+  if((pan<0) || (pan>1))
     stop("pan must be between 0 and 1.")
   if(timbre != "sine")
     stop("'sine' is the only supported timbre right now")  
 
-  son <- list(pitch, time, tempo, dur, vol, pan, timbre) #TODO: make this easier to add on to
-  names(son) <- c("pitch", "time", "tempo", "dur", "vol", "pan", "timbre") #TODO: extract this  intelligently
+  son <- list(time, pitch, dur, vol, pan, tempo, timbre) #TODO: make this easier to add on to
+  names(son) <- c("time", "pitch", "dur", "vol", "pan", "tempo", "timbre") #TODO: extract this  intelligently
   
   class(son) <- c("sonaes", "character")
   son
@@ -122,6 +123,9 @@ checkSonify <- function(x) {
     if(!is.numeric(map[[y]])) return((y=map[[y]])) else return(NA)})
   nonnumericmapnames <- names(nonnumericmaps)[!is.na(nonnumericmaps)]
   nonnumericmaps <- na.omit(as.vector(nonnumericmaps, "character"))
+  if(length(nonnumericmaps)==0)
+    stop("No data columns selected as mappings. You need to set\n",
+         "at least one data column to be mapped with sonaes().")
   names(nonnumericmaps) <- nonnumericmapnames
   unmatched <- nonnumericmaps[!(nonnumericmaps %in% names(x$data))]
   if(length(unmatched)>1)
@@ -198,6 +202,7 @@ summary.sonify <- function(object, ...) {
     ## THe preceding is not quite correct since it doesn't deal with the fact that some
     ## mappings are set
     x$data <- y
+    x$dataname <- deparse(substitute(y))
     x
   }
 

@@ -1,4 +1,10 @@
-sonscaling <- function(pitch = NULL, time = NULL, tempo = NULL, dur = NULL, vol = NULL, pan=NULL, timbre = NULL) {
+sonscaling <- function(time = list(0, 5, linear.scale),
+                       pitch = list(8, 9, linear.scale),
+                       dur = list(0.25, 4, linear.scale),
+                       vol = list(0.2, 1, linear.scale),
+                       pan= list(0, 1, linear.scale),
+                       tempo = list(120, 240, linear.scale),
+                       timbre = NULL) {
   ##
   ##The sonscaling for a sound parameter is a list with three elements: min, max, and function
   ##
@@ -10,13 +16,13 @@ sonscaling <- function(pitch = NULL, time = NULL, tempo = NULL, dur = NULL, vol 
   ##        different renderings. For MIDI notes, just the general MIDI specification
 
   
-  sc <- list(pitch, time, tempo, dur, vol, pan, timbre)
+  sc <- list(time, pitch, dur, vol, pan, tempo, timbre)
   sc <- lapply(sc, function(x) {
-               if(length(x) == 3)
-                 names(x) <- c("min", "max", "scaling.function")
-               return(x)})
-  names(sc) <- c("pitch", "time", "tempo", "dur", "vol", "pan", "timbre")
-   if(!is.null(sc$time) && ((sc$time$max < 0) || (sc$time$min < 0)))
+    if(length(x) == 3)
+      names(x) <- c("min", "max", "scaling.function")
+    return(x)})
+  names(sc) <- c( "time", "pitch", "dur", "vol", "pan", "tempo", "timbre")
+  if(!is.null(sc$time) && ((sc$time$max < 0) || (sc$time$min < 0)))
     stop("time must be greater than 0.")
   if(!is.null(sc$tempo) && ((sc$tempo$max < 0) || (sc$tempo$min< 0)))
     stop("tempo must be at least 0 (bpm)")
@@ -26,18 +32,18 @@ sonscaling <- function(pitch = NULL, time = NULL, tempo = NULL, dur = NULL, vol 
     stop("vol must be between 0 and 1.")
   if(!is.null(sc$pan) && (((sc$pan$max<0) || sc$pan$min<0) || (sc$pan$min>1 || sc$pan$max>1)))
     stop("pan must be between 0 and 1.")
- 
+  
   class(sc) <- c("sonscaling", "list")
   sc
 }
 
 ## Convenience functions for specifying scales.
-scale_pitch_linear <- function(min, max) sonscaling(pitch=list(min, max, linear.scale))
 scale_time_linear <- function(min, max) sonscaling(time=list(min, max, linear.scale))
-scale_tempo_linear <- function(min, max) sonscaling(tempo=list(min, max, linear.scale))
+scale_pitch_linear <- function(min, max) sonscaling(pitch=list(min, max, linear.scale))
 scale_dur_linear <- function(min, max) sonscaling(dur=list(min, max, linear.scale))
-scale_pan_linear <- function(min, max) sonscaling(pan=list(min, max, linear.scale))
 scale_vol_linear <- function(min, max) sonscaling(vol=list(min, max, linear.scale))
+scale_pan_linear <- function(min, max) sonscaling(pan=list(min, max, linear.scale))
+scale_tempo_linear <- function(min, max) sonscaling(tempo=list(min, max, linear.scale))
 
 linear.scale <- function(x, min, max) {
   ## Linearly rescales vector x so that "lower" is the minimum
@@ -51,7 +57,7 @@ linear.scale <- function(x, min, max) {
     min <- oldmax
     max <- oldmin
   }
-    
+  
   nrange <- abs(max-min)
   out <- ((x-min(x))*nrange/(max(x)-min(x)) + min)
   out

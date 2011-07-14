@@ -9,24 +9,22 @@
   (or included in its construction).}
 
 \usage{
-sonaes(pitch=NULL, time=NULL, tempo=NULL,
-                   dur=1, vol=1, pan=0.5, timbre="sine")
+sonaes(time=0, pitch=8, dur=1, vol=1, pan=0.5, tempo=NULL,
+       timbre="sine")
 }
 
 \arguments{
-  
+  \item{time}{a \code{data.frame} column name, or the desired start
+    time of all events (in seconds). Either \code{time} or
+    \code{tempo} must be specified, but not both, for a \code{sonify}
+    object to be rendered.}
+
   \item{pitch}{a \code{data.frame} column name (of the "data" argument
     in \code{sonify}), or the desired pitch of all events, represented
     such that 8 represents middle C, 9 represents the octave above,
     etc. (This is
     \href{http://www.csounds.com/manual/html/cpsoct.html}{Csound's
       \sQuote{oct} notation}.)}
-  \item{time}{a \code{data.frame} column name, or the desired start
-    time of all events (in seconds). Either \code{time} or
-    \code{tempo} must be specified, but not both, for a \code{sonify}
-    object to be rendered.}
-  \item{tempo}{a \code{data.frame} column name, or the desired tempo
-    of all events (in beats per minute)}
   
   \item{dur}{a \code{data.frame} column name, or the relative desired
     duration of all events in \dfn{beats}, where 1 beat equals the
@@ -34,10 +32,15 @@ sonaes(pitch=NULL, time=NULL, tempo=NULL,
   
   \item{vol}{a \code{data.frame} column name, or the desired volume of
     all events as a number between 0, silence, and 1, the maximum
-  possible amplitude}
+    possible amplitude}
+
   \item{pan}{a \code{data.frame} column name, or the desired balance
     between left and right stereo channels, where 0 is all the left
     channel, 0.5 balanced, and 1 all the right.}
+
+  \item{tempo}{a \code{data.frame} column name, or the desired tempo
+    of all events (in beats per minute)}
+
   \item{timbre}{The desired timbre of the sound. Currently only the
     default value "sine", for a simple sine wave, is supported.}
 }
@@ -48,8 +51,8 @@ sonaes(pitch=NULL, time=NULL, tempo=NULL,
 \seealso{
   
   \code{\link{sonify}}, \code{\link{sonscaling}}, \code{\link{octToFreq}
-}. Also, see \code{\link[ggplot2]{aes}} from the \pkg{ggplot2} package, which
-inspired this function.
+  }. Also, see \code{\link[ggplot2]{aes}} from the \pkg{ggplot2} package, which
+  inspired this function.
 
 }
 

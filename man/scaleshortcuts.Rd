@@ -9,12 +9,12 @@
 \title{Shortcut functions to set linear scales for \code{sonify}
   objects}
 \usage{
-scale_pitch_linear(min, max)
 scale_time_linear(min, max)
-scale_tempo_linear(min, max)
+scale_pitch_linear(min, max)
 scale_dur_linear(min, max)
-scale_pan_linear(min, max)
 scale_vol_linear(min, max)
+scale_pan_linear(min, max)
+scale_tempo_linear(min, max)
 }
 \description{
 
