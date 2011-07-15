@@ -5,6 +5,15 @@
 render(x)
 playAudioRendering(audioSamp)
 }
+
+\description{
+  These functions provide the ability to render sonifications to a
+  \code{audioSample} object from the \pkg{audio} package, and save to a
+  file. \code{\link{print.sonify}} calls both these functions in
+  succession.
+  }
+
+
 \value{
   
   \code{render.audio} returns an \code{audioSample} object (from the
@@ -43,8 +52,5 @@ x
 save.wave(out, "myfile.wav")
 }
 }
-\details{
-\code{\link{print.sonify}} calls both these functions; these are
-provided in case you want to manipulate the object further or save it to file.
-}
+
 
