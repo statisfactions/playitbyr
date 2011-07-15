@@ -173,11 +173,12 @@ checkSonify <- function(x) {
          paste(nonnumericmapnames[scalesnull], collapse="\n"))
 }                               
 
-render <- function(s) UseMethod("render")
+render <- function(x) UseMethod("render")
 
 print.sonify <- function(x, ...) {
   checkSonify(x)
-  render(x)
+  out <- render(x)
+  playAudioRendering(out)
 }
 
 summary.sonify <- function(object, ...) {

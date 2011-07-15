@@ -31,8 +31,8 @@ octToFreq <- function(oct) {
   440*2^(oct-8.75)
 }
 
-render.audio <- function(s) {
-  notes <- .dfNotes(s)
+render.audio <- function(x) {
+  notes <- .dfNotes(x)
   samp.rate <- 10000 ## TODO: need to have this as an option
 
   ## Calculate total number of samples and create data.frame
@@ -50,8 +50,7 @@ render.audio <- function(s) {
   out <- linear.scale(out, -1, 1)
   outWave <- as.audioSample(out, samp.rate)
   assign(".LastRendering", outWave, pos=".GlobalEnv")
-  playAudioRendering(outWave)
-  
+  return(outWave)
 }
 
 

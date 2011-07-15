@@ -1,5 +1,6 @@
 export("checkSonify")
 export("%+%")
+export("playAudioRendering")
 export("getPlayer")
 export("linear.scale")
 export("octToFreq")
