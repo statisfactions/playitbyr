@@ -53,13 +53,12 @@ summary(x)
 
 ## A more complete specification
 ## for a sonify object that uses iris
-## with "Petal.Width" mapped onto pitches
-## between pitch values 6 (110 Hz) and 8 (440 Hz),
-## and "Petal.Length" mapped onto times
+## with Petal.Length mapped onto times
 ## between 0 and 10 seconds.
+## and Petal.Width mapped onto pitches
+## between pitch values 6 (110 Hz) and 8 (440 Hz),
 x <- sonify(data=iris,
-            sonaes(pitch="Petal.Width",
-                   time="Petal.Length"),
+            sonaes(Petal.Length, Petal.Width),
             sonscaling(pitch=list(6, 8, linear.scale),
                        time=list(0, 10, linear.scale)))
 summary(x)
@@ -71,8 +70,8 @@ summary(x)
 
 ## The same, created incrementally
 ## and with the "scale_" convenience functions
-x <- sonify(data=iris)
-x <- x + sonaes(pitch="Petal.Width", time="Petal.Length")
+x <- sonify(iris)
+x <- x + sonaes(Petal.Length, Petal.Width)
 x <- x + scale_pitch_linear(6, 8) + scale_time_linear(0, 10)
 summary(x)
 \dontrun{x # outputs sound}

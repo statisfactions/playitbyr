@@ -56,9 +56,7 @@ scale_tempo_linear(min, max)
 ## A verbose way of specifying a sonify object,
 ## without using the shortcuts
 x <- sonify(data=iris, 
-     mapping = sonaes(time="Petal.Width",
-       pitch = "Petal.Length", 
-       dur=5, vol=0.75),
+     sonaes(Petal.Width, Petal.Length, dur=5, vol=0.75),
      scales = sonscaling(
        time = list(min=0, max=3,
         scaling.function = linear.scale),
@@ -69,10 +67,7 @@ summary(x)
 
 ## An equivalent and much more compact way, with
 ## the shortcut functions
-y <- sonify(data=iris, 
-      sonaes(time="Petal.Width",
-      pitch = "Petal.Length", 
-      dur=5, vol=0.75))
+y <- sonify(iris, sonaes(Petal.Width, Petal.Length, dur=5, vol=0.75))
 y <- y + scale_time_linear(0, 3)
 y <- y + scale_pitch_linear(3, 13)
 summary(y)
@@ -83,7 +78,7 @@ summary(y)
 ## the sonification is stretched to 12 seconds
 ## long instead of 3, and the pitch is mapped to
 ## a much narrower range, the octave below tuning A (440 Hz)
-y <- y + scale_time_linear(0,12) + scale_pitch_linear(7,8)
+y <- y + scale_time_linear(0, 12) + scale_pitch_linear(7, 8)
 summary(y)
 \dontrun{y}
 }

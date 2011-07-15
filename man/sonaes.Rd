@@ -9,26 +9,28 @@
   (or included in its construction).}
 
 \usage{
-sonaes(time=0, pitch=8, dur=1, vol=1, pan=0.5, tempo=NULL,
+sonaes(time=0, pitch=8, dur=2, vol=1, pan=0.5, tempo=NULL,
        timbre="sine")
 }
 
 \arguments{
-  \item{time}{a \code{data.frame} column name, or the desired start
-    time of all events (in seconds). Either \code{time} or
-    \code{tempo} must be specified, but not both, for a \code{sonify}
-    object to be rendered.}
 
-  \item{pitch}{a \code{data.frame} column name (of the "data" argument
-    in \code{sonify}), or the desired pitch of all events, represented
-    such that 8 represents middle C, 9 represents the octave above,
-    etc. (This is
+  \item{time}{a \code{data.frame} column name corresponding to one of
+    the columns of the \code{data} argument of \code{\link{sonify}}, or
+    the desired start time of all events (in seconds). Either
+    \code{time} or \code{tempo} must be specified, but not both, for a
+    \code{sonify} object to be rendered. For any of these arguments,
+    quotes are optional.}
+
+  \item{pitch}{a \code{data.frame} column name or the desired pitch of
+    all events, represented such that 8 represents middle C, 9
+    represents the octave above, etc. (This is
     \href{http://www.csounds.com/manual/html/cpsoct.html}{Csound's
-      \sQuote{oct} notation}.)}
+    \sQuote{oct} notation}.)}
   
   \item{dur}{a \code{data.frame} column name, or the relative desired
     duration of all events in \dfn{beats}, where 1 beat equals the
-    length of time for one event if all events were equal length.)}
+    length of time for one event if all events were equal length.}
   
   \item{vol}{a \code{data.frame} column name, or the desired volume of
     all events as a number between 0, silence, and 1, the maximum
@@ -76,21 +78,22 @@ sonaes(time=0, pitch=8, dur=1, vol=1, pan=0.5, tempo=NULL,
 }
 
 \examples{
-## Maps "Petal.Width" onto tempo,
-## "Sepal.Width" onto pitch,
+## Maps Petal.Width onto tempo,
+## Sepal.Width onto pitch,
 ## and sets scalings
 ## (not terribly informative, since the order is
 ## arbitrary)
-x <- sonify(iris, sonaes(tempo="Petal.Width",
-            pitch="Sepal.Width"))
-x <- (x + scale_tempo_linear(200, 1000)
-        + scale_pitch_linear(3, 12))
+x <- sonify(iris, sonaes(tempo=Petal.Width,
+            pitch=Sepal.Width))
 summary(x)
-\dontrun{x}
+\dontrun{x ## Quite long!}
 
-## Map "Petal.Width" onto 'time' instead
-y <- (x + sonaes(time="Petal.Width")
-        + scale_time_linear(0, 5))
+## Use a different tempo scaling than default
+## to hear more of the data faster
+\dontrun{x + scale_tempo_linear(300, 1000)}
+
+## Map Petal.Width onto 'time' instead
+y <- x + sonaes(time=Petal.Width)
 summary(y)
 \dontrun{y}
 

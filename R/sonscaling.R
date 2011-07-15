@@ -14,14 +14,16 @@ sonscaling <- function(time = list(0, 5, linear.scale),
   ##vol: specified in relation to loudest sound = 1
   ##timbre: this argument is rendering-specific; there are different ranges of timbre available for
   ##        different renderings. For MIDI notes, just the general MIDI specification
-
-  
   sc <- list(time, pitch, dur, vol, pan, tempo, timbre)
-  sc <- lapply(sc, function(x) {
-    if(length(x) == 3)
-      names(x) <- c("min", "max", "scaling.function")
-    return(x)})
-  names(sc) <- c( "time", "pitch", "dur", "vol", "pan", "tempo", "timbre")
+  names(sc) <- names(formals())
+  givens <- names(as.list(match.call())[-1])
+  for(i in names(sc)) {
+    if(!is.null(sc[[i]])) {
+      attr(sc[[i]], "default") <- !(i %in% givens)
+      names(sc[[i]]) <- c("min", "max", "scaling.function")
+    }
+  }
+
   if(!is.null(sc$time) && ((sc$time$max < 0) || (sc$time$min < 0)))
     stop("time must be greater than 0.")
   if(!is.null(sc$tempo) && ((sc$tempo$max < 0) || (sc$tempo$min< 0)))
@@ -33,7 +35,7 @@ sonscaling <- function(time = list(0, 5, linear.scale),
   if(!is.null(sc$pan) && (((sc$pan$max<0) || sc$pan$min<0) || (sc$pan$min>1 || sc$pan$max>1)))
     stop("pan must be between 0 and 1.")
   
-  class(sc) <- c("sonscaling", "list")
+  class(sc) <- "sonscaling"
   sc
 }
 
