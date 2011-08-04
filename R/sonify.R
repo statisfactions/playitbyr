@@ -1,50 +1,58 @@
+## TODO check checkSonify's new functionality
+## and sonlayer and all the new stuff...
+
 sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling()) {
-  ## This just puts the items in a list
-  ## TODO much more validation is needed to make this sensible
-  if(!is.null(data) & !is.data.frame(data))
-    stop("'data' must be a data.frame.")
+  ## Creates a \code{sonify} object, which is a list containing the \code{data.frame}
+  ## to be sonified, the mappings of data to sound parameters, the scaling
+  ## of parameters, and additional options.
   
-  ## TODO these functions will eventually be defined separately
-  sonlayer <- function(shape="notes", shape_params=NULL, stat=NULL, stat_params=NULL, data=NULL, mapping=NULL) {
-    l <- list(list(shape, shape_params), list(stat, stat_params), data, mapping)
-    names(l) <- c("shape", "stat", "data", "mapping")
-    names(l$stat) <- c("stat", "stat_params")
-    names(l$shape) <- c("shape", "shape_params")
-    class(l) <- c("sonlayer", "list")
-    l
-  }
-  shape_notes <- function(...) sonlayer("notes",...)
 
-  rendering <- function(x) {
-    class(x) <- "sonrendering"
-    x
-  }
-
-  
-  ## TODO these will eventually be arguments in the sonify function,
-  ## but for now I'm simply assigning them since there is only one
-  ## possible value
+####################TEMPORARY####################
+  ## This code is a temporary hack in place of future functionality
+  ## TODO Make as arguments in sonify() once there are other options
   sonlayers <- shape_notes()
   rendering <- "audio"
-  dataname <- deparse(substitute(data))
-  s <- list(data, dataname, mapping, rendering, scales, sonlayers)
+####################END##########################
+
+  .checkRendering(rendering)
+  dataname <- deparse(substitute(data)) # Used by summary.sonify()
+  
+  s <- list(data, dataname, mapping, rendering, scales, sonlayers) 
   names(s) <- c("data", "dataname", "mapping", "rendering", "scales", "sonlayers") 
-  class(s) <- c(rendering, "sonify")
+  class(s) <- c(rendering, "sonify")    # The class of rendering determines the
+                                        # function called to render s
+  .checkData(s)
   s
 }
 
-##Need to generate mappings. Let's tempo with just pitch and tone.
-##Pitch can be default stored in csound's "oct" notation, with
-##before decimal being octaves of middle 
+sonlayer <- function(shape="notes", shape_params=NULL, stat=NULL,
+                     stat_params=NULL, data=NULL, mapping=NULL) {
+  ## TODO Let's only make live the parts of this we're actually supporting
+  ## TODO man page
+  ## TODO add to namespace
 
-##From manual at Csounds.com: the fraction is preceded by a whole number octave index such that 8.00 represents Middle C, 9.00 the C above, etc. Midi note number values range between 0 and 127 (inclusively) with 60 representing Middle C, and are usually whole numbers.
+  dataname <- deparse(substitute(data)) # Used by summary.sonify()
+  l <- list(list(shape, shape_params), list(stat, stat_params), data, dataname, mapping)
+  
+  names(l) <- c("shape", "stat", "data", "dataname", "mapping")
+  names(l$stat) <- c("stat", "stat_params")
+  names(l$shape) <- c("shape", "shape_params")
+  class(l) <- c("sonlayer")
+
+  .checkData(l)    
+  l
+}
+
+shape_notes <- function(...) sonlayer("notes",...)
+## TODO add to namespace  
+## Convenience function for the only supported layer type, notes.
 
 sonaes <- function(time=0, pitch=8, dur=2, vol=1, pan=0.5, tempo=NULL, timbre="sine") {
-  ##Similar to ggplot2 "sonaes"
-
+  ##Similar to ggplot2 "aes", for generating mappings of data to sound.
+  ## 'sonaes' objects are lists and are used as the top-level 'mapping' of sonify objects
+  
   if(!missing(time) && !missing(tempo))
     stop("Only one of 'time' or 'tempo' can be provided.")
-
 
   given <-  as.list(match.call()[-1])
   ## Deparse any unquoted data.frame columns given as args
@@ -114,12 +122,19 @@ sonaes <- function(time=0, pitch=8, dur=2, vol=1, pan=0.5, tempo=NULL, timbre="s
 }         
 
 checkSonify <- function(x) {
+  ## TODO note data check on man page
+
   xname <- deparse(substitute(x))
-  map <- .getMappings(x, 1)
-  ## Checks that correct mapping slots are filled
-  if(is.null(x$data))
+  if(!("sonify" %in% class(x)))
+    stop("'",xname,"' is not a 'sonify' object.")
+  
+  ## Do any layers of x contain data?
+  layers.null <- all(sapply(x$sonlayers, function(y) is.null(y$data)))
+  if(is.null(x$data) & layers.null)
     stop("No data.frame provided for sonification. See ?sonify.")
   
+  ## Checks that correct mapping slots are filled  
+  map <- .getMappings(x, 1)
   if(!xor(is.null(map$time), is.null(map$tempo)))
     stop("Either 'time' or 'tempo' must be set, but not both. See ?sonaes.\n\n",
          xname, "$mapping$time:  ", as.character(x$mapping$time), "\n",
@@ -216,13 +231,13 @@ summary.sonify <- function(object, ...) {
   ##Another possible ggplot2 confusion/conflict
   ##Replace data.frame in x (a sonify object)
   ##with y (data.frame)
-  ##If mappings are already set up, the input data.frame should have the
-  ##same names, which we explicitly should check with sonthing like:
-  ##  if(!all(x$mapping[!is.null(x$mapping)] %in% names(y)))
-  ##    stop("New data.frame does not match mapping in sonify object")
-  ## THe preceding is not quite correct since it doesn't deal with the fact that some
-  ## mappings are set
+
+  ## This function does not check whether the y's names
+  ## match the names in x$mapping, but this is checked
+  ## before rendering by checkSonify
+  
   x$data <- y
+  .checkData(x)
   x$dataname <- deparse(substitute(y))
   x
 }
@@ -263,7 +278,6 @@ summary.sonify <- function(object, ...) {
     return(x$sonlayers[[sonlayernum]]$data)} else {return(x$data)}
 } 
 
-
 .getNotes <- function(x, sonlayernum) {
   ## Create the notes for the given sonlayer into Csound score style format
   n <- nrow(x$data) # for notes shape, every row of df is a note
@@ -301,3 +315,43 @@ summary.sonify <- function(object, ...) {
   curnotes$sonlayer <- factor(curnotes$sonlayer)
   curnotes[,c("sonlayer", "start", "dur", "pitch", "vol", "pan", "timbre")]
 }
+
+.checkRendering <- function(x) {
+  ## Checks whether input string x is a valid rendering type
+  ## This is a dopey function for now, but is likely to become
+  ## more complex as more rendering types are supported,
+  ## some of which may even be machine or architecture dependent.
+  ## This is called by 'rendering()' and will be called by
+  ## 'sonify()' once there are any non-audio rendering options.
+  
+  if(!(x %in% c("audio")))
+    stop("'",x, "' is not a valid rendering")
+  if(length(x) > 0 | !is.character(x))
+    stop("Renderings must be a character vector of length one.")
+  
+}
+
+rendering <- function(x) {
+  ## Not yet part of public API
+  ## This function exists ENTIRELY for changing rendering
+  ## in interactive use via '+.sonify';
+  ## all it does is check the validitiy of its string argument
+  ## and give it the class "sonrendering"
+  ## (so that '+.sonify' knows what to do with it)
+  
+  .checkRendering(x)
+  class(x) <- "sonrendering"
+  x
+}
+
+.checkData <- function(x) {
+  ## Checks if sonify object or sonlayer x has an invalid data.frame
+  ## It is okay for x$data to be null since one of either the sonify
+  ## object or the layers can have NULL data frame.
+  ## Called by 'sonify()' and 'sonlayer()'
+
+  if(!is.null(x$data) & !is.data.frame(x$data))
+    stop("'data' must be a data.frame.")
+}
+
+
