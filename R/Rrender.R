@@ -53,27 +53,6 @@ render.audio <- function(x) {
   return(outWave)
 }
 
-
-playAudioRendering <- function(audioSamp) {
-  ## Plays the file either using audio::play
-  ## or by writing to a tempfile and playing it
-  if(is.null(getPlayer())) {
-    stop("Please set the wave file player you want to use with setPlayer().
-Once you've done so, you can play the last rendering with playLastRendering().
-
-Though you can't play it yet, you can save it to file with
-saveLastRendering('path/to/file.wav').")
-  } else if(getPlayer() == "audio::play") {
-    play(audioSamp)
-  } else {
-    player <- getPlayer()
-    file <- paste(tempfile(), ".wav", sep="")
-    save.wave(audioSamp, file)
-    system2(player, file)
-    unlink(file)
-  }
-}
-
 getPlayer <- function() getOption("player")
 
 setPlayer <- function(newPlayer) options(player = newPlayer)
