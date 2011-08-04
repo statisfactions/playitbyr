@@ -38,30 +38,3 @@ sonscaling <- function(time = list(0, 5, linear.scale),
   class(sc) <- "sonscaling"
   sc
 }
-
-## Convenience functions for specifying scales.
-scale_time_linear <- function(min, max) sonscaling(time=list(min, max, linear.scale))
-scale_pitch_linear <- function(min, max) sonscaling(pitch=list(min, max, linear.scale))
-scale_dur_linear <- function(min, max) sonscaling(dur=list(min, max, linear.scale))
-scale_vol_linear <- function(min, max) sonscaling(vol=list(min, max, linear.scale))
-scale_pan_linear <- function(min, max) sonscaling(pan=list(min, max, linear.scale))
-scale_tempo_linear <- function(min, max) sonscaling(tempo=list(min, max, linear.scale))
-
-linear.scale <- function(x, min, max) {
-  ## Linearly rescales vector x so that "lower" is the minimum
-  ## and "upper" the maximum
-
-  if(min>max) {
-    ## Allow for reversed polarity
-    x <- -x
-    oldmin <- min
-    oldmax <- max
-    min <- oldmax
-    max <- oldmin
-  }
-  
-  nrange <- abs(max-min)
-  out <- ((x-min(x))*nrange/(max(x)-min(x)) + min)
-  out
-}
-
