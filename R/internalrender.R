@@ -11,7 +11,7 @@ render.audio <- function(x) {
 
   for(i in 1:nrow(notes)) {
     ## Loop to generate each note and put it into the "out" matrix
-    curNote <- .createNote(notes[i,], samp.rate)
+    curNote <- .createNoteAudio(notes[i,], samp.rate)
     out[, curNote$start:curNote$end] <- out[, curNote$start:curNote$end] + curNote$note
   }
 
@@ -22,7 +22,7 @@ render.audio <- function(x) {
   return(outWave)
 }
 
-.createNote <- function(noterow, samp.rate) {
+.createNoteAudio <- function(noterow, samp.rate) {
   ## Returns a matrix with 
   ## a note with specified start, pitch, duration, volume, and pan
   

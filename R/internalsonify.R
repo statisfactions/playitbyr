@@ -8,7 +8,7 @@
   
   if(!(x %in% c("audio")))
     stop("'",x, "' is not a valid rendering")
-  if(length(x) > 0 | !is.character(x))
+  if(length(x) > 1 | !is.character(x))
     stop("Renderings must be a character vector of length one.")
   
 }

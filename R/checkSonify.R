@@ -11,7 +11,8 @@ checkSonify <- function(x) {
     stop("'",xname,"' is not a 'sonify' object.")
   
   ## Do any layers of x contain data?
-  layers.null <- all(sapply(x$sonlayers, function(y) is.null(y$data)))
+  layers.null <- all(sapply(x$sonlayers, function(y) is.null(y["data"])))
+
   if(is.null(x$data) & layers.null)
     stop("No data.frame provided for sonification. See ?sonify.")
   

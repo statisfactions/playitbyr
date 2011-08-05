@@ -10,7 +10,7 @@ sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling()) {
 ####################TEMPORARY####################
   ## This code is a temporary hack in place of future functionality
   ## TODO Make as arguments in sonify() once there are other options
-  sonlayers <- shape_notes()
+  sonlayers <- list(shape_notes())
   rendering <- "audio"
 ####################END##########################
 
