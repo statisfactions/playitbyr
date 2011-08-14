@@ -1,4 +1,4 @@
-render.audio <- function(x) {
+render.audio <- function(x, ...) {
   ## Renders sonify object to audioSample object
   
   notes <- .dfNotes(x)

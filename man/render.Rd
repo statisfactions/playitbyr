@@ -2,7 +2,7 @@
 \alias{render}
 \alias{playAudioRendering}
 \usage{
-render(x)
+render(x, ...)
 playAudioRendering(audioSamp)
 }
 
@@ -31,6 +31,7 @@ playAudioRendering(audioSamp)
 
 \arguments{
   \item{x}{A \code{sonify} object to be rendered.}
+  \item{...}{Other arguments to be passed to the individual rendering option.}
   \item{audioSamp}{An \code{audioSample} object, already rendered and
     ready to be played or saved to file.}
 }

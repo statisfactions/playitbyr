@@ -1,4 +1,4 @@
-render <- function(x) UseMethod("render")
+render <- function(x, ...) UseMethod("render")
 ## All render methods should render the sonify object
 ## to an audioSample object.
 
