@@ -1,40 +1,20 @@
-.dfNotes <- function(s) {
-  ## s is a "sonify" object containing all notes sonlayers
-  ## This function renders the "notes" shape
+.getScore <- function(s) {
+  ## Returns a data.frame score that the render method
+  ## uses to actually create the sound for the sonification
 
-  if(is.null(s$sonlayers)) stop("Cannot render sound without any sonlayers.")
+  ## s is a "sonify" object containing sonlayers
 
-  notes <- do.call(rbind, lapply(1:length(s$sonlayers), function(x) .getNotes(s, x)))
-  notes
+  ## Check to make sure there are layers to render
+  if(is.null(s$sonlayers))
+    stop("Cannot render sound without any sonlayers.")
+
+  ## Create a score for each sonlayer and concatenate all scores into a data.frame
+  score <- do.call(rbind, lapply(1:length(s$sonlayers),
+                                 function(x) .getSonlayerScore(s, x)))
+  return(score)
 }
 
-
-
-
-.getMappings <- function(x, sonlayernum) {
-  ## x: a sonify object, returns the current mappings as a named list
-  ## 1. assign mapping based on sonlayer, and on default if sonlayer mapping not present
-  if(sonlayernum > length(x$sonlayers)) stop(paste("There is no sonlayer", sonlayernum))
-
-  sonlayermap <- x$sonlayers[[sonlayernum]]$mapping
-  if(!is.null(sonlayermap)) {
-    for(i in names(sonlayermap)) {
-      if(!is.null(sonlayermap[[i]]))
-        x$mapping[[i]] <- sonlayermap[[i]]
-    }
-  }
-  return(x$mapping)
-}
-
-.getData <- function(x, sonlayernum) {
-  ## x: a sonify object, returns the current data as a data.frame
-  if(sonlayernum > length(x$sonlayers)) stop(paste("There is no sonlayer", sonlayernum))
-
-  if(!is.null(x$sonlayers[[sonlayernum]]$data)){
-    return(x$sonlayers[[sonlayernum]]$data)} else {return(x$data)}
-} 
-
-.getNotes <- function(x, sonlayernum) {
+.getSonlayerScore <- function(x, sonlayernum) {
   ## Returns an output data.frame with all the information needed to render
   ## the sonlayernum-th sonlayer of x.
   ## The output is in a format rather similar to a Csound score.
@@ -45,8 +25,8 @@
   out <- data.frame(sonlayer)
 
   ## Get mappings and data
-  map <- .getMappings(x, sonlayernum) 
-  data <- .getData(x, sonlayernum)
+  map <- .getSonlayerMappings(x, sonlayernum) 
+  data <- .getSonlayerData(x, sonlayernum)
   
   ## If tempo or time is NULL, remove it from the sound parameters we're
   ## looking at
@@ -83,15 +63,43 @@
   }
 
   ## Scale durations by total time divided by number of notes
-  ## NOTE: this is somewhat questionable whether this is the right
+  out$dur <- (out$dur) * (total/n) 
+
+  ## (NOTE: this is somewhat questionable whether this is the right
   ## thing to do; it's a little arbitrary and makes scaling duration
   ## less intuitively related to what's specified in x$scaling.
   ## I have chosen to do it this way b/c it means you can easily set a different
   ## scaling for the time and duration will automagically scale down without
-  ## having to set it separately, which seems annoying.
-  out$dur <- (out$dur) * (total/n) 
+  ## having to set it separately, which seems annoying.)
+
+  
   
   ## Return only the standard columns expected by the render methods,
   ## since we've introduced a bunch of other crap into the picture.
   out[,c("sonlayer", "start", "dur", "pitch", "vol", "pan", "timbre")] 
 }
+
+
+
+.getSonlayerMappings <- function(x, sonlayernum) {
+  ## x: a sonify object, returns the current mappings as a named list
+  ## 1. assign mapping based on sonlayer, and on default if sonlayer mapping not present
+  if(sonlayernum > length(x$sonlayers)) stop(paste("There is no sonlayer", sonlayernum))
+
+  sonlayermap <- x$sonlayers[[sonlayernum]]$mapping
+  if(!is.null(sonlayermap)) {
+    for(i in names(sonlayermap)) {
+      if(!is.null(sonlayermap[[i]]))
+        x$mapping[[i]] <- sonlayermap[[i]]
+    }
+  }
+  return(x$mapping)
+}
+
+.getSonlayerData <- function(x, sonlayernum) {
+  ## x: a sonify object, returns the current data to be sonified
+  if(sonlayernum > length(x$sonlayers)) stop(paste("There is no sonlayer", sonlayernum))
+
+  if(!is.null(x$sonlayers[[sonlayernum]]$data)){
+    return(x$sonlayers[[sonlayernum]]$data)} else {return(x$data)}
+} 

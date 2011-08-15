@@ -1,7 +1,7 @@
 render.audio <- function(x, ...) {
   ## Renders sonify object to audioSample object
   
-  notes <- .dfNotes(x)
+  notes <- .getScore(x)
   samp.rate <- 10000 ## TODO: need to have this as an option
 
   ## Calculate total number of samples and create data.frame
