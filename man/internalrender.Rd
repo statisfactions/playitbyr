@@ -1,37 +1,48 @@
 \name{internalrender}
-\alias{render.audio}
 \alias{.createNoteAudio}
-\title{Internal functions to generate sound from a
-  \code{sonify} object.}
-\description{These functions are not intended to be called directly by
-  the user. \code{render} is a generic that takes a \code{sonify} object
-  and determines which method to call based on the class of the object;
-  playAudioRendering plays the resulting \code{audioSample} object.}
+\alias{internalrender}
+\alias{render.audio}
+\title{Internal functions to generate sound from a \code{sonify} object.}
 \usage{
-render.audio(x)
-.createNoteAudio(noterow, samp.rate)
+  \method{render}{audio} (x, ...)
+
+  .createNoteAudio(noterow, samp.rate)
 }
-\value{
-  \code{render.audio} returns an \code{audioSample} object (from the
-  \code{audio} package).
-
-  \code{.createNoteAudio} creates each individual note one by one for each
-  row returned by \code{.getNotes}.
-
-  \code{playAudioRendering} is called for its side effect, to produce
-  the sound of the sonification.}
 \arguments{
   \item{x}{A \code{sonify} object}
+
   \item{noterow}{A row of the \code{data.frame} returned by
-    \code{.getNotes}, spoon-fed to \code{.createNoteAudio} one by one by
-    \code{render.audio}}
+  \code{.getNotes}, spoon-fed to \code{.createNoteAudio}
+  one by one by \code{render.audio}}
+
   \item{samp.rate}{The sampling rate, in Hertz}
-  \item{audioSamp}{The \code{audioSample} object to be played}
+
+  \item{audioSamp}{The \code{audioSample} object to be
+  played}
 }
+\value{
+  \code{render.audio} returns an \code{audioSample} object
+  (from the \code{audio} package).
 
+  \code{.createNoteAudio} creates each individual note one
+  by one for each row returned by \code{.getNotes}.
+
+  \code{playAudioRendering} is called for its side effect,
+  to produce the sound of the sonification.
+}
+\description{
+  These functions are not intended to be called directly by
+  the user. \code{render} is a generic that takes a
+  \code{sonify} object and determines which method to call
+  based on the class of the object; playAudioRendering
+  plays the resulting \code{audioSample} object.
+}
 \details{
-    \code{render.audio} (the only currently available rendering method),
-  calls \code{.createNoteAudio} for every note in the data
-  frame returned by \code{.getNotes}. Finally, \code{playAudioRendering} is called to produce sound.}
-
+  \code{render.audio} (the only currently available
+  rendering method), calls \code{.createNoteAudio} for
+  every note in the data frame returned by
+  \code{.getNotes}. Finally, \code{playAudioRendering} is
+  called to produce sound.
+}
 \keyword{internal}
+

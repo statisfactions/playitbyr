@@ -1,3 +1,34 @@
+##' Internal functions to generate sound from a \code{sonify} object.
+##' 
+##' These functions are not intended to be called directly by the user.
+##' \code{render} is a generic that takes a \code{sonify} object and determines
+##' which method to call based on the class of the object; playAudioRendering
+##' plays the resulting \code{audioSample} object.
+##' 
+##' \code{render.audio} (the only currently available rendering method), calls
+##' \code{.createNoteAudio} for every note in the data frame returned by
+##' \code{.getNotes}. Finally, \code{playAudioRendering} is called to produce
+##' sound.
+##'
+##' @name internalrender
+##' @rdname internalrender
+##' @aliases render.audio .createNoteAudio
+##' @param x A \code{sonify} object
+##' @param noterow A row of the \code{data.frame} returned by \code{.getNotes},
+##' spoon-fed to \code{.createNoteAudio} one by one by \code{render.audio}
+##' @param samp.rate The sampling rate, in Hertz
+##' @param audioSamp The \code{audioSample} object to be played
+##' @return \code{render.audio} returns an \code{audioSample} object (from the
+##' \code{audio} package).
+##' 
+##' \code{.createNoteAudio} creates each individual note one by one for each
+##' row returned by \code{.getNotes}.
+##' 
+##' \code{playAudioRendering} is called for its side effect, to produce the
+##' sound of the sonification.
+##' @keywords internal
+##' @method render audio
+##' @export
 render.audio <- function(x, ...) {
   ## Renders sonify object to audioSample object
   
@@ -22,6 +53,7 @@ render.audio <- function(x, ...) {
   return(outWave)
 }
 
+##' @rdname internalrender
 .createNoteAudio <- function(noterow, samp.rate) {
   ## Returns a matrix with 
   ## a note with specified start, pitch, duration, volume, and pan
@@ -49,3 +81,5 @@ render.audio <- function(x, ...) {
 
   return(list(start=start, end=end, note=note))
 }  
+
+

@@ -1,3 +1,22 @@
+##' Internal functions to generate output \code{data.frame} from a
+##' \code{sonify} object.
+##' 
+##' These functions, together, are used to generate a standardized
+##' \code{data.frame}, rather like a Csound score, that is then used by
+##' whatever method renders the sounds (currently only rendering in R as sine
+##' waves is supported).
+##' 
+##' @rdname internaldf
+##' @name internaldf
+##' @aliases .getScore .getSonlayerMappings .getSonlayerData .getSonlayerScore
+##' @param s,x A \code{sonify} object
+##' @param sonlayernum The layer number of the \code{sonify} object. This is a
+##' placeholder for future implementation of a layering functionality (modeled
+##' after \code{ggplot2} objects).
+##' @return The end product of all this is a \code{data.frame} object that is
+##' used as an input to the rendering process
+##' @keywords internal
+##' 
 .getScore <- function(s) {
   ## Returns a data.frame score that the render method
   ## uses to actually create the sound for the sonification
@@ -14,6 +33,7 @@
   return(score)
 }
 
+##' @rdname internaldf
 .getSonlayerScore <- function(x, sonlayernum) {
   ## Returns an output data.frame with all the information needed to render
   ## the sonlayernum-th sonlayer of x.
@@ -80,7 +100,7 @@
 }
 
 
-
+##' @rdname internaldf
 .getSonlayerMappings <- function(x, sonlayernum) {
   ## x: a sonify object, returns the current mappings as a named list
   ## 1. assign mapping based on sonlayer, and on default if sonlayer mapping not present
@@ -96,6 +116,7 @@
   return(x$mapping)
 }
 
+##' @rdname internaldf
 .getSonlayerData <- function(x, sonlayernum) {
   ## x: a sonify object, returns the current data to be sonified
   if(sonlayernum > length(x$sonlayers)) stop(paste("There is no sonlayer", sonlayernum))

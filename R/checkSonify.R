@@ -1,11 +1,17 @@
+##' Check if a \code{sonify} object can be rendered
+##' 
+##' This function is called by \code{\link{print.sonify}} before rendering to
+##' check if the object can be rendered; it can also be called directly by the
+##' user for diagnostic purposes.
+##' 
+##' 
+##' @param x A \code{sonify} object.
+##' @seealso \code{\link{sonify}}, \code{\link{sonaes}},
+##' \code{\link{sonscaling}} all give more details on how to correctly form a
+##' \code{sonify} object.
+##' @export
 checkSonify <- function(x) {
-  ## This function is called by \code{\link{print.sonify}}
-  ## before rendering to check if the object can be rendered; it can also
-  ## be called directly by the user for diagnostic purposes.
-
   
-  ## TODO note data check on man page
-
   xname <- deparse(substitute(x))
   if(!("sonify" %in% class(x)))
     stop("'",xname,"' is not a 'sonify' object.")
