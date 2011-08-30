@@ -4,7 +4,6 @@
 ##' check if the object can be rendered; it can also be called directly by the
 ##' user for diagnostic purposes.
 ##' 
-##' 
 ##' @param x A \code{sonify} object.
 ##' @seealso \code{\link{sonify}}, \code{\link{sonaes}},
 ##' \code{\link{sonscaling}} all give more details on how to correctly form a

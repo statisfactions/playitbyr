@@ -35,8 +35,6 @@
 
 ##' @rdname internalsonify
 rendering <- function(x) {
-  ## TODO add to namespace
-  ## TODO add to render.Rd
   ## This function exists ENTIRELY for changing rendering
   ## in interactive use via '+.sonify';
   ## all it does is check the validitiy of its string argument

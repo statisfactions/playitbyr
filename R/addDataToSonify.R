@@ -16,14 +16,13 @@
 ##' @param x A \code{sonify} object whose default \code{data.frame} is
 ##' to be changed
 ##' @param y A \code{data.frame} to add to \code{x}
-##' @return A \code{sonify} object with \code{y} now as the default \code{data.frame}
+##' @return A \code{sonify} object with \code{y} now as the default
+##' \code{data.frame}
 ##'
 ##' @seealso \code{+.sonify}
 ##' @export
 ##' @usage x \%+\% y
 `%+%` <- function(x, y) {
-
-
   ## This function does not check whether the y's names
   ## match the names in x$mapping, but this is checked
   ## before rendering by checkSonify

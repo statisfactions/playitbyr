@@ -4,7 +4,6 @@
 ##' \code{data.frame} to be sonified, the mappings of data to sound parameters,
 ##' the scaling of parameters, and additional options.
 ##' 
-##' 
 ##' @param data a \code{data.frame} with the data to be sonified
 ##' @param mapping a \code{sonaes} object (created by \code{sonaes()}) that
 ##' maps data to sound parameters
@@ -24,8 +23,6 @@
 ##' \code{ggplot} objects in the \pkg{ggplot2} package. See the
 ##' \href{http://had.co.nz/ggplot2/}{ggplot2 web site} for more information.
 ##' @examples
-##' 
-##' 
 ##' ## A bare-bones sonify object, but one that cannot render
 ##' x <- sonify()
 ##' summary(x)

@@ -5,8 +5,6 @@
 ##' intended be added to a \code{sonify} object (or included in its
 ##' construction).
 ##' 
-
-##' 
 ##' Setting sonic parameters to \code{data.frame} columns or constant values is
 ##' the heart of making the sonification happen and making it possible to
 ##' render.
@@ -47,7 +45,6 @@
 ##' value "sine", for a simple sine wave, is supported.
 ##' @return A \code{sonaes} object, used in or added to a \code{sonify} object.
 ##' @seealso
-##' 
 ##' \code{\link{sonify}}, \code{\link{sonscaling}}, \code{\link{octToFreq} }.
 ##' Also, see \code{\link[ggplot2]{aes}} from the \pkg{ggplot2} package, which
 ##' inspired this function.
@@ -77,8 +74,8 @@
 ##' 
 ##' @export
 sonaes <- function(time=0, pitch=8, dur=2, vol=1, pan=0.5, tempo=NULL, timbre="sine") {
-  ##Similar to ggplot2 "aes", for generating mappings of data to sound.
-  ## 'sonaes' objects are lists and are used as the top-level 'mapping' of sonify objects
+  ## 'sonaes' objects are lists and are used as the top-level
+  ## 'mapping' slot of sonify objects
   
   if(!missing(time) && !missing(tempo))
     stop("Only one of 'time' or 'tempo' can be provided.")

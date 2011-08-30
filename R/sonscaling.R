@@ -4,8 +4,6 @@
 ##' it in order to specify precisely how the data parameters are mapped onto
 ##' sonic parameters. Currently, only continuous scales are supported.
 ##' 
-
-##' 
 ##' Each argument of \code{sonscaling} is in the form of a list, where the
 ##' first element is the minimum value of the sonic parameter, the second is
 ##' the maximum, and the third is a function that maps the data column onto the
@@ -50,15 +48,6 @@ sonscaling <- function(time = list(0, 5, linear.scale),
                        pan= list(0, 1, linear.scale),
                        tempo = list(120, 240, linear.scale),
                        timbre = NULL) {
-  ##
-  ##The sonscaling for a sound parameter is a list with three elements: min, max, and function
-  ##
-  ##pitch: specified in csound oct notation, with 8.00 as middle C
-  ##tempo: specified in proportional relation to total length=1 then multiplied, by default
-  ##dur: in relation to 1 "beat", where a "beat" is (total length)/nrow(data)  
-  ##vol: specified in relation to loudest sound = 1
-  ##timbre: this argument is rendering-specific; there are different ranges of timbre available for
-  ##        different renderings. For MIDI notes, just the general MIDI specification
   sc <- list(time, pitch, dur, vol, pan, tempo, timbre)
   names(sc) <- names(formals())
   givens <- names(as.list(match.call())[-1])

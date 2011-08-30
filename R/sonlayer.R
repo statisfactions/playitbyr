@@ -22,8 +22,6 @@
 
 sonlayer <- function(shape="notes", shape_params=NULL, stat=NULL,
                      stat_params=NULL, data=NULL, mapping=NULL) {
-  ## TODO man page
-  ## TODO add to namespace
 
   dataname <- deparse(substitute(data)) # Used by summary.sonify()
   l <- list(list(shape, shape_params), list(stat, stat_params), data, dataname, mapping)

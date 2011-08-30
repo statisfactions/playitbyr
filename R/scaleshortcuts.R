@@ -1,6 +1,5 @@
 ##' Shortcut functions to set linear scales for \code{sonify} objects
 ##' 
-##' 
 ##' These shortcut functions (with the notation \code{scale_}\kbd{[data
 ##' parameter]}\code{_}\kbd{[scaling function]}) are intended to be added onto
 ##' a \code{sonify} object to specify how \kbd{[data parameter]} from the data
