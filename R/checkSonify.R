@@ -22,7 +22,7 @@ checkSonify <- function(x) {
     stop("No data.frame provided for sonification. See ?sonify.")
   
   ## Checks that correct mapping slots are filled  
-  map <- .getSonlayerMappings(x, 1)
+  map <- .getSonlayerMappings(x, 1, remove.null = FALSE)
   if(!xor(is.null(map$time), is.null(map$tempo)))
     stop("Either 'time' or 'tempo' must be set, but not both. See ?sonaes.\n\n",
          xname, "$mapping$time:  ", as.character(x$mapping$time), "\n",

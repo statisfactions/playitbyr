@@ -74,8 +74,18 @@
 ##' 
 ##' @export
 sonaes <- function(time=0, pitch=8, dur=2, vol=1, pan=0.5, tempo=NULL, timbre="sine") {
+
   ## 'sonaes' objects are lists and are used as the top-level
   ## 'mapping' slot of sonify objects
+
+##################################################
+### BRAINSTORM 2011-08-30
+###
+### Here's where I'm defining the data structure, used BOTH by the
+### default mapping slot and by each layer. This data structure deeply
+### accessed in .get, but it's also
+### accessed by .checkSonify, summary.sonify, and +.sonify, confirmed
+### by a quick grep of the R files.
   
   if(!missing(time) && !missing(tempo))
     stop("Only one of 'time' or 'tempo' can be provided.")

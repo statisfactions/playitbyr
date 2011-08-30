@@ -32,7 +32,7 @@
 render.audio <- function(x, ...) {
   ## Renders sonify object to audioSample object
   
-  notes <- .getScore(x)
+  notes <- do.call(rbind, .getScore(x))
   samp.rate <- 10000 ## TODO: need to have this as an option
 
   ## Calculate total number of samples and create data.frame
