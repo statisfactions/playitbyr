@@ -2,12 +2,12 @@
 ##' \code{sonify} object.
 ##' 
 ##' These functions, together, are used to generate a standardized
-##' \code{data.frame}, rather like a Csound score, that is then used by
-##' whatever method renders the sounds (currently only rendering in R as sine
-##' waves is supported).
+##' \code{data.frame}, rather like a Csound score, that is then used
+##' by whatever method renders the sounds (currently only rendering in
+##' R as sine waves is supported).
 ##'
-##' @note These functions (particularly .getSonlayerScore) assume that every
-##' shape has a single output row for each input data row after
+##' @note These functions (particularly .getSonlayerScore) assume that
+##' every shape has a single output row for each input data row after
 ##' applying statistical tranformations
 ##' 
 ##' @rdname internaldf
@@ -15,11 +15,11 @@
 ##' @aliases .getScore .getSonlayerMappings .getSonlayerData
 ##' .getSonlayerScore
 ##' @param x A \code{sonify} object
-##' @param sonlayernum The layer number of the \code{sonify} object. This is a
-##' placeholder for future implementation of a layering functionality (modeled
-##' after \code{ggplot2} objects).
-##' @return The end product of all this is a \code{data.frame} object that is
-##' used as an input to the rendering process
+##' @param sonlayernum The layer number of the \code{sonify}
+##' object. This is a placeholder for future implementation of a
+##' layering functionality (modeled after \code{ggplot2} objects).
+##' @return The end product of all this is a \code{data.frame} object
+##' that is used as an input to the rendering process
 ##' @keywords internal
 ##' 
 .getScore <- function(x) {
@@ -34,6 +34,7 @@
   ## a data.frame
   score <- lapply(1:length(x$sonlayers),
                   function(layernum) .getSonlayerScore(x, layernum))
+  class(score) <- c(x$rendering, "score")
   return(score)
 }
 
@@ -96,7 +97,7 @@
   ## annoying.)
 
   ## Set shape to pass to rendering method
-  attr(out, "shape") <- .getSonlayerShape(x, sonlayernum)
+  class(out) <- c(.getSonlayerShape(x, sonlayernum),  "data.frame")
 
   return(out)
 }

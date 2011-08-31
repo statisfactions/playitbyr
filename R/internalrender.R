@@ -1,38 +1,41 @@
-##' Internal functions to generate sound from a \code{sonify} object.
+##' Internal functions to generate sound from a \code{score} object.
 ##' 
-##' These functions are not intended to be called directly by the user.
-##' \code{render} is a generic that takes a \code{sonify} object and determines
-##' which method to call based on the class of the object; playAudioRendering
-##' plays the resulting \code{audioSample} object.
+##' These functions are not intended to be called directly by the
+##' user.  \code{render} is a generic that takes a \code{sonify}
+##' object and determines which method to call based on the class of
+##' the object; play_audioSample plays the resulting
+##' \code{audioSample} object.
 ##' 
-##' \code{render.audio} (the only currently available rendering method), calls
-##' \code{.createNoteAudio} for every note in the data frame returned by
-##' \code{.getNotes}. Finally, \code{playAudioRendering} is called to produce
-##' sound.
+##' \code{render.audio} (the only currently available rendering
+##' method), calls \code{.createNoteAudio} for every note in the data
+##' frame returned by \code{.getScore}. Finally,
+##' \code{play_audioSample} is called to produce sound.
 ##'
+##' @note This file is currently under heavy development and will
+##' be changing drastically in the development version.
 ##' @name internalrender
 ##' @rdname internalrender
 ##' @aliases render.audio .createNoteAudio
 ##' @param x A \code{sonify} object
-##' @param noterow A row of the \code{data.frame} returned by \code{.getNotes},
-##' spoon-fed to \code{.createNoteAudio} one by one by \code{render.audio}
+##' @param noterow A row of the \code{data.frame} returned by
+##' \code{.getNotes}, spoon-fed to \code{.createNoteAudio} one by one
+##' by \code{render.audio}
 ##' @param samp.rate The sampling rate, in Hertz
 ##' @param audioSamp The \code{audioSample} object to be played
-##' @return \code{render.audio} returns an \code{audioSample} object (from the
-##' \code{audio} package).
+##' @return \code{render.audio} returns an \code{audioSample} object
+##' (from the \code{audio} package).
 ##' 
-##' \code{.createNoteAudio} creates each individual note one by one for each
-##' row returned by \code{.getNotes}.
+##' \code{.createNoteAudio} creates each individual note one by one
+##' for each row returned by \code{.getNotes}.
 ##' 
-##' \code{playAudioRendering} is called for its side effect, to produce the
-##' sound of the sonification.
+##' \code{play_audioSample} is called for its side effect, to
+##' produce the sound of the sonification.
 ##' @keywords internal
 ##' @method render audio
 ##' @export
-render.audio <- function(x, ...) {
-  ## Renders sonify object to audioSample object
+render.audio <- function(x, audioSample=FALSE, ...) {
   
-  notes <- do.call(rbind, .getScore(x))
+  notes <- x
   samp.rate <- 10000 ## TODO: need to have this as an option
 
   ## Calculate total number of samples and create data.frame
@@ -40,12 +43,15 @@ render.audio <- function(x, ...) {
   total <- max(notes$start + notes$dur) * samp.rate + nrow(notes) 
   out <- matrix(data=0, ncol = total, nrow = 2)
 
-  for(i in 1:nrow(notes)) {
-    ## Loop to generate each note and put it into the "out" matrix
-    curNote <- .createNoteAudio(notes[i,], samp.rate)
-    out[, curNote$start:curNote$end] <- out[, curNote$start:curNote$end] + curNote$note
+  for(i in length(notes)) {
+    layerscore <- notes[[i]]
+    for(j in 1:nrow(layerscore)) {
+      ## Loop to generate each note and put it into the "out" matrix
+      curNote <- .createNoteAudio(layerscore[i,], samp.rate)
+      out[, curNote$start:curNote$end] <- out[, curNote$start:curNote$end] + curNote$note
+    }
   }
-
+  
   ## Rescale matrix
   out <- linear.scale(out, -1, 1)
   outWave <- as.audioSample(out, samp.rate)

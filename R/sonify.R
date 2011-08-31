@@ -72,8 +72,7 @@ sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling()) {
   
   s <- list(data, dataname, mapping, rendering, scales, sonlayers) 
   names(s) <- c("data", "dataname", "mapping", "rendering", "scales", "sonlayers") 
-  class(s) <- c(rendering, "sonify")    # The class of rendering determines the
-                                        # function called to render s
+  class(s) <- "sonify"
   .checkData(s)
   s
 }

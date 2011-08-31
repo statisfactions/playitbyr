@@ -2,9 +2,9 @@
 \alias{.createNoteAudio}
 \alias{internalrender}
 \alias{render.audio}
-\title{Internal functions to generate sound from a \code{sonify} object.}
+\title{Internal functions to generate sound from a \code{score} object.}
 \usage{
-  \method{render}{audio} (x, ...)
+  \method{render}{audio} (x, audioSample = FALSE, ...)
 
   .createNoteAudio(noterow, samp.rate)
 }
@@ -27,22 +27,26 @@
   \code{.createNoteAudio} creates each individual note one
   by one for each row returned by \code{.getNotes}.
 
-  \code{playAudioRendering} is called for its side effect,
-  to produce the sound of the sonification.
+  \code{play_audioSample} is called for its side effect, to
+  produce the sound of the sonification.
 }
 \description{
   These functions are not intended to be called directly by
-  the user. \code{render} is a generic that takes a
+  the user.  \code{render} is a generic that takes a
   \code{sonify} object and determines which method to call
-  based on the class of the object; playAudioRendering
-  plays the resulting \code{audioSample} object.
+  based on the class of the object; play_audioSample plays
+  the resulting \code{audioSample} object.
 }
 \details{
   \code{render.audio} (the only currently available
   rendering method), calls \code{.createNoteAudio} for
   every note in the data frame returned by
-  \code{.getNotes}. Finally, \code{playAudioRendering} is
+  \code{.getScore}. Finally, \code{play_audioSample} is
   called to produce sound.
+}
+\note{
+  This file is currently under heavy development and will
+  be changing drastically in the development version.
 }
 \keyword{internal}
 
