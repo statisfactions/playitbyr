@@ -34,7 +34,6 @@
 ##' @param tempo The desired tempo mapping (in beats per minute). A list with
 ##' three elements: the minimum tempo, the maximum tempo, and the scaling
 ##' function.
-##' @param timbre Ignored. Currently no mappings are supported for this timbre
 ##' @seealso \code{\link{sonify}} where this is eventually used;
 ##' \code{\link{sonaes}} for defining the which data columns get mapped onto
 ##' these sonic parameters; \code{\link{scaleShortcuts}} for easy shortcut
@@ -46,9 +45,9 @@ sonscaling <- function(time = list(0, 5, linear.scale),
                        dur = list(0.25, 4, linear.scale),
                        vol = list(0.2, 1, linear.scale),
                        pan= list(0, 1, linear.scale),
-                       tempo = list(120, 240, linear.scale),
-                       timbre = NULL) {
-  sc <- list(time, pitch, dur, vol, pan, tempo, timbre)
+                       tempo = list(120, 240, linear.scale)) {
+
+  sc <- list(time, pitch, dur, vol, pan, tempo)
   names(sc) <- names(formals())
   givens <- names(as.list(match.call())[-1])
   for(i in names(sc)) {

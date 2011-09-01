@@ -38,16 +38,17 @@ render.audio <- function(x, audioSample=FALSE, ...) {
   notes <- x
   samp.rate <- 10000 ## TODO: need to have this as an option
 
-  ## Calculate total number of samples and create data.frame
-  ## I add on "nrow(notes)" to the total as a fudge factor
-  total <- max(notes$start + notes$dur) * samp.rate + nrow(notes) 
+  ## Calculate total number of samples and create matrix
+  ## based on first layer.
+  ## I add on "nrow(notes[[1]])" to the total as a fudge factor
+  total <- max(notes[[1]]$start + notes[[1]]$dur) * samp.rate + nrow(notes[[1]]) 
   out <- matrix(data=0, ncol = total, nrow = 2)
 
   for(i in length(notes)) {
     layerscore <- notes[[i]]
     for(j in 1:nrow(layerscore)) {
       ## Loop to generate each note and put it into the "out" matrix
-      curNote <- .createNoteAudio(layerscore[i,], samp.rate)
+      curNote <- .createNoteAudio(layerscore[j,], samp.rate)
       out[, curNote$start:curNote$end] <- out[, curNote$start:curNote$end] + curNote$note
     }
   }

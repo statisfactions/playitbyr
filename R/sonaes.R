@@ -41,8 +41,6 @@
 ##' balanced, and 1 all the right.
 ##' @param tempo a \code{data.frame} column name, or the desired tempo of all
 ##' events (in beats per minute)
-##' @param timbre The desired timbre of the sound. Currently only the default
-##' value "sine", for a simple sine wave, is supported.
 ##' @return A \code{sonaes} object, used in or added to a \code{sonify} object.
 ##' @seealso
 ##' \code{\link{sonify}}, \code{\link{sonscaling}}, \code{\link{octToFreq} }.
@@ -73,7 +71,7 @@
 ##' \dontrun{y + sonaes(dur=4)}
 ##' 
 ##' @export
-sonaes <- function(time=0, pitch=8, dur=2, vol=1, pan=0.5, tempo=NULL, timbre="sine") {
+sonaes <- function(time=0, pitch=8, dur=2, vol=1, pan=0.5, tempo=NULL) {
 
   ## 'sonaes' objects are lists and are used as the top-level
   ## 'mapping' slot of sonify objects
@@ -118,8 +116,6 @@ sonaes <- function(time=0, pitch=8, dur=2, vol=1, pan=0.5, tempo=NULL, timbre="s
     stop("vol must be between 0 and 1.")
   if((son$pan<0) || (son$pan>1))
     stop("pan must be between 0 and 1.")
-  if(son$timbre != "sine")
-    stop("'sine' is the only supported timbre right now")  
 
   class(son) <- c("sonaes")
   son

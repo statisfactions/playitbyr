@@ -180,6 +180,13 @@
 ##' @param param The sound parameter
 ##' @param column The data.frame column (vector) to be rescaled
 .rescaleDataByParam <- function(x, param, column) {
-  x$scales[[param]]$scaling.function(column, x$scales[[param]]$min, x$scales[[param]]$max)
+  ## If the parameter has a scaling associated with it, apply it
+  ## otherwise return the column verbatim
+  if(!is.null(x$scales[[param]]))
+     x$scales[[param]]$scaling.function(column,
+                                        x$scales[[param]]$min,
+                                        x$scales[[param]]$max)
+  else {warning("No scaling defined for ", param, ".")
+        return(column)}
 }
 

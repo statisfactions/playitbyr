@@ -6,7 +6,7 @@
   list(8, 9, linear.scale), dur = list(0.25, 4,
   linear.scale), vol = list(0.2, 1, linear.scale), pan =
   list(0, 1, linear.scale), tempo = list(120, 240,
-  linear.scale), timbre = NULL)
+  linear.scale))
 }
 \arguments{
   \item{time}{The desired start time mapping of all events
@@ -38,9 +38,6 @@
   \item{tempo}{The desired tempo mapping (in beats per
   minute). A list with three elements: the minimum tempo,
   the maximum tempo, and the scaling function.}
-
-  \item{timbre}{Ignored. Currently no mappings are
-  supported for this timbre}
 }
 \description{
   \code{sonscaling()} is invoked in the call to

@@ -42,7 +42,7 @@
 create_audioSample <- function(x, play=FALSE) {
   checkSonify(x)
   score <- .getScore(x)
-  out <- render(x, audioSample=TRUE)
+  out <- render(score, audioSample=TRUE)
   
   if(play) play_audioSample(out)
   

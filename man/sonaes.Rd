@@ -3,7 +3,7 @@
 \title{Create mappings and parameters for sonification objects}
 \usage{
   sonaes(time = 0, pitch = 8, dur = 2, vol = 1, pan = 0.5,
-  tempo = NULL, timbre = "sine")
+  tempo = NULL)
 }
 \arguments{
   \item{time}{a \code{data.frame} column name corresponding
@@ -37,10 +37,6 @@
 
   \item{tempo}{a \code{data.frame} column name, or the
   desired tempo of all events (in beats per minute)}
-
-  \item{timbre}{The desired timbre of the sound. Currently
-  only the default value "sine", for a simple sine wave, is
-  supported.}
 }
 \value{
   A \code{sonaes} object, used in or added to a
