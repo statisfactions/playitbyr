@@ -16,12 +16,7 @@
 ##' @name internalrender
 ##' @rdname internalrender
 ##' @aliases render.audio .createNoteAudio
-##' @param x A \code{sonify} object
-##' @param noterow A row of the \code{data.frame} returned by
-##' \code{.getNotes}, spoon-fed to \code{.createNoteAudio} one by one
-##' by \code{render.audio}
-##' @param samp.rate The sampling rate, in Hertz
-##' @param audioSamp The \code{audioSample} object to be played
+
 ##' @return \code{render.audio} returns an \code{audioSample} object
 ##' (from the \code{audio} package).
 ##' 
@@ -33,37 +28,70 @@
 ##' @keywords internal
 ##' @method render audio
 ##' @export
+##' @param x A \code{score} object created by \code{\link{.getScore}}
+##' @param \dots Currently ignored.
+
 render.audio <- function(x, audioSample=FALSE, ...) {
   
-  notes <- x
   samp.rate <- 10000 ## TODO: need to have this as an option
 
-  ## Calculate total number of samples and create matrix
-  ## based on first layer.
-  ## I add on "nrow(notes[[1]])" to the total as a fudge factor
-  total <- max(notes[[1]]$start + notes[[1]]$dur) * samp.rate + nrow(notes[[1]]) 
+  ## Calculate total number of samples and create matrix based on
+  ## first layer.  I add on a quarter-second onto the total length in
+  ## seconds, passed as the "length" attribute of the score object,
+  ## just to make absolutely sure I have enough space for the
+  ## sonification.
+  total <- (attributes(x)$length + 0.25) * samp.rate
   out <- matrix(data=0, ncol = total, nrow = 2)
 
-  for(i in length(notes)) {
-    layerscore <- notes[[i]]
-    for(j in 1:nrow(layerscore)) {
-      ## Loop to generate each note and put it into the "out" matrix
-      curNote <- .createNoteAudio(layerscore[j,], samp.rate)
-      out[, curNote$start:curNote$end] <- out[, curNote$start:curNote$end] + curNote$note
-    }
+  for(i in 1:length(x)) {
+    out <- audio_layer(x[[i]], out, samp.rate)
   }
   
   ## Rescale matrix
   out <- linear.scale(out, -1, 1)
   outWave <- as.audioSample(out, samp.rate)
   assign(".LastRendering", outWave, pos=".GlobalEnv")
-  return(outWave)
+  
+  if(audioSample)
+    return(outWave)
+  else
+    return(NULL)
 }
 
 ##' @rdname internalrender
+##' @param sonlayerscore An element of the score list--the score
+##' produced for a specific layer. The class of this determines the
+##' shape to be rendered
+##' @param out A matrix containing the rendered output of any
+##' previously rendered sonlayers, or a blank matrix large enough to
+##' contain the output of this one.
+audio_layer <- function(sonlayerscore, out, samp.rate, ...) {
+  ## Generic to render a shape
+  UseMethod("audio_layer")
+}
+
+
+##' @rdname internalrender
+##' @method audio_layer notes
+audio_layer.notes <- function(sonlayerscore, out, samp.rate, ...) {
+  for(j in 1:nrow(sonlayerscore)) {
+    ## Loop to generate each note and put it into the "out" matrix
+    curNote <- .createNoteAudio(sonlayerscore[j,], samp.rate)
+    out[, curNote$start:curNote$end] <- out[, curNote$start:curNote$end] + curNote$note
+  }
+  return(out)
+}
+  
+
+##' @rdname internalrender
+##' @param samp.rate The sampling rate, in Hertz
+##' @param noterow A row of the \code{data.frame} returned by
+##' \code{.getScore}, spoon-fed to \code{.createNoteAudio} one by one
+##' by \code{render.audio}
 .createNoteAudio <- function(noterow, samp.rate) {
-  ## Returns a matrix with 
-  ## a note with specified start, pitch, duration, volume, and pan
+  ## Returns a list with the start and end time of the note, and a
+  ## matrix with a rendered with specified start, pitch, duration,
+  ## volume, and pan which can be coerced into an audioSample object.
   
   ## "noterow" is intended to be what is returned by a row from funciton df.notes
   start <- round(noterow$start * samp.rate)+1

@@ -30,11 +30,19 @@
   if(is.null(x$sonlayers))
     stop("Cannot render sound without any sonlayers.")
 
-  ## Create a score for each sonlayer and concatenate all scores into
-  ## a data.frame
+  ## Create a score for each sonlayer and put together in list
   score <- lapply(1:length(x$sonlayers),
                   function(layernum) .getSonlayerScore(x, layernum))
+
+  ## Get the total length in seconds of the sonification (i.e. the
+  ## longest of the layers) and pass as an attribute.
+  length <- max(sapply(score, function(y) y$start[nrow(y)] + y$dur[nrow(y)]))
+  attr(score, "length") <- length
+
+  ## The class of score is used to determine which rendering method is
+  ## called. 
   class(score) <- c(x$rendering, "score")
+  
   return(score)
 }
 
@@ -96,6 +104,7 @@
   ## scale down without having to set it separately, which seems
   ## annoying.)
 
+  attr(out, "length") <- out$start[n] + out$dur[n] # length in seconds
   ## Set shape to pass to rendering method
   class(out) <- c(.getSonlayerShape(x, sonlayernum),  "data.frame")
 
@@ -146,7 +155,8 @@
 ##' @param transform A logical indicating whether to perform the
 ##' given statistical transformation (stat) to the layer.
 .getSonlayerData <- function(x, sonlayernum, transform = TRUE) {
-  ## x: a sonify object, returns the current data to be sonified, after applying 
+  ## x: a sonify object, returns the current data to be sonified,
+  ## after applying
 
   if(sonlayernum > length(x$sonlayers))
     stop(paste("There is no sonlayer", sonlayernum))
