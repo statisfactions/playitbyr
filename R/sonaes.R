@@ -71,6 +71,8 @@ sonaes <- function(...) {
      && is.null(names(out)) | any(names(out) == ""))
     stop("All arguments to sonaes must be named.")
 
+  checkSoundParams(names(out), shape = "any")
+
   class(out) <- c("sonaes")
   out
 }

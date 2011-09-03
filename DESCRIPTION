@@ -36,3 +36,4 @@ Collate:
     'sonlayer.R'
     'sonscaling.R'
     'shapeDescriptions.R'
+    'getSoundParams.R'

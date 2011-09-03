@@ -7,6 +7,8 @@
 ##'
 ##' @param x A \code{\link{sonlayer}} object or character string
 ##' @return A \code{shapeDef} object
+##' @export
+##' @keywords internal
 getShapeDef <- function(x) {
   if(is.character(x))
     shape <- x

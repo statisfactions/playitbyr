@@ -17,4 +17,5 @@
   and its default; this function takes a sonlayer object or
   a character string and gets the appropriate shapeDef.
 }
+\keyword{internal}
 
