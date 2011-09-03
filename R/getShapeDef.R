@@ -5,8 +5,11 @@
 ##' default; this function takes a sonlayer object or a character
 ##' string and gets the appropriate shapeDef.
 ##'
+##' @rdname getShapeDef
 ##' @param x A \code{\link{sonlayer}} object or character string
-##' @return A \code{shapeDef} object
+##' @return \code{getShapeDef} returns a \code{shapeDef} object;
+##' \code{getShapeNames} returns a character vector containing the
+##' names of all currently available shapes
 ##' @export
 ##' @keywords internal
 getShapeDef <- function(x) {
@@ -16,5 +19,10 @@ getShapeDef <- function(x) {
   
   return(allShapeDefs[[shape]])
 }
+
+##' @rdname getShapeDef
+##' @export
+getShapeNames <- function(x) names(allShapeDefs)
+  
 
 
