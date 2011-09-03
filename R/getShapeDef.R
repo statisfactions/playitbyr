@@ -22,7 +22,7 @@ getShapeDef <- function(x) {
 
 ##' @rdname getShapeDef
 ##' @export
-getShapeNames <- function(x) names(allShapeDefs)
+getShapeNames <- function() names(allShapeDefs)
   
 
 
