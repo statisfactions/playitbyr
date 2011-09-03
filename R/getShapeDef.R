@@ -8,9 +8,12 @@
 ##' @param x A \code{\link{sonlayer}} object or character string
 ##' @return A \code{\link{shapeDef}} object
 getShapeDef <- function(x) {
-  if(is.character(x))
-    shape <- x
-  else shape <- class(x)
-
+  ## if(is.character(x))
+  ##   shape <- x
+  ## else shape <- class(x)
+  
+  return(wheeHeeHee)
   ## TODO need to attach shapeDef data structure and subset it
 }
+
+

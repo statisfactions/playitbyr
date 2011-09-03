@@ -30,7 +30,6 @@ Collate:
     'playlastrendering.R'
     'render.R'
     'scaleshortcuts.R'
-    'shapeDef.R'
     'sonaes.R'
     'sonifyclass.R'
     'sonify.R'

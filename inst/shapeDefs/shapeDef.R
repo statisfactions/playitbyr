@@ -8,6 +8,7 @@
 ##'
 ##' @rdname shapeDef
 ##' @param shape A string containing name of the shape (e.g. \sQuote{\code{notes}})
+##' @param description A string containing a description of the shape
 ##' @param renderings A character vector containing the rendering
 ##' methods (see \code{link{rendering}}) that support this shape.
 ##' @param params A named list of the sound parameters created by newParam
@@ -16,9 +17,9 @@
 ##' \code{shapeParam} returns a named list for use in the
 ##' \code{params} argument of \code{shapeDef}
 ##' 
-shapeDef <- function(shapename, renderings, params) {
+shapeDef <- function(description, renderings, params) {
 
-  x <- list(shapename, renderings, params)
+  x <- list(description, renderings, params)
   names(x) <- names(formals())
   class(x) <- "shapeDef"
 
@@ -34,12 +35,6 @@ shapeDef <- function(shapename, renderings, params) {
 ##' @param defaultScaling The default scaling (as created by
 ##' \code{\link{sonscaling}} for this parameter
 ##' @param description A string containing the description of the parameter
-##' @param errors A list of expression objects containing an \code{if}
-##' statement, a condition for the error, and a string with the error
-##' message. This is used by \code{\link{checkSonify}} to check any
-##' special conditions for this parameter. 
-
-
 shapeParam <- function(param, min, max, defaultSetting, defaultScaling, description) {
   names(defaultScaling) <- c("min", "max", "scaling.function")
   x <- list(list(min, max, defaultSetting, defaultScaling, description))
