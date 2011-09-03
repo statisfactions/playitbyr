@@ -1,4 +1,6 @@
 \name{internalrender}
+\alias{audio_layer}
+\alias{audio_layer.notes}
 \alias{.createNoteAudio}
 \alias{internalrender}
 \alias{render.audio}
@@ -6,19 +8,32 @@
 \usage{
   \method{render}{audio} (x, audioSample = FALSE, ...)
 
+  audio_layer(sonlayerscore, out, samp.rate, ...)
+
+  \method{audio_layer}{notes} (sonlayerscore, out,
+  samp.rate, ...)
+
   .createNoteAudio(noterow, samp.rate)
 }
 \arguments{
-  \item{x}{A \code{sonify} object}
+  \item{x}{A \code{score} object created by
+  \code{\link{.getScore}}}
 
-  \item{noterow}{A row of the \code{data.frame} returned by
-  \code{.getNotes}, spoon-fed to \code{.createNoteAudio}
-  one by one by \code{render.audio}}
+  \item{\dots}{Currently ignored.}
+
+  \item{sonlayerscore}{An element of the score list--the
+  score produced for a specific layer. The class of this
+  determines the shape to be rendered}
+
+  \item{out}{A matrix containing the rendered output of any
+  previously rendered sonlayers, or a blank matrix large
+  enough to contain the output of this one.}
 
   \item{samp.rate}{The sampling rate, in Hertz}
 
-  \item{audioSamp}{The \code{audioSample} object to be
-  played}
+  \item{noterow}{A row of the \code{data.frame} returned by
+  \code{.getScore}, spoon-fed to \code{.createNoteAudio}
+  one by one by \code{render.audio}}
 }
 \value{
   \code{render.audio} returns an \code{audioSample} object
