@@ -54,7 +54,6 @@
 sonaes <- function(...) {
   ## 'sonaes' objects are lists and are used as the top-level
   ## 'mapping' slot of sonify and sonlayer objects
-
   ## This mouthful puts args in list safely without evaluating them,
   ## to allow for specifying data.frame names without quotes:
   out <- as.list(substitute(list(...)))[-1L]
@@ -69,12 +68,18 @@ sonaes <- function(...) {
   
   if(length(out) > 0
      && is.null(names(out)) | any(names(out) == ""))
-    stop("All arguments to sonaes must be named.")
+    stop("All arguments must be named.")
 
   checkSoundParams(names(out), shape = "any")
-
+  
   class(out) <- c("sonaes")
   out
 }
 
 
+.createSoundParamList <- function(...) {
+  ## Creates a sound parameter list from its arguments. Used by both
+  ## sonaes() and sonscaling()
+  
+
+}

@@ -48,7 +48,7 @@
 ##' ## The same, created incrementally
 ##' ## and with the "scale_" convenience functions
 ##' x <- sonify(iris)
-##' x <- x + sonaes(Petal.Length, Petal.Width)
+##' x <- x + sonaes(time=Petal.Length, pitch=Petal.Width)
 ##' x <- x + scale_pitch_linear(6, 8) + scale_time_linear(0, 10)
 ##' summary(x)
 ##' \dontrun{x # outputs sound}

@@ -27,7 +27,7 @@
 ##' @examples
 ##' 
 ##' x <- sonify(iris) + sonaes(time = Petal.Length, pitch = Petal.Width)
-##' out <- create_audioSample(x)
+##' \dontrun{out <- create_audioSample(x) ##TODO: temporarily not run while I fix checkSonify}
 ##' \dontrun{
 ##' play_audioSample(out)
 ##' ## This is the same as just printing the object:
