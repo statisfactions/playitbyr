@@ -126,10 +126,10 @@
   if(sonlayernum > length(x$sonlayers))
     stop(paste("There is no sonlayer", sonlayernum))
 
-  outmap <- x$mapping # use default aesthetic mappings as starting point
+  outmap <- x$mapping # use top-level aesthetic mappings as starting point
   sonlayermap <- x$sonlayers[[sonlayernum]]$mapping
 
-  ## If there are any sonlayer mappings, override all default aesthetic
+  ## If there are any sonlayer mappings, override all top-level aesthetic
   ## mappings with the sonlayer mappings
   if(!is.null(sonlayermap)) {
     for(i in names(sonlayermap)) {
@@ -137,12 +137,12 @@
         outmap[[i]] <- sonlayermap[[i]]
     }
   }
-
+  
   if(remove.null) {
     ## If remove.null, remove list elements whose value is NULL
     i <- 1
     while(i <= length(outmap)) {
-      ## See R Faq "How can I set components of a list to NULL" for
+      ## See R FAQ "How can I set components of a list to NULL" for
       ## more on how this works... looks odd, but it's good
       if(is.null(outmap[[i]])) outmap[[i]] <- NULL
       else i <- i +1

@@ -37,3 +37,4 @@ Collate:
     'sonscaling.R'
     'shapeDescriptions.R'
     'getSoundParams.R'
+    'getDefaultMappings.R'
