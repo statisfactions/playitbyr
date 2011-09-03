@@ -22,6 +22,8 @@
 
 sonlayer <- function(shape="notes", shape_params=NULL, stat=NULL,
                      stat_params=NULL, data=NULL, mapping=NULL) {
+  if(!(shape %in% getShapeNames()))
+     stop("'", deparse(shape),"' is not a valid shape name. See getShapeNames.")
 
   dataname <- deparse(substitute(data)) # Used by summary.sonify()
   l <- list(list(shape, shape_params), list(stat, stat_params), data, dataname, mapping)
