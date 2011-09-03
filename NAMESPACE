@@ -1,6 +1,5 @@
 export(addDataToSonify)
 export(getShapeDef)
-export(getAllShapeDefs)
 export(checkSonify)
 export(create_audioSample)
 export(getPlayer)
