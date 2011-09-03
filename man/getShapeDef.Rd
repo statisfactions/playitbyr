@@ -5,7 +5,7 @@
 \usage{
   getShapeDef(x)
 
-  getShapeNames(x)
+  getShapeNames()
 }
 \arguments{
   \item{x}{A \code{\link{sonlayer}} object or character

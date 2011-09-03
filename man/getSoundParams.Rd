@@ -3,21 +3,23 @@
 \alias{getSoundParams}
 \title{Get and check currently possible sound parameters.}
 \usage{
-  getSoundParams(shape = "any")
+  getSoundParams(shapes = getShapeNames())
 
-  checkSoundParams(paramnames, shape = "any")
+  checkSoundParams(paramnames, shapes = getShapeNames())
 }
 \arguments{
-  \item{shape}{The shape to return the sound parameters of.
-  The default, \code{"any"}, returns sound parameters of
-  all shapes.}
+  \item{shapes}{The shapes to return the sound parameters
+  of. The default is to get or check all currently
+  available shapes (see \code{link{getShapeNames}}).}
 
-  \item{paramnames}{A character vector}
+  \item{paramnames}{A character vector of sound parameters
+  to check for validity}
 }
 \value{
-  \code{getSoundParams} returns a character vector with the
-  name of each parameter. \code{checkSoundParams} returns
-  \code{NULL} if successful.
+  \code{getSoundParams} returns \code{data.frame} with the
+  name of each parameter and the name of the shape it is a
+  part of. \code{checkSoundParams} returns \code{NULL} if
+  successful.
 }
 \description{
   Gets all supported sound parameters, or checks a

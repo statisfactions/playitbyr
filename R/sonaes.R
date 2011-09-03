@@ -70,16 +70,8 @@ sonaes <- function(...) {
      && is.null(names(out)) | any(names(out) == ""))
     stop("All arguments must be named.")
 
-  checkSoundParams(names(out), shape = "any")
+  checkSoundParams(names(out))
   
   class(out) <- c("sonaes")
   out
-}
-
-
-.createSoundParamList <- function(...) {
-  ## Creates a sound parameter list from its arguments. Used by both
-  ## sonaes() and sonscaling()
-  
-
 }

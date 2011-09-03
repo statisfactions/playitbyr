@@ -126,11 +126,20 @@
   if(sonlayernum > length(x$sonlayers))
     stop(paste("There is no sonlayer", sonlayernum))
 
-  outmap <- x$mapping # use top-level aesthetic mappings as starting point
+  outmap <- getDefaultMappings(class(x)) # use default mappings as starting point
+  topmap <- x$mapping
   sonlayermap <- x$sonlayers[[sonlayernum]]$mapping
 
-  ## If there are any sonlayer mappings, override all top-level aesthetic
-  ## mappings with the sonlayer mappings
+  ## If any top-level mappings, override defaults
+  if(!is.null(topmap)) {
+    for(i in names(topmap)) {
+      if(!is.null(topmap[[i]]))
+        outmap[[i]] <- topmap[[i]]
+    }
+  }
+    
+  ## If there are any sonlayer mappings, override toplevel and
+  ## defaults
   if(!is.null(sonlayermap)) {
     for(i in names(sonlayermap)) {
       if(!is.null(sonlayermap[[i]]))
