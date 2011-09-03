@@ -35,4 +35,4 @@ Collate:
     'sonify.R'
     'sonlayer.R'
     'sonscaling.R'
-    'showShapes.R'
+    'shapeDescriptions.R'

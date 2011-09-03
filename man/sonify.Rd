@@ -42,15 +42,15 @@ summary(x)
 ## and Petal.Width mapped onto pitches
 ## between pitch values 6 (110 Hz) and 8 (440 Hz),
 x <- sonify(data=iris,
-sonaes(Petal.Length, Petal.Width),
+sonaes(time=Petal.Length, pitch=Petal.Width),
 sonscaling(pitch=list(6, 8, linear.scale),
 time=list(0, 10, linear.scale)))
 summary(x)
 \dontrun{x # outputs sound}
 
 ## You can hear there is a cluster of low values at the beginning
-## when both Petal.Width and Petal.Length are small,
-## followed by a higher cluster.
+## when both Petal.Width and Petal.Length are small, followed
+## by a higher cluster.
 
 ## The same, created incrementally
 ## and with the "scale_" convenience functions

@@ -38,7 +38,7 @@
   succession.
 }
 \examples{
-x <- sonify(iris) + sonaes(Petal.Length, Petal.Width)
+x <- sonify(iris) + sonaes(time = Petal.Length, pitch = Petal.Width)
 out <- create_audioSample(x)
 \dontrun{
 play_audioSample(out)

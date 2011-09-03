@@ -30,7 +30,7 @@
 ##' ## A verbose way of specifying a sonify object,
 ##' ## without using the shortcuts
 ##' x <- sonify(data=iris, 
-##'      sonaes(Petal.Width, Petal.Length, dur=5, vol=0.75),
+##'      sonaes(time=Petal.Width, pitch=Petal.Length, dur=5, vol=0.75),
 ##'      scales = sonscaling(
 ##'        time = list(min=0, max=3,
 ##'         scaling.function = linear.scale),
@@ -41,7 +41,7 @@
 ##' 
 ##' ## An equivalent and much more compact way, with
 ##' ## the shortcut functions
-##' y <- sonify(iris, sonaes(Petal.Width, Petal.Length, dur=5, vol=0.75))
+##' y <- sonify(iris, sonaes(time=Petal.Width, pitch=Petal.Length, dur=5, vol=0.75))
 ##' y <- y + scale_time_linear(0, 3)
 ##' y <- y + scale_pitch_linear(3, 13)
 ##' summary(y)

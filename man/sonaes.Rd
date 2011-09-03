@@ -28,7 +28,7 @@
   constant values is the heart of making the sonification
   happen and making it possible to render. But {sonaes}
   does not check to make sure that all mappings are filled
-  in. since the user can add on more mappings (using
+  in, since the user can add on more mappings (using
   \code{\link{+.sonify}}) interactively. However, this is
   checked by \code{\link{checkSonify}} when the object is
   to be rendered.
@@ -37,21 +37,6 @@
   column in a \code{sonify} object must also have a scale
   associated with it before rendering; see
   \code{\link{sonscaling}}.
-}
-\section{Leaving First Two Arguments Unnamed}{
-  One intuitive way to sonify a bivariate dataset maps the
-  independent variable to time and the dependent variable
-  to pitch. To make this easy, \code{sonaes} supports the
-  first two arguments being unnamed, in which case it
-  assumes that the first is time and the second is pitch.
-  All remaining objects must be named. Thus,
-
-  \code{sonaes(Sepal.Length, Sepal.Width, dur=2)}
-
-  is equivalent to
-
-  \code{sonaes(dur=2, pitch=Sepal.Width,
-  time=Sepal.Length)}
 }
 \examples{
 ## Maps Petal.Width onto tempo,
