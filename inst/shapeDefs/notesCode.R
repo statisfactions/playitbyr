@@ -22,7 +22,7 @@
                     0.5,
                     list(0.2, 1, linear.scale),
                     "The desired volume of all events as a number between 0, silence, and 1, the maximum possible amplitude.")
-  pan <- shapeParam("vol",
+  pan <- shapeParam("pan",
                     0,
                     1,
                     0.5,
