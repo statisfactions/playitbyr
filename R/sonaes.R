@@ -66,7 +66,6 @@ sonaes <- function(...) {
       x <- deparse(x)
     return(x)
   })
-
   
   if(length(out) > 0
      && is.null(names(out)) | any(names(out) == ""))

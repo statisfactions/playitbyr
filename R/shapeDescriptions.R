@@ -8,8 +8,8 @@
 ##' shape, and the parameters available for sonification. 
 ##' @export
 shapeDescriptions <- function() {
-  descriptions <- sapply(allShapes, function(x) x$description)
-  params <- sapply(allShapes, function(x) paste(names(x$params), collapse=", "))
+  descriptions <- sapply(allShapeDefs, function(x) x$description)
+  params <- sapply(allShapeDefs, function(x) paste(names(x$params), collapse=", "))
   return(cbind(descriptions, params))
 }
   
