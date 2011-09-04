@@ -3,8 +3,22 @@
 ##' These functions facilitate the creation of a new kind of
 ##' \code{shape} by providing functions to construct a new
 ##' \code{shapeDef} object which contains everything \pkg{playitbyr}
-##' needs to keep track of mappings, scalings, and error-checking for
-##' the shape.
+##' needs to keep track of mappings, scalings, and eventually
+##' statistical transformations for the shape.
+##'
+##' To create a new shape, first create each parameter using
+##' \code{shapeParam}. Then, use \code{shapeDef} to bind everything
+##' together in an object. Then, save the object (using \code{save()})
+##' as a \code{rda} file in the \code{inst/shapeDefs} directory of the
+##' package. Now, when you install the package the shapeDef will be
+##' automatically loaded (see aaa.R for how this is
+##' done). Unfortunately the wherewithal to implement stats is not
+##' quite ready.
+##'
+##' If you are creating a shapeDef that shares many properties of an
+##' existing one, you can simply copy the existing one and change it,
+##' if you find that easier. Also in this directory is the code used
+##' to generate the \sQuote{notes} \code{shapeDef}.
 ##'
 ##' @rdname shapeDef
 ##' @param shape A string containing name of the shape (e.g. \sQuote{\code{notes}})
@@ -34,10 +48,12 @@ shapeDef <- function(description, renderings, params) {
 ##' variable, used if no setting or mapping is specified.
 ##' @param defaultScaling The default scaling (as created by
 ##' \code{\link{sonscaling}} for this parameter
+##' @param defaultStatName The default statistic. Currently ignored,
+##' since the infrastructure isn't yet up and running.
 ##' @param description A string containing the description of the parameter
-shapeParam <- function(param, min, max, defaultSetting, defaultScaling, description) {
+shapeParam <- function(param, min, max, defaultSetting, defaultScaling, defaultStatName, description) {
   names(defaultScaling) <- c("min", "max", "scaling.function")
-  x <- list(list(min, max, defaultSetting, defaultScaling, description))
+  x <- list(list(min, max, defaultSetting, defaultScaling, defaultStatName, description))
   names(x) <- param
   names(x[[param]]) <- names(formals())[-1]
   return(x)
