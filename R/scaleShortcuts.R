@@ -13,7 +13,7 @@
 ##' These functions are intended to be added onto a pre-existing sonify object,
 ##' as shown in the examples.
 ##'
-##' @rdname scaleshortcuts
+##' @rdname scaleShortcuts
 ##' @aliases scaleShortcuts scale_dur_linear scale_pan_linear
 ##' scale_pitch_linear scale_tempo_linear scale_time_linear scale_vol_linear
 ##' @param min The desired minimum value, a \code{numeric} of length 1
@@ -59,22 +59,22 @@
 ##' @export
 scale_time_linear <- function(min, max) sonscaling(time=list(min, max, linear.scale))
 
-##' @rdname scaleshortcuts
+##' @rdname scaleShortcuts
 ##' @export
 scale_pitch_linear <- function(min, max) sonscaling(pitch=list(min, max, linear.scale))
 
-##' @rdname scaleshortcuts
+##' @rdname scaleShortcuts
 ##' @export
 scale_dur_linear <- function(min, max) sonscaling(dur=list(min, max, linear.scale))
 
-##' @rdname scaleshortcuts
+##' @rdname scaleShortcuts
 ##' @export
 scale_vol_linear <- function(min, max) sonscaling(vol=list(min, max, linear.scale))
 
-##' @rdname scaleshortcuts
+##' @rdname scaleShortcuts
 ##' @export
 scale_pan_linear <- function(min, max) sonscaling(pan=list(min, max, linear.scale))
 
-##' @rdname scaleshortcuts
+##' @rdname scaleShortcuts
 ##' @export
 scale_tempo_linear <- function(min, max) sonscaling(tempo=list(min, max, linear.scale))

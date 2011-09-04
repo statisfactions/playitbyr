@@ -1,4 +1,5 @@
 \name{internaldf}
+\alias{.getDefaultScalingByParam}
 \alias{.getScore}
 \alias{.getSonlayerData}
 \alias{.getSonlayerMappings}
@@ -22,7 +23,9 @@
 
   .getSonlayerShape(x, sonlayernum)
 
-  .rescaleDataByParam(x, param, column)
+  .rescaleDataByParam(scales, param, column)
+
+  .getDefaultScalingByParam(param, shapes)
 }
 \arguments{
   \item{x}{A \code{sonify} object}
@@ -47,6 +50,12 @@
 
   \item{column}{The data.frame column (vector) to be
   rescaled}
+
+  \item{scales}{The \code{$scales} slot of a sonscaling
+  object}
+
+  \item{shapes}{A character vector of names of shapes
+  included in the \code{sonify} object}
 }
 \value{
   The end product of all this is a \code{data.frame} object

@@ -36,4 +36,19 @@
   layers. This creates a list object that can be included
   in a \code{sonify} object.
 }
+\section{Conflicting defaults on \code{sonlayer} scalings}{
+  Each shape has its own default scalings (see
+  \code{link{getShapeDef}} to view these defaults. It's
+  quite possible that some default scalings for a parameter
+  differ between scalings; if this is the case, the default
+  scaling for the earlier \code{sonlayer} type, as it
+  appears in the \code{$sonlayers} slot of a \code{sonify}
+  object, takes precedence.
+
+  Default scalings are, of course, ignored when they are
+  explicitly declared; if you don't like the behavior of a
+  default scaling you can always define your own (see
+  \code{\link{sonscaling}} and
+  \code{\link{scaleShortcuts}}.
+}
 

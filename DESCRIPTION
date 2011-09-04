@@ -29,7 +29,6 @@ Collate:
     'octToFreq.R'
     'playlastrendering.R'
     'render.R'
-    'scaleshortcuts.R'
     'sonaes.R'
     'sonifyclass.R'
     'sonify.R'
@@ -38,3 +37,4 @@ Collate:
     'shapeDescriptions.R'
     'getSoundParams.R'
     'getDefaultMappings.R'
+    'scaleShortcuts.R'

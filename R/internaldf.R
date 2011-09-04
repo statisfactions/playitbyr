@@ -68,7 +68,7 @@
       column <- rep(map[[param]], n)
     else {
       column <- data[[map[[param]]]]
-      column <- .rescaleDataByParam(x, param, column)
+      column <- .rescaleDataByParam(x$scales, param, column)
     }
     return(column)
   })      
@@ -198,14 +198,40 @@
 ##' @rdname internaldf
 ##' @param param The sound parameter
 ##' @param column The data.frame column (vector) to be rescaled
-.rescaleDataByParam <- function(x, param, column) {
-  ## If the parameter has a scaling associated with it, apply it
-  ## otherwise return the column verbatim
+##' @param scales The \code{$scales} slot of a sonscaling object
+.rescaleDataByParam <- function(scales, param, column) {
+  ## If the parameter has a scaling associated with it in the sonify
+  ## object, apply it; otherwise return the column verbatim
   if(!is.null(x$scales[[param]]))
-     x$scales[[param]]$scaling.function(column,
-                                        x$scales[[param]]$min,
-                                        x$scales[[param]]$max)
-  else {warning("No scaling defined for ", param, ".")
-        return(column)}
+    scale <- x$scales[[param]]
+  else {
+    ## Figure out shapes in order of their unique appearance in sonlayers
+    shapes <- unique(sapply(x$sonlayers, class)[2,])
+    scale <- .getDefaultScalingByParam(param, shapes)
+  }
+
+  ##Apply function
+  column <- scale$scaling.function(column, scale$min, scale$max)
+
+  return(column)
 }
 
+##' @rdname internaldf
+##' @param shapes A character vector of names of shapes included in
+##' the \code{sonify} object
+.getDefaultScalingByParam <- function(param, shapes) {
+  ## Get the data.frame of all soundparameters
+  soundparams <- getSoundParams(shapes)
+
+  ## We want to recall sound parameters IN THE ORDER THAT SHAPES
+  ## APPEAR IN THE SONLAYERS. Thus if there is a conflict between
+  ## defaults, the earliest shape to appear in the sonlayers takes
+  ## precedence. This is arbitrary behavior, but it's worth doing and
+  ## documenting.
+  soundparams$shape <- ordered(soundparams$shape, levels=shapes)
+  soundparams <- soundparams[order(soundparams$shape),]
+  lookup <- soundparams[soundparams$param %in% param,][1,]
+  return(getShapeDef(lookup$shape)$params[[param]]$defaultScaling)
+}
+  
+  
