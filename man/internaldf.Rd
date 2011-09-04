@@ -23,7 +23,7 @@
 
   .getSonlayerShape(x, sonlayernum)
 
-  .rescaleDataByParam(scales, param, column)
+  .rescaleDataByParam(x, param, column)
 
   .getDefaultScalingByParam(param, shapes)
 }
@@ -50,9 +50,6 @@
 
   \item{column}{The data.frame column (vector) to be
   rescaled}
-
-  \item{scales}{The \code{$scales} slot of a sonscaling
-  object}
 
   \item{shapes}{A character vector of names of shapes
   included in the \code{sonify} object}

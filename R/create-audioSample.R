@@ -40,7 +40,7 @@
 ##' @rdname create_audioSample
 ##' @export
 create_audioSample <- function(x, play=FALSE) {
-  checkSonify(x)
+#  checkSonify(x)
   score <- .getScore(x)
   out <- render(score, audioSample=TRUE)
   

@@ -68,7 +68,7 @@
       column <- rep(map[[param]], n)
     else {
       column <- data[[map[[param]]]]
-      column <- .rescaleDataByParam(x$scales, param, column)
+      column <- .rescaleDataByParam(x, param, column)
     }
     return(column)
   })      
@@ -125,11 +125,13 @@
 
   if(sonlayernum > length(x$sonlayers))
     stop(paste("There is no sonlayer", sonlayernum))
-
-  outmap <- getDefaultMappings(class(x)) # use default mappings as starting point
+  shape <- .getSonlayerShape(x, sonlayernum)
+  outmap <- getDefaultMappings(shape) # use default mappings as starting point
   topmap <- x$mapping
-  sonlayermap <- x$sonlayers[[sonlayernum]]$mapping
+  sonlayermap <- (x$sonlayers[[sonlayernum]])$mapping
 
+
+  
   ## If any top-level mappings, override defaults
   if(!is.null(topmap)) {
     for(i in names(topmap)) {
@@ -198,15 +200,15 @@
 ##' @rdname internaldf
 ##' @param param The sound parameter
 ##' @param column The data.frame column (vector) to be rescaled
-##' @param scales The \code{$scales} slot of a sonscaling object
-.rescaleDataByParam <- function(scales, param, column) {
+.rescaleDataByParam <- function(x, param, column) {
   ## If the parameter has a scaling associated with it in the sonify
   ## object, apply it; otherwise return the column verbatim
   if(!is.null(x$scales[[param]]))
     scale <- x$scales[[param]]
   else {
     ## Figure out shapes in order of their unique appearance in sonlayers
-    shapes <- unique(sapply(x$sonlayers, class)[2,])
+    shapes <- unique(sapply(1:length(x$sonlayers),
+                            function(y) .getSonlayerShape(x, y)))
     scale <- .getDefaultScalingByParam(param, shapes)
   }
 
@@ -231,7 +233,9 @@
   soundparams$shape <- ordered(soundparams$shape, levels=shapes)
   soundparams <- soundparams[order(soundparams$shape),]
   lookup <- soundparams[soundparams$param %in% param,][1,]
-  return(getShapeDef(lookup$shape)$params[[param]]$defaultScaling)
+  
+  lookup <- as.character(lookup$shape) # since it's a factor
+  return(getShapeDef(lookup)$params[[param]]$defaultScaling)
 }
   
   
