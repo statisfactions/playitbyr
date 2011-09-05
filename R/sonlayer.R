@@ -42,7 +42,7 @@ sonlayer <- function(shape="notes", shape_params=NULL, stat=NULL,
   names(l) <- c("shape", "stat", "data", "dataname", "mapping")
   names(l$stat) <- c("stat", "stat_params")
   names(l$shape) <- c("shape", "shape_params")
-  class(l) <- c(shape, "sonlayer")
+  class(l) <- "sonlayer"
 
   .checkData(l)    
   l

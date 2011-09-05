@@ -38,3 +38,4 @@ Collate:
     'getSoundParams.R'
     'getDefaultMappings.R'
     'scaleShortcuts.R'
+    'scorePreprocessor.notes.R'

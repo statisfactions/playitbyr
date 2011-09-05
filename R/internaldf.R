@@ -74,39 +74,17 @@
   })      
   names(out) <- names(map)
   out <- as.data.frame(out)
-
-
-  ## We need to transform the "tempo" or "time" data into actual start
-  ## times and tranform the durations accordingly
-
-  if("tempo" %in% names(out)) {
-    ## If tempo is provided, convert tempo data into start times, sort
-    ## score, and scale durations in relation to beat
-    beatlength <- 60/out$tempo
-    out$tempo <- NULL
-    out$start <- c(0, cumsum(beatlength[-n]))
-    total <- out$start[n]+ beatlength[n] #used to calculate dur
-  } else if("time" %in% names(out)) {
-    ## Otherwise, just rename 'time' to 'start' and sort by that.
-    out$start <- out$time
-    out$time <- NULL
-    out <- out[order(out$start),]
-    total <- out$start[n] + mean(out$start[-1] - out$start[-n]) #used to calculate dur
-  }
-
-  ## Scale durations by total time divided by number of notes
-  out$dur <- (out$dur) * (total/n) 
-  ## (NOTE: this is somewhat questionable whether this is the right
-  ## thing to do; it's a little arbitrary and makes scaling duration
-  ## less intuitively related to what's specified in x$scaling.  I
-  ## have chosen to do it this way b/c it means you can easily set a
-  ## different scaling for the time and duration will automagically
-  ## scale down without having to set it separately, which seems
-  ## annoying.)
-
-  attr(out, "length") <- out$start[n] + out$dur[n] # length in seconds
-  ## Set shape to pass to rendering method
+  ## Set shape to pass to shape and rendering methods
   class(out) <- c(.getSonlayerShape(x, sonlayernum),  "data.frame")
+
+  ## Any additional score processing done by shape-specific methods to
+  ## scorePreprocessor. NOTE: all scorePreprocessor methods must
+  ## calculate length of sonification
+  out <- scorePreprocessor(out)
+
+  if(is.null(attributes(out)$length))
+    stop("scorePreprocessor.", .getSonlayerShape(x, sonlayernum),
+         " failed to add required 'length' attribute.")
 
   return(out)
 }
@@ -125,13 +103,11 @@
 
   if(sonlayernum > length(x$sonlayers))
     stop(paste("There is no sonlayer", sonlayernum))
+  
   shape <- .getSonlayerShape(x, sonlayernum)
   outmap <- getDefaultMappings(shape) # use default mappings as starting point
   topmap <- x$mapping
   sonlayermap <- (x$sonlayers[[sonlayernum]])$mapping
-
-
-  
   ## If any top-level mappings, override defaults
   if(!is.null(topmap)) {
     for(i in names(topmap)) {
@@ -148,9 +124,9 @@
         outmap[[i]] <- sonlayermap[[i]]
     }
   }
-  
+
+  ## If remove.null, remove list elements whose value is NULL
   if(remove.null) {
-    ## If remove.null, remove list elements whose value is NULL
     i <- 1
     while(i <= length(outmap)) {
       ## See R FAQ "How can I set components of a list to NULL" for
@@ -167,7 +143,7 @@
 ##' given statistical transformation (stat) to the layer.
 .getSonlayerData <- function(x, sonlayernum, transform = TRUE) {
   ## x: a sonify object, returns the current data to be sonified,
-  ## after applying
+  ## after applying statistic if defined.
 
   if(sonlayernum > length(x$sonlayers))
     stop(paste("There is no sonlayer", sonlayernum))
@@ -176,6 +152,7 @@
     outdata <- x$sonlayers[[sonlayernum]]$data} else {
       outdata <- x$data
     }
+  
   if(transform) {
     stat <- .getSonlayerStat(x, sonlayernum)
     if(!is.null(stat))
@@ -237,5 +214,11 @@
   lookup <- as.character(lookup$shape) # since it's a factor
   return(getShapeDef(lookup)$params[[param]]$defaultScaling)
 }
-  
-  
+
+##' @rdname internaldf
+##' @param sonlayerscore The score generated for a specific
+##' \code{sonlayer} by \code{.getSonlayerScore()}
+##' @note all scorePreprocessor methods must calculate length of
+##' sonification and return that as an attribute \code{length} of the
+##' data frame.
+scorePreprocessor <- function(sonlayerscore) UseMethod("scorePreprocessor")

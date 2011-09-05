@@ -8,6 +8,7 @@
 \alias{.getSonlayerStat}
 \alias{internaldf}
 \alias{.rescaleDataByParam}
+\alias{scorePreprocessor}
 \title{Internal functions to generate output \code{data.frame} from a
 \code{sonify} object.}
 \usage{
@@ -26,6 +27,8 @@
   .rescaleDataByParam(x, param, column)
 
   .getDefaultScalingByParam(param, shapes)
+
+  scorePreprocessor(sonlayerscore)
 }
 \arguments{
   \item{x}{A \code{sonify} object}
@@ -53,6 +56,9 @@
 
   \item{shapes}{A character vector of names of shapes
   included in the \code{sonify} object}
+
+  \item{sonlayerscore}{The score generated for a specific
+  \code{sonlayer} by \code{.getSonlayerScore()}}
 }
 \value{
   The end product of all this is a \code{data.frame} object
@@ -69,6 +75,10 @@
   These functions (particularly .getSonlayerScore) assume
   that every shape has a single output row for each input
   data row after applying statistical tranformations
+
+  all scorePreprocessor methods must calculate length of
+  sonification and return that as an attribute
+  \code{length} of the data frame.
 }
 \section{Not yet implemented}{
   .getStat currently just returns NULL. It is intended that

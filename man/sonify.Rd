@@ -3,7 +3,7 @@
 \title{Create sonification objects}
 \usage{
   sonify(data = NULL, mapping = sonaes(), scales =
-  sonscaling())
+  sonscaling(), sonlayers = NULL, rendering = "audio")
 }
 \arguments{
   \item{data}{a \code{data.frame} with the data to be
@@ -15,6 +15,13 @@
   \item{scales}{a \code{sonifyScale} object (created by
   \code{scaling()}) that gives the scaling function and
   desired parameter range from the data to each sound}
+
+  \item{sonlayers}{a list of \code{sonlayer} objects that
+  gives each layer to be rendered.}
+
+  \item{rendering}{character string containing the method
+  of rendering. Currently only the default, \code{"audio"},
+  is supported.}
 }
 \value{
   A \code{sonify} object, which contains what is needed to
@@ -44,7 +51,8 @@ summary(x)
 x <- sonify(data=iris,
 sonaes(time=Petal.Length, pitch=Petal.Width),
 sonscaling(pitch=list(6, 8, linear.scale),
-time=list(0, 10, linear.scale)))
+time=list(0, 10, linear.scale)),
+sonlayers=shape_notes())
 summary(x)
 \dontrun{x # outputs sound}
 
@@ -56,6 +64,7 @@ summary(x)
 ## and with the "scale_" convenience functions
 x <- sonify(iris)
 x <- x + sonaes(time=Petal.Length, pitch=Petal.Width)
+x <- x + shape_notes()
 x <- x + scale_pitch_linear(6, 8) + scale_time_linear(0, 10)
 summary(x)
 \dontrun{x # outputs sound}

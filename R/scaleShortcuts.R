@@ -35,13 +35,15 @@
 ##'        time = list(min=0, max=3,
 ##'         scaling.function = linear.scale),
 ##'        pitch = list(min=3, max=13,
-##'         scaling.function = linear.scale)))
+##'         scaling.function = linear.scale)),
+##'      sonlayers = shape_notes())
 ##' summary(x)
 ##' \dontrun{x}
 ##' 
-##' ## An equivalent and much more compact way, with
+##' ## An equivalent and much more readable way, with
 ##' ## the shortcut functions
 ##' y <- sonify(iris, sonaes(time=Petal.Width, pitch=Petal.Length, dur=5, vol=0.75))
+##' y <- y + shape_notes()
 ##' y <- y + scale_time_linear(0, 3)
 ##' y <- y + scale_pitch_linear(3, 13)
 ##' summary(y)

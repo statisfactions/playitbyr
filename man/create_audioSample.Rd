@@ -38,7 +38,8 @@
   succession.
 }
 \examples{
-x <- sonify(iris) + sonaes(time = Petal.Length, pitch = Petal.Width)
+x <- (sonify(iris) + sonaes(time = Petal.Length, pitch = Petal.Width)
++ shape_notes())
 \dontrun{out <- create_audioSample(x) ##TODO: temporarily not run while I fix checkSonify}
 \dontrun{
 play_audioSample(out)
