@@ -1,0 +1,31 @@
+To create a new shape for playitbyr
+1) Create a shapeDef for it--there's functions and documentation on
+how to do this in inst/shapeDefs/shapeDef.R and the example code to
+create one in inst/shapeDefs/notesCode.R. The name of the shapeDef
+object should be the name of the shape as it will be called by the
+user. Then save the shapeDef as an rda file in inst/shapeDefs/ so the
+package loads it (once you re-build the package).
+
+2) Create a function (in R/ as usual) that handles any extra
+preprocessing for it. This is a method for the S3 generic
+scorePreprocessor() (currently defined all the way at the end of
+internaldf.R) which takes an input data.frame with the mappings and
+settings applied to the data.frame but which may need a few more steps
+to be renderable (for instance, scorePreprocessor.notes() needs to
+convert "tempo" into start times and does some rescaling of the
+duration at this point). If your shape is "foo", the preprocessing
+function should be named scorePreprocessor.foo(). One odd requirement
+is that the preprocessor should add an attribute to its argument that
+corresponds to the overall length--this helps render.audio allocate
+the right amount of memory (which I had some issues with before). If
+you don't need to do any preprocessing, then adding the length
+attribute is all you need to do here.
+
+3) Create an audio_layer() S3 method for your shape to actually render
+the layer, i.e. the way that audio_layer.notes() now does for
+"notes". (Once I get csound up and running there will of course also be
+csound_layer())
+
+4) Create a shortcut function to create the sonlayer of that shape for
+convenience and to support people's ggplot2 intuitions--i.e. analagous
+to shape_notes() for shape "notes".
