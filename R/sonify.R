@@ -10,8 +10,8 @@
 ##' @param scales a \code{sonifyScale} object (created by \code{scaling()})
 ##' that gives the scaling function and desired parameter range from the data
 ##' to each sound
-##' @param sonlayers a list of \code{sonlayer} objects that gives each
-##' layer to be rendered.
+##' @param sonlayers A single \code{sonlayer} object, or a list of
+##' \code{sonlayer} objects, that gives each layer to be rendered.
 ##' @param rendering character string containing the method of
 ##' rendering. Currently only the default, \code{"audio"}, is
 ##' supported.
@@ -68,6 +68,9 @@ sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling(), sonlayers =
 
   .checkRendering(rendering)
   dataname <- deparse(substitute(data)) # Used by summary.sonify()
+
+  if("sonlayer" %in% class(sonlayers))
+    sonlayers <- list(sonlayers)
   
   s <- list(data, dataname, mapping, rendering, scales, sonlayers) 
   names(s) <- c("data", "dataname", "mapping", "rendering", "scales", "sonlayers") 

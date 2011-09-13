@@ -16,8 +16,9 @@
   \code{scaling()}) that gives the scaling function and
   desired parameter range from the data to each sound}
 
-  \item{sonlayers}{a list of \code{sonlayer} objects that
-  gives each layer to be rendered.}
+  \item{sonlayers}{A single \code{sonlayer} object, or a
+  list of \code{sonlayer} objects, that gives each layer to
+  be rendered.}
 
   \item{rendering}{character string containing the method
   of rendering. Currently only the default, \code{"audio"},
