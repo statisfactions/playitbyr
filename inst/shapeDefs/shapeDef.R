@@ -53,7 +53,9 @@ shapeDef <- function(description, renderings, options, params) {
 ##' since the infrastructure isn't yet up and running.
 ##' @param description A string containing the description of the parameter
 shapeParam <- function(param, min, max, defaultSetting, defaultScaling, defaultStatName, description) {
-  names(defaultScaling) <- c("min", "max", "scaling.function")
+  if(!is.null(defaultScaling))
+    names(defaultScaling) <- c("min", "max", "scaling.function")
+  
   x <- list(list(min, max, defaultSetting, defaultScaling, defaultStatName, description))
   names(x) <- param
   names(x[[param]]) <- names(formals())[-1]
