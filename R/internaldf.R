@@ -36,7 +36,7 @@
 
   ## Get the total length in seconds of the sonification (i.e. the
   ## longest of the layers) and pass as an attribute.
-  length <- max(sapply(score, function(y) y$start[nrow(y)] + y$dur[nrow(y)]))
+  length <- max(sapply(score, function(y) attributes(y)$length))
   attr(score, "length") <- length
 
   ## The class of score is used to determine which rendering method is
