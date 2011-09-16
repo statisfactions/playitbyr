@@ -15,7 +15,8 @@
 ##' @param rendering character string containing the method of
 ##' rendering. Currently only the default, \code{"audio"}, is
 ##' supported.
-##' @param options Additional options
+##' @param render_options A named list of rendering options to pass to
+##' the individual rendering type.
 ##' @return A \code{sonify} object, which contains what is needed to render the
 ##' object. If the object is completely specified, it can by rendered simply by
 ##' calling the print method for the object (i.e. simply typing the name of the

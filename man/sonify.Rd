@@ -25,7 +25,8 @@
   of rendering. Currently only the default, \code{"audio"},
   is supported.}
 
-  \item{options}{Additional options}
+  \item{render_options}{A named list of rendering options
+  to pass to the individual rendering type.}
 }
 \value{
   A \code{sonify} object, which contains what is needed to
