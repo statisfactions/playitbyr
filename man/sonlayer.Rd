@@ -1,19 +1,22 @@
 \name{sonlayer}
+\alias{shape_csound}
 \alias{shape_notes}
 \alias{sonlayer}
 \title{Creating individual layers for sonify objects}
 \usage{
-  sonlayer(shape = "notes", shape_params = NULL, stat =
+  sonlayer(shape = "notes", shape_options = NULL, stat =
   NULL, stat_params = NULL, data = NULL, mapping = NULL)
 
   shape_notes(...)
+
+  shape_csound(...)
 }
 \arguments{
   \item{shape}{A character string representing the overall
   style of the audio plot (analogous to \code{geom}s from
   the \pkg{ggplot2} package).}
 
-  \item{shape_params}{Additional parameters specific to the
+  \item{shape_options}{Additional options specific to the
   shape}
 
   \item{stat}{The statistic to be calculated for the layer}

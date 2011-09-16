@@ -39,3 +39,4 @@ Collate:
     'getDefaultMappings.R'
     'scaleShortcuts.R'
     'scorePreprocessor.notes.R'
+    'scorePreprocessor.csound.R'

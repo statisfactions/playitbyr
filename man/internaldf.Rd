@@ -1,10 +1,12 @@
 \name{internaldf}
 \alias{.getDefaultScalingByParam}
+\alias{.getDefaultShapeOptions}
 \alias{.getScore}
 \alias{.getSonlayerData}
 \alias{.getSonlayerMappings}
 \alias{.getSonlayerScore}
 \alias{.getSonlayerShape}
+\alias{.getSonlayerShapeOptions}
 \alias{.getSonlayerStat}
 \alias{internaldf}
 \alias{.rescaleDataByParam}
@@ -27,6 +29,10 @@
   .rescaleDataByParam(x, param, column)
 
   .getDefaultScalingByParam(param, shapes)
+
+  .getDefaultShapeOptions(shapename)
+
+  .getSonlayerShapeOptions(x, sonlayernum)
 
   scorePreprocessor(sonlayerscore)
 }
@@ -56,6 +62,9 @@
 
   \item{shapes}{A character vector of names of shapes
   included in the \code{sonify} object}
+
+  \item{shapename}{The name of the shape to get the
+  defaults for}
 
   \item{sonlayerscore}{The score generated for a specific
   \code{sonlayer} by \code{.getSonlayerScore()}}

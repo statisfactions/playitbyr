@@ -15,7 +15,7 @@
   ## This is called by 'rendering()' and will be called by
   ## 'sonify()' once there are any non-audio rendering options.
   
-  if(!(x %in% c("audio")))
+  if(!(x %in% c("audio", "csound")))
     stop("'",x, "' is not a valid rendering")
   if(length(x) > 1 | !is.character(x))
     stop("Renderings must be a character vector of length one.")
@@ -34,6 +34,7 @@
 }
 
 ##' @rdname internalsonify
+##' @export
 rendering <- function(x) {
   ## This function exists ENTIRELY for changing rendering
   ## in interactive use via '+.sonify';
