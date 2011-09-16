@@ -1,8 +1,7 @@
-\name{internalrender}
+\name{render.audio}
 \alias{audio_layer}
 \alias{audio_layer.notes}
 \alias{.createNoteAudio}
-\alias{internalrender}
 \alias{render.audio}
 \title{Internal functions to generate sound from a \code{score} object.}
 \usage{

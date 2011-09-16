@@ -23,7 +23,6 @@ Collate:
     'getPlayer.R'
     'getShapeDef.R'
     'internaldf.R'
-    'internalrender.R'
     'internalsonify.R'
     'linearscale.R'
     'octToFreq.R'
@@ -40,3 +39,4 @@ Collate:
     'scaleShortcuts.R'
     'scorePreprocessor.notes.R'
     'scorePreprocessor.csound.R'
+    'render.audio.R'

@@ -13,8 +13,8 @@
 ##'
 ##' @note This file is currently under heavy development and will
 ##' be changing drastically in the development version.
-##' @name internalrender
-##' @rdname internalrender
+##' @name render.audio
+##' @rdname render.audio
 ##' @aliases render.audio .createNoteAudio
 
 ##' @return \code{render.audio} returns an \code{audioSample} object
@@ -58,7 +58,7 @@ render.audio <- function(x, audioSample=FALSE, ...) {
     return(NULL)
 }
 
-##' @rdname internalrender
+##' @rdname render.audio
 ##' @param sonlayerscore An element of the score list--the score
 ##' produced for a specific layer. The class of this determines the
 ##' shape to be rendered
@@ -71,7 +71,7 @@ audio_layer <- function(sonlayerscore, out, samp.rate, ...) {
 }
 
 
-##' @rdname internalrender
+##' @rdname render.audio
 ##' @method audio_layer notes
 audio_layer.notes <- function(sonlayerscore, out, samp.rate, ...) {
   for(j in 1:nrow(sonlayerscore)) {
@@ -83,7 +83,7 @@ audio_layer.notes <- function(sonlayerscore, out, samp.rate, ...) {
 }
   
 
-##' @rdname internalrender
+##' @rdname render.audio
 ##' @param samp.rate The sampling rate, in Hertz
 ##' @param noterow A row of the \code{data.frame} returned by
 ##' \code{.getScore}, spoon-fed to \code{.createNoteAudio} one by one
