@@ -23,7 +23,7 @@
 ##' @param shape A character string representing the overall style of
 ##' the audio plot (analogous to \code{geom}s from the \pkg{ggplot2}
 ##' package).
-##' @param shape_params Additional parameters specific to the shape
+##' @param shape_options Additional options specific to the shape
 ##' @param stat The statistic to be calculated for the layer
 ##' @param stat_params Additional parameters specific to the stat
 ##' @param data The \code{data.frame} to be sonified for this
@@ -31,17 +31,17 @@
 ##' used.
 ##' @param mapping A \code{\link{sonaes}} object.
 
-sonlayer <- function(shape="notes", shape_params=NULL, stat=NULL,
+sonlayer <- function(shape="notes", shape_options=NULL, stat=NULL,
                      stat_params=NULL, data=NULL, mapping=NULL) {
   if(!(shape %in% getShapeNames()))
      stop("'", deparse(shape),"' is not a valid shape name. See getShapeNames.")
 
   dataname <- deparse(substitute(data)) # Used by summary.sonify()
-  l <- list(list(shape, shape_params), list(stat, stat_params), data, dataname, mapping)
+  l <- list(list(shape, shape_options), list(stat, stat_params), data, dataname, mapping)
   
   names(l) <- c("shape", "stat", "data", "dataname", "mapping")
   names(l$stat) <- c("stat", "stat_params")
-  names(l$shape) <- c("shape", "shape_params")
+  names(l$shape) <- c("shape", "shape_options")
   class(l) <- "sonlayer"
 
   .checkData(l)    

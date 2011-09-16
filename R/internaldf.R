@@ -77,6 +77,9 @@
   ## Set shape to pass to shape and rendering methods
   class(out) <- c(.getSonlayerShape(x, sonlayernum),  "data.frame")
 
+  ## Add shape options to pass to rendering methods
+  attr(out, "shape_options") <- .getSonlayerShapeOptions(x, sonlayernum)
+
   ## Any additional score processing done by shape-specific methods to
   ## scorePreprocessor. NOTE: all scorePreprocessor methods must
   ## calculate length of sonification
@@ -214,6 +217,26 @@
   lookup <- as.character(lookup$shape) # since it's a factor
   return(getShapeDef(lookup)$params[[param]]$defaultScaling)
 }
+
+##' @rdname internaldf
+##' @param shapename The name of the shape to get the defaults for
+.getDefaultShapeOptions <- function(shapename) {
+  getShapeDef(shapename)$options
+}
+
+##' @rdname internaldf
+.getSonlayerShapeOptions <- function(x, sonlayernum) {
+  shape <- .getSonlayerShape(x, sonlayernum)
+  out <- .getDefaultShapeOptions(shape)
+  supplied <- x$sonlayers[[sonlayernum]]$shape$shape_options
+
+  for(i in names(supplied))
+    out[[i]] <- supplied[[i]]
+
+  return(out)
+}
+                
+
 
 ##' @rdname internaldf
 ##' @param sonlayerscore The score generated for a specific

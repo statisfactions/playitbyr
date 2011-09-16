@@ -25,15 +25,16 @@
 ##' @param description A string containing a description of the shape
 ##' @param renderings A character vector containing the rendering
 ##' methods (see \code{link{rendering}}) that support this shape.
-##' @param params A named list of the sound parameters created by newParam
+##' @param options A named list of the options and their default values
+##' @param params A named list of the sound parameters created by shapeParam
 ##' @return \code{shapeDef} returns a new shapeDef object that for use
 ##' by \code{\link{checkSonify}} and \code{\link{getShapeDef}};
 ##' \code{shapeParam} returns a named list for use in the
 ##' \code{params} argument of \code{shapeDef}
 ##' 
-shapeDef <- function(description, renderings, params) {
+shapeDef <- function(description, renderings, options, params) {
 
-  x <- list(description, renderings, params)
+  x <- list(description, renderings, options, params)
   names(x) <- names(formals())
   class(x) <- "shapeDef"
 
@@ -58,4 +59,4 @@ shapeParam <- function(param, min, max, defaultSetting, defaultScaling, defaultS
   names(x[[param]]) <- names(formals())[-1]
   return(x)
 }
-  
+
