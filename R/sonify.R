@@ -15,6 +15,7 @@
 ##' @param rendering character string containing the method of
 ##' rendering. Currently only the default, \code{"audio"}, is
 ##' supported.
+##' @param options Additional options
 ##' @return A \code{sonify} object, which contains what is needed to render the
 ##' object. If the object is completely specified, it can by rendered simply by
 ##' calling the print method for the object (i.e. simply typing the name of the
@@ -61,7 +62,7 @@
 ##' \dontrun{x # outputs sound}
 ##'
 ##' @export
-sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling(), sonlayers = NULL, rendering = "audio") {
+sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling(), sonlayers = NULL, rendering = "audio", render_options= NULL) {
   ## Creates a \code{sonify} object, which is a list containing the \code{data.frame}
   ## to be sonified, the mappings of data to sound parameters, the scaling
   ## of parameters, and additional options.
@@ -72,8 +73,8 @@ sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling(), sonlayers =
   if("sonlayer" %in% class(sonlayers))
     sonlayers <- list(sonlayers)
   
-  s <- list(data, dataname, mapping, rendering, scales, sonlayers) 
-  names(s) <- c("data", "dataname", "mapping", "rendering", "scales", "sonlayers") 
+  s <- list(data, dataname, mapping, rendering, scales, sonlayers, render_options) 
+  names(s) <- c("data", "dataname", "mapping", "rendering", "scales", "sonlayers", "render_options") 
   class(s) <- "sonify"
   .checkData(s)
   s

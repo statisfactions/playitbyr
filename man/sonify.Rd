@@ -3,7 +3,8 @@
 \title{Create sonification objects}
 \usage{
   sonify(data = NULL, mapping = sonaes(), scales =
-  sonscaling(), sonlayers = NULL, rendering = "audio")
+  sonscaling(), sonlayers = NULL, rendering = "audio",
+  render_options = NULL)
 }
 \arguments{
   \item{data}{a \code{data.frame} with the data to be
@@ -23,6 +24,8 @@
   \item{rendering}{character string containing the method
   of rendering. Currently only the default, \code{"audio"},
   is supported.}
+
+  \item{options}{Additional options}
 }
 \value{
   A \code{sonify} object, which contains what is needed to

@@ -38,6 +38,7 @@
   ## longest of the layers) and pass as an attribute.
   length <- max(sapply(score, function(y) attributes(y)$length))
   attr(score, "length") <- length
+  attr(score, "render_options") <- x$render_options
 
   ## The class of score is used to determine which rendering method is
   ## called. 

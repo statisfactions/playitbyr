@@ -1,4 +1,4 @@
-##' Internal functions to generate sound from a \code{score} object.
+##' Rendering sound using the audio package
 ##' 
 ##' These functions are not intended to be called directly by the
 ##' user.  \code{render} is a generic that takes a \code{sonify}
@@ -6,9 +6,8 @@
 ##' the object; play_audioSample plays the resulting
 ##' \code{audioSample} object.
 ##' 
-##' \code{render.audio} (the only currently available rendering
-##' method), calls \code{.createNoteAudio} for every note in the data
-##' frame returned by \code{.getScore}. Finally,
+##' \code{render.audio} calls \code{.createNoteAudio} for every note
+##' in the data frame returned by \code{.getScore}. Finally,
 ##' \code{play_audioSample} is called to produce sound.
 ##'
 ##' @note This file is currently under heavy development and will
@@ -33,8 +32,10 @@
 
 render.audio <- function(x, audioSample=FALSE, ...) {
   
-  samp.rate <- 10000 ## TODO: need to have this as an option
-
+  samp.rate <- attributes(x)$render_options$samp.rate
+  if(is.null(samp.rate))
+    samp.rate <- 10000
+  
   ## Calculate total number of samples and create matrix based on
   ## first layer.  I add on a quarter-second onto the total length in
   ## seconds, passed as the "length" attribute of the score object,

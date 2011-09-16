@@ -7,4 +7,4 @@ pto20 <- rep(pfield, 17)
 names(pto20) <-paste("p", 4:20, sep = "")
 params <- c(inst, start, dur, pto20)
 
-csound <- shapeDef("Arbitrary csound instrument", "csound", list(orcpath=NULL, orctext=NULL, flags=NULL), params)
+csound <- shapeDef("Arbitrary csound instrument", "csound", list(f = NULL), params)

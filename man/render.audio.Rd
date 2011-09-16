@@ -3,7 +3,7 @@
 \alias{audio_layer.notes}
 \alias{.createNoteAudio}
 \alias{render.audio}
-\title{Internal functions to generate sound from a \code{score} object.}
+\title{Rendering sound using the audio package}
 \usage{
   \method{render}{audio} (x, audioSample = FALSE, ...)
 
@@ -52,8 +52,7 @@
   the resulting \code{audioSample} object.
 }
 \details{
-  \code{render.audio} (the only currently available
-  rendering method), calls \code{.createNoteAudio} for
+  \code{render.audio} calls \code{.createNoteAudio} for
   every note in the data frame returned by
   \code{.getScore}. Finally, \code{play_audioSample} is
   called to produce sound.
