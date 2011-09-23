@@ -86,18 +86,12 @@ summary.sonify <- function(object, ...) {
     } else {x$sonlayers <- c(x$sonlayers, list(y))}
   } else if("sonscaling" %in% class(y)) {
     ## adds to or overrides scale
-    for(i in names(x$scales)) {
-      if(!is.null(y[[i]])) {
-        if(!attr(y[[i]], "default"))
-          x$scales[[i]] <- y[[i]]
-      }
+    for(i in names(y)) {
+      x$scales[[i]] <- y[[i]]
     }
   } else if("sonaes" %in% class(y)) {
-    for(i in names(x$mapping)) {
-      if(!is.null(y[[i]])) {
-        if(!attr(y[[i]], "default"))
-          x$mapping[[i]] <- y[[i]]
-      }
+    for(i in names(y)) {
+      x$mapping[[i]] <- y[[i]]
     }
     if(is.null(y$time) && !is.null(x$mapping$tempo))
       x$mapping["time"] <- list(NULL)
@@ -105,7 +99,7 @@ summary.sonify <- function(object, ...) {
       x$mapping["tempo"] <- list(NULL)
   } else if("sonrendering" %in% class(y)) {
     x$rendering <- y
-    class(x) <- c(y, class(x)[-1])
+    class(x) <- c(y, "sonify")
   } else {stop("'+' operator not supported for this operation.")}
   x
 }         

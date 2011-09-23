@@ -12,20 +12,20 @@ render.csound <- function(x, audioSample=FALSE, ...) {
   ## Draw options only from first sonlayer. Annoying, I know. Really,
   ## these are rendering, not shape options
   
-  orcpathname <- x[[1]]$shape_options$orcpath
-  flags <- x[[1]]$shape_options$flags
+  orcpath <- attributes(x)$render_options$orcpath
+  flags <- attributes(x)$render_options$flags
 
-  ## Soon will need something like this to handle 'orctext',
-  ## specifying orchestra in R:
-  ## 
-  ## if(is.null(orcpathnames)) {
-  ##   orctext <- unique(sapply(x, function(y) attributes(y)$shape_options$orctext))
+  if(is.null(flags))
+    flags <- c("-odac", "-g")
+  
+  
+  ## Create i statement list of matrices
+  i <- lapply(x, as.matrix)
 
-  
-  ## layers into a single score
-  maxcol <- max(sapply(x, function(y) ncol(y)))
-  
-  
+  f <- attributes(x)$render_options$f
+
+  createPerformance(orcpath, i = i, f=f)
+    
 }
 
 
