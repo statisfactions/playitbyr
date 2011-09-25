@@ -51,8 +51,12 @@ sonlayer <- function(shape="notes", shape_options=NULL, stat=NULL,
 ##' @export
 ##' @param \dots Layer parameters to be passed to \code{sonlayer}
 shape_notes <- function(...) sonlayer("notes",...)
+## Convenience function for one supported layer type, notes.
+shape_tone <- function(...) sonlayer("tone",...)
+## Convenience function for a supported layer type, tone.
+shape_dotplot <- function(...) sonlayer("dotplot",...)
+## Convenience function for a supported layer type, dotplot.
 
 ##' @rdname sonlayer
 ##' @export
 shape_csound <- function(...) sonlayer("csound",...)
-

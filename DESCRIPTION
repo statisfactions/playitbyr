@@ -39,6 +39,7 @@ Collate:
     'getDefaultMappings.R'
     'scaleShortcuts.R'
     'scorePreprocessor.notes.R'
+    'scorePreprocessor.dotplot.R'
     'scorePreprocessor.csound.R'
     'render.audio.R'
     'render.csound.R'
