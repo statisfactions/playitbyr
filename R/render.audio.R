@@ -99,15 +99,16 @@ audio_layer.dotplot <- function(sonlayerscore, out, samp.rate, ...) {
 
 
   # Make a matrix with clicks
-  click = c(0.1,0.3, 1, 0.9 ,0.8,0.7,0.6,0.5,0.4,0.35,0.3,0.25,0.2,0.15,0.1,0.05,0.025,0);
-  click = t(matrix(data=click,nrow=18,ncol=2));
+  # click = c(1, seq(1,0,by=-1/(44100/1000))^2) ;
+  click = c(1,-1);
+  click = t(matrix(data=click,nrow=2,ncol=2));
   for (i in 1:length(starts)){
-      out[1:2,starts[i]:(starts[i]+17)] = (out[1:2,starts[i]:(starts[i]+17)] + click)/2 ;
-
+      out[1:2,starts[i]:(starts[i]+1)] = (out[1:2,starts[i]:(starts[i]+1)] + click)/2 ;
   }
   
-  plot(out[1,],type="l")
-
+  plot(out[2,],type="l")
+  
+  out= out *0.1;
   # No pan for now
   # out[1,] <- waveform * noterow$pan
   # out[2,] <- waveform * (1 - noterow$pan)
