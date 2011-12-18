@@ -4,8 +4,9 @@
 \alias{sonlayer}
 \title{Creating individual layers for sonify objects}
 \usage{
-  sonlayer(shape = "notes", shape_options = NULL, stat =
-  NULL, stat_params = NULL, data = NULL, mapping = NULL)
+  sonlayer(shape = "notes", shape_options = NULL,
+    stat = NULL, stat_params = NULL, data = NULL,
+    mapping = NULL)
 
   shape_notes(...)
 

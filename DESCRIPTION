@@ -1,8 +1,8 @@
 Package: playitbyr
 Type: Package
 Title: Representing and exploring data through sound
-Version: 0.1-2
-Date: 2011-08-04
+Version: 0.1-4
+Date: 2011-12-17
 Author: Ethan Brown
 Maintainer: Ethan Brown <ethancbrown+playitbyr@gmail.com>
 Depends:
@@ -43,3 +43,4 @@ Collate:
     'scorePreprocessor.csound.R'
     'render.audio.R'
     'render.csound.R'
+    'sonopts.R'

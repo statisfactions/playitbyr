@@ -52,13 +52,13 @@
 ## A verbose way of specifying a sonify object,
 ## without using the shortcuts
 x <- sonify(data=iris,
-sonaes(time=Petal.Width, pitch=Petal.Length, dur=5, vol=0.75),
-scales = sonscaling(
-time = list(min=0, max=3,
-scaling.function = linear.scale),
-pitch = list(min=3, max=13,
-scaling.function = linear.scale)),
-sonlayers = shape_notes())
+     sonaes(time=Petal.Width, pitch=Petal.Length, dur=5, vol=0.75),
+     scales = sonscaling(
+       time = list(min=0, max=3,
+        scaling.function = linear.scale),
+       pitch = list(min=3, max=13,
+        scaling.function = linear.scale)),
+     sonlayers = shape_notes())
 summary(x)
 \dontrun{x}
 

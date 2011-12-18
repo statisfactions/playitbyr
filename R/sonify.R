@@ -12,10 +12,7 @@
 ##' to each sound
 ##' @param sonlayers A single \code{sonlayer} object, or a list of
 ##' \code{sonlayer} objects, that gives each layer to be rendered.
-##' @param rendering character string containing the method of
-##' rendering. Currently only the default, \code{"audio"}, is
-##' supported.
-##' @param render_options A named list of rendering options to pass to
+##' @param opts A named list of rendering options to pass to
 ##' the individual rendering type.
 ##' @return A \code{sonify} object, which contains what is needed to render the
 ##' object. If the object is completely specified, it can by rendered simply by
@@ -63,19 +60,18 @@
 ##' \dontrun{x # outputs sound}
 ##'
 ##' @export
-sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling(), sonlayers = NULL, rendering = "audio", render_options= NULL) {
+sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling(), sonlayers = NULL, opts = sonopts(rendering = "audio")) {
   ## Creates a \code{sonify} object, which is a list containing the \code{data.frame}
   ## to be sonified, the mappings of data to sound parameters, the scaling
   ## of parameters, and additional options.
 
-  .checkRendering(rendering)
   dataname <- deparse(substitute(data)) # Used by summary.sonify()
 
   if("sonlayer" %in% class(sonlayers))
     sonlayers <- list(sonlayers)
   
-  s <- list(data, dataname, mapping, rendering, scales, sonlayers, render_options) 
-  names(s) <- c("data", "dataname", "mapping", "rendering", "scales", "sonlayers", "render_options") 
+  s <- list(data, dataname, mapping, scales, sonlayers, opts) 
+  names(s) <- c("data", "dataname", "mapping", "scales", "sonlayers", "opts")
   class(s) <- "sonify"
   .checkData(s)
   s

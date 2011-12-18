@@ -38,7 +38,7 @@
 ##' @method print sonify
 ##' @export
 print.sonify <- function(x, ...) {
-  create_audioSample(x, play=TRUE)
+  render(.getScore(x), opts = x$opts)
   return(NULL)
 }
 
@@ -97,10 +97,12 @@ summary.sonify <- function(object, ...) {
       x$mapping["time"] <- list(NULL)
     if(is.null(y$tempo) & !is.null(x$mapping$time))
       x$mapping["tempo"] <- list(NULL)
-  } else if("sonrendering" %in% class(y)) {
-    x$rendering <- y
-    class(x) <- c(y, "sonify")
-  } else {stop("'+' operator not supported for this operation.")}
+  } else if("sonopts" %in% class(y)) {
+    ## adds to or overrides sonopts
+    for(i in names(y)) {
+      x$opts[[i]] <- y[[i]]
+    }
+  } else stop("'+' operator not supported for this operation.")
   x
 }         
 

@@ -25,14 +25,12 @@
 ##' \code{play_audioSample} is called for its side effect, to
 ##' produce the sound of the sonification.
 ##' @keywords internal
-##' @method render audio
 ##' @export
-##' @param x A \code{score} object created by \code{\link{.getScore}}
-##' @param \dots Currently ignored.
+##' @inheritParams render
+##' @param \dots Currently ignored
 
-render.audio <- function(x, audioSample=FALSE, ...) {
-  
-  samp.rate <- attributes(x)$render_options$samp.rate
+render.audio <- function(x, opts, audioSample=FALSE, ...) {
+  samp.rate <- opts$samp.rate
   if(is.null(samp.rate))
     samp.rate <- 10000
   
@@ -55,8 +53,10 @@ render.audio <- function(x, audioSample=FALSE, ...) {
   
   if(audioSample)
     return(outWave)
-  else
+  else {
+    play_audioSample(outWave)
     return(NULL)
+  }
 }
 
 ##' @rdname render.audio
@@ -115,9 +115,6 @@ audio_layer.dotplot <- function(sonlayerscore, out, samp.rate, ...) {
   return(out)
 }
   
-  
-
-##' @rdname internalrender
 ##' @rdname render.audio
 ##' @param samp.rate The sampling rate, in Hertz
 ##' @param noterow A row of the \code{data.frame} returned by
@@ -152,9 +149,6 @@ audio_layer.dotplot <- function(sonlayerscore, out, samp.rate, ...) {
   return(list(start=start, end=end, note=note))
 }  
 
-
-
-###' @rdname internalrender
 ###' @param samp.rate The sampling rate, in Hertz
 ###' @param noterow A row of the \code{data.frame} returned by
 ###' \code{.getScore}, spoon-fed to \code{.createNoteAudio} one by one

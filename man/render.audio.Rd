@@ -1,24 +1,25 @@
 \name{render.audio}
 \alias{audio_layer}
+\alias{audio_layer.dotplot}
 \alias{audio_layer.notes}
 \alias{.createNoteAudio}
 \alias{render.audio}
 \title{Rendering sound using the audio package}
 \usage{
-  \method{render}{audio} (x, audioSample = FALSE, ...)
+  render.audio(x, opts, audioSample = FALSE, ...)
 
   audio_layer(sonlayerscore, out, samp.rate, ...)
 
   \method{audio_layer}{notes} (sonlayerscore, out,
-  samp.rate, ...)
+    samp.rate, ...)
+
+  \method{audio_layer}{dotplot} (sonlayerscore, out,
+    samp.rate, ...)
 
   .createNoteAudio(noterow, samp.rate)
 }
 \arguments{
-  \item{x}{A \code{score} object created by
-  \code{\link{.getScore}}}
-
-  \item{\dots}{Currently ignored.}
+  \item{\dots}{Currently ignored}
 
   \item{sonlayerscore}{An element of the score list--the
   score produced for a specific layer. The class of this
@@ -33,6 +34,15 @@
   \item{noterow}{A row of the \code{data.frame} returned by
   \code{.getScore}, spoon-fed to \code{.createNoteAudio}
   one by one by \code{render.audio}}
+
+  \item{x}{A \code{score} object created by
+  \code{\link{.getScore}}}
+
+  \item{opts}{the options of the original sonify object}
+
+  \item{audioSample}{Logical indicating whether to return
+  an \code{audioSample} object containing the from the
+  object.}
 }
 \value{
   \code{render.audio} returns an \code{audioSample} object

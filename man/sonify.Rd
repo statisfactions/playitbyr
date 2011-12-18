@@ -2,9 +2,9 @@
 \alias{sonify}
 \title{Create sonification objects}
 \usage{
-  sonify(data = NULL, mapping = sonaes(), scales =
-  sonscaling(), sonlayers = NULL, rendering = "audio",
-  render_options = NULL)
+  sonify(data = NULL, mapping = sonaes(),
+    scales = sonscaling(), sonlayers = NULL,
+    opts = sonopts(rendering = "audio"))
 }
 \arguments{
   \item{data}{a \code{data.frame} with the data to be
@@ -21,12 +21,8 @@
   list of \code{sonlayer} objects, that gives each layer to
   be rendered.}
 
-  \item{rendering}{character string containing the method
-  of rendering. Currently only the default, \code{"audio"},
-  is supported.}
-
-  \item{render_options}{A named list of rendering options
-  to pass to the individual rendering type.}
+  \item{opts}{A named list of rendering options to pass to
+  the individual rendering type.}
 }
 \value{
   A \code{sonify} object, which contains what is needed to
@@ -54,10 +50,10 @@ summary(x)
 ## and Petal.Width mapped onto pitches
 ## between pitch values 6 (110 Hz) and 8 (440 Hz),
 x <- sonify(data=iris,
-sonaes(time=Petal.Length, pitch=Petal.Width),
-sonscaling(pitch=list(6, 8, linear.scale),
-time=list(0, 10, linear.scale)),
-sonlayers=shape_notes())
+            sonaes(time=Petal.Length, pitch=Petal.Width),
+            sonscaling(pitch=list(6, 8, linear.scale),
+                       time=list(0, 10, linear.scale)),
+            sonlayers=shape_notes())
 summary(x)
 \dontrun{x # outputs sound}
 

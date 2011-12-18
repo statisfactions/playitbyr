@@ -2,11 +2,13 @@
 \alias{render}
 \title{Render a sonification score to sound}
 \usage{
-  render(x, audioSample = FALSE, ...)
+  render(x, opts, audioSample = FALSE, ...)
 }
 \arguments{
   \item{x}{A \code{score} object created by
   \code{\link{.getScore}}}
+
+  \item{opts}{the options of the original sonify object}
 
   \item{audioSample}{Logical indicating whether to return
   an \code{audioSample} object containing the from the

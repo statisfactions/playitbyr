@@ -4,27 +4,25 @@
 ##' \code{score} object.
 ##'
 ##' @rdname render.csound
-##' @param x A \code{score} object created by \code{\link{.getScore}}
-##' @param audioSample Currently ignored.
-##' @param \dots Currently ignored.
-render.csound <- function(x, audioSample=FALSE, ...) {
-
+##' @inheritParams render
+##' @param \dots Currently ignored
+##' @note See \code{\link{createPerformance}} for possible
+##' \code{render_options} that can be used with this rendering
+##' technique; all the arguments of \code{createPerformance} can be
+##' passed as options.
+render.csound <- function(x, opts, audioSample=FALSE, ...) {
   ## Draw options only from first sonlayer. Annoying, I know. Really,
   ## these are rendering, not shape options
-  
-  orcpath <- attributes(x)$render_options$orcpath
-  flags <- attributes(x)$render_options$flags
+  stop("need to fix render.csound to harmonize with createPerformance")
+  orcpath <- opts$orcpath
+  flags <- opts$flags
 
-  if(is.null(flags))
-    flags <- c("-odac", "-g")
-  
-  
   ## Create i statement list of matrices
   i <- lapply(x, as.matrix)
 
   f <- attributes(x)$render_options$f
 
-  createPerformance(orcpath, i = i, f=f)
+  createPerformance(i = i, f=f, orcpath)
     
 }
 
