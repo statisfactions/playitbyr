@@ -21,7 +21,9 @@
   When \code{rendering = "csound"}, the default, the
   following options are available, which mirror the input
   arguments to \code{\link{createPerformance}} from the
-  \pkg{csound} package:
+  \pkg{csound} package. Note that most of these will be
+  \strong{ignored} for many shapes, since they set these
+  options themselves on the back end.
 
   \describe{ \item{i}{Usually this is not specified, since
   this will replace any intended sonification. A list of

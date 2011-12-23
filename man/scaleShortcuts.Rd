@@ -1,12 +1,14 @@
 \name{scale_time_linear}
 \alias{scale_dur_linear}
+\alias{scale_dur_linear_scale_pan_linear}
 \alias{scale_pan_linear}
 \alias{scale_pitch_linear}
+\alias{scale_pitch_linear_scale_tempo_linear_scale_time_linear_scale_vol_linear}
 \alias{scaleShortcuts}
 \alias{scale_tempo_linear}
 \alias{scale_time_linear}
 \alias{scale_vol_linear}
-\title{Shortcut functions to set linear scales for \code{sonify} objects}
+\title{Shortcut functions to set linear_scales for \code{sonify} objects}
 \usage{
   scale_time_linear(min, max)
 
@@ -55,9 +57,9 @@ x <- sonify(data=iris,
      sonaes(time=Petal.Width, pitch=Petal.Length, dur=5, vol=0.75),
      scales = sonscaling(
        time = list(min=0, max=3,
-        scaling.function = linear.scale),
+        scaling.function = linear_scale),
        pitch = list(min=3, max=13,
-        scaling.function = linear.scale)),
+        scaling.function = linear_scale)),
      sonlayers = shape_scatter())
 summary(x)
 \dontrun{x}
@@ -83,7 +85,7 @@ summary(y)
 \seealso{
   \code{\link{sonscaling}} for the full syntax and range of
   possibilities for specifying scaling of \code{sonify}
-  objects; \code{\link{linear.scale}} for the pre-defined
+  objects; \code{\link{linear_scale}} for the pre-defined
   linear scaling function which this incorporates;
   \code{\link{+.sonify}} for the addition onto
   \code{sonify} objects.

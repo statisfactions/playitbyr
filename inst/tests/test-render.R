@@ -9,3 +9,11 @@ test_that("basic iris example works in 'audio'", {
   load(system.file("testdata/audioiris.Rd", package="playitbyr"))
   expect_equal(curr, comp)
 })
+
+test_that("basic iris example works in 'csound' scatter", {
+  x <- sonify(iris)
+  x <- x + sonaes(time=Petal.Length, pitch=Petal.Width)
+  x <- x + scale_pitch_linear(6, 8) + scale_time_linear(0, 10)
+  x <- x + shape_scatter()
+  print(x)
+})

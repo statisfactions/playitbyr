@@ -7,8 +7,10 @@
 ##'
 ##' When \code{rendering = "csound"}, the default, the following
 ##' options are available, which mirror the input arguments to
-##' \code{\link{createPerformance}} from the \pkg{csound} package:
-##'
+##' \code{\link{createPerformance}} from the \pkg{csound} package.
+##' Note that most of these will be \strong{ignored} for many shapes,
+##' since they set these options themselves on the back end.
+##' 
 # Parameter list imported from createPerformance on Friday, December 16, 2011
 ##' \describe{
 ##' \item{i}{Usually this is not specified, since this will

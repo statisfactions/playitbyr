@@ -1,11 +1,21 @@
 \name{render.csound}
+\alias{csound_layer}
+\alias{csound_layer.scatter}
 \alias{render.csound}
 \title{Rendering sound using csound}
 \usage{
   render.csound(x, opts, audioSample = FALSE, ...)
+
+  csound_layer(sonlayerscore, ...)
+
+  \method{csound_layer}{scatter} (sonlayerscore, ...)
 }
 \arguments{
   \item{\dots}{Currently ignored}
+
+  \item{sonlayerscore}{An element of the score list--the
+  score produced for a specific layer. The class of this
+  determines the shape to be rendered}
 
   \item{x}{A \code{score} object created by
   \code{\link{.getScore}}}

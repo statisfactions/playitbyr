@@ -1,4 +1,4 @@
-##' Shortcut functions to set linear scales for \code{sonify} objects
+##' Shortcut functions to set linear_scales for \code{sonify} objects
 ##' 
 ##' These shortcut functions (with the notation \code{scale_}\kbd{[data
 ##' parameter]}\code{_}\kbd{[scaling function]}) are intended to be added onto
@@ -14,15 +14,15 @@
 ##' as shown in the examples.
 ##'
 ##' @rdname scaleShortcuts
-##' @aliases scaleShortcuts scale_dur_linear scale_pan_linear
-##' scale_pitch_linear scale_tempo_linear scale_time_linear scale_vol_linear
+##' @aliases scaleShortcuts scale_dur_linear_scale_pan_linear
+##' scale_pitch_linear_scale_tempo_linear_scale_time_linear_scale_vol_linear
 ##' @param min The desired minimum value, a \code{numeric} of length 1
 ##' @param max The desired maximum value, a \code{numeric} of length 1
 ##' @return A \code{sonscaling} object, to be used in \code{sonify} or added
 ##' onto a \code{sonify} object.
 ##' @seealso \code{\link{sonscaling}} for the full syntax and range of
 ##' possibilities for specifying scaling of \code{sonify} objects;
-##' \code{\link{linear.scale}} for the pre-defined linear scaling function
+##' \code{\link{linear_scale}} for the pre-defined linear scaling function
 ##' which this incorporates; \code{\link{+.sonify}} for the addition onto
 ##' \code{sonify} objects.
 ##' @examples
@@ -33,9 +33,9 @@
 ##'      sonaes(time=Petal.Width, pitch=Petal.Length, dur=5, vol=0.75),
 ##'      scales = sonscaling(
 ##'        time = list(min=0, max=3,
-##'         scaling.function = linear.scale),
+##'         scaling.function = linear_scale),
 ##'        pitch = list(min=3, max=13,
-##'         scaling.function = linear.scale)),
+##'         scaling.function = linear_scale)),
 ##'      sonlayers = shape_scatter())
 ##' summary(x)
 ##' \dontrun{x}
@@ -59,24 +59,24 @@
 ##' \dontrun{y}
 ##'
 ##' @export
-scale_time_linear <- function(min, max) sonscaling(time=list(min, max, linear.scale))
+scale_time_linear <- function(min, max) sonscaling(time=list(min, max, linear_scale))
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_pitch_linear <- function(min, max) sonscaling(pitch=list(min, max, linear.scale))
+scale_pitch_linear <- function(min, max) sonscaling(pitch=list(min, max, linear_scale))
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_dur_linear <- function(min, max) sonscaling(dur=list(min, max, linear.scale))
+scale_dur_linear <- function(min, max) sonscaling(dur=list(min, max, linear_scale))
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_vol_linear <- function(min, max) sonscaling(vol=list(min, max, linear.scale))
+scale_vol_linear <- function(min, max) sonscaling(vol=list(min, max, linear_scale))
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_pan_linear <- function(min, max) sonscaling(pan=list(min, max, linear.scale))
+scale_pan_linear <- function(min, max) sonscaling(pan=list(min, max, linear_scale))
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_tempo_linear <- function(min, max) sonscaling(tempo=list(min, max, linear.scale))
+scale_tempo_linear <- function(min, max) sonscaling(tempo=list(min, max, linear_scale))

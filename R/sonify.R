@@ -40,8 +40,8 @@
 ##' ## between pitch values 6 (110 Hz) and 8 (440 Hz),
 ##' x <- sonify(data=iris,
 ##'             sonaes(time=Petal.Length, pitch=Petal.Width),
-##'             sonscaling(pitch=list(6, 8, linear.scale),
-##'                        time=list(0, 10, linear.scale)),
+##'             sonscaling(pitch=list(6, 8, linear_scale),
+##'                        time=list(0, 10, linear_scale)),
 ##'             sonlayers=shape_scatter())
 ##' summary(x)
 ##' \dontrun{x # outputs sound}
@@ -60,7 +60,7 @@
 ##' \dontrun{x # outputs sound}
 ##'
 ##' @export
-sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling(), sonlayers = NULL, opts = sonopts(rendering = "audio")) {
+sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling(), sonlayers = NULL, opts = sonopts(rendering = "csound")) {
   ## Creates a \code{sonify} object, which is a list containing the \code{data.frame}
   ## to be sonified, the mappings of data to sound parameters, the scaling
   ## of parameters, and additional options.

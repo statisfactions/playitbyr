@@ -47,7 +47,7 @@ render.audio <- function(x, opts, audioSample=FALSE, ...) {
   }
   
   ## Rescale matrix
-  out <- linear.scale(out, -1, 1)
+  out <- linear_scale(out, -1, 1)
   outWave <- as.audioSample(out, samp.rate)
   assign(".LastRendering", outWave, pos=".GlobalEnv")
   

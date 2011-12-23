@@ -4,7 +4,7 @@
 \usage{
   sonify(data = NULL, mapping = sonaes(),
     scales = sonscaling(), sonlayers = NULL,
-    opts = sonopts(rendering = "audio"))
+    opts = sonopts(rendering = "csound"))
 }
 \arguments{
   \item{data}{a \code{data.frame} with the data to be
@@ -51,8 +51,8 @@ summary(x)
 ## between pitch values 6 (110 Hz) and 8 (440 Hz),
 x <- sonify(data=iris,
             sonaes(time=Petal.Length, pitch=Petal.Width),
-            sonscaling(pitch=list(6, 8, linear.scale),
-                       time=list(0, 10, linear.scale)),
+            sonscaling(pitch=list(6, 8, linear_scale),
+                       time=list(0, 10, linear_scale)),
             sonlayers=shape_scatter())
 summary(x)
 \dontrun{x # outputs sound}

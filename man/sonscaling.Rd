@@ -23,7 +23,7 @@
   sonic parameter, the second is the maximum, and the third
   is a function that maps the data column onto the range of
   the sonic parameter. The only such function included with
-  \pkg{playitbyr} right now is \code{\link{linear.scale}}.
+  \pkg{playitbyr} right now is \code{\link{linear_scale}}.
 
   \code{\link{scaleShortcuts}} provides a more intuitive
   interface to defining scales.
@@ -34,7 +34,7 @@
   get mapped onto these sonic parameters;
   \code{\link{scaleShortcuts}} for easy shortcut functions
   for common use-cases of scaling; and
-  \code{\link{linear.scale}} for an example of a scaling
+  \code{\link{linear_scale}} for an example of a scaling
   function.
 }
 

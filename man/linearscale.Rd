@@ -1,8 +1,8 @@
-\name{linear.scale}
-\alias{linear.scale}
+\name{linear_scale}
+\alias{linear_scale}
 \title{Create a linear parameter scaling with given minimum and maximum}
 \usage{
-  linear.scale(x, min, max)
+  linear_scale(x, min, max)
 }
 \arguments{
   \item{x}{A numeric vector or matrix}
@@ -18,7 +18,7 @@
   linearly rescaled in the desired way.
 }
 \description{
-  \code{linear.scale()} linearly transforms its input
+  \code{linear_scale()} linearly transforms its input
   vector \code{x} so that its minimum value is \code{min}
   and its maximum value is \code{max}. This is for use as a
   scaling function in \code{\link{sonscaling}}. It is
@@ -33,10 +33,10 @@
 }
 \examples{
 x <- 1:10
-linear.scale(x, min=-2, max=-1.5)
+linear_scale(x, min=-2, max=-1.5)
 
 ## If max<min, it's rescaled in reverse:
-linear.scale(x, min=10, max=1)
+linear_scale(x, min=10, max=1)
 }
 \seealso{
   \code{\link{sonscaling}}, \code{\link{scaleShortcuts}}
