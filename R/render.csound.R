@@ -11,8 +11,6 @@
 ##' technique; all the arguments of \code{createPerformance} can be
 ##' passed as options.
 render.csound <- function(x, opts, audioSample=FALSE, ...) {
-  ## Draw options only from first sonlayer. Annoying, I know. Really,
-  ## these are rendering, not shape options
   i <- lapply(x, function(y) csound_layer(y))
   createPerformance(i)
 }
@@ -29,13 +27,14 @@ csound_layer <- function(sonlayerscore, ...) {
 ##' @rdname render.csound
 ##' @method csound_layer scatter
 csound_layer.scatter <- function(sonlayerscore, ...) {
+
   sonlayerscorem <- as.matrix(sonlayerscore)
   out <- scoreMatrices(nrow(sonlayerscorem))
-  out$FM[, c("dur", "pan", "start", "amp")] <- sonlayerscorem[, c("dur", "pan", "start", "vol")]
+  namesmatch <- intersect(colnames(sonlayerscorem), colnames(out$FM))
+                            
+  out$FM[, namesmatch] <- sonlayerscorem[, namesmatch]
+  out$FM[, "amp"] <- sonlayerscorem[, "vol"]
   out$FM[, "cps"] <- octToFreq(sonlayerscorem[, "pitch"])
-  out$FM[, c("attkp", "decayp")] <- 0.01
-  out$FM[, "mod"] <- 1
-  out$FM[, "indx"] <- 1
   return(out$FM)
 }
 

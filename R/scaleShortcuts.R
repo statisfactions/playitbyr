@@ -16,6 +16,7 @@
 ##' @rdname scaleShortcuts
 ##' @aliases scaleShortcuts scale_dur_linear_scale_pan_linear
 ##' scale_pitch_linear_scale_tempo_linear_scale_time_linear_scale_vol_linear
+##' scale_attkp_linear scale_decayp_linear scale_mod_linear scale_indx_linear
 ##' @param min The desired minimum value, a \code{numeric} of length 1
 ##' @param max The desired maximum value, a \code{numeric} of length 1
 ##' @return A \code{sonscaling} object, to be used in \code{sonify} or added
@@ -80,3 +81,19 @@ scale_pan_linear <- function(min, max) sonscaling(pan=list(min, max, linear_scal
 ##' @rdname scaleShortcuts
 ##' @export
 scale_tempo_linear <- function(min, max) sonscaling(tempo=list(min, max, linear_scale))
+
+##' @rdname scaleShortcuts
+##' @export
+scale_attkp_linear <- function(min, max) sonscaling(attkp=list(min, max, linear_scale))
+
+##' @rdname scaleShortcuts
+##' @export
+scale_decayp_linear <- function(min, max) sonscaling(decayp=list(min, max, linear_scale))
+
+##' @rdname scaleShortcuts
+##' @export
+scale_mod_linear <- function(min, max) sonscaling(mod=list(min, max, linear_scale))
+
+##' @rdname scaleShortcuts
+##' @export
+scale_indx_linear <- function(min, max) sonscaling(indx=list(min, max, linear_scale))

@@ -1,6 +1,10 @@
 \name{scale_time_linear}
+\alias{scale_attkp_linear}
+\alias{scale_decayp_linear}
 \alias{scale_dur_linear}
 \alias{scale_dur_linear_scale_pan_linear}
+\alias{scale_indx_linear}
+\alias{scale_mod_linear}
 \alias{scale_pan_linear}
 \alias{scale_pitch_linear}
 \alias{scale_pitch_linear_scale_tempo_linear_scale_time_linear_scale_vol_linear}
@@ -21,6 +25,14 @@
   scale_pan_linear(min, max)
 
   scale_tempo_linear(min, max)
+
+  scale_attkp_linear(min, max)
+
+  scale_decayp_linear(min, max)
+
+  scale_mod_linear(min, max)
+
+  scale_indx_linear(min, max)
 }
 \arguments{
   \item{min}{The desired minimum value, a \code{numeric} of
