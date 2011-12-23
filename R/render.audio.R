@@ -29,7 +29,7 @@
 ##' @inheritParams render
 ##' @param \dots Currently ignored
 
-render.audio <- function(x, opts, audioSample=FALSE, ...) {
+render.audio <- function(x, opts, file = "", audioSample=FALSE, ...) {
   samp.rate <- opts$samp.rate
   if(is.null(samp.rate))
     samp.rate <- 10000
@@ -53,10 +53,10 @@ render.audio <- function(x, opts, audioSample=FALSE, ...) {
   
   if(audioSample)
     return(outWave)
-  else {
+  else if(file == "") {
     play_audioSample(outWave)
     return(NULL)
-  }
+  } else save.wave(outWave, file)
 }
 
 ##' @rdname render.audio

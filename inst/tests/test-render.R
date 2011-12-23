@@ -10,10 +10,15 @@ test_that("basic iris example works in 'audio'", {
   expect_equal(curr, comp)
 })
 
-test_that("basic iris example works in 'csound' scatter", {
+test_that("basic iris example file works in 'csound'", {
   x <- sonify(iris)
   x <- x + sonaes(time=Petal.Length, pitch=Petal.Width)
   x <- x + scale_pitch_linear(6, 8) + scale_time_linear(0, 10)
   x <- x + shape_scatter()
-  print(x)
+  outfile <- paste(tempfile(), ".wav", sep="")
+  sonsave(x,outfile)
+  curr <- load.wave(outfile)
+  unlink(outfile)
+  load(system.file("testdata/csoundiris.Rd", package="playitbyr"))
+  expect_equal(curr, comp)
 })

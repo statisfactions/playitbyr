@@ -6,7 +6,8 @@
 \alias{render.audio}
 \title{Rendering sound using the audio package}
 \usage{
-  render.audio(x, opts, audioSample = FALSE, ...)
+  render.audio(x, opts, file = "", audioSample = FALSE,
+    ...)
 
   audio_layer(sonlayerscore, out, samp.rate, ...)
 
@@ -38,11 +39,17 @@
   \item{x}{A \code{score} object created by
   \code{\link{.getScore}}}
 
-  \item{opts}{the options of the original sonify object}
+  \item{opts}{the options of the original sonify object.
+  Currently most options are ignored besides for
+  \code{rendering}.}
+
+  \item{file}{the file to save the rendering to. The
+  default,\code{""}, plays the sonification in real time.}
 
   \item{audioSample}{Logical indicating whether to return
   an \code{audioSample} object containing the from the
-  object.}
+  object. This is only currently available when rendering
+  using \code{"audio"}.}
 }
 \value{
   \code{render.audio} returns an \code{audioSample} object

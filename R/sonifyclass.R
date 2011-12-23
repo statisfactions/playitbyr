@@ -38,7 +38,7 @@
 ##' @method print sonify
 ##' @export
 print.sonify <- function(x, ...) {
-  render(.getScore(x), opts = x$opts)
+  render(.getScore(x), opts = x$opts, ...)
   return(NULL)
 }
 
