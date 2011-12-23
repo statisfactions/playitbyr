@@ -16,7 +16,7 @@
 ##' can always define your own (see \code{\link{sonscaling}} and
 ##' \code{\link{scaleShortcuts}}.
 ##' 
-##' @aliases sonlayer shape_notes
+##' @aliases sonlayer shape_scatter
 ##' 
 ##' @rdname sonlayer
 ##' @export 
@@ -31,7 +31,7 @@
 ##' used.
 ##' @param mapping A \code{\link{sonaes}} object.
 
-sonlayer <- function(shape="notes", shape_options=NULL, stat=NULL,
+sonlayer <- function(shape="scatter", shape_options=NULL, stat=NULL,
                      stat_params=NULL, data=NULL, mapping=NULL) {
   if(!(shape %in% getShapeNames()))
      stop("'", deparse(shape),"' is not a valid shape name. See getShapeNames.")
@@ -50,8 +50,8 @@ sonlayer <- function(shape="notes", shape_options=NULL, stat=NULL,
 ##' @rdname sonlayer
 ##' @export
 ##' @param \dots Layer parameters to be passed to \code{sonlayer}
-shape_notes <- function(...) sonlayer("notes",...)
-## Convenience function for one supported layer type, notes.
+shape_scatter <- function(...) sonlayer("scatter",...)
+## Convenience function for one supported layer type, scatter.
 shape_tone <- function(...) sonlayer("tone",...)
 ## Convenience function for a supported layer type, tone.
 shape_dotplot <- function(...) sonlayer("dotplot",...)

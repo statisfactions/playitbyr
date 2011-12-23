@@ -27,7 +27,7 @@
 ##' ## (not terribly informative, since the order is
 ##' ## arbitrary)
 ##' x <- sonify(iris, sonaes(tempo=Petal.Width,
-##'             pitch=Sepal.Width)) + shape_notes()
+##'             pitch=Sepal.Width)) + shape_scatter()
 ##' summary(x)
 ##' \dontrun{x ## Quite long!}
 ##' 

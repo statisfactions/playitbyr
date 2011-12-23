@@ -1,7 +1,7 @@
 \name{render.audio}
 \alias{audio_layer}
 \alias{audio_layer.dotplot}
-\alias{audio_layer.notes}
+\alias{audio_layer.scatter}
 \alias{.createNoteAudio}
 \alias{render.audio}
 \title{Rendering sound using the audio package}
@@ -10,7 +10,7 @@
 
   audio_layer(sonlayerscore, out, samp.rate, ...)
 
-  \method{audio_layer}{notes} (sonlayerscore, out,
+  \method{audio_layer}{scatter} (sonlayerscore, out,
     samp.rate, ...)
 
   \method{audio_layer}{dotplot} (sonlayerscore, out,

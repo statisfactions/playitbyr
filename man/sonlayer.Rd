@@ -1,14 +1,14 @@
 \name{sonlayer}
 \alias{shape_csound}
-\alias{shape_notes}
+\alias{shape_scatter}
 \alias{sonlayer}
 \title{Creating individual layers for sonify objects}
 \usage{
-  sonlayer(shape = "notes", shape_options = NULL,
+  sonlayer(shape = "scatter", shape_options = NULL,
     stat = NULL, stat_params = NULL, data = NULL,
     mapping = NULL)
 
-  shape_notes(...)
+  shape_scatter(...)
 
   shape_csound(...)
 }

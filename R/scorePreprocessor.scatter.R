@@ -1,15 +1,15 @@
-##' Score preprocessing for shape 'notes'
+##' Score preprocessing for shape 'scatter'
 ##'
-##' This function does some needed preprocessing for shape notes to
+##' This function does some needed preprocessing for shape scatter to
 ##' get the method ready to render. In this case, it takes the 'time'
 ##' and 'tempo' mappings and translates them into start times. It also
 ##' scales duration accordingly.
 ##' 
 ##' @keywords internal
-##' @method scorePreprocessor notes
+##' @method scorePreprocessor scatter
 ##' @inheritParams scorePreprocessor
 ##' @return A sonlayer score with the transformations described in the 'Description' field
-scorePreprocessor.notes <- function(sonlayerscore) {
+scorePreprocessor.scatter <- function(sonlayerscore) {
   ## We need to transform the "tempo" or "time" data into actual start
   ## times and tranform the durations accordingly
 

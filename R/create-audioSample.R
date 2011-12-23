@@ -27,7 +27,7 @@
 ##' @examples
 ##' 
 ##' x <- (sonify(iris) + sonaes(time = Petal.Length, pitch = Petal.Width)
-##'       + shape_notes())
+##'       + shape_scatter())
 ##' \dontrun{out <- create_audioSample(x) ##TODO: temporarily not run while I fix checkSonify}
 ##' \dontrun{
 ##' play_audioSample(out)

@@ -42,7 +42,7 @@
 ##'             sonaes(time=Petal.Length, pitch=Petal.Width),
 ##'             sonscaling(pitch=list(6, 8, linear.scale),
 ##'                        time=list(0, 10, linear.scale)),
-##'             sonlayers=shape_notes())
+##'             sonlayers=shape_scatter())
 ##' summary(x)
 ##' \dontrun{x # outputs sound}
 ##' 
@@ -54,7 +54,7 @@
 ##' ## and with the "scale_" convenience functions
 ##' x <- sonify(iris)
 ##' x <- x + sonaes(time=Petal.Length, pitch=Petal.Width)
-##' x <- x + shape_notes()
+##' x <- x + shape_scatter()
 ##' x <- x + scale_pitch_linear(6, 8) + scale_time_linear(0, 10)
 ##' summary(x)
 ##' \dontrun{x # outputs sound}

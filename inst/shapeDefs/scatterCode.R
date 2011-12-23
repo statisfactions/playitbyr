@@ -41,7 +41,7 @@
                       NULL,
                       "The desired tempo of events in beats per minute. Either time or tempo, but not both, must be specified for an object to be rendered.")
 
-notes <- shapeDef("A bare-bones sonification using pure sine tones", "audio", list(), c(time, pitch, dur, vol, pan, tempo))
+scatter <- shapeDef("A scatterplot shape", "audio", list(), c(time, pitch, dur, vol, pan, tempo))
 
                                 
                                 

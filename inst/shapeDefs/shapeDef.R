@@ -18,10 +18,10 @@
 ##' If you are creating a shapeDef that shares many properties of an
 ##' existing one, you can simply copy the existing one and change it,
 ##' if you find that easier. Also in this directory is the code used
-##' to generate the \sQuote{notes} \code{shapeDef}.
+##' to generate the \sQuote{scatter} \code{shapeDef}.
 ##'
 ##' @rdname shapeDef
-##' @param shape A string containing name of the shape (e.g. \sQuote{\code{notes}})
+##' @param shape A string containing name of the shape (e.g. \sQuote{\code{scatter}})
 ##' @param description A string containing a description of the shape
 ##' @param renderings A character vector containing the rendering
 ##' methods (see \code{link{rendering}}) that support this shape.
