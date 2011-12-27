@@ -33,14 +33,6 @@ exp_scale <- function(x, min, max) {
   ## and "upper" the maximum
   if(any(x <= 0))
     stop("All of vector 'x' must be greater than zero.")
-  if(min>max) {
-    ## Allow for reversed polarity
-    x <- -x
-    oldmin <- min
-    oldmax <- max
-    min <- oldmax
-    max <- oldmin
-  }
   lx <- log(x)
   return(linear_scale(lx, min, max))
 }
