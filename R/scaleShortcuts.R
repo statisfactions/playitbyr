@@ -19,6 +19,13 @@
 ##' scale_attkp_linear scale_decayp_linear scale_mod_linear scale_indx_linear
 ##' @param min The desired minimum value, a \code{numeric} of length 1
 ##' @param max The desired maximum value, a \code{numeric} of length 1
+##' @param dmin The data value to be lined up with the \code{min}
+##' argument. This is useful for when you want to specify a fixed
+##' scale
+##' @param dmax The data value to be lined up with the \code{max}
+##' argument. This is useful for when you want to specify a fixed
+##' scale
+##' 
 ##' @return A \code{sonscaling} object, to be used in \code{sonify} or added
 ##' onto a \code{sonify} object.
 ##' @seealso \code{\link{sonscaling}} for the full syntax and range of
@@ -60,40 +67,180 @@
 ##' \dontrun{y}
 ##'
 ##' @export
-scale_time_linear <- function(min, max) sonscaling(time=list(min, max, linear_scale))
+##################################################
+## LINEAR SCALES
+##################################################
+scale_time_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("time", min, max, dmin, dmax)
+
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_pitch_linear <- function(min, max) sonscaling(pitch=list(min, max, linear_scale))
+scale_pitch_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("pitch", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_dur_linear <- function(min, max) sonscaling(dur=list(min, max, linear_scale))
+scale_dur_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("dur", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_vol_linear <- function(min, max) sonscaling(vol=list(min, max, linear_scale))
+scale_vol_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("vol", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_pan_linear <- function(min, max) sonscaling(pan=list(min, max, linear_scale))
+scale_pan_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("pan", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_tempo_linear <- function(min, max) sonscaling(tempo=list(min, max, linear_scale))
+scale_tempo_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("tempo", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_attkp_linear <- function(min, max) sonscaling(attkp=list(min, max, linear_scale))
+scale_attkp_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("attkp", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_decayp_linear <- function(min, max) sonscaling(decayp=list(min, max, linear_scale))
+scale_decayp_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("decayp", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_mod_linear <- function(min, max) sonscaling(mod=list(min, max, linear_scale))
+scale_mod_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("mod", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_indx_linear <- function(min, max) sonscaling(indx=list(min, max, linear_scale))
+scale_indx_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("indx", min, max, dmin, dmax)
+
+##################################################
+## EXPONENTIAL SCALES
+##################################################
+##' @rdname scaleShortcuts
+##' @export
+scale_time_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("time", min, max, dmin, dmax)
+
+
+##' @rdname scaleShortcuts
+##' @export
+scale_pitch_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("pitch", min, max, dmin, dmax)
+
+##' @rdname scaleShortcuts
+##' @export
+scale_dur_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("dur", min, max, dmin, dmax)
+
+##' @rdname scaleShortcuts
+##' @export
+scale_vol_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("vol", min, max, dmin, dmax)
+
+##' @rdname scaleShortcuts
+##' @export
+scale_pan_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("pan", min, max, dmin, dmax)
+
+##' @rdname scaleShortcuts
+##' @export
+scale_tempo_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("tempo", min, max, dmin, dmax)
+
+##' @rdname scaleShortcuts
+##' @export
+scale_attkp_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("attkp", min, max, dmin, dmax)
+
+##' @rdname scaleShortcuts
+##' @export
+scale_decayp_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("decayp", min, max, dmin, dmax)
+
+##' @rdname scaleShortcuts
+##' @export
+scale_mod_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("mod", min, max, dmin, dmax)
+
+##' @rdname scaleShortcuts
+##' @export
+scale_indx_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("indx", min, max, dmin, dmax)
+
+##################################################
+## IDENTITY SCALES
+##################################################
+##' @rdname scaleShortcuts
+##' @export
+scale_time_identity <- function()
+  sonscaling("time" =  list(0, 0, function(x, min, max) x))
+
+##' ##' @rdname scaleShortcuts
+##' @export
+scale_pitch_identity <- function()
+  sonscaling("pitch" =  list(0, 0, function(x, min, max) x))
+
+##' @rdname scaleShortcuts
+##' @export
+scale_dur_identity <- function()
+  sonscaling("dur" =  list(0, 0, function(x, min, max) x))
+
+##' @rdname scaleShortcuts
+##' @export
+scale_vol_identity <- function()
+  sonscaling("vol" =  list(0, 0, function(x, min, max) x))
+
+##' @rdname scaleShortcuts
+##' @export
+scale_pan_identity <- function()
+  sonscaling("pan" =  list(0, 0, function(x, min, max) x))
+
+##' @rdname scaleShortcuts
+##' @export
+scale_tempo_identity <- function()
+  sonscaling("tempo" =  list(0, 0, function(x, min, max) x))
+
+##' @rdname scaleShortcuts
+##' @export
+scale_attkp_identity <- function()
+  sonscaling("attkp" =  list(0, 0, function(x, min, max) x))
+
+##' @rdname scaleShortcuts
+##' @export
+scale_decayp_identity <- function()
+  sonscaling("decayp" =  list(0, 0, function(x, min, max) x))
+
+##' @rdname scaleShortcuts
+##' @export
+scale_mod_identity <- function()
+  sonscaling("mod" =  list(0, 0, function(x, min, max) x))
+
+##' @rdname scaleShortcuts
+##' @export
+scale_indx_identity <- function()
+  sonscaling("indx" =  list(0, 0, function(x, min, max) x))
+
+fixie <- function(column, min, max) {
+  dmin <- 1
+  dmax <- 3
+  exp_scale(c(dmin, dmax, column), min, max)[-(1:2)]
+}
+
+exp_fixed_scale <- function(param, min, max, dmin, dmax) {
+  numdmin <- as.numeric(!is.null(dmin)) + as.numeric(!is.null(dmax))
+  if(numdmin == 0)
+    out <- sonscaling(start = list(min, max, exp_scale))
+  else if(numdmin == 1)
+    stop("Only one of dmin, dmax was given. Both or neither can be supplied.")
+  else {
+    exfixie <- fixie
+    body(exfixie)[[2]][[3]] <- dmin
+    body(exfixie)[[3]][[3]] <- dmax
+    out <- sonscaling("start" = list(min, max, exfixie))
+  }
+  names(out) <- param
+  out
+}
+
+linear_fixed_scale <- function(param, min, max, dmin, dmax) {
+  numdmin <- as.numeric(!is.null(dmin)) + as.numeric(!is.null(dmax))
+  if(numdmin == 0)
+    out <- sonscaling(start = list(min, max, linear_scale))
+  else if(numdmin == 1)
+    stop("Only one of dmin, dmax was given. Both or neither can be supplied.")
+  else {
+    linfixie <- fixie
+    body(linfixie)[[2]][[3]] <- dmin
+    body(linfixie)[[3]][[3]] <- dmax
+    body(linfixie)[[4]][[2]][[1]] <- substitute(linear_scale)
+    out <- sonscaling("start" = list(min, max, linfixie))
+  }
+  names(out) <- param
+  out
+}

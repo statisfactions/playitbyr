@@ -1,5 +1,5 @@
 require(testthat)
-require(playitbyr)
+
 
 context("sonopts()")
 

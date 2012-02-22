@@ -1,38 +1,98 @@
 \name{scale_time_linear}
+\alias{scale_attkp_exp}
+\alias{scale_attkp_identity}
 \alias{scale_attkp_linear}
+\alias{scale_decayp_exp}
+\alias{scale_decayp_identity}
 \alias{scale_decayp_linear}
+\alias{scale_dur_exp}
+\alias{scale_dur_identity}
 \alias{scale_dur_linear}
 \alias{scale_dur_linear_scale_pan_linear}
+\alias{scale_indx_exp}
+\alias{scale_indx_identity}
 \alias{scale_indx_linear}
+\alias{scale_mod_exp}
+\alias{scale_mod_identity}
 \alias{scale_mod_linear}
+\alias{scale_pan_exp}
+\alias{scale_pan_identity}
 \alias{scale_pan_linear}
+\alias{scale_pitch_exp}
+\alias{scale_pitch_identity}
 \alias{scale_pitch_linear}
 \alias{scale_pitch_linear_scale_tempo_linear_scale_time_linear_scale_vol_linear}
 \alias{scaleShortcuts}
+\alias{scale_tempo_exp}
+\alias{scale_tempo_identity}
 \alias{scale_tempo_linear}
+\alias{scale_time_exp}
+\alias{scale_time_identity}
 \alias{scale_time_linear}
+\alias{scale_vol_exp}
+\alias{scale_vol_identity}
 \alias{scale_vol_linear}
 \title{Shortcut functions to set linear_scales for \code{sonify} objects}
 \usage{
-  scale_time_linear(min, max)
+  scale_time_linear(min, max, dmin = NULL, dmax = NULL)
 
-  scale_pitch_linear(min, max)
+  scale_pitch_linear(min, max, dmin = NULL, dmax = NULL)
 
-  scale_dur_linear(min, max)
+  scale_dur_linear(min, max, dmin = NULL, dmax = NULL)
 
-  scale_vol_linear(min, max)
+  scale_vol_linear(min, max, dmin = NULL, dmax = NULL)
 
-  scale_pan_linear(min, max)
+  scale_pan_linear(min, max, dmin = NULL, dmax = NULL)
 
-  scale_tempo_linear(min, max)
+  scale_tempo_linear(min, max, dmin = NULL, dmax = NULL)
 
-  scale_attkp_linear(min, max)
+  scale_attkp_linear(min, max, dmin = NULL, dmax = NULL)
 
-  scale_decayp_linear(min, max)
+  scale_decayp_linear(min, max, dmin = NULL, dmax = NULL)
 
-  scale_mod_linear(min, max)
+  scale_mod_linear(min, max, dmin = NULL, dmax = NULL)
 
-  scale_indx_linear(min, max)
+  scale_indx_linear(min, max, dmin = NULL, dmax = NULL)
+
+  scale_time_exp(min, max, dmin = NULL, dmax = NULL)
+
+  scale_pitch_exp(min, max, dmin = NULL, dmax = NULL)
+
+  scale_dur_exp(min, max, dmin = NULL, dmax = NULL)
+
+  scale_vol_exp(min, max, dmin = NULL, dmax = NULL)
+
+  scale_pan_exp(min, max, dmin = NULL, dmax = NULL)
+
+  scale_tempo_exp(min, max, dmin = NULL, dmax = NULL)
+
+  scale_attkp_exp(min, max, dmin = NULL, dmax = NULL)
+
+  scale_decayp_exp(min, max, dmin = NULL, dmax = NULL)
+
+  scale_mod_exp(min, max, dmin = NULL, dmax = NULL)
+
+  scale_indx_exp(min, max, dmin = NULL, dmax = NULL)
+
+  scale_time_identity()
+
+  scale_pitch_identity()
+
+  scale_dur_identity()
+
+  scale_vol_identity()
+
+  scale_pan_identity()
+
+  scale_tempo_identity()
+
+  scale_attkp_identity()
+
+  scale_decayp_identity()
+
+  scale_mod_identity()
+
+  scale_indx_identity()
 }
 \arguments{
   \item{min}{The desired minimum value, a \code{numeric} of
@@ -40,6 +100,14 @@
 
   \item{max}{The desired maximum value, a \code{numeric} of
   length 1}
+
+  \item{dmin}{The data value to be lined up with the
+  \code{min} argument. This is useful for when you want to
+  specify a fixed scale}
+
+  \item{dmax}{The data value to be lined up with the
+  \code{max} argument. This is useful for when you want to
+  specify a fixed scale}
 }
 \value{
   A \code{sonscaling} object, to be used in \code{sonify}
@@ -52,6 +120,8 @@
   object to specify how \kbd{[data parameter]} from the
   data (a column of the data) is to be mapped to sonic
   parameters.
+
+  ##'
 }
 \details{
   The syntax of specifying a full \code{sonify} object can
