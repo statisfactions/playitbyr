@@ -101,17 +101,19 @@
 ##' checkSonify calls this with FALSE since it bases its approach on
 ##' having the null slots in.
 .getSonlayerMappings <- function(x, sonlayernum, remove.null = TRUE) {
-  ## x: a sonify object, returns the current aesthetic mappings as a
-  ##  named list This assign aesthetic mappings based on sonlayer, and
-  ##  on default if sonlayer mapping not present.
+  ## x: a sonify object, returns the current aesthetic mappings or
+  ##  settings as a named list. This assign aesthetic mappings based on
+  ##  sonlayer, and on default if sonlayer mapping not present.
 
   if(sonlayernum > length(x$sonlayers))
     stop(paste("There is no sonlayer", sonlayernum))
   
   shape <- .getSonlayerShape(x, sonlayernum)
-  outmap <- getDefaultMappings(shape) # use default mappings as starting point
+  outmap <- getDefaultSettings(shape) # use default settings as starting point
   topmap <- x$mapping
   sonlayermap <- (x$sonlayers[[sonlayernum]])$mapping
+  sonlayersettings <-(x$sonlayers[[sonlayernum]])$shape$shape_params
+    
   ## If any top-level mappings, override defaults
   if(!is.null(topmap)) {
     for(i in names(topmap)) {
@@ -128,6 +130,14 @@
         outmap[[i]] <- sonlayermap[[i]]
     }
   }
+
+  ## If any sonlayer SETTINGS, override everything else above
+  if(!is.null(sonlayersettings)) {
+    for(i in names(sonlayersettings)) {
+      if(!is.null(sonlayersettings[[i]]))
+        outmap[[i]] <- sonlayersettings[[i]]
+    }
+  }  
 
   ## If remove.null, remove list elements whose value is NULL
   if(remove.null) {

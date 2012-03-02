@@ -1,9 +1,9 @@
-\name{getDefaultMappings}
-\alias{getDefaultMappings}
+\name{getDefaultSettings}
 \alias{getDefaultScalings}
-\title{Get the default mappings and scalings for a given sonlayer shape}
+\alias{getDefaultSettings}
+\title{Get the default settings and scalings for a given sonlayer shape}
 \usage{
-  getDefaultMappings(shape)
+  getDefaultSettings(shape)
 
   getDefaultScalings(shape)
 }
@@ -12,12 +12,12 @@
   to be looked up}
 }
 \value{
-  The default mappings or default scalings for a given
+  The default settings or default scalings for a given
   shape.
 }
 \description{
   Given a \code{shape} name, these functions returns the
-  default mappings or scalings for that shape.
+  default settings or scalings for that shape.
 }
 \keyword{internal}
 

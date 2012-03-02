@@ -4,9 +4,8 @@
 \alias{sonlayer}
 \title{Creating individual layers for sonify objects}
 \usage{
-  sonlayer(shape = "scatter", shape_params = NULL,
-    stat = NULL, stat_params = NULL, data = NULL,
-    mapping = NULL)
+  sonlayer(shape = "scatter", stat = NULL,
+    stat_params = NULL, data = NULL, mapping = NULL, ...)
 
   shape_scatter(...)
 
@@ -16,9 +15,6 @@
   \item{shape}{A character string representing the overall
   style of the audio plot (analogous to \code{geom}s from
   the \pkg{ggplot2} package).}
-
-  \item{shape_params}{Additional options specific to the
-  shape}
 
   \item{stat}{The statistic to be calculated for the layer}
 
@@ -31,8 +27,8 @@
 
   \item{mapping}{A \code{\link{sonaes}} object.}
 
-  \item{\dots}{Layer parameters to be passed to
-  \code{sonlayer}}
+  \item{\dots}{Additional options and settings specific to
+  the shape}
 }
 \description{
   These functions are a start on the layer functionality

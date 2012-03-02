@@ -23,20 +23,25 @@
 ##' @param shape A character string representing the overall style of
 ##' the audio plot (analogous to \code{geom}s from the \pkg{ggplot2}
 ##' package).
-##' @param shape_params Additional options specific to the shape
 ##' @param stat The statistic to be calculated for the layer
 ##' @param stat_params Additional parameters specific to the stat
 ##' @param data The \code{data.frame} to be sonified for this
 ##' layer. If blank, the data from the parent \code{sonify} object is
 ##' used.
 ##' @param mapping A \code{\link{sonaes}} object.
+##' @param \dots Additional options and settings specific to the shape
 
-sonlayer <- function(shape="scatter", shape_params=NULL, stat=NULL,
-                     stat_params=NULL, data=NULL, mapping=NULL) {
+sonlayer <- function(shape="scatter", stat=NULL,
+                     stat_params=NULL, data=NULL, mapping=NULL, ...) {
   if(!(shape %in% getShapeNames()))
      stop("'", deparse(shape),"' is not a valid shape name. See getShapeNames.")
 
+  ## Check shape params given
+  shape_params <- list(...)
+  checkSoundParams(names(shape_params), shape)
+
   dataname <- deparse(substitute(data)) # Used by summary.sonify()
+
   l <- list(list(shape, shape_params), list(stat, stat_params), data, dataname, mapping)
   
   names(l) <- c("shape", "stat", "data", "dataname", "mapping")
@@ -49,7 +54,6 @@ sonlayer <- function(shape="scatter", shape_params=NULL, stat=NULL,
 }
 ##' @rdname sonlayer
 ##' @export
-##' @param \dots Layer parameters to be passed to \code{sonlayer}
 shape_scatter <- function(...) sonlayer("scatter",...)
 ## Convenience function for one supported layer type, scatter.
 shape_tone <- function(...) sonlayer("tone",...)
