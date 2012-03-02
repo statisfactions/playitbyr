@@ -36,7 +36,8 @@
 \usage{
   scale_time_linear(min, max, dmin = NULL, dmax = NULL)
 
-  scale_pitch_linear(min, max, dmin = NULL, dmax = NULL)
+  scale_pitch_linear(min, max, dmin = NULL, dmax = NULL,
+    chromatic = TRUE)
 
   scale_dur_linear(min, max, dmin = NULL, dmax = NULL)
 
@@ -56,7 +57,8 @@
 
   scale_time_exp(min, max, dmin = NULL, dmax = NULL)
 
-  scale_pitch_exp(min, max, dmin = NULL, dmax = NULL)
+  scale_pitch_exp(min, max, dmin = NULL, dmax = NULL,
+    chromatic = TRUE)
 
   scale_dur_exp(min, max, dmin = NULL, dmax = NULL)
 
@@ -76,7 +78,7 @@
 
   scale_time_identity()
 
-  scale_pitch_identity()
+  scale_pitch_identity(chromatic = FALSE)
 
   scale_dur_identity()
 
@@ -108,6 +110,9 @@
   \item{dmax}{The data value to be lined up with the
   \code{max} argument. This is useful for when you want to
   specify a fixed scale}
+
+  \item{chromatic}{For pitches, should they be rounded to
+  chromatic values? Default \code{TRUE}}
 }
 \value{
   A \code{sonscaling} object, to be used in \code{sonify}
@@ -120,8 +125,6 @@
   object to specify how \kbd{[data parameter]} from the
   data (a column of the data) is to be mapped to sonic
   parameters.
-
-  ##'
 }
 \details{
   The syntax of specifying a full \code{sonify} object can

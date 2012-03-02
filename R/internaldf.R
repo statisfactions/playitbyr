@@ -79,7 +79,7 @@
   class(out) <- c(.getSonlayerShape(x, sonlayernum),  "data.frame")
 
   ## Add shape options to pass to rendering methods
-  attr(out, "shape_options") <- .getSonlayerShapeOptions(x, sonlayernum)
+  attr(out, "shape_params") <- .getSonlayerShapeOptions(x, sonlayernum)
 
   ## Any additional score processing done by shape-specific methods to
   ## scorePreprocessor. NOTE: all scorePreprocessor methods must
@@ -229,7 +229,7 @@
 .getSonlayerShapeOptions <- function(x, sonlayernum) {
   shape <- .getSonlayerShape(x, sonlayernum)
   out <- .getDefaultShapeOptions(shape)
-  supplied <- x$sonlayers[[sonlayernum]]$shape$shape_options
+  supplied <- x$sonlayers[[sonlayernum]]$shape$shape_params
 
   for(i in names(supplied))
     out[[i]] <- supplied[[i]]

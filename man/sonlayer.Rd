@@ -4,7 +4,7 @@
 \alias{sonlayer}
 \title{Creating individual layers for sonify objects}
 \usage{
-  sonlayer(shape = "scatter", shape_options = NULL,
+  sonlayer(shape = "scatter", shape_params = NULL,
     stat = NULL, stat_params = NULL, data = NULL,
     mapping = NULL)
 
@@ -17,7 +17,7 @@
   style of the audio plot (analogous to \code{geom}s from
   the \pkg{ggplot2} package).}
 
-  \item{shape_options}{Additional options specific to the
+  \item{shape_params}{Additional options specific to the
   shape}
 
   \item{stat}{The statistic to be calculated for the layer}

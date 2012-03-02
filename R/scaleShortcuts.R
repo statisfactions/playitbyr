@@ -25,6 +25,8 @@
 ##' @param dmax The data value to be lined up with the \code{max}
 ##' argument. This is useful for when you want to specify a fixed
 ##' scale
+##' @param chromatic For pitches, should they be rounded to chromatic
+##' values? Default \code{TRUE}
 ##' 
 ##' @return A \code{sonscaling} object, to be used in \code{sonify} or added
 ##' onto a \code{sonify} object.
@@ -75,7 +77,11 @@ scale_time_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_s
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_pitch_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("pitch", min, max, dmin, dmax)
+scale_pitch_linear <- function(min, max, dmin = NULL, dmax = NULL, chromatic = TRUE) {
+  if(chromatic)
+    return(linear_fixed_scale_chromatic(min, max, dmin, dmax))
+  else return(linear_fixed_scale("pitch", min, max, dmin, dmax))
+}
 
 ##' @rdname scaleShortcuts
 ##' @export
@@ -119,7 +125,11 @@ scale_time_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_pitch_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("pitch", min, max, dmin, dmax)
+scale_pitch_exp <- function(min, max, dmin = NULL, dmax = NULL, chromatic = TRUE) {
+  if(chromatic)
+    return(exp_fixed_scale_chromatic(min, max, dmin, dmax))
+  else return(exp_fixed_scale("pitch", min, max, dmin, dmax))
+}
 
 ##' @rdname scaleShortcuts
 ##' @export
@@ -161,10 +171,13 @@ scale_indx_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("
 scale_time_identity <- function()
   sonscaling("time" =  list(0, 0, function(x, min, max) x))
 
-##' ##' @rdname scaleShortcuts
+##' @rdname scaleShortcuts
 ##' @export
-scale_pitch_identity <- function()
-  sonscaling("pitch" =  list(0, 0, function(x, min, max) x))
+scale_pitch_identity <- function(chromatic = FALSE) {
+  if(chromatic)
+    return(sonscaling("pitch" = list(0, 0, function(x, min, max) round_chromatic(x))))
+  else return(sonscaling("pitch" =  list(0, 0, function(x, min, max) x)))
+}
 
 ##' @rdname scaleShortcuts
 ##' @export
@@ -244,3 +257,52 @@ linear_fixed_scale <- function(param, min, max, dmin, dmax) {
   names(out) <- param
   out
 }
+
+
+## returns vector rounded to the nearest twelfth for use with
+## chromatic scales This whole section is a horrible cheap hack and I
+## feel very sorry for anyone trying to figure this out and apologize
+## humbly. Really, I should be able to pass arbitrary parameters to
+## scaling functions is the real lesson here.
+round_chromatic <- function(x) round(x*12)/12
+
+chromfixie <- function(column, min, max) {
+  dmin <- 1
+  dmax <- 3
+  exp_scale(c(dmin, dmax, column), min, max)[-(1:2)] -> out
+  round_chromatic(out)
+}
+
+linear_fixed_scale_chromatic <- function(min, max, dmin, dmax) {
+  numdmin <- as.numeric(!is.null(dmin)) + as.numeric(!is.null(dmax))
+  if(numdmin == 0)
+    out <- sonscaling(start = list(min, max, linear_scale))
+  else if(numdmin == 1)
+    stop("Only one of dmin, dmax was given. Both or neither can be supplied.")
+  else {
+    linfixie <- chromfixie
+    body(linfixie)[[2]][[3]] <- dmin
+    body(linfixie)[[3]][[3]] <- dmax
+    body(linfixie)[[4]][[3]][[2]][[1]] <- substitute(linear_scale)
+    out <- sonscaling("start" = list(min, max, linfixie))
+  }
+  names(out) <- "pitch"
+  out
+}
+
+exp_fixed_scale_chromatic<- function(min, max, dmin, dmax) {
+  numdmin <- as.numeric(!is.null(dmin)) + as.numeric(!is.null(dmax))
+  if(numdmin == 0)
+    out <- sonscaling(start = list(min, max, exp_scale))
+  else if(numdmin == 1)
+    stop("Only one of dmin, dmax was given. Both or neither can be supplied.")
+  else {
+    exfixie <- chromfixie
+    body(exfixie)[[2]][[3]] <- dmin
+    body(exfixie)[[3]][[3]] <- dmax
+    out <- sonscaling("start" = list(min, max, exfixie))
+  }
+  names(out) <- "pitch"
+  out
+}
+
