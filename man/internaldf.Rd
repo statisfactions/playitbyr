@@ -5,6 +5,7 @@
 \alias{.getSonlayerData}
 \alias{.getSonlayerMappings}
 \alias{.getSonlayerScore}
+\alias{.getSonlayerSettings}
 \alias{.getSonlayerShape}
 \alias{.getSonlayerShapeOptions}
 \alias{.getSonlayerStat}
@@ -21,6 +22,8 @@
   .getSonlayerMappings(x, sonlayernum, remove.null = TRUE)
 
   .getSonlayerData(x, sonlayernum, transform = TRUE)
+
+  .getSonlayerSettings(x, sonlayernum, remove.null = TRUE)
 
   .getSonlayerStat(x, sonlayernum)
 
@@ -90,8 +93,8 @@
   \code{length} of the data frame.
 }
 \section{Not yet implemented}{
-  .getStat currently just returns NULL. It is intended that
-  it will eventually return a function that
+  .getSonlayerStat currently just returns NULL. It is
+  intended that it will eventually return a function that
   .getSonlayerData can use to transform a data.frame, or
   NULL if no tranformation is requested. This function (and
   its only call in .getSonlayerData) will likely change

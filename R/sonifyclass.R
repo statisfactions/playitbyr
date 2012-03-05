@@ -5,14 +5,6 @@
 ##' \code{ggplot} objects renders them to screen in the
 ##' \href{http://had.co.nz/ggplot2}{ggplot2} package).
 ##' 
-##' The \code{print} method for \code{sonify} objects not only renders
-##' them to sound, it also creates an \code{audioSample} object (from
-##' the \code{audio} package), \code{.LastRendering}, in the user's
-##' workspace.  \code{.LastRendering} is the output of the
-##' sonification and can be replayed or saved to a \code{.wav} file
-##' without regenerating the sonification from scratch with the
-##' convenience functions \code{\link{playLastRendering}} and
-##' \code{\link{saveLastRendering}}.
 ##'
 ##' @rdname sonifyclass
 ##' @name sonifyclass
@@ -32,9 +24,7 @@
 ##' \code{summary.sonify} prints a brief summary of the name of the
 ##' dataset to be sonified, and the specified mappings and scalings of
 ##' sonic values to data parameters.
-##' @seealso \code{\link{sonify}} for the creation of these objects;
-##' \code{\link{\%+\%}} for adding or replacing a default
-##' \code{data.frame}.
+##' @seealso \code{\link{sonify}} for the creation of these objects
 ##' @method print sonify
 ##' @export
 print.sonify <- function(x, ...) {

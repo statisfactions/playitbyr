@@ -37,20 +37,7 @@
   printing \code{ggplot} objects renders them to screen in
   the \href{http://had.co.nz/ggplot2}{ggplot2} package).
 }
-\details{
-  The \code{print} method for \code{sonify} objects not
-  only renders them to sound, it also creates an
-  \code{audioSample} object (from the \code{audio}
-  package), \code{.LastRendering}, in the user's workspace.
-  \code{.LastRendering} is the output of the sonification
-  and can be replayed or saved to a \code{.wav} file
-  without regenerating the sonification from scratch with
-  the convenience functions \code{\link{playLastRendering}}
-  and \code{\link{saveLastRendering}}.
-}
 \seealso{
-  \code{\link{sonify}} for the creation of these objects;
-  \code{\link{\%+\%}} for adding or replacing a default
-  \code{data.frame}.
+  \code{\link{sonify}} for the creation of these objects
 }
 

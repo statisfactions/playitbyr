@@ -18,7 +18,6 @@ License: GPL (>= 2)
 LazyLoad: yes
 Collate:
     'aaa.R'
-    'addDataToSonify.R'
     'checkSonify.R'
     'create-audioSample.R'
     'getPlayer.R'
@@ -27,7 +26,6 @@ Collate:
     'internalsonify.R'
     'linearscale.R'
     'octToFreq.R'
-    'playlastrendering.R'
     'render.R'
     'sonaes.R'
     'sonifyclass.R'

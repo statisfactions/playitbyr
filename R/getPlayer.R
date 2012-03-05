@@ -28,7 +28,7 @@
 ##' for \code{player}.
 ##' 
 ##' \code{getPlayer()} returns the option set by \code{setPlayer()}.
-##' @seealso \code{\link{print.sonify}}, \code{\link{playLastRendering}}
+##' @seealso \code{\link{print.sonify}}
 ##' @examples
 ##' 
 ##' ## Get the current player

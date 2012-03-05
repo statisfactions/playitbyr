@@ -58,7 +58,6 @@ getPlayer()
 setPlayer(oldPlayer)
 }
 \seealso{
-  \code{\link{print.sonify}},
-  \code{\link{playLastRendering}}
+  \code{\link{print.sonify}}
 }
 
