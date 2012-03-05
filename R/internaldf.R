@@ -57,29 +57,36 @@
   ## Get mappings and stat-transformed data
   map <- .getSonlayerMappings(x, sonlayernum, remove.null = TRUE) 
   data <- .getSonlayerData(x, sonlayernum, transform = TRUE)
+  set <- .getSonlayerSettings(x, sonlayernum, remove.null = TRUE)
+  shape <- .getSonlayerShape(x, sonlayernum)
 
   n <- nrow(data) # length of output score
 
-  ## Create output score: If given aesthetic mapping is a numeric
-  ## constant, that sonic parameter should be that
-  ## constant. Otherwise, if data.frame column is given, rescale that
-  ## that data.frame column (based on the given scaling)
+  ## Create output score:
+  ## If map gives data.frame column, rescale that column.
+  ## If map gives anything else, create new variable and then rescale column.
   out <- lapply(names(map), function(param) {
-    if(is.numeric(map[[param]]))
-      column <- rep(map[[param]], n)
-    else {
+    if(length(map[[param]]) == 1 && map[[param]] %in% names(data))
       column <- data[[map[[param]]]]
-      column <- .rescaleDataByParam(x, param, column)
-    }
-    return(column)
-  })      
+    else
+      column <- eval(map[[param]])
+    return(.rescaleDataByParam(x, param, column))
+  })
+
+  ## add on settings for params that do not yet have columns
   names(out) <- names(map)
+  missingmaps <- setdiff(names(set), names(out))
+  out <- c(out, set[missingmaps])
+  
   out <- as.data.frame(out)
+  
+                
   ## Set shape to pass to shape and rendering methods
   class(out) <- c(.getSonlayerShape(x, sonlayernum),  "data.frame")
 
   ## Add shape options to pass to rendering methods
   attr(out, "shape_params") <- .getSonlayerShapeOptions(x, sonlayernum)
+  ## TODO subtract out sound params from this function
 
   ## Any additional score processing done by shape-specific methods to
   ## scorePreprocessor. NOTE: all scorePreprocessor methods must
@@ -101,43 +108,23 @@
 ##' checkSonify calls this with FALSE since it bases its approach on
 ##' having the null slots in.
 .getSonlayerMappings <- function(x, sonlayernum, remove.null = TRUE) {
-  ## x: a sonify object, returns the current aesthetic mappings or
-  ##  settings as a named list. This assign aesthetic mappings based on
-  ##  sonlayer, and on default if sonlayer mapping not present.
+  ## x: a sonify object, returns the current aesthetic mappings as a
+  ##  named list. This assign aesthetic mappings based on sonlayer
 
   if(sonlayernum > length(x$sonlayers))
     stop(paste("There is no sonlayer", sonlayernum))
   
   shape <- .getSonlayerShape(x, sonlayernum)
-  outmap <- getDefaultSettings(shape) # use default settings as starting point
-  topmap <- x$mapping
+  outmap <- x$mapping # use top-level mapping as starting point
   sonlayermap <- (x$sonlayers[[sonlayernum]])$mapping
-  sonlayersettings <-(x$sonlayers[[sonlayernum]])$shape$shape_params
     
-  ## If any top-level mappings, override defaults
-  if(!is.null(topmap)) {
-    for(i in names(topmap)) {
-      if(!is.null(topmap[[i]]))
-        outmap[[i]] <- topmap[[i]]
-    }
-  }
-    
-  ## If there are any sonlayer mappings, override toplevel and
-  ## defaults
+  ## If there are any sonlayer mappings, override toplevel 
   if(!is.null(sonlayermap)) {
     for(i in names(sonlayermap)) {
       if(!is.null(sonlayermap[[i]]))
         outmap[[i]] <- sonlayermap[[i]]
     }
   }
-
-  ## If any sonlayer SETTINGS, override everything else above
-  if(!is.null(sonlayersettings)) {
-    for(i in names(sonlayersettings)) {
-      if(!is.null(sonlayersettings[[i]]))
-        outmap[[i]] <- sonlayersettings[[i]]
-    }
-  }  
 
   ## If remove.null, remove list elements whose value is NULL
   if(remove.null) {
@@ -173,10 +160,44 @@
       outdata <- stat(outdata)
   }
   return(outdata)
-} 
+}
 
 ##' @rdname internaldf
-##' @section Not yet implemented: .getStat currently just returns
+.getSonlayerSettings <- function(x, sonlayernum, remove.null = TRUE) {
+  ## Get sonlayer SETTINGS (as opposed to mappings)
+  shape <- .getSonlayerShape(x, sonlayernum)
+  outset <- getDefaultSettings(shape) # use default settings as starting point
+
+  ## The shape_params that match the possible sound params are the
+  ## settings we want.
+  params <- getSoundParams(shape)$param
+  sonlayersettings <-(x$sonlayers[[sonlayernum]])$shape$shape_params
+  sonlayersettings <- sonlayersettings[names(sonlayersettings) %in% params]
+
+  ## Override defaults by given params
+  if(!is.null(sonlayersettings)) {
+    for(i in names(sonlayersettings)) {
+      if(!is.null(sonlayersettings[[i]]))
+        outset[[i]] <- sonlayersettings[[i]]
+    }
+  }
+
+    ## If remove.null, remove list elements whose value is NULL
+  if(remove.null) {
+    i <- 1
+    while(i <= length(outset)) {
+      ## See R FAQ "How can I set components of a list to NULL" for
+      ## more on how this works... looks odd, but it's good
+      if(is.null(outset[[i]])) outset[[i]] <- NULL
+      else i <- i +1
+    }
+  }
+  
+  return(outset)
+}
+
+##' @rdname internaldf
+##' @section Not yet implemented: .getSonlayerStat currently just returns
 ##' NULL. It is intended that it will eventually return a function
 ##' that .getSonlayerData can use to transform a data.frame, or NULL
 ##' if no tranformation is requested. This function (and its only call
