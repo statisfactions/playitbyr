@@ -1,9 +1,9 @@
-\name{getDefaultSettings}
+\name{.getDefaultSettings}
 \alias{getDefaultScalings}
-\alias{getDefaultSettings}
+\alias{.getDefaultSettings}
 \title{Get the default settings and scalings for a given sonlayer shape}
 \usage{
-  getDefaultSettings(shape)
+  .getDefaultSettings(shape)
 
   getDefaultScalings(shape)
 }

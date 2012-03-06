@@ -7,12 +7,12 @@
 ##'
 ##' @rdname getShapeDef
 ##' @param x A \code{\link{sonlayer}} object or character string
-##' @return \code{getShapeDef} returns a \code{shapeDef} object;
+##' @return \code{.getShapeDef} returns a \code{shapeDef} object;
 ##' \code{getShapeNames} returns a character vector containing the
 ##' names of all currently available shapes
 ##' @export
 ##' @keywords internal
-getShapeDef <- function(x) {
+.getShapeDef <- function(x) {
   if(is.character(x))
     shape <- x
   else shape <- class(x)

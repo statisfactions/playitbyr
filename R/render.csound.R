@@ -36,7 +36,7 @@ csound_layer.scatter <- function(sonlayerscore, ...) {
                             
   out$FM[, namesmatch] <- sonlayerscorem[, namesmatch]
   out$FM[, "amp"] <- sonlayerscorem[, "vol"]
-  out$FM[, "cps"] <- octToFreq(sonlayerscorem[, "pitch"])
+  out$FM[, "cps"] <- .octToFreq(sonlayerscorem[, "pitch"])
   return(out$FM)
 }
 

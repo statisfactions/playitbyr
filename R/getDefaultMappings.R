@@ -10,8 +10,8 @@
 ##' shape.
 ##' @export
 ##' @keywords internal
-getDefaultSettings <- function(shape) {
-  shapedef <- getShapeDef(shape)
+.getDefaultSettings <- function(shape) {
+  shapedef <- .getShapeDef(shape)
   defaults <- lapply(shapedef$params, function(x) x$defaultSetting)
   return(do.call(sonaes, defaults))
 }
@@ -19,7 +19,7 @@ getDefaultSettings <- function(shape) {
 ##' @rdname getDefaultSettings
 ##' @export
 getDefaultScalings <- function(shape) {
-  shapedef <- getShapeDef(shape)
+  shapedef <- .getShapeDef(shape)
   defaults <- lapply(shapedef$params, function(x) x$defaultScaling)
   return(do.call(sonscaling, defaults))
 }

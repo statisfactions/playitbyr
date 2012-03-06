@@ -38,7 +38,7 @@
 }
 \section{Conflicting defaults on \code{sonlayer} scalings}{
   Each shape has its own default scalings (see
-  \code{link{getShapeDef}} to view these defaults. It's
+  \code{link{.getShapeDef}} to view these defaults. It's
   quite possible that some default scalings for a parameter
   differ between scalings; if this is the case, the default
   scaling for the earlier \code{sonlayer} type, as it

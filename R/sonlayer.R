@@ -5,7 +5,7 @@
 ##' object that can be included in a \code{sonify} object.
 ##'
 ##' @section Conflicting defaults on \code{sonlayer} scalings: Each shape has
-##' its own default scalings (see \code{link{getShapeDef}} to view
+##' its own default scalings (see \code{link{.getShapeDef}} to view
 ##' these defaults. It's quite possible that some default scalings for
 ##' a parameter differ between scalings; if this is the case, the
 ##' default scaling for the earlier \code{sonlayer} type, as it appears in the
@@ -38,7 +38,7 @@ sonlayer <- function(shape="scatter", stat=NULL,
 
   ## Check shape params given
   shape_params <- list(...)
-  checkSoundParams(names(shape_params), shape)
+  .checkSoundParams(names(shape_params), shape)
 
   dataname <- deparse(substitute(data)) # Used by summary.sonify()
 

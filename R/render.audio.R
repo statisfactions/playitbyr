@@ -130,7 +130,7 @@ audio_layer.dotplot <- function(sonlayerscore, out, samp.rate, ...) {
   n <- round(noterow$dur * samp.rate)
   end <- start + n-1
   note <- matrix(data=0, ncol = n, nrow = 2)
-  freq <- octToFreq(noterow$pitch)
+  freq <- .octToFreq(noterow$pitch)
 
   ## Create and trim waveform to last non-zerocrossing
   ## (this avoids clipping)

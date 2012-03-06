@@ -48,7 +48,7 @@ sonscaling <- function(...) {
      && is.null(names(out)) | any(names(out) == ""))
     stop("All arguments must be named.")
 
-  checkSoundParams(names(out))
+  .checkSoundParams(names(out))
 
   class(out) <- "sonscaling"
   out

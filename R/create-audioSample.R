@@ -28,7 +28,7 @@
 ##' 
 ##' x <- (sonify(iris) + sonaes(time = Petal.Length, pitch = Petal.Width)
 ##'       + shape_scatter())
-##' \dontrun{out <- create_audioSample(x) ##TODO: temporarily not run while I fix checkSonify}
+##' \dontrun{out <- create_audioSample(x) ##TODO: temporarily not run while I fix .checkSonify}
 ##' \dontrun{
 ##' play_audioSample(out)
 ##' ## This is the same as just printing the object:
@@ -41,7 +41,7 @@
 ##' @rdname create_audioSample
 ##' @export
 create_audioSample <- function(x, play=FALSE) {
-#  checkSonify(x)
+#  .checkSonify(x)
   score <- .getScore(x)
   out <- render(score, x$opts, audioSample=TRUE)
   

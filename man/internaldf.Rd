@@ -50,7 +50,7 @@
   \item{remove.null}{Logical indicating whether to remove
   missing mappings from the returned list of mappings.
   .getSonlayerScore calls this with TRUE to avoid
-  cluttering calculations; but checkSonify calls this with
+  cluttering calculations; but .checkSonify calls this with
   FALSE since it bases its approach on having the null
   slots in.}
 

@@ -32,7 +32,6 @@ Collate:
     'sonify.R'
     'sonlayer.R'
     'sonscaling.R'
-    'shapeDescriptions.R'
     'getSoundParams.R'
     'getDefaultMappings.R'
     'scaleShortcuts.R'
@@ -44,3 +43,4 @@ Collate:
     'expscale.R'
     'scorePreprocessor.scatter.R'
     'sonsave.R'
+    'shape-descriptions.R'

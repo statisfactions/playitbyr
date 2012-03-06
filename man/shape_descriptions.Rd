@@ -1,8 +1,8 @@
-\name{shapeDescriptions}
-\alias{shapeDescriptions}
+\name{shape_descriptions}
+\alias{shape_descriptions}
 \title{Show the names and descriptions of all available shapes}
 \usage{
-  shapeDescriptions()
+  shape_descriptions()
 }
 \value{
   A \code{data.frame} with each row representing one of the

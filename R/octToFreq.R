@@ -15,21 +15,23 @@
 ##' 
 ##' @param oct A \code{numeric} of length 1, which is a pitch in \sQuote{oct}
 ##' notation
+##' @keywords internal
 ##' @return A \code{numeric} value of length 1, which is a frequency in Hertz.
 ##' @seealso \code{\link{sonaes}}
 ##' @examples
 ##' 
 ##' ## In oct, middle c is 8
-##' octToFreq(8)
+##' .octToFreq(8)
 ##' 
 ##' ## An octave below tuning A, in Hz
-##' octToFreq(7.75)
+##' .octToFreq(7.75)
 ##' 
 ##' ## A little more than that, in Hz
-##' octToFreq(7.76)
+##' .octToFreq(7.76)
 ##'
+##' @rdname octToFreq
 ##' @export
-octToFreq <- function(oct) {
+.octToFreq <- function(oct) {
   ## Converts "oct" notation to an actual frequency
   440*2^(oct-8.75)
 }

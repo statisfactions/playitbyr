@@ -7,7 +7,7 @@
 ##' shapes available for sonification, a brief description of the
 ##' shape, and the parameters available for sonification. 
 ##' @export
-shapeDescriptions <- function() {
+shape_descriptions <- function() {
   descriptions <- sapply(allShapeDefs, function(x) x$description)
   params <- sapply(allShapeDefs, function(x) paste(names(x$params), collapse=", "))
   return(cbind(descriptions, params))

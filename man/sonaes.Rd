@@ -30,7 +30,7 @@
   does not check to make sure that all mappings are filled
   in, since the user can add on more mappings (using
   \code{\link{+.sonify}}) interactively. However, this is
-  checked by \code{\link{checkSonify}} when the object is
+  checked by \code{\link{.checkSonify}} when the object is
   to be rendered.
 
   Also, every item that is mapped to a \code{data.frame}
@@ -63,7 +63,7 @@ summary(y)
 }
 \seealso{
   \code{\link{sonify}}, \code{\link{sonscaling}},
-  \code{\link{octToFreq} }.  Also, see
+  \code{\link{.octToFreq} }.  Also, see
   \code{\link[ggplot2]{aes}} from the \pkg{ggplot2}
   package, which inspired this function.
 }

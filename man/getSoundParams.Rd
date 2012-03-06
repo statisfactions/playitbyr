@@ -1,11 +1,11 @@
 \name{getSoundParams}
-\alias{checkSoundParams}
+\alias{.checkSoundParams}
 \alias{getSoundParams}
 \title{Get and check currently possible sound parameters.}
 \usage{
   getSoundParams(shapes = getShapeNames())
 
-  checkSoundParams(paramnames, shapes = getShapeNames())
+  .checkSoundParams(paramnames, shapes = getShapeNames())
 }
 \arguments{
   \item{shapes}{The shapes to return the sound parameters
@@ -18,7 +18,7 @@
 \value{
   \code{getSoundParams} returns \code{data.frame} with the
   name of each parameter and the name of the shape it is a
-  part of. \code{checkSoundParams} returns \code{NULL} if
+  part of. \code{.checkSoundParams} returns \code{NULL} if
   successful.
 }
 \description{

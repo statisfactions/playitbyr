@@ -10,14 +10,14 @@
 ##' it possible to render. But {sonaes} does not check to make sure that all mappings
 ##' are filled in, since the user can add on more mappings (using
 ##' \code{\link{+.sonify}}) interactively. However, this is checked by
-##' \code{\link{checkSonify}} when the object is to be rendered.
+##' \code{\link{.checkSonify}} when the object is to be rendered.
 ##' 
 ##' Also, every item that is mapped to a \code{data.frame} column in a
 ##' \code{sonify} object must also have a scale associated with it before
 ##' rendering; see \code{\link{sonscaling}}.
 ##'
 ##' @seealso \code{\link{sonify}}, \code{\link{sonscaling}},
-##' \code{\link{octToFreq} }.  Also, see \code{\link[ggplot2]{aes}}
+##' \code{\link{.octToFreq} }.  Also, see \code{\link[ggplot2]{aes}}
 ##' from the \pkg{ggplot2} package, which inspired this function.
 ##' @examples
 ##' 
@@ -70,7 +70,7 @@ sonaes <- function(...) {
      && is.null(names(out)) | any(names(out) == ""))
     stop("All arguments must be named.")
 
-  checkSoundParams(names(out))
+  .checkSoundParams(names(out))
   
   class(out) <- c("sonaes")
   out

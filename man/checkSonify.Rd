@@ -1,8 +1,8 @@
-\name{checkSonify}
-\alias{checkSonify}
+\name{.checkSonify}
+\alias{.checkSonify}
 \title{Check if a \code{sonify} object can be rendered}
 \usage{
-  checkSonify(x)
+  .checkSonify(x)
 }
 \arguments{
   \item{x}{A \code{sonify} object.}

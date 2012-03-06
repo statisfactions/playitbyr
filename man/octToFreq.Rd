@@ -1,8 +1,8 @@
-\name{octToFreq}
-\alias{octToFreq}
+\name{.octToFreq}
+\alias{.octToFreq}
 \title{Convert from csound-style oct notation for pitches to frequency in Hertz}
 \usage{
-  octToFreq(oct)
+  .octToFreq(oct)
 }
 \arguments{
   \item{oct}{A \code{numeric} of length 1, which is a pitch
@@ -31,15 +31,16 @@
 }
 \examples{
 ## In oct, middle c is 8
-octToFreq(8)
+.octToFreq(8)
 
 ## An octave below tuning A, in Hz
-octToFreq(7.75)
+.octToFreq(7.75)
 
 ## A little more than that, in Hz
-octToFreq(7.76)
+.octToFreq(7.76)
 }
 \seealso{
   \code{\link{sonaes}}
 }
+\keyword{internal}
 

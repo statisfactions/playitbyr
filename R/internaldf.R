@@ -105,7 +105,7 @@
 ##' @param remove.null Logical indicating whether to remove missing
 ##' mappings from the returned list of mappings. .getSonlayerScore
 ##' calls this with TRUE to avoid cluttering calculations; but
-##' checkSonify calls this with FALSE since it bases its approach on
+##' .checkSonify calls this with FALSE since it bases its approach on
 ##' having the null slots in.
 .getSonlayerMappings <- function(x, sonlayernum, remove.null = TRUE) {
   ## x: a sonify object, returns the current aesthetic mappings as a
@@ -166,7 +166,7 @@
 .getSonlayerSettings <- function(x, sonlayernum, remove.null = TRUE) {
   ## Get sonlayer SETTINGS (as opposed to mappings)
   shape <- .getSonlayerShape(x, sonlayernum)
-  outset <- getDefaultSettings(shape) # use default settings as starting point
+  outset <- .getDefaultSettings(shape) # use default settings as starting point
 
   ## The shape_params that match the possible sound params are the
   ## settings we want.
@@ -247,13 +247,13 @@
   lookup <- soundparams[soundparams$param %in% param,][1,]
   
   lookup <- as.character(lookup$shape) # since it's a factor
-  return(getShapeDef(lookup)$params[[param]]$defaultScaling)
+  return(.getShapeDef(lookup)$params[[param]]$defaultScaling)
 }
 
 ##' @rdname internaldf
 ##' @param shapename The name of the shape to get the defaults for
 .getDefaultShapeOptions <- function(shapename) {
-  getShapeDef(shapename)$options
+  .getShapeDef(shapename)$options
 }
 
 ##' @rdname internaldf
