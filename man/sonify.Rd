@@ -66,7 +66,7 @@ summary(x)
 x <- sonify(iris)
 x <- x + sonaes(time=Petal.Length, pitch=Petal.Width)
 x <- x + shape_scatter()
-x <- x + scale_pitch_linear(6, 8) + scale_time_linear(0, 10)
+x <- x + scale_pitch_continuous(6, 8) + scale_time_continuous(0, 10)
 summary(x)
 \dontrun{x # outputs sound}
 }

@@ -14,9 +14,7 @@
 ##' as shown in the examples.
 ##'
 ##' @rdname scaleShortcuts
-##' @aliases scaleShortcuts scale_dur_linear_scale_pan_linear
-##' scale_pitch_linear_scale_tempo_linear_scale_time_linear_scale_vol_linear
-##' scale_attkp_linear scale_decayp_linear scale_mod_linear scale_indx_linear
+##' @aliases scaleShortcuts
 ##' @param min The desired minimum value, a \code{numeric} of length 1
 ##' @param max The desired maximum value, a \code{numeric} of length 1
 ##' @param dmin The data value to be lined up with the \code{min}
@@ -54,8 +52,8 @@
 ##' ## the shortcut functions
 ##' y <- sonify(iris, sonaes(time=Petal.Width, pitch=Petal.Length, dur=5, vol=0.75))
 ##' y <- y + shape_scatter()
-##' y <- y + scale_time_linear(0, 3)
-##' y <- y + scale_pitch_linear(3, 13)
+##' y <- y + scale_time_continuous(0, 3)
+##' y <- y + scale_pitch_continuous(3, 13)
 ##' summary(y)
 ##' \dontrun{y}
 ##' 
@@ -64,7 +62,7 @@
 ##' ## the sonification is stretched to 12 seconds
 ##' ## long instead of 3, and the pitch is mapped to
 ##' ## a much narrower range, the octave below tuning A (440 Hz)
-##' y <- y + scale_time_linear(0, 12) + scale_pitch_linear(7, 8)
+##' y <- y + scale_time_continuous(0, 12) + scale_pitch_continuous(7, 8)
 ##' summary(y)
 ##' \dontrun{y}
 ##'
@@ -72,12 +70,12 @@
 ##################################################
 ## LINEAR SCALES
 ##################################################
-scale_time_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("time", min, max, dmin, dmax)
+scale_time_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("time", min, max, dmin, dmax)
 
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_pitch_linear <- function(min, max, dmin = NULL, dmax = NULL, chromatic = TRUE) {
+scale_pitch_continuous <- function(min, max, dmin = NULL, dmax = NULL, chromatic = TRUE) {
   if(chromatic)
     return(linear_fixed_scale_chromatic(min, max, dmin, dmax))
   else return(linear_fixed_scale("pitch", min, max, dmin, dmax))
@@ -85,35 +83,35 @@ scale_pitch_linear <- function(min, max, dmin = NULL, dmax = NULL, chromatic = T
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_dur_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("dur", min, max, dmin, dmax)
+scale_dur_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("dur", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_vol_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("vol", min, max, dmin, dmax)
+scale_vol_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("vol", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_pan_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("pan", min, max, dmin, dmax)
+scale_pan_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("pan", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_tempo_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("tempo", min, max, dmin, dmax)
+scale_tempo_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("tempo", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_attkp_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("attkp", min, max, dmin, dmax)
+scale_attkp_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("attkp", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_decayp_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("decayp", min, max, dmin, dmax)
+scale_decayp_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("decayp", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_mod_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("mod", min, max, dmin, dmax)
+scale_mod_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("mod", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_indx_linear <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("indx", min, max, dmin, dmax)
+scale_indx_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("indx", min, max, dmin, dmax)
 
 ##################################################
 ## EXPONENTIAL SCALES
