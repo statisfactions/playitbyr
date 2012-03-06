@@ -8,7 +8,7 @@
 ##' @rdname getShapeDef
 ##' @param x A \code{\link{sonlayer}} object or character string
 ##' @return \code{.getShapeDef} returns a \code{shapeDef} object;
-##' \code{getShapeNames} returns a character vector containing the
+##' \code{..getShapeNames} returns a character vector containing the
 ##' names of all currently available shapes
 ##' @export
 ##' @keywords internal
@@ -22,7 +22,7 @@
 
 ##' @rdname getShapeDef
 ##' @export
-getShapeNames <- function() names(allShapeDefs)
+..getShapeNames <- function() names(allShapeDefs)
   
 
 

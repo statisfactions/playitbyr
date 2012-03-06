@@ -33,8 +33,8 @@
 
 sonlayer <- function(shape="scatter", stat=NULL,
                      stat_params=NULL, data=NULL, mapping=NULL, ...) {
-  if(!(shape %in% getShapeNames()))
-     stop("'", deparse(shape),"' is not a valid shape name. See getShapeNames.")
+  if(!(shape %in% ..getShapeNames()))
+     stop("'", deparse(shape),"' is not a valid shape name. See ..getShapeNames.")
 
   ## Check shape params given
   shape_params <- list(...)

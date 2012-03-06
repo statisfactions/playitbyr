@@ -170,7 +170,7 @@
 
   ## The shape_params that match the possible sound params are the
   ## settings we want.
-  params <- getSoundParams(shape)$param
+  params <- .getSoundParams(shape)$param
   sonlayersettings <-(x$sonlayers[[sonlayernum]])$shape$shape_params
   sonlayersettings <- sonlayersettings[names(sonlayersettings) %in% params]
 
@@ -235,7 +235,7 @@
 ##' the \code{sonify} object
 .getDefaultScalingByParam <- function(param, shapes) {
   ## Get the data.frame of all soundparameters
-  soundparams <- getSoundParams(shapes)
+  soundparams <- .getSoundParams(shapes)
 
   ## We want to recall sound parameters IN THE ORDER THAT SHAPES
   ## APPEAR IN THE SONLAYERS. Thus if there is a conflict between

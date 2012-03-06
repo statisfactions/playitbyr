@@ -18,7 +18,7 @@
 
 ##' @rdname getDefaultSettings
 ##' @export
-getDefaultScalings <- function(shape) {
+.getDefaultScalings <- function(shape) {
   shapedef <- .getShapeDef(shape)
   defaults <- lapply(shapedef$params, function(x) x$defaultScaling)
   return(do.call(sonscaling, defaults))
