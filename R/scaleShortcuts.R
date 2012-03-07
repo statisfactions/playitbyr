@@ -5,7 +5,6 @@
 ##' a \code{sonify} object to specify how \kbd{[data parameter]} from the data
 ##' (a column of the data) is to be mapped to sonic parameters.
 ##' 
-##' 
 ##' The syntax of specifying a full \code{sonify} object can be rather verbose.
 ##' Inspired by the \pkg{ggplot2} package, \pkg{playitbyr} provides shortcut
 ##' functions to make the process easier and more intuitive.
@@ -25,6 +24,8 @@
 ##' scale
 ##' @param chromatic For pitches, should they be rounded to chromatic
 ##' values? Default \code{TRUE}
+##' @param \dots Other parameters (ignored)
+##'
 ##' 
 ##' @return A \code{sonscaling} object, to be used in \code{sonify} or added
 ##' onto a \code{sonify} object.
@@ -67,15 +68,12 @@
 ##' \dontrun{y}
 ##'
 ##' @export
-##################################################
-## LINEAR SCALES
-##################################################
-scale_time_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("time", min, max, dmin, dmax)
+scale_time_continuous <- function(min, max, dmin = NULL, dmax = NULL, ...) linear_fixed_scale("time", min, max, dmin, dmax)
 
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_pitch_continuous <- function(min, max, dmin = NULL, dmax = NULL, chromatic = TRUE) {
+scale_pitch_continuous <- function(min, max, dmin = NULL, dmax = NULL, chromatic = TRUE, ...) {
   if(chromatic)
     return(linear_fixed_scale_chromatic(min, max, dmin, dmax))
   else return(linear_fixed_scale("pitch", min, max, dmin, dmax))
@@ -83,47 +81,47 @@ scale_pitch_continuous <- function(min, max, dmin = NULL, dmax = NULL, chromatic
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_dur_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("dur", min, max, dmin, dmax)
+scale_dur_continuous <- function(min, max, dmin = NULL, dmax = NULL, ...) linear_fixed_scale("dur", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_vol_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("vol", min, max, dmin, dmax)
+scale_vol_continuous <- function(min, max, dmin = NULL, dmax = NULL, ...) linear_fixed_scale("vol", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_pan_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("pan", min, max, dmin, dmax)
+scale_pan_continuous <- function(min, max, dmin = NULL, dmax = NULL, ...) linear_fixed_scale("pan", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_tempo_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("tempo", min, max, dmin, dmax)
+scale_tempo_continuous <- function(min, max, dmin = NULL, dmax = NULL, ...) linear_fixed_scale("tempo", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_attkp_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("attkp", min, max, dmin, dmax)
+scale_attkp_continuous <- function(min, max, dmin = NULL, dmax = NULL, ...) linear_fixed_scale("attkp", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_decayp_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("decayp", min, max, dmin, dmax)
+scale_decayp_continuous <- function(min, max, dmin = NULL, dmax = NULL, ...) linear_fixed_scale("decayp", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_mod_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("mod", min, max, dmin, dmax)
+scale_mod_continuous <- function(min, max, dmin = NULL, dmax = NULL, ...) linear_fixed_scale("mod", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_indx_continuous <- function(min, max, dmin = NULL, dmax = NULL) linear_fixed_scale("indx", min, max, dmin, dmax)
+scale_indx_continuous <- function(min, max, dmin = NULL, dmax = NULL, ...) linear_fixed_scale("indx", min, max, dmin, dmax)
 
 ##################################################
 ## EXPONENTIAL SCALES
 ##################################################
 ##' @rdname scaleShortcuts
 ##' @export
-scale_time_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("time", min, max, dmin, dmax)
+scale_time_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("time", min, max, dmin, dmax)
 
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_pitch_exp <- function(min, max, dmin = NULL, dmax = NULL, chromatic = TRUE) {
+scale_pitch_exp <- function(min, max, dmin = NULL, dmax = NULL, chromatic = TRUE, ...) {
   if(chromatic)
     return(exp_fixed_scale_chromatic(min, max, dmin, dmax))
   else return(exp_fixed_scale("pitch", min, max, dmin, dmax))
@@ -131,47 +129,47 @@ scale_pitch_exp <- function(min, max, dmin = NULL, dmax = NULL, chromatic = TRUE
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_dur_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("dur", min, max, dmin, dmax)
+scale_dur_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("dur", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_vol_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("vol", min, max, dmin, dmax)
+scale_vol_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("vol", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_pan_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("pan", min, max, dmin, dmax)
+scale_pan_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("pan", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_tempo_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("tempo", min, max, dmin, dmax)
+scale_tempo_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("tempo", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_attkp_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("attkp", min, max, dmin, dmax)
+scale_attkp_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("attkp", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_decayp_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("decayp", min, max, dmin, dmax)
+scale_decayp_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("decayp", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_mod_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("mod", min, max, dmin, dmax)
+scale_mod_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("mod", min, max, dmin, dmax)
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_indx_exp <- function(min, max, dmin = NULL, dmax = NULL) exp_fixed_scale("indx", min, max, dmin, dmax)
+scale_indx_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("indx", min, max, dmin, dmax)
 
 ##################################################
 ## IDENTITY SCALES
 ##################################################
 ##' @rdname scaleShortcuts
 ##' @export
-scale_time_identity <- function()
+scale_time_identity <- function(...)
   sonscaling("time" =  list(0, 0, function(x, min, max) x))
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_pitch_identity <- function(chromatic = FALSE) {
+scale_pitch_identity <- function(chromatic = FALSE, ...) {
   if(chromatic)
     return(sonscaling("pitch" = list(0, 0, function(x, min, max) round_chromatic(x))))
   else return(sonscaling("pitch" =  list(0, 0, function(x, min, max) x)))
@@ -179,42 +177,42 @@ scale_pitch_identity <- function(chromatic = FALSE) {
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_dur_identity <- function()
+scale_dur_identity <- function(...)
   sonscaling("dur" =  list(0, 0, function(x, min, max) x))
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_vol_identity <- function()
+scale_vol_identity <- function(...)
   sonscaling("vol" =  list(0, 0, function(x, min, max) x))
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_pan_identity <- function()
+scale_pan_identity <- function(...)
   sonscaling("pan" =  list(0, 0, function(x, min, max) x))
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_tempo_identity <- function()
+scale_tempo_identity <- function(...)
   sonscaling("tempo" =  list(0, 0, function(x, min, max) x))
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_attkp_identity <- function()
+scale_attkp_identity <- function(...)
   sonscaling("attkp" =  list(0, 0, function(x, min, max) x))
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_decayp_identity <- function()
+scale_decayp_identity <- function(...)
   sonscaling("decayp" =  list(0, 0, function(x, min, max) x))
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_mod_identity <- function()
+scale_mod_identity <- function(...)
   sonscaling("mod" =  list(0, 0, function(x, min, max) x))
 
 ##' @rdname scaleShortcuts
 ##' @export
-scale_indx_identity <- function()
+scale_indx_identity <- function(...)
   sonscaling("indx" =  list(0, 0, function(x, min, max) x))
 
 fixie <- function(column, min, max) {

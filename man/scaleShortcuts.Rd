@@ -32,70 +32,76 @@
 \alias{scale_vol_identity}
 \title{Shortcut functions to set linear_scales for \code{sonify} objects}
 \usage{
-  scale_time_continuous(min, max, dmin = NULL, dmax = NULL)
+  scale_time_continuous(min, max, dmin = NULL, dmax = NULL,
+    ...)
 
   scale_pitch_continuous(min, max, dmin = NULL,
-    dmax = NULL, chromatic = TRUE)
+    dmax = NULL, chromatic = TRUE, ...)
 
-  scale_dur_continuous(min, max, dmin = NULL, dmax = NULL)
+  scale_dur_continuous(min, max, dmin = NULL, dmax = NULL,
+    ...)
 
-  scale_vol_continuous(min, max, dmin = NULL, dmax = NULL)
+  scale_vol_continuous(min, max, dmin = NULL, dmax = NULL,
+    ...)
 
-  scale_pan_continuous(min, max, dmin = NULL, dmax = NULL)
+  scale_pan_continuous(min, max, dmin = NULL, dmax = NULL,
+    ...)
 
   scale_tempo_continuous(min, max, dmin = NULL,
-    dmax = NULL)
+    dmax = NULL, ...)
 
   scale_attkp_continuous(min, max, dmin = NULL,
-    dmax = NULL)
+    dmax = NULL, ...)
 
   scale_decayp_continuous(min, max, dmin = NULL,
-    dmax = NULL)
+    dmax = NULL, ...)
 
-  scale_mod_continuous(min, max, dmin = NULL, dmax = NULL)
+  scale_mod_continuous(min, max, dmin = NULL, dmax = NULL,
+    ...)
 
-  scale_indx_continuous(min, max, dmin = NULL, dmax = NULL)
+  scale_indx_continuous(min, max, dmin = NULL, dmax = NULL,
+    ...)
 
-  scale_time_exp(min, max, dmin = NULL, dmax = NULL)
+  scale_time_exp(min, max, dmin = NULL, dmax = NULL, ...)
 
   scale_pitch_exp(min, max, dmin = NULL, dmax = NULL,
-    chromatic = TRUE)
+    chromatic = TRUE, ...)
 
-  scale_dur_exp(min, max, dmin = NULL, dmax = NULL)
+  scale_dur_exp(min, max, dmin = NULL, dmax = NULL, ...)
 
-  scale_vol_exp(min, max, dmin = NULL, dmax = NULL)
+  scale_vol_exp(min, max, dmin = NULL, dmax = NULL, ...)
 
-  scale_pan_exp(min, max, dmin = NULL, dmax = NULL)
+  scale_pan_exp(min, max, dmin = NULL, dmax = NULL, ...)
 
-  scale_tempo_exp(min, max, dmin = NULL, dmax = NULL)
+  scale_tempo_exp(min, max, dmin = NULL, dmax = NULL, ...)
 
-  scale_attkp_exp(min, max, dmin = NULL, dmax = NULL)
+  scale_attkp_exp(min, max, dmin = NULL, dmax = NULL, ...)
 
-  scale_decayp_exp(min, max, dmin = NULL, dmax = NULL)
+  scale_decayp_exp(min, max, dmin = NULL, dmax = NULL, ...)
 
-  scale_mod_exp(min, max, dmin = NULL, dmax = NULL)
+  scale_mod_exp(min, max, dmin = NULL, dmax = NULL, ...)
 
-  scale_indx_exp(min, max, dmin = NULL, dmax = NULL)
+  scale_indx_exp(min, max, dmin = NULL, dmax = NULL, ...)
 
-  scale_time_identity()
+  scale_time_identity(...)
 
-  scale_pitch_identity(chromatic = FALSE)
+  scale_pitch_identity(chromatic = FALSE, ...)
 
-  scale_dur_identity()
+  scale_dur_identity(...)
 
-  scale_vol_identity()
+  scale_vol_identity(...)
 
-  scale_pan_identity()
+  scale_pan_identity(...)
 
-  scale_tempo_identity()
+  scale_tempo_identity(...)
 
-  scale_attkp_identity()
+  scale_attkp_identity(...)
 
-  scale_decayp_identity()
+  scale_decayp_identity(...)
 
-  scale_mod_identity()
+  scale_mod_identity(...)
 
-  scale_indx_identity()
+  scale_indx_identity(...)
 }
 \arguments{
   \item{min}{The desired minimum value, a \code{numeric} of
@@ -114,6 +120,8 @@
 
   \item{chromatic}{For pitches, should they be rounded to
   chromatic values? Default \code{TRUE}}
+
+  \item{\dots}{Other parameters (ignored)}
 }
 \value{
   A \code{sonscaling} object, to be used in \code{sonify}
