@@ -1,25 +1,20 @@
 \name{sonlayer}
-\alias{shape_csound}
-\alias{shape_scatter}
 \alias{sonlayer}
 \title{Creating individual layers for sonify objects}
 \usage{
   sonlayer(shape = "scatter", stat = NULL,
     stat_params = NULL, data = NULL, mapping = NULL, ...)
-
-  shape_scatter(...)
-
-  shape_csound(...)
 }
 \arguments{
   \item{shape}{A character string representing the overall
   style of the audio plot (analogous to \code{geom}s from
   the \pkg{ggplot2} package).}
 
-  \item{stat}{The statistic to be calculated for the layer}
+  \item{stat}{The statistic to be calculated for the layer
+  (currently ignored)}
 
   \item{stat_params}{Additional parameters specific to the
-  stat}
+  stat (currently ignored)}
 
   \item{data}{The \code{data.frame} to be sonified for this
   layer. If blank, the data from the parent \code{sonify}
@@ -31,10 +26,8 @@
   the shape}
 }
 \description{
-  These functions are a start on the layer functionality
-  for \code{sonify} objects, analogous to \pkg{ggplot2}
-  layers. This creates a list object that can be included
-  in a \code{sonify} object.
+  This function creates layers to be added onto a
+  \code{sonify} object.
 }
 \section{Conflicting defaults on \code{sonlayer} scalings}{
   Each shape has its own default scalings (see
@@ -49,5 +42,10 @@
   explicitly declared; if you don't like the behavior of a
   default scaling you can always define your own (see
   \code{\link{sonscaling}}.
+}
+\seealso{
+  This functionality is most easily accessed through its
+  shortcut functions, the \code{shape_}\kbd{shapename}
+  functions, currently: \code{\link{shape_scatter}}
 }
 

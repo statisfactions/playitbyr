@@ -8,7 +8,7 @@
   \item{\dots}{See Details section.}
 }
 \value{
-  A \code{sonscaling} object that
+  A \code{sonscaling} object
 }
 \description{
   \code{sonscaling()} is invoked in the call to
@@ -28,7 +28,7 @@
 \seealso{
   \code{\link{sonify}} where this is eventually used;
   \code{\link{sonaes}} for defining the which data columns
-  get mapped onto these sonic parameters; and
+  get mapped onto these sonic parameters;
   \code{\link{linear_scale}} for an example of a scaling
   function.
 }

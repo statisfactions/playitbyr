@@ -14,10 +14,10 @@
 ##'
 ##' 
 ##' @param \dots See Details section.
-##' @return A \code{sonscaling} object that 
+##' @return A \code{sonscaling} object 
 ##' @seealso \code{\link{sonify}} where this is eventually used;
 ##' \code{\link{sonaes}} for defining the which data columns get
-##' mapped onto these sonic parameters; and
+##' mapped onto these sonic parameters; 
 ##' \code{\link{linear_scale}} for an example of a scaling function.
 ##' @export
 sonscaling <- function(...) {

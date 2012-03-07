@@ -1,9 +1,8 @@
 ##' Creating individual layers for sonify objects
 ##'
-##' These functions are a start on the layer functionality for \code{sonify}
-##' objects, analogous to \pkg{ggplot2} layers. This creates a list
-##' object that can be included in a \code{sonify} object.
-##'
+##' This function creates layers to be added onto a \code{sonify}
+##' object.
+##' 
 ##' @section Conflicting defaults on \code{sonlayer} scalings: Each shape has
 ##' its own default scalings (see \code{link{.getShapeDef}} to view
 ##' these defaults. It's quite possible that some default scalings for
@@ -15,20 +14,22 @@
 ##' declared; if you don't like the behavior of a default scaling you
 ##' can always define your own (see \code{\link{sonscaling}}.
 ##' 
-##' @aliases sonlayer shape_scatter
-##' 
 ##' @rdname sonlayer
 ##' @export 
 ##' @param shape A character string representing the overall style of
 ##' the audio plot (analogous to \code{geom}s from the \pkg{ggplot2}
 ##' package).
-##' @param stat The statistic to be calculated for the layer
-##' @param stat_params Additional parameters specific to the stat
+##' @param stat The statistic to be calculated for the layer (currently ignored)
+##' @param stat_params Additional parameters specific to the stat (currently ignored)
 ##' @param data The \code{data.frame} to be sonified for this
 ##' layer. If blank, the data from the parent \code{sonify} object is
 ##' used.
 ##' @param mapping A \code{\link{sonaes}} object.
 ##' @param \dots Additional options and settings specific to the shape
+##'
+##' @seealso This functionality is most easily accessed through its
+##' shortcut functions, the \code{shape_}\kbd{shapename} functions, currently: \code{\link{shape_scatter}}
+# currently excluded \code{\link{shape_csound}}, \code{\link{shape_dotplot}}
 
 sonlayer <- function(shape="scatter", stat=NULL,
                      stat_params=NULL, data=NULL, mapping=NULL, ...) {
@@ -51,15 +52,3 @@ sonlayer <- function(shape="scatter", stat=NULL,
   .checkData(l)    
   l
 }
-##' @rdname sonlayer
-##' @export
-shape_scatter <- function(...) sonlayer("scatter",...)
-## Convenience function for one supported layer type, scatter.
-shape_tone <- function(...) sonlayer("tone",...)
-## Convenience function for a supported layer type, tone.
-shape_dotplot <- function(...) sonlayer("dotplot",...)
-## Convenience function for a supported layer type, dotplot.
-
-##' @rdname sonlayer
-##' @export
-shape_csound <- function(...) sonlayer("csound",...)

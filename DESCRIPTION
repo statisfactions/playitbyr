@@ -54,3 +54,6 @@ Collate:
     'scale-tempo-continuous.R'
     'scale-time-continuous.R'
     'scale-vol-continuous.R'
+    'shape-csound.R'
+    'shape-dotplot.R'
+    'shape-scatter.R'
