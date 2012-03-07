@@ -39,6 +39,6 @@ linear_scale(x, min=-2, max=-1.5)
 linear_scale(x, min=10, max=1)
 }
 \seealso{
-  \code{\link{sonscaling}}, \code{\link{scaleShortcuts}}
+  \code{\link{sonscaling}}
 }
 

@@ -22,6 +22,7 @@
 ##' objects.
 ##'
 ##' @inheritParams scale_time_continuous
+##' @param \dots Other parameters (currently ignored)
 ##' @rdname scale_decayp_continuous
 ##' @export
 scale_decayp_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("decayp", min, max, dmin, dmax)

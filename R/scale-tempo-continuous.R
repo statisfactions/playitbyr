@@ -21,6 +21,7 @@
 ##' objects.
 ##'
 ##' @inheritParams scale_time_continuous
+##' @param \dots Other parameters (currently ignored)
 ##' @rdname scale_tempo_continuous
 ##' @export
 scale_tempo_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("tempo", min, max, dmin, dmax)

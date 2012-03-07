@@ -79,7 +79,6 @@ summary(x)
 \seealso{
   \code{\link{+.sonify}} for interacting with \code{sonify}
   objects; \code{\link{sonaes}} for setting the mappings;
-  \code{\link{sonscaling}} and \code{\link{scaleShortcuts}}
-  for creating the scalings.
+  \code{\link{sonscaling}} for creating the scalings.
 }
 

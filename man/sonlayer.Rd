@@ -48,7 +48,6 @@
   Default scalings are, of course, ignored when they are
   explicitly declared; if you don't like the behavior of a
   default scaling you can always define your own (see
-  \code{\link{sonscaling}} and
-  \code{\link{scaleShortcuts}}.
+  \code{\link{sonscaling}}.
 }
 

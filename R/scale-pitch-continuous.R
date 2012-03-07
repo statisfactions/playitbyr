@@ -23,6 +23,7 @@
 ##' @inheritParams scale_time_continuous
 ##' @param chromatic Should pitches be rounded to chromatic
 ##' values? Default \code{TRUE}
+##' @param \dots Other parameters (currently ignored)
 ##' @rdname scale_pitch_continuous
 ##' @export
 scale_pitch_continuous <- function(min, max, dmin = NULL, dmax = NULL, chromatic = TRUE, ...) {

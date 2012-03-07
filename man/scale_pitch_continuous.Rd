@@ -13,6 +13,8 @@
   \item{chromatic}{Should pitches be rounded to chromatic
   values? Default \code{TRUE}}
 
+  \item{\dots}{Other parameters (currently ignored)}
+
   \item{min}{The desired minimum value, a \code{numeric} of
   length 1}
 

@@ -24,16 +24,11 @@
   is a function that maps the data column onto the range of
   the sonic parameter. The only such function included with
   \pkg{playitbyr} right now is \code{\link{linear_scale}}.
-
-  \code{\link{scaleShortcuts}} provides a more intuitive
-  interface to defining scales.
 }
 \seealso{
   \code{\link{sonify}} where this is eventually used;
   \code{\link{sonaes}} for defining the which data columns
-  get mapped onto these sonic parameters;
-  \code{\link{scaleShortcuts}} for easy shortcut functions
-  for common use-cases of scaling; and
+  get mapped onto these sonic parameters; and
   \code{\link{linear_scale}} for an example of a scaling
   function.
 }

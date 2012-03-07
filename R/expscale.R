@@ -18,7 +18,7 @@
 ##' 1. Must be greater than zero.
 ##' @return A numeric vector or matrix of the same type as \code{x}, exponentially
 ##' rescaled in the desired way.
-##' @seealso \code{\link{sonscaling}}, \code{\link{scaleShortcuts}}
+##' @seealso \code{\link{sonscaling}}
 ##' @examples
 ##' 
 ##' x <- 1:10

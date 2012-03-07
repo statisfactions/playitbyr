@@ -21,8 +21,9 @@
 ##' @seealso
 ##' 
 ##' \code{\link{+.sonify}} for interacting with \code{sonify} objects;
-##' \code{\link{sonaes}} for setting the mappings; \code{\link{sonscaling}} and
-##' \code{\link{scaleShortcuts}} for creating the scalings.
+##' \code{\link{sonaes}} for setting the mappings;
+##' \code{\link{sonscaling}} for creating the scalings.
+##' 
 ##' @references The syntax of \code{sonify} objects is heavily based on that of
 ##' \code{ggplot} objects in the \pkg{ggplot2} package. See the
 ##' \href{http://had.co.nz/ggplot2/}{ggplot2 web site} for more information.

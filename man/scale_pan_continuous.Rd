@@ -9,6 +9,8 @@
   scale_pan_exp(min, max, dmin = NULL, dmax = NULL, ...)
 }
 \arguments{
+  \item{\dots}{Other parameters (currently ignored)}
+
   \item{min}{The desired minimum value, a \code{numeric} of
   length 1}
 

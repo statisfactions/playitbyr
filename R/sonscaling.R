@@ -12,15 +12,12 @@
 ##' function included with \pkg{playitbyr} right now is
 ##' \code{\link{linear_scale}}.
 ##'
-##' \code{\link{scaleShortcuts}} provides a more intuitive interface
-##' to defining scales.
 ##' 
 ##' @param \dots See Details section.
 ##' @return A \code{sonscaling} object that 
 ##' @seealso \code{\link{sonify}} where this is eventually used;
 ##' \code{\link{sonaes}} for defining the which data columns get
-##' mapped onto these sonic parameters; \code{\link{scaleShortcuts}}
-##' for easy shortcut functions for common use-cases of scaling; and
+##' mapped onto these sonic parameters; and
 ##' \code{\link{linear_scale}} for an example of a scaling function.
 ##' @export
 sonscaling <- function(...) {

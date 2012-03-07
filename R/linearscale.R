@@ -16,7 +16,7 @@
 ##' @param max The desired maximum value, a \code{numeric} of length 1
 ##' @return A numeric vector or matrix of the same type as \code{x}, linearly
 ##' rescaled in the desired way.
-##' @seealso \code{\link{sonscaling}}, \code{\link{scaleShortcuts}}
+##' @seealso \code{\link{sonscaling}}
 ##' @examples
 ##' 
 ##' x <- 1:10

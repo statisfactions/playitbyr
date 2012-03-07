@@ -6,9 +6,8 @@
 ##'
 ##' @param chromatic Should pitches be rounded to chromatic
 ##' values? Default \code{TRUE}
+##' @param \dots Ignored.
 ##' 
-##' @rdname scale_identity
-##' @export
 ##' @rdname scale_identity
 ##' @export
 scale_time_identity <- function(...)

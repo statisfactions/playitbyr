@@ -34,6 +34,8 @@
 \arguments{
   \item{chromatic}{Should pitches be rounded to chromatic
   values? Default \code{TRUE}}
+
+  \item{\dots}{Ignored.}
 }
 \description{
   These functions can be added onto a \code{sonify} object

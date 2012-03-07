@@ -21,6 +21,7 @@
 ##' objects.
 ##'
 ##' @inheritParams scale_time_continuous
+##' @param \dots Other parameters (currently ignored)
 ##' @rdname scale_attkp_continuous
 ##' @export
 scale_attkp_continuous <- function(min, max, dmin = NULL, dmax = NULL, ...) linear_fixed_scale("attkp", min, max, dmin, dmax)
