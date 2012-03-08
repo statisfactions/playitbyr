@@ -70,6 +70,8 @@
       column <- data[[map[[param]]]]
     else
       column <- eval(map[[param]])
+    if(!is.numeric(column))
+      column <- as.numeric(factor(column))
     return(.rescaleDataByParam(x, param, column))
   })
 
