@@ -36,3 +36,8 @@ test_that("scaling shortcuts as expected with dmin, dmax", {
   expect_equal(reference_exp, test_exp)
 })
 
+test_that("scalings work when all the same value", {
+  expect_equal(rep(5, 5), linear_scale(rep(22, 5), 0, 10))
+  expect_equal(rep(2, 5), exp_scale(rep(2321, 5), 1, 3))
+})
+          

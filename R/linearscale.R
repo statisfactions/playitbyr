@@ -14,8 +14,10 @@
 ##' @param x A numeric vector or matrix
 ##' @param min The desired minimum value, a \code{numeric} of length 1
 ##' @param max The desired maximum value, a \code{numeric} of length 1
-##' @return A numeric vector or matrix of the same type as \code{x}, linearly
-##' rescaled in the desired way.
+##' @return A numeric vector or matrix of the same type as \code{x},
+##' linearly rescaled in the desired way. If \code{x} only has one
+##' value, \code{linear_scale} simply returns the midpoint between
+##' \code{min} and \code{max}.
 ##' @seealso \code{\link{sonscaling}}
 ##' @examples
 ##' 
@@ -24,7 +26,7 @@
 ##' 
 ##' ## If max<min, it's rescaled in reverse:
 ##' linear_scale(x, min=10, max=1)
-##'
+## TODO add example of choosing midpoint and document here
 ##' @export
 linear_scale <- function(x, min, max) {
   ## Linearly rescales vector x so that "lower" is the minimum
@@ -38,9 +40,13 @@ linear_scale <- function(x, min, max) {
     min <- oldmax
     max <- oldmin
   }
-  
-  nrange <- abs(max-min)
-  out <- ((x-min(x))*nrange/(max(x)-min(x)) + min)
+  if(length(unique(x)) == 1) {
+    ## allow for all the same, choose midpoint
+    out <- rep(mean(c(min, max)), length(x))
+  } else {
+    nrange <- abs(max-min)
+    out <- ((x-min(x))*nrange/(max(x)-min(x)) + min)
+  }
   out
 }
 
