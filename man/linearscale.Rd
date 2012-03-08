@@ -15,7 +15,9 @@
 }
 \value{
   A numeric vector or matrix of the same type as \code{x},
-  linearly rescaled in the desired way.
+  linearly rescaled in the desired way. If \code{x} only
+  has one value, \code{linear_scale} simply returns the
+  midpoint between \code{min} and \code{max}.
 }
 \description{
   \code{linear_scale()} linearly transforms its input

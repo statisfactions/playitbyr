@@ -8,8 +8,6 @@
   .checkRendering(x)
 
   .checkData(x)
-
-  rendering(x)
 }
 \description{
   These all will eventually will be used as arguments to

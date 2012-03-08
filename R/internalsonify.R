@@ -32,17 +32,3 @@
   if(!is.null(x$data) & !is.data.frame(x$data))
     stop("'data' must be a data.frame.")
 }
-
-##' @rdname internalsonify
-##' @export
-rendering <- function(x) {
-  ## This function exists ENTIRELY for changing rendering
-  ## in interactive use via '+.sonify';
-  ## all it does is check the validitiy of its string argument
-  ## and give it the class "sonrendering"
-  ## (so that '+.sonify' knows what to do with it)
-  
-  .checkRendering(x)
-  class(x) <- "sonrendering"
-  x
-}
