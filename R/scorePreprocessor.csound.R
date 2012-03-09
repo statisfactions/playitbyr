@@ -8,7 +8,7 @@
 ##' @inheritParams scorePreprocessor
 ##' @return A sonlayer score with the transformations described in the 'Description' field
 scorePreprocessor.csound <- function(sonlayerscore) {
-
+  sonlayerscore <- sonlayerscore[intersect(.getSoundParams("csound")$param, names(sonlayerscore))]
   attr(sonlayerscore, "length") <- max(rowSums(sonlayerscore[,c("start", "dur")])) # length in seconds
 
   return(sonlayerscore)
