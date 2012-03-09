@@ -9,9 +9,11 @@ test_that("mapping creates new variable and sonifies it", {
           y <- sonify(irisplus, sonaes(time = Sepal.Length, pitch = 1:3)) +
           shape_scatter()
           outfile1 <- paste(tempfile(), ".wav", sep="")
+          set.seed(719)
           sonsave(x, outfile1)
           curr <- load.wave(outfile1)
           outfile2 <- paste(tempfile(), ".wav", sep="")
+          set.seed(719)
           sonsave(y, outfile2)
           comp <- load.wave(outfile2)
           expect_equal(curr, comp)

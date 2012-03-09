@@ -15,17 +15,10 @@
   dur <- shapeParam("dur",
                     0,
                     Inf,
-                    2,
+                    0.5,
                     list(0.25, 4, linear_scale),
                     NULL,
-                    "The relative desired duration of all events in beats, where 1 beat equals the length of time for one event if all events were equal length")
-  vol <- shapeParam("vol",
-                    0,
-                    1,
-                    0.5,
-                    list(0.2, 1, linear_scale),
-                    NULL,
-                    "The desired volume of all events as a number between 0, silence, and 1, the maximum possible amplitude.")
+                    "The duration of the hit (seconds)")
   pan <- shapeParam("pan",
                     0,
                     1,
@@ -41,7 +34,9 @@
                       NULL,
                       "The desired tempo of events in beats per minute. Either time or tempo, but not both, must be specified for an object to be rendered.")
 
-dotplot <- shapeDef("A sonification using only clicks to denote observations on the time axis.", "audio", c(time, pitch, dur, vol, pan, tempo))
+dotplot <- shapeDef("A sonification using only synthesized snare hits to denote observations on the time axis.", "csound", list(), c(time, dur, pitch, pan, tempo))
+
+
 
                                 
                                 

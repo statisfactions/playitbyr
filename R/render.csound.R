@@ -11,7 +11,8 @@
 ##' technique; all the arguments of \code{createPerformance} can be
 ##' passed as options.
 render.csound <- function(x, opts, file = "", audioSample=FALSE, ...) {
-  i <- lapply(x, function(y) csound_layer(y))
+  len <- attr(x, "length")
+  i <- lapply(x, function(y) csound_layer(y, len = len))
   i <- unlist(i, recursive = FALSE)
   if(file == "")
     file <- "dac"
@@ -39,7 +40,6 @@ csound_layer <- function(sonlayerscore, ...) {
 ##' @rdname render.csound
 ##' @method csound_layer scatter
 csound_layer.scatter <- function(sonlayerscore, ...) {
-
   sonlayerscorem <- as.matrix(sonlayerscore)
   out <- scoreMatrices(nrow(sonlayerscorem))
   namesmatch <- intersect(colnames(sonlayerscorem), colnames(out$FM))
@@ -55,3 +55,24 @@ csound_layer.scatter <- function(sonlayerscore, ...) {
 csound_layer.csound <- function(sonlayerscore, ...) {
   list(as.matrix(sonlayerscore))
 }
+
+##' @rdname render.csound
+##' @method csound_layer dotplot
+csound_layer.dotplot <- function(sonlayerscore, ...) {
+  len <- list(...)[["len"]]
+  allnames <- c("inst", "start", "dur", "p4", "pitch", "pan", "p7", "p8", "p9", "p10", "p11", "p12", "p13")
+
+  sonlayerscorem <- as.matrix(sonlayerscore)
+  out <- matrix(nrow = nrow(sonlayerscorem), ncol = length(allnames))
+  colnames(out) <- allnames
+  namesmatch <- intersect(colnames(sonlayerscorem), allnames)
+
+  out[, "inst"] <- 34
+  out[, namesmatch] <- sonlayerscorem[, namesmatch]
+  out[, "p4"] <- 30000
+  out[, 7:13] <- t(replicate(nrow(out), c( .5, .2, 1, .5, .5, 1, 1.5)))
+
+  noisegen <-  rbind(c(33, 0, len + 0.2, .5, 1), c(33, 0, 0, 0, 0))
+
+  return(list(noisegen, out))
+ }

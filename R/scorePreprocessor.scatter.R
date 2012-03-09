@@ -40,6 +40,18 @@ scorePreprocessor.scatter <- function(sonlayerscore) {
   ## different scaling for the time and duration will automagically
   ## scale down without having to set it separately, which seems
   ## annoying.)
+
+  ## add jitter effect; this is a total hack right now and will go
+  ## away in the next version when we integrate closer with ggplot2
+  
+  avdur <- mean(sonlayerscore$dur)
+  sonsplit <- split(sonlayerscore, 10^(-5)*(sonlayerscore$start) + sonlayerscore$pitch)
+  sonlayerscore <- do.call(rbind, lapply(sonsplit, function(x) {
+    if(nrow(x) > 1)
+      x$start <- abs(x$start + rnorm(nrow(x), sd = avdur))
+    return(x)
+  }))
+
   
   attr(sonlayerscore, "length") <- sonlayerscore$start[n] + sonlayerscore$dur[n] # length in seconds
 

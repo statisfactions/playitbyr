@@ -1,0 +1,41 @@
+\name{shape_dotplot}
+\alias{shape_dotplot}
+\title{Create a dotplot layer}
+\usage{
+  shape_dotplot(...)
+}
+\arguments{
+  \item{\dots}{data, settings, and mappings to pass to
+  \code{\link{sonlayer}}}
+}
+\value{
+  A \code{sonscaling} object
+}
+\description{
+  Creates a dotplot layer using the sound of a snare drum.
+}
+\details{
+  The audio dotplot creates a sense of how the distribution
+  is spread out in time. Users are only expected to really
+  use the \code{time} parameter for mapping, but they may
+  want to fiddle with the other aspects of the sound for
+  aesthetic reasons.
+
+  These parameters are available for setting or mapping:
+
+  \describe{ \item{time}{The starting time of the snare
+  sound (in seconds).} \item{dur}{The duration of the drum
+  sound (in seconds).} \item{pitch}{The pitch of the drum
+  sound, in the Csound
+  \href{"http://www.csounds.com/manual/html/cpsoct.html"}{oct
+  notation} notation for pitches, where 8 is middle C and 1
+  represents an octave, to the corresponding frequency in
+  Hertz.} }
+
+  To \emph{set} a sound parameter to a value, you simply
+  include it as an extra argument in \code{shape_scatter};
+  to \emph{map} a parameter, you set the mapping for the
+  layer or the \code{sonify} object using
+  \code{\link{sonaes}} (see examples).
+}
+

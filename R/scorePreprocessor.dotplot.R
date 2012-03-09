@@ -14,7 +14,7 @@ scorePreprocessor.dotplot <- function(sonlayerscore) {
   ## times and tranform the durations accordingly
 
   n <- nrow(sonlayerscore)
-  
+
   if("tempo" %in% names(sonlayerscore)) {
     ## If tempo is provided, convert tempo data into start times, sort
     ## score, and scale durations in relation to beat
@@ -30,16 +30,16 @@ scorePreprocessor.dotplot <- function(sonlayerscore) {
     total <- sonlayerscore$start[n] + mean(sonlayerscore$start[-1] - sonlayerscore$start[-n]) #used to calculate dur
   }
 
-  ## Scale durations by total time divided by number of dotplot
-  sonlayerscore$dur <- (sonlayerscore$dur) * (total/n)
+  ## add jitter effect
+  avdur <- mean(sonlayerscore$dur)
+  sonsplit <- split(sonlayerscore, sonlayerscore$start)
+  sonlayerscore <- do.call(rbind, lapply(sonsplit, function(x) {
+    if(nrow(x) > 1)
+      x$start <- abs(x$start + rnorm(nrow(x), sd = avdur/2))
+    return(x)
+  }))
+  
 
-  ## (NOTE: this is somewhat questionable whether this is the right
-  ## thing to do; it's a little arbitrary and makes scaling duration
-  ## less intuitively related to what's specified in x$scaling.  I
-  ## have chosen to do it this way b/c it means you can easily set a
-  ## different scaling for the time and duration will automagically
-  ## scale down without having to set it separately, which seems
-  ## annoying.)
   
   attr(sonlayerscore, "length") <- sonlayerscore$start[n] + sonlayerscore$dur[n] # length in seconds
 
