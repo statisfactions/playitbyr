@@ -1,3 +1,5 @@
+require(audio)
+
 require(testthat)
 
 

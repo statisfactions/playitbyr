@@ -1,3 +1,5 @@
+require(audio)
+
 
 test_that("all FM + envelope parameters in shape_scatter are exposed", {
   x <- sonify(iris)
@@ -11,7 +13,7 @@ test_that("all FM + envelope parameters in shape_scatter are exposed", {
   sonsave(x, outfile)
   curr <- load.wave(outfile)
   unlink(outfile)
-  load(system.file("testdata/csoundirisFM.Rd", package = "playitbyr"))
+  load(system.file("testdata/csoundirisFM.rda", package = "playitbyr"))
   expect_equal(curr, comp)
 })
 

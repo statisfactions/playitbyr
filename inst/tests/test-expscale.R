@@ -1,3 +1,5 @@
+require(audio)
+
 context("expscale")
 
 test_that("scales to desired output", {

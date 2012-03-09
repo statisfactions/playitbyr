@@ -1,3 +1,5 @@
+require(audio)
+
 context("scaleShortcuts")
 
 test_that("scaling shortcuts produce as expected with no dmin, dmax", {

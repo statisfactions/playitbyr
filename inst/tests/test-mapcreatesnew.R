@@ -1,3 +1,5 @@
+require(audio)
+
 context("mapping tries to create new var when not in dataset")
 
 test_that("mapping creates new variable and sonifies it", {

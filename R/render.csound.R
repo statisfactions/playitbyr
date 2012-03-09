@@ -16,11 +16,12 @@ render.csound <- function(x, opts, file = "", audioSample=FALSE, ...) {
   if(file == "")
     file <- "dac"
 
- if("i" %in% names(opts))
-   opts$i <- c(opts$i, i)
- else
+  if("i" %in% names(opts))
+    opts$i <- c(opts$i, i)
+  else
     opts$i <- i
-  
+
+  opts$orcfile <- system.file("orc/playitbyr.orc", package = "playitbyr")
   opts$out <- file
   opts$rendering <- NULL
   do.call(createPerformance, opts)
@@ -54,13 +55,3 @@ csound_layer.scatter <- function(sonlayerscore, ...) {
 csound_layer.csound <- function(sonlayerscore, ...) {
   list(as.matrix(sonlayerscore))
 }
-
-## ; Pink Noise
-## ;	Sta	Dur	Seed	Out
-## i
-## i
-
-## ;	Sta	Dur	Amp	Fqc	Pan	Q	SprDec	SprTone	SprMix	SprQ	PBend	PBTime
-## i34	0.5	.5	30000	8.00	.5	.2	1	.5	.5	1	1.5	.1
-
-

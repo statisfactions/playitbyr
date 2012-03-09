@@ -1,3 +1,5 @@
+require(audio)
+
 context("setting vs mapping")
 
 test_that("setting accepted outside of sonaes()", {
@@ -6,6 +8,6 @@ test_that("setting accepted outside of sonaes()", {
           sonsave(x,outfile)
           curr <- load.wave(outfile)
           unlink(outfile)
-          load(system.file("testdata/setmap.Rd", package="playitbyr"))
+          load(system.file("testdata/setmap.rda", package="playitbyr"))
           expect_equal(curr, comp)
         })

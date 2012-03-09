@@ -1,3 +1,5 @@
+require(audio)
+
 context("non-numeric")
 
 test_that("data mappings can be non-numeric", {

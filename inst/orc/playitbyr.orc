@@ -1,0 +1,123 @@
+sr	=	44100			; Sample rate
+kr	=	4410			; Kontrol rate
+ksmps	=	10			; Samples/Kontrol period
+nchnls	=	2			; Normal stereo
+	zakinit	50,50			; Initialize the zak system
+
+
+gitab ftgen 1, 0, 65536, 10, 1
+
+instr 1
+/* Basic FM synthesis instrument */
+  idur    = p3
+  iamp    = ampdb(p4)*50
+  ipan	  = p5
+  iattkp  = p6
+  idecayp = p7
+  icps    = p8
+  imod    = p9
+  indx    = p10
+
+  kenv linen iamp, iattkp*idur, idur, (1-idecayp)*idur
+  asig foscili iamp*kenv, icps, 1, imod, indx, gitab
+  outs asig*ipan, asig*(1-ipan)
+
+endin
+
+instr 2
+/* Basic band-pass subtractive synthesis */
+  idur	   = p3
+  iamp	   = ampdb(p4)*50
+  ipan	   = p5
+  iattkp   = p6
+  idecayp  = p7
+  kcntr	   = p8
+  kbw	   = p9
+
+  kenv linen iamp, iattkp*idur, idur, (1-idecayp)*idur
+  anoise rand kenv
+  asig reson anoise, kcntr, kbw
+  outs asig*ipan, asig*(1-ipan)
+
+endin
+
+;---------------------------------------------------------
+; Drum Kit
+; Coded by Hans Mikelson January 2001
+;---------------------------------------------------------
+;---------------------------------------------------------
+; Pinkish noise
+;---------------------------------------------------------
+	instr   33
+
+iseed	=	p4		; Random generator seed
+iout	=	p5		; Zak output channel
+
+asig	pinkish 2, 0, 20, iseed ; Use multi-rate pink noise
+
+	zaw	asig, iout	; Write to the audio zak channel
+
+        endin
+
+
+;---------------------------------------------------------
+; Snare 4
+;---------------------------------------------------------
+       instr     34
+
+idur	=	p3		; Duration
+iamp	=	p4		; Amplitude
+ifqc	=	cpspch(p5)	; Pitch to frequency
+ipanl	=	sqrt(p6)	; Pan left
+ipanr	=	sqrt(1-p6)	; Pan right
+irez	=	p7		; Tone
+ispdec	=	p8		; Spring decay
+ispton	=	p9		; Spring tone
+ispmix	=	p10		; Spring mix
+ispq	=	p11		; Spring Q
+ipbnd	=	p12		; Pitch bend
+ipbtm	=	p13		; Pitch bend time
+
+arndr1 init      0
+arndr2 init      0
+
+kdclk  linseg    1, idur-.002, 1, .002, 0                ; Declick envelope
+aamp   linseg    1, .2/ifqc, 1, .2/ifqc, 0, idur-.002, 0 ; An amplitude pulse
+kptch  linseg    1, ipbtm, ipbnd, ipbtm, 1, .1, 1
+
+aosc1   vco      1, ifqc, 2, 1, gitab, 1 ; Use a pulse of the vco to stimulate the filters
+aosc    =        -aosc1*aamp        ; Multiply by the envelope pulse
+aosc2   butterlp aosc, 12000        ; Lowpass at 12K to take the edge off
+
+asig1   moogvcf  aosc,    ifqc*kptch, .9*irez      ; Moof filter with high resonance for basic drum tone
+asig2   moogvcf  aosc*.5, ifqc*2.1*kptch, .75*irez ; Sweeten with an overtone
+
+aampr  expseg    .1, .002, 1, .2, .005
+
+arnd1	zar      1
+arnd2	zar      2
+
+arnd1   =        arnd1*2*asig1
+arndr1 delay     arnd1-arndr2*.6, .01
+
+arnd2   =        arnd2*2*asig1
+arndr2 delay     arnd2-arndr1*.6, .01
+
+ahp1l   rezzy    arnd1+arndr1, 2700*ispton*kptch, 5*ispq, 1 ; High pass rezzy based at 2700
+ahp2l   butterbp arnd1, 2000*ispton*kptch, 500/ispq  ; Generate an undertone
+ahp3l   butterbp arnd1, 5400*ispton*kptch, 500/ispq  ; Generate an overtone
+ahpl    pareq    ahp1l+ahp2l*.7+ahp3l*.3, 15000, .1, .707, 2 ; Attenuate the highs a bit
+
+ahp1r   rezzy    arnd2+arndr2, 2700*ispton*kptch, 5*ispq, 1 ; High pass rezzy based at 2700
+ahp2r   butterbp arnd2, 2000*ispton*kptch, 500/ispq  ; Generate an undertone
+ahp3r   butterbp arnd2, 5400*ispton*kptch, 500/ispq  ; Generate an overtone
+ahpr    pareq    ahp1r+ahp2r*.7+ahp3r*.3, 15000, .1, .707, 2 ; Attenuate the highs a bit
+
+
+; Mix drum tones, pulse and noise signal & declick
+aoutl  =         (asig1+asig2+aosc2*.1+ahpl*ispmix*4)*iamp*kdclk 
+aoutr  =         (asig1+asig2+aosc2*.1+ahpr*ispmix*4)*iamp*kdclk 
+       outs      aoutl*ipanl, aoutr*ipanr              ; Output the sound
+
+       endin
+
