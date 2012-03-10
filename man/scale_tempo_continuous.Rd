@@ -3,27 +3,12 @@
 \alias{scale_tempo_exp}
 \title{Continuous tempo scales}
 \usage{
-  scale_tempo_exp(min, max, dmin = NULL, dmax = NULL, ...)
+  scale_tempo_exp(soundlimits, limits = NULL, ...)
 
-  scale_tempo_continuous(min, max, dmin = NULL,
-    dmax = NULL, ...)
+  scale_tempo_continuous(soundlimits, limits = NULL, ...)
 }
 \arguments{
   \item{\dots}{Other parameters (currently ignored)}
-
-  \item{min}{The desired minimum value, a \code{numeric} of
-  length 1}
-
-  \item{max}{The desired maximum value, a \code{numeric} of
-  length 1}
-
-  \item{dmin}{The data value to be lined up with the
-  \code{min} argument. This is useful for when you want to
-  specify a fixed scale}
-
-  \item{dmax}{The data value to be lined up with the
-  \code{max} argument. This is useful for when you want to
-  specify a fixed scale}
 }
 \value{
   A \code{sonscaling} object, to be used in \code{sonify}

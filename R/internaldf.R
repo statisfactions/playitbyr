@@ -6,7 +6,7 @@
 ##' by whatever method renders the sounds (currently only rendering in
 ##' R as sine waves is supported).
 ##'
-##' @note These functions (particularly .getSonlayerScore) assume that
+##' @note These functions (particularly .SonlayerScore) assume that
 ##' every shape has a single output row for each input data row after
 ##' applying statistical tranformations
 ##' 
@@ -30,9 +30,15 @@
   if(is.null(x$sonlayers))
     stop("Cannot render sound without any sonlayers.")
 
+  ## get scales; train if faceting
+  if(!is.null(x$sonfacet) && x$sonfacet$scales == "fixed") 
+    scale <- .fixFacetScales(x)
+  else
+    scale <- .getScales(x)
+  
   ## Create a score for each sonlayer and put together in list
   score <- lapply(1:length(x$sonlayers),
-                  function(layernum) .getSonlayerScore(x, layernum))
+                  function(layernum) .getSonlayerScore(x, layernum, scale))
 
   ## Get the total length in seconds of the sonification (i.e. the
   ## longest of the layers) and pass as an attribute.
@@ -48,14 +54,14 @@
 }
 
 ##' @rdname internaldf
-.getSonlayerScore <- function(x, sonlayernum) {
+.getSonlayerScore <- function(x, sonlayernum, scale) {
   data <- .getSonlayerData(x, sonlayernum, transform = TRUE)
   if(!is.null(x$sonfacet)) {
     if(x$sonfacet$facet %in% names(data)) {
     datal <- split(data, data[[x$sonfacet$facet]], drop = TRUE)
     nl <- length(datal)
     scorel <- lapply(datal, function(d)
-                     .getSonlayerScoreFacet(x, sonlayernum, d))
+                     .getSonlayerScoreFacet(x, sonlayernum, d, scale))
     facetend <- sapply(scorel, function(s) attr(s, "length"))
     facetend <- facetend + (0:(nl-1))*x$sonfacet$pause
     scorelshift <- lapply(1:nl, function(fn) {
@@ -67,7 +73,7 @@
     score <- do.call(rbind, scorelshift)
     attr(score, "length") <- facetend[nl]
   }} else {
-    score <- .getSonlayerScoreFacet(x, sonlayernum, data)
+    score <- .getSonlayerScoreFacet(x, sonlayernum, data, scale)
   }
 
   ## Set shape to pass to shape and rendering methods
@@ -80,7 +86,7 @@
 }
 
 ##' @rdname internaldf
-.getSonlayerScoreFacet <- function(x, sonlayernum, data) {
+.getSonlayerScoreFacet <- function(x, sonlayernum, data, scale) {
   ## Returns an output data.frame with all the information needed to
   ## render the sonlayernum-th sonlayer of x.  The output is in a
   ## format rather similar to a Csound score.
@@ -106,7 +112,7 @@
       column <- eval(map[[param]])
     if(!is.numeric(column))
       column <- as.numeric(factor(column))
-    return(.rescaleDataByParam(x, param, column))
+    return(.rescaleDataByParam(scale, param, column))
   })
 
   ## add on settings for params that do not yet have columns
@@ -114,15 +120,10 @@
   missingmaps <- setdiff(names(set), names(out))
   out <- c(out, set[missingmaps])
 
-
   out <- as.data.frame(out)
-
   
   ## Set shape to pass to shape and rendering methods
   class(out) <- c(.getSonlayerShape(x, sonlayernum),  "data.frame")
-
-
-
 
   ## Any additional score processing done by shape-specific methods to
   ## scorePreprocessor. NOTE: all scorePreprocessor methods must
@@ -235,28 +236,58 @@
 ##' @rdname internaldf
 ##' @param param The sound parameter
 ##' @param column The data.frame column (vector) to be rescaled
-.rescaleDataByParam <- function(x, param, column) {
-  ## If the parameter has a scaling associated with it in the sonify
-  ## object, apply it; otherwise return the column verbatim
-  if(!is.null(x$scales[[param]]))
-    scale <- x$scales[[param]]
-  else {
-    ## Figure out shapes in order of their unique appearance in sonlayers
-    shapes <- unique(sapply(1:length(x$sonlayers),
-                            function(y) .getSonlayerShape(x, y)))
-    scale <- .getDefaultScalingByParam(param, shapes)
-  }
-
+.rescaleDataByParam <- function(scale, param, column) {
   ##Apply function
-  column <- scale$scaling.function(column, scale$min, scale$max)
+  column <- scale[[param]]$scaling.function(column, limits = scale[[param]]$limits, soundlimits = scale[[param]]$soundlimits)
 
   return(column)
 }
 
 ##' @rdname internaldf
+.getScales <- function(x) {
+  shapes <- unique(sapply(1:length(x$sonlayers),
+                            function(y) .getSonlayerShape(x, y)))
+  scale <- .getDefaultScalings(shapes)
+  scale[names(x$scales)] <- x$scales
+  scale
+}
+
+.fixFacetScales <- function(x) {
+  ## get all sonlayer mappings for each of these
+  scales <- .getScales(x)
+  all <- lapply(1:length(x$sonlayers), function(i) {
+    map <- .getSonlayerMappings(x, i)
+    data <- .getSonlayerData(x, i)
+    extremes <- lapply(names(map), function(param) {
+      if(length(map[[param]]) == 1 && map[[param]] %in% names(data))
+        column <- data[[map[[param]]]]
+      else
+        column <- eval(map[[param]])
+      if(!is.numeric(column))
+        column <- as.numeric(factor(column))
+      return(param = c(min(column), max(column)))
+    })
+    names(extremes) <- names(map)
+    extremes <- do.call(rbind,extremes)
+  })
+  all <- do.call(rbind,all)
+  nm <- row.names(all)
+  row.names(all) <- NULL
+  all <- as.data.frame(all)
+  names(all) <- c("min", "max")
+  all$map <- as.character(nm)
+  lapply(split(all, all$map), function(y) {
+    scales[[y$map[1]]]$limits <- c(min(y$min), max(y$max))
+    scales[[y$map[1]]]
+  })
+}
+
+
+
+##' @rdname internaldf
 ##' @param shapes A character vector of names of shapes included in
 ##' the \code{sonify} object
-.getDefaultScalingByParam <- function(param, shapes) {
+.getDefaultScalings <- function(shapes) {
   ## Get the data.frame of all soundparameters
   soundparams <- .getSoundParams(shapes)
 
@@ -267,10 +298,18 @@
   ## documenting.
   soundparams$shape <- ordered(soundparams$shape, levels=shapes)
   soundparams <- soundparams[order(soundparams$shape),]
-  lookup <- soundparams[soundparams$param %in% param,][1,]
-  
-  lookup <- as.character(lookup$shape) # since it's a factor
-  return(.getShapeDef(lookup)$params[[param]]$defaultScaling)
+  soundparams <- soundparams[!duplicated(soundparams$param),]
+
+  out <- lapply(1:nrow(soundparams), function(y) {
+    x <- soundparams[y, ]
+    scaleparam <- .getShapeDef(as.character(x[["shape"]]))
+    scaleparam <- scaleparam$params[[x[["param"]]]]$defaultScaling
+    names(scaleparam) <- c("limits", "soundlimits", "scaling.function")
+    scaleparam
+   })
+  names(out) <- soundparams$param
+  class(out) <- "sonscaling"
+  return(out)
 }
 
 ##' @rdname internaldf

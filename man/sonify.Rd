@@ -4,7 +4,7 @@
 \usage{
   sonify(data = NULL, mapping = sonaes(),
     scales = sonscaling(), sonlayers = NULL,
-    opts = sonopts(rendering = "csound"))
+    opts = sonopts(rendering = "csound"), sonfacet = NULL)
 }
 \arguments{
   \item{data}{a \code{data.frame} with the data to be
@@ -23,6 +23,9 @@
 
   \item{opts}{A named list of rendering options to pass to
   the individual rendering type.}
+
+  \item{sonfacet}{A \code{\link{sonfacet}} object that
+  gives what variables to split by}
 }
 \value{
   A \code{sonify} object, which contains what is needed to

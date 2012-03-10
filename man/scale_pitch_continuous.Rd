@@ -3,31 +3,12 @@
 \alias{scale_pitch_exp}
 \title{Continuous pitch scales}
 \usage{
-  scale_pitch_continuous(min, max, dmin = NULL,
-    dmax = NULL, chromatic = TRUE, ...)
+  scale_pitch_continuous(soundlimits, limits = NULL, ...)
 
-  scale_pitch_exp(min, max, dmin = NULL, dmax = NULL,
-    chromatic = TRUE, ...)
+  scale_pitch_exp(soundlimits, limits = NULL, ...)
 }
 \arguments{
-  \item{chromatic}{Should pitches be rounded to chromatic
-  values? Default \code{TRUE}}
-
   \item{\dots}{Other parameters (currently ignored)}
-
-  \item{min}{The desired minimum value, a \code{numeric} of
-  length 1}
-
-  \item{max}{The desired maximum value, a \code{numeric} of
-  length 1}
-
-  \item{dmin}{The data value to be lined up with the
-  \code{min} argument. This is useful for when you want to
-  specify a fixed scale}
-
-  \item{dmax}{The data value to be lined up with the
-  \code{max} argument. This is useful for when you want to
-  specify a fixed scale}
 }
 \value{
   A \code{sonscaling} object, to be used in \code{sonify}

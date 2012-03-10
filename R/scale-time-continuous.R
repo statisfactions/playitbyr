@@ -18,15 +18,15 @@
 ##' \code{\link{+.sonify}} for the addition onto \code{sonify}
 ##' objects.
 ##'
-##' @inheritParams linear.scale
+##' @inheritParams linear_scale
 ##' @param \dots Other parameters (currently ignored)
 ##'
 ##' @rdname scale_time_continuous
 ##' @export
-scale_time_continuous <- function(min, max, dmin = NULL, dmax = NULL, ...)
-  linear_fixed_scale("time", min, max, dmin, dmax)
+scale_time_continuous <- function(soundlimits, limits = NULL, ...)
+  sonscaling(time = list(limits, soundlimits, linear_scale))
 
 ##' @rdname scale_time_continuous
 ##' @export
-scale_time_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("time", min, max, dmin, dmax)
+scale_time_exp <- function(soundlimits, limits = NULL, ...) sonscaling(time = list(limits, soundlimits, exp_scale))
 

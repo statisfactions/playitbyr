@@ -17,7 +17,7 @@
 ##' @param scales Should scales be fixed (\code{"fixed"}, the
 ##' default), or free (\code{"free"})
 ##' @param pause Length of pause, in seconds, between each facet
-sonfacet <- function(facet = NULL, scales = "free", pause = 0.5) {
+sonfacet <- function(facet = NULL, scales = "fixed", pause = 0.5) {
   ## Deparse (convert to string) any unquoted string arguments, which R
   ## interpreted as mode "name" in above:
   if(is.name(substitute(facet)))

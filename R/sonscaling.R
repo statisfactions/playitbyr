@@ -37,20 +37,14 @@ sonscaling <- function(...) {
 }
 
 sonscale <- function(x) {
-
   if(!is.list(x))
     stop("All arguments to sonscaling() must be a list")
   else if(length(x) == 3) {
-    if(is.null(names(x)))
-      names(x) <-  c("limits", "soundlimits", "scaling.function")
-    if(!is.numeric(x$limits) | length(x$limits) != 2)
-      stop("All arguments' 'limits' slot must be numeric of length 2")
-  } else if(length(x) == 2) {
-    if(is.null(names(x)))
-      names(x) <- c("soundlimits", "scaling.function")
-    x <- c(limits = list(NULL), x)
+    names(x) <-  c("limits", "soundlimits", "scaling.function")
   } else stop("Each argument must be a list of length 2 or 3.")
 
+  if((!is.numeric(x$limits) | length(x$limits) != 2) & (!is.null(x$limits)))
+    stop("All arguments' 'limits' slot must be numeric of length 2, or NULL")
 
   if(!is.numeric(x$soundlimits) | length(x$soundlimits) != 2)
     stop("All arguments' 'soundlimits' slot must be of length 2")

@@ -3,27 +3,19 @@
 \alias{scale_time_exp}
 \title{Continuous time scales}
 \usage{
-  scale_time_continuous(min, max, dmin = NULL, dmax = NULL,
-    ...)
+  scale_time_continuous(soundlimits, limits = NULL, ...)
 
-  scale_time_exp(min, max, dmin = NULL, dmax = NULL, ...)
+  scale_time_exp(soundlimits, limits = NULL, ...)
 }
 \arguments{
-  \item{min}{The desired minimum value, a \code{numeric} of
-  length 1}
-
-  \item{max}{The desired maximum value, a \code{numeric} of
-  length 1}
-
-  \item{dmin}{The data value to be lined up with the
-  \code{min} argument. This is useful for when you want to
-  specify a fixed scale}
-
-  \item{dmax}{The data value to be lined up with the
-  \code{max} argument. This is useful for when you want to
-  specify a fixed scale}
-
   \item{\dots}{Other parameters (currently ignored)}
+
+  \item{soundlimits}{The limits of the sound parameter.}
+
+  \item{limits}{The limits of the data to train, a numeric
+  vector of length 2. All data values outside these limits
+  are returned as \code{NA}. If \code{NULL}, the default,
+  the function takes the minimum and maximum of the data}
 }
 \value{
   A \code{sonscaling} object, to be used in \code{sonify}

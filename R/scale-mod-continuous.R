@@ -24,8 +24,8 @@
 ##' @param \dots Other parameters (currently ignored)
 ##' @rdname scale_mod_continuous
 ##' @export
-scale_mod_continuous <- function(min, max, dmin = NULL, dmax = NULL, ...) linear_fixed_scale("mod", min, max, dmin, dmax)
+scale_mod_continuous <- function(soundlimits, limits = NULL, ...) sonscaling(mod = list(limits, soundlimits, linear_scale))
 
 ##' @rdname scale_mod_continuous
 ##' @export
-scale_mod_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("mod", min, max, dmin, dmax)
+scale_mod_exp <- function(soundlimits, limits = NULL, ...) sonscaling(mod = list(limits, soundlimits, exp_scale))

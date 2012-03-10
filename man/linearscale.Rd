@@ -2,16 +2,17 @@
 \alias{linear_scale}
 \title{Create a linear parameter scaling with given minimum and maximum}
 \usage{
-  linear_scale(x, min, max)
+  linear_scale(x, limits = NULL, soundlimits)
 }
 \arguments{
   \item{x}{A numeric vector or matrix}
 
-  \item{min}{The desired minimum value, a \code{numeric} of
-  length 1}
+  \item{limits}{The limits of the data to train, a numeric
+  vector of length 2. All data values outside these limits
+  are returned as \code{NA}. If \code{NULL}, the default,
+  the function takes the minimum and maximum of the data}
 
-  \item{max}{The desired maximum value, a \code{numeric} of
-  length 1}
+  \item{soundlimits}{The limits of the sound parameter.}
 }
 \value{
   A numeric vector or matrix of the same type as \code{x},

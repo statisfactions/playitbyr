@@ -1,10 +1,12 @@
 \name{internaldf}
-\alias{.getDefaultScalingByParam}
+\alias{.getDefaultScalings}
 \alias{.getDefaultShapeOptions}
+\alias{.getScales}
 \alias{.getScore}
 \alias{.getSonlayerData}
 \alias{.getSonlayerMappings}
 \alias{.getSonlayerScore}
+\alias{.getSonlayerScoreFacet}
 \alias{.getSonlayerSettings}
 \alias{.getSonlayerShape}
 \alias{.getSonlayerShapeOptions}
@@ -17,7 +19,9 @@
 \usage{
   .getScore(x)
 
-  .getSonlayerScore(x, sonlayernum)
+  .getSonlayerScore(x, sonlayernum, scale)
+
+  .getSonlayerScoreFacet(x, sonlayernum, data, scale)
 
   .getSonlayerMappings(x, sonlayernum, remove.null = TRUE)
 
@@ -29,9 +33,11 @@
 
   .getSonlayerShape(x, sonlayernum)
 
-  .rescaleDataByParam(x, param, column)
+  .rescaleDataByParam(scale, param, column)
 
-  .getDefaultScalingByParam(param, shapes)
+  .getScales(x)
+
+  .getDefaultScalings(shape)
 
   .getDefaultShapeOptions(shapename)
 
@@ -84,9 +90,9 @@
   supported).
 }
 \note{
-  These functions (particularly .getSonlayerScore) assume
-  that every shape has a single output row for each input
-  data row after applying statistical tranformations
+  These functions (particularly .SonlayerScore) assume that
+  every shape has a single output row for each input data
+  row after applying statistical tranformations
 
   all scorePreprocessor methods must calculate length of
   sonification and return that as an attribute

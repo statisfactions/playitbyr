@@ -33,8 +33,8 @@ exp_scale <- function(x, limits = NULL, soundlimits) {
   ## return NA if outside range
   x[x < dmin | x > dmax] <- NA
   
-  if(any(na.exclude(x <= 0)))
-    stop("All values must be greater than zero for exponential scales (try setting 'limits' to a positive number to exclude non-positive values)")
+  if(any(na.exclude(c(x, limits) <= 0)))
+    stop("'x' and 'limits' must be greater than zero for exponential scales (try setting 'limits' to a positive number to exclude non-positive values)")
   lx <- log(x)
   if(!is.null(limits))
      limits <- log(limits)

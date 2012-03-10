@@ -24,8 +24,8 @@
 ##' @param \dots Other parameters (currently ignored)
 ##' @rdname scale_vol_continuous
 ##' @export
-scale_vol_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("vol", min, max, dmin, dmax)
+scale_vol_exp <- function(soundlimits, limits = NULL, ...) sonscaling(vol = list(limits, soundlimits, exp_scale))
 
 ##' @rdname scale_vol_continuous
 ##' @export
-scale_vol_continuous <- function(min, max, dmin = NULL, dmax = NULL, ...) linear_fixed_scale("vol", min, max, dmin, dmax)
+scale_vol_continuous <- function(soundlimits, limits = NULL, ...) sonscaling(vol = list(limits, soundlimits, linear_scale))

@@ -1,6 +1,7 @@
 \name{render.csound}
 \alias{csound_layer}
 \alias{csound_layer.csound}
+\alias{csound_layer.dotplot}
 \alias{csound_layer.scatter}
 \alias{render.csound}
 \title{Rendering sound using csound}
@@ -13,6 +14,8 @@
   \method{csound_layer}{scatter} (sonlayerscore, ...)
 
   \method{csound_layer}{csound} (sonlayerscore, ...)
+
+  \method{csound_layer}{dotplot} (sonlayerscore, ...)
 }
 \arguments{
   \item{\dots}{Currently ignored}

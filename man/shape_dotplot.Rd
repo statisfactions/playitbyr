@@ -21,6 +21,10 @@
   want to fiddle with the other aspects of the sound for
   aesthetic reasons.
 
+  When more than one value appears at a given time, this
+  shape automatically adds noise to "jitter" the values so
+  they can be heard distinctly.
+
   These parameters are available for setting or mapping:
 
   \describe{ \item{time}{The starting time of the snare

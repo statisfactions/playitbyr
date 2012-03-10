@@ -9,7 +9,8 @@
 
   \item{y}{A \code{\link{sonlayer}} (such as
   \code{\link{shape_scatter}}), \code{\link{sonscaling}},
-  \code{\link{sonaes}}, or \code{\link{sonopts}} object.}
+  \code{\link{sonaes}}, \code{\link{sonopts}}, or
+  \code{\link{sonfacet}} object.}
 }
 \value{
   A sonify object with the relevant \code{y} value added

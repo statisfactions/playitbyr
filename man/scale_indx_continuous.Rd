@@ -3,27 +3,12 @@
 \alias{scale_indx_exp}
 \title{Continuous modulation index scales}
 \usage{
-  scale_indx_continuous(min, max, dmin = NULL, dmax = NULL,
-    ...)
+  scale_indx_continuous(soundlimits, limits = NULL, ...)
 
-  scale_indx_exp(min, max, dmin = NULL, dmax = NULL, ...)
+  scale_indx_exp(soundlimits, limits = NULL, ...)
 }
 \arguments{
   \item{\dots}{Other parameters (currently ignored)}
-
-  \item{min}{The desired minimum value, a \code{numeric} of
-  length 1}
-
-  \item{max}{The desired maximum value, a \code{numeric} of
-  length 1}
-
-  \item{dmin}{The data value to be lined up with the
-  \code{min} argument. This is useful for when you want to
-  specify a fixed scale}
-
-  \item{dmax}{The data value to be lined up with the
-  \code{max} argument. This is useful for when you want to
-  specify a fixed scale}
 }
 \value{
   A \code{sonscaling} object, to be used in \code{sonify}

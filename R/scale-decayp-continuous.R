@@ -25,8 +25,8 @@
 ##' @param \dots Other parameters (currently ignored)
 ##' @rdname scale_decayp_continuous
 ##' @export
-scale_decayp_exp <- function(min, max, dmin = NULL, dmax = NULL, ...) exp_fixed_scale("decayp", min, max, dmin, dmax)
+scale_decayp_exp <- function(soundlimits, limits = NULL, ...) sonscaling(decayp = list(limits, soundlimits, exp_scale))
 
 ##' @rdname scale_decayp_continuous
 ##' @export
-scale_decayp_continuous <- function(min, max, dmin = NULL, dmax = NULL, ...) linear_fixed_scale("decayp", min, max, dmin, dmax)
+scale_decayp_continuous <- function(soundlimits, limits = NULL, ...) sonscaling(decayp = list(limits, soundlimits, linear_scale))
