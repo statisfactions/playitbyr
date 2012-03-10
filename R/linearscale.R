@@ -12,8 +12,11 @@
 ##'
 ##' @rdname linearscale
 ##' @param x A numeric vector or matrix
-##' @param min The desired minimum value, a \code{numeric} of length 1
-##' @param max The desired maximum value, a \code{numeric} of length 1
+##' @param limits The limits of the data to train, a numeric vector of length
+##' 2. All data values outside these limits are returned as
+##' \code{NA}. If \code{NULL}, the default, the function takes the
+##' minimum and maximum of the data
+##' @param soundlimits The limits of the sound parameter.
 ##' @return A numeric vector or matrix of the same type as \code{x},
 ##' linearly rescaled in the desired way. If \code{x} only has one
 ##' value, \code{linear_scale} simply returns the midpoint between
@@ -28,24 +31,30 @@
 ##' linear_scale(x, min=10, max=1)
 ## TODO add example of choosing midpoint and document here
 ##' @export
-linear_scale <- function(x, min, max) {
-  ## Linearly rescales vector x so that "lower" is the minimum
-  ## and "upper" the maximum
-
-  if(min>max) {
+linear_scale <- function(x, limits = NULL, soundlimits) {
+  
+  if(soundlimits[1] > soundlimits[2]) {
     ## Allow for reversed polarity
     x <- -x
-    oldmin <- min
-    oldmax <- max
-    min <- oldmax
-    max <- oldmin
+    soundlimits <- rev(soundlimits)
   }
+  if(is.null(limits))
+    limits <- c(min(x), max(x))
+  
+  smin <- soundlimits[1]
+  smax <- soundlimits[2]
+  dmin <- limits[1]
+  dmax <- limits[2]
+
+  ## return NA if outside range
+  x[x < dmin | x > dmax] <- NA
+  
   if(length(unique(x)) == 1) {
     ## allow for all the same, choose midpoint
-    out <- rep(mean(c(min, max)), length(x))
+    out <- rep(mean(soundlimits), length(x))
   } else {
-    nrange <- abs(max-min)
-    out <- ((x-min(x))*nrange/(max(x)-min(x)) + min)
+    nrange <- abs(smax - smin)
+    out <- ((x-dmin)*nrange/(dmax - dmin) + smin)
   }
   out
 }
@@ -68,23 +77,6 @@ exp_fixed_scale <- function(param, min, max, dmin, dmax) {
     body(exfixie)[[2]][[3]] <- dmin
     body(exfixie)[[3]][[3]] <- dmax
     out <- sonscaling("start" = list(min, max, exfixie))
-  }
-  names(out) <- param
-  out
-}
-
-linear_fixed_scale <- function(param, min, max, dmin, dmax) {
-  numdmin <- as.numeric(!is.null(dmin)) + as.numeric(!is.null(dmax))
-  if(numdmin == 0)
-    out <- sonscaling(start = list(min, max, linear_scale))
-  else if(numdmin == 1)
-    stop("Only one of dmin, dmax was given. Both or neither can be supplied.")
-  else {
-    linfixie <- fixie
-    body(linfixie)[[2]][[3]] <- dmin
-    body(linfixie)[[3]][[3]] <- dmax
-    body(linfixie)[[4]][[2]][[1]] <- substitute(linear_scale)
-    out <- sonscaling("start" = list(min, max, linfixie))
   }
   names(out) <- param
   out

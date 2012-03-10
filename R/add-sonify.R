@@ -5,7 +5,10 @@
 ##'
 ##' @rdname add-sonify
 ##' @param x A \code{sonify} object
-##' @param y A \code{\link{sonlayer}} (such as \code{\link{shape_scatter}}), \code{\link{sonscaling}}, \code{\link{sonaes}}, or \code{\link{sonopts}} object.
+##' @param y A \code{\link{sonlayer}} (such as
+##' \code{\link{shape_scatter}}), \code{\link{sonscaling}},
+##' \code{\link{sonaes}}, \code{\link{sonopts}}, or
+##' \code{\link{sonfacet}} object.
 ##' @return A sonify object with
 ##' the relevant \code{y} value added into the object.
 ##' 
@@ -36,6 +39,8 @@
     for(i in names(y)) {
       x$opts[[i]] <- y[[i]]
     }
+  } else if("sonfacet" %in% class(y)) {
+    x$sonfacet <- y
   } else stop("'+' operator not supported for this operation.")
   x
 }         

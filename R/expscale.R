@@ -11,11 +11,7 @@
 ##' used on any vector or matrix.
 ##'
 ##' @rdname expscale
-##' @param x A numeric vector or matrix
-##' @param min The desired minimum value, a \code{numeric} of length
-##' 1. Must be greater than zero.
-##' @param max The desired maximum value, a \code{numeric} of length
-##' 1. Must be greater than zero.
+##' @inheritParams linear_scale
 ##' @return A numeric vector or matrix of the same type as \code{x}, exponentially
 ##' rescaled in the desired way.
 ##' @seealso \code{\link{sonscaling}}
@@ -28,11 +24,19 @@
 ##' exp_scale(x, min=10, max=1)
 ##'
 ##' @export
-exp_scale <- function(x, min, max) {
+exp_scale <- function(x, limits = NULL, soundlimits) {
   ## Exponentially rescales vector x so that "lower" is the minimum
   ## and "upper" the maximum
-  if(any(x <= 0))
-    stop("All of vector 'x' must be greater than zero.")
+  dmin <- limits[1]
+  dmax <- limits[2]
+
+  ## return NA if outside range
+  x[x < dmin | x > dmax] <- NA
+  
+  if(any(na.exclude(x <= 0)))
+    stop("All values must be greater than zero for exponential scales (try setting 'limits' to a positive number to exclude non-positive values)")
   lx <- log(x)
-  return(linear_scale(lx, min, max))
+  if(!is.null(limits))
+     limits <- log(limits)
+  return(linear_scale(lx, limits, soundlimits))
 }

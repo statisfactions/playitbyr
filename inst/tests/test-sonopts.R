@@ -32,7 +32,7 @@ test_that("sonopt works with `+.sonify`", {
   testsonify <- structure(list(data = NULL, dataname = "NULL",
                                mapping = structure(list(), class = "sonaes"), 
                                scales = structure(list(), class = "sonscaling"),
-                               sonlayers = NULL, opts = testlist),
+                               sonlayers = NULL, opts = testlist, sonfacet = NULL),
                           class = "sonify")
   expect_equal(testsonify, sonify() + sonoptsout)
 })

@@ -49,18 +49,52 @@
 
 ##' @rdname internaldf
 .getSonlayerScore <- function(x, sonlayernum) {
+  data <- .getSonlayerData(x, sonlayernum, transform = TRUE)
+  if(!is.null(x$sonfacet)) {
+    if(x$sonfacet$facet %in% names(data)) {
+    datal <- split(data, data[[x$sonfacet$facet]], drop = TRUE)
+    nl <- length(datal)
+    scorel <- lapply(datal, function(d)
+                     .getSonlayerScoreFacet(x, sonlayernum, d))
+    facetend <- sapply(scorel, function(s) attr(s, "length"))
+    facetend <- facetend + (0:(nl-1))*x$sonfacet$pause
+    scorelshift <- lapply(1:nl, function(fn) {
+      outsc <- scorel[[fn]]
+      if(fn > 1) 
+        outsc$start <- outsc$start + facetend[fn]
+      return(outsc)
+    })
+    score <- do.call(rbind, scorelshift)
+    attr(score, "length") <- facetend[nl]
+  }} else {
+    score <- .getSonlayerScoreFacet(x, sonlayernum, data)
+  }
+
+  ## Set shape to pass to shape and rendering methods
+  class(score) <- c(.getSonlayerShape(x, sonlayernum),  "data.frame")
+
+  ## Add shape options, if any, to pass to rendering methods
+  attr(score, "shape_params") <- .getSonlayerShapeOptions(x, sonlayernum)
+  ## TODO subtract out sound params from this function
+  score  
+}
+
+##' @rdname internaldf
+.getSonlayerScoreFacet <- function(x, sonlayernum, data) {
   ## Returns an output data.frame with all the information needed to
   ## render the sonlayernum-th sonlayer of x.  The output is in a
   ## format rather similar to a Csound score.
 
-  
   ## Get mappings and stat-transformed data
   map <- .getSonlayerMappings(x, sonlayernum, remove.null = TRUE) 
-  data <- .getSonlayerData(x, sonlayernum, transform = TRUE)
   set <- .getSonlayerSettings(x, sonlayernum, remove.null = TRUE)
   shape <- .getSonlayerShape(x, sonlayernum)
 
   n <- nrow(data) # length of output score
+
+  if(n == 0)
+    ## if no data here, skip this facet
+    return(NULL)
 
   ## Create output score:
   ## If map gives data.frame column, rescale that column.
@@ -79,16 +113,16 @@
   names(out) <- names(map)
   missingmaps <- setdiff(names(set), names(out))
   out <- c(out, set[missingmaps])
-  
+
+
   out <- as.data.frame(out)
+
   
-                
   ## Set shape to pass to shape and rendering methods
   class(out) <- c(.getSonlayerShape(x, sonlayernum),  "data.frame")
 
-  ## Add shape options to pass to rendering methods
-  attr(out, "shape_params") <- .getSonlayerShapeOptions(x, sonlayernum)
-  ## TODO subtract out sound params from this function
+
+
 
   ## Any additional score processing done by shape-specific methods to
   ## scorePreprocessor. NOTE: all scorePreprocessor methods must
@@ -129,15 +163,9 @@
   }
 
   ## If remove.null, remove list elements whose value is NULL
-  if(remove.null) {
-    i <- 1
-    while(i <= length(outmap)) {
-      ## See R FAQ "How can I set components of a list to NULL" for
-      ## more on how this works... looks odd, but it's good
-      if(is.null(outmap[[i]])) outmap[[i]] <- NULL
-      else i <- i +1
-    }
-  }
+  if(remove.null)
+    outmap <- removenull(outmap)    
+  
   return(outmap)
 }
 
@@ -185,16 +213,9 @@
   }
 
     ## If remove.null, remove list elements whose value is NULL
-  if(remove.null) {
-    i <- 1
-    while(i <= length(outset)) {
-      ## See R FAQ "How can I set components of a list to NULL" for
-      ## more on how this works... looks odd, but it's good
-      if(is.null(outset[[i]])) outset[[i]] <- NULL
-      else i <- i +1
-    }
-  }
-  
+  if(remove.null) 
+    outset <- removenull(outset)    
+    
   return(outset)
 }
 
@@ -279,3 +300,12 @@
 ##' sonification and return that as an attribute \code{length} of the
 ##' data frame.
 scorePreprocessor <- function(sonlayerscore) UseMethod("scorePreprocessor")
+
+  
+removenull <- function(x) {
+  out <- Filter(function(y) !is.null(y), x)
+  newnames <- intersect(names(out), names(x))
+  mostattributes(out) <- attributes(x)
+  names(out) <- newnames
+  out
+}

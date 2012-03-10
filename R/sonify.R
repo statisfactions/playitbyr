@@ -14,6 +14,8 @@
 ##' \code{sonlayer} objects, that gives each layer to be rendered.
 ##' @param opts A named list of rendering options to pass to
 ##' the individual rendering type.
+##' @param sonfacet A \code{\link{sonfacet}} object that gives what
+##' variables to split by
 ##' @return A \code{sonify} object, which contains what is needed to render the
 ##' object. If the object is completely specified, it can by rendered simply by
 ##' calling the print method for the object (i.e. simply typing the name of the
@@ -61,7 +63,7 @@
 ##' \dontrun{x # outputs sound}
 ##'
 ##' @export
-sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling(), sonlayers = NULL, opts = sonopts(rendering = "csound")) {
+sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling(), sonlayers = NULL, opts = sonopts(rendering = "csound"), sonfacet = NULL) {
   ## Creates a \code{sonify} object, which is a list containing the \code{data.frame}
   ## to be sonified, the mappings of data to sound parameters, the scaling
   ## of parameters, and additional options.
@@ -71,8 +73,8 @@ sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling(), sonlayers =
   if("sonlayer" %in% class(sonlayers))
     sonlayers <- list(sonlayers)
   
-  s <- list(data, dataname, mapping, scales, sonlayers, opts) 
-  names(s) <- c("data", "dataname", "mapping", "scales", "sonlayers", "opts")
+  s <- list(data, dataname, mapping, scales, sonlayers, opts, sonfacet) 
+  names(s) <- c("data", "dataname", "mapping", "scales", "sonlayers", "opts", "sonfacet")
   class(s) <- "sonify"
   .checkData(s)
   s

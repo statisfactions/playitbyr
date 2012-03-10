@@ -18,14 +18,7 @@
 ##' \code{\link{+.sonify}} for the addition onto \code{sonify}
 ##' objects.
 ##'
-##' @param min The desired minimum value, a \code{numeric} of length 1
-##' @param max The desired maximum value, a \code{numeric} of length 1
-##' @param dmin The data value to be lined up with the \code{min}
-##' argument. This is useful for when you want to specify a fixed
-##' scale
-##' @param dmax The data value to be lined up with the \code{max}
-##' argument. This is useful for when you want to specify a fixed
-##' scale
+##' @inheritParams linear.scale
 ##' @param \dots Other parameters (currently ignored)
 ##'
 ##' @rdname scale_time_continuous
