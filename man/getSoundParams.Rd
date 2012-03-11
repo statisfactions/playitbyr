@@ -3,14 +3,14 @@
 \alias{.getSoundParams}
 \title{Get and check currently possible sound parameters.}
 \usage{
-  .getSoundParams(shapes = ..getShapeNames())
+  .getSoundParams(shapes = .getShapeNames())
 
-  .checkSoundParams(paramnames, shapes = ..getShapeNames())
+  .checkSoundParams(paramnames, shapes = .getShapeNames())
 }
 \arguments{
   \item{shapes}{The shapes to return the sound parameters
   of. The default is to get or check all currently
-  available shapes (see \code{link{..getShapeNames}}).}
+  available shapes (see \code{link{.getShapeNames}}).}
 
   \item{paramnames}{A character vector of sound parameters
   to check for validity}

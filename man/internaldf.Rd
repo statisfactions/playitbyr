@@ -37,7 +37,7 @@
 
   .getScales(x)
 
-  .getDefaultScalings(shape)
+  .getDefaultScalings(shapes)
 
   .getDefaultShapeOptions(shapename)
 

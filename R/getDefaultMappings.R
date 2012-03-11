@@ -15,13 +15,3 @@
   defaults <- lapply(shapedef$params, function(x) x$defaultSetting)
   return(do.call(sonaes, defaults))
 }
-
-##' @rdname getDefaultSettings
-##' @export
-.getDefaultScalings <- function(shape) {
-  shapedef <- .getShapeDef(shape)
-  defaults <- lapply(shapedef$params, function(x) x$defaultScaling)
-  defaults
-}
-                     
-

@@ -16,5 +16,8 @@ test_that("scaling function sanity checks", {
   expect_error(exp_scale(c(1, 1), c(0, 1), c(1, 2)))
 })
 
+test_that("rest of package can handle NA output from linear_scale or in source dataframe", {
+})
+
 
 

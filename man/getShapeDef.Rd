@@ -1,11 +1,11 @@
 \name{.getShapeDef}
 \alias{.getShapeDef}
-\alias{..getShapeNames}
+\alias{.getShapeNames}
 \title{Get the \code{shapeDef} object for a shape}
 \usage{
   .getShapeDef(x)
 
-  ..getShapeNames()
+  .getShapeNames()
 }
 \arguments{
   \item{x}{A \code{\link{sonlayer}} object or character
@@ -13,7 +13,7 @@
 }
 \value{
   \code{.getShapeDef} returns a \code{shapeDef} object;
-  \code{..getShapeNames} returns a character vector
+  \code{.getShapeNames} returns a character vector
   containing the names of all currently available shapes
 }
 \description{
