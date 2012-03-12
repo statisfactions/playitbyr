@@ -1,4 +1,4 @@
-require(audio)
+require(tuneR)
 
 context("mapping tries to create new var when not in dataset")
 
@@ -11,11 +11,11 @@ test_that("mapping creates new variable and sonifies it", {
           outfile1 <- paste(tempfile(), ".wav", sep="")
           set.seed(719)
           sonsave(x, outfile1)
-          curr <- load.wave(outfile1)
+          curr <- readWave(outfile1)
           outfile2 <- paste(tempfile(), ".wav", sep="")
           set.seed(719)
           sonsave(y, outfile2)
-          comp <- load.wave(outfile2)
+          comp <- readWave(outfile2)
           expect_equal(curr, comp)
         })
           

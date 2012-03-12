@@ -1,6 +1,6 @@
 set.seed(719)
 
-require(audio)
+require(tuneR)
 
 require(testthat)
 

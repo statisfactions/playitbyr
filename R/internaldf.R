@@ -21,7 +21,7 @@
 ##' @return The end product of all this is a \code{data.frame} object
 ##' that is used as an input to the rendering process
 ##' @keywords internal
-##' 
+##' @export
 .getScore <- function(x) {
   ## Returns a data.frame score that the render method
   ## uses to actually create the sound for the sonification
@@ -82,7 +82,7 @@
   ## Add shape options, if any, to pass to rendering methods
   attr(score, "shape_params") <- .getSonlayerShapeOptions(x, sonlayernum)
   ## TODO subtract out sound params from this function
-  score  
+  score
 }
 
 ##' @rdname internaldf

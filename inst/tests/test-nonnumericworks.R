@@ -1,15 +1,15 @@
 set.seed(719)
 
-require(audio)
+require(tuneR)
 
 context("non-numeric")
 
 test_that("data mappings can be non-numeric", {
-  x <- sonify(iris, sonaes(time = Sepal.Length, pitch = Species)) + shape_scatter()
+  x <- sonify(iris[41:50,], sonaes(time = Sepal.Length, pitch = Species)) + shape_scatter()
   outfile <- paste(tempfile(), ".wav", sep="")
   sonsave(x, outfile)
-  curr <- load.wave(outfile)
+  curr <- readWave(outfile)
   unlink(outfile)
-  load(system.file("testdata/nonnumeric.rda", package = "playitbyr"))
+  comp <- readWave(system.file("testdata/test-nonnumericworks.wav", package = "playitbyr"))
   expect_equal(curr, comp)
 })

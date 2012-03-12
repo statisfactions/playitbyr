@@ -1,10 +1,10 @@
 set.seed(719)
 
-require(audio)
+require(tuneR)
 
 
 test_that("all FM + envelope parameters in shape_scatter are exposed", {
-  x <- sonify(iris)
+  x <- sonify(iris[21:30,])
   x <- x + sonaes(time=Petal.Length, pitch=Petal.Width, attkp = Sepal.Length,
                   decayp = Sepal.Width, mod = Petal.Length, indx=Petal.Width)
   x <- x + scale_pitch_continuous(c(6, 8)) + scale_time_continuous(c(0, 10))
@@ -13,9 +13,9 @@ test_that("all FM + envelope parameters in shape_scatter are exposed", {
   x <- x + shape_scatter()
   outfile <- paste(tempfile(), ".wav", sep="")
   sonsave(x, outfile)
-  curr <- load.wave(outfile)
+  curr <- readWave(outfile)
   unlink(outfile)
-  load(system.file("testdata/csoundirisFM.rda", package = "playitbyr"))
+  comp <- readWave(system.file("testdata/test-shape-scatter.wav", package = "playitbyr"))
   expect_equal(curr, comp)
 })
 
