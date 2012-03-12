@@ -12,7 +12,7 @@ Description: playitbyr is a flexible toolkit for data
     analysis and exploration in R. The functions allow the
     user to map data onto sonic parameters like pitch,
     tempo, and rhythm, and output sound and sound files.
-URL: http://playitbyr.r-forge.r-project.org/
+URL: http://playitbyr.org/
 License: GPL (>= 2)
 LazyLoad: yes
 Collate:
