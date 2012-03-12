@@ -5,8 +5,8 @@
   sonopts(rendering = "csound", ...)
 }
 \arguments{
-  \item{rendering}{The rendering type. Only \code{"audio"}
-  and \code{"csound"} are currently supported.}
+  \item{rendering}{The rendering type. Only \code{"csound"}
+  is currently supported.}
 
   \item{\dots}{Additional named parameters for setting
   rendering options. See Details.}
@@ -82,12 +82,6 @@
   options}.}
 
   \item{csInstance}{An instance of Csound that can be used
-  to continue or close the current performance.}
-
-  If \code{rendering = "audio"}, there is only one
-  parameter to identify:
-
-  \item{samp.rate}{The sampling rate in Hertz. For
-  instance, CD quality is 44100 Hertz.} }
+  to continue or close the current performance.} }
 }
 

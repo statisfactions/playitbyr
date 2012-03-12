@@ -1,4 +1,4 @@
-\name{internaldf}
+\name{.getScore}
 \alias{.getDefaultScalings}
 \alias{.getDefaultShapeOptions}
 \alias{.getScales}
@@ -11,7 +11,6 @@
 \alias{.getSonlayerShape}
 \alias{.getSonlayerShapeOptions}
 \alias{.getSonlayerStat}
-\alias{internaldf}
 \alias{.rescaleDataByParam}
 \alias{scorePreprocessor}
 \title{Internal functions to generate output \code{data.frame} from a

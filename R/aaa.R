@@ -1,13 +1,4 @@
 .onLoad <- function(libname, pkgname) {
-  if(is.null(getOption("player")))
-    ## We only need to set this option if it is not
-    ## already set.
-    if(!(Sys.info()[["sysname"]] %in% "Linux")) {
-      ## We only set the option if the system is NOT
-      ## Linux. audio::play does not work well with Linux.
-      options(player = "audio::play")
-    } else options(player = "aplay") ## a common CLI wav player
-
 }
 
 loadShapeDefs <- function() {

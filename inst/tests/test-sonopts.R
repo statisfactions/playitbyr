@@ -8,12 +8,10 @@ require(testthat)
 context("sonopts()")
 
 test_that("bad parameters give errors", {
-  expect_error(sonopts("yummy"), "rendering must be 'csound' or 'audio'")
+  expect_error(sonopts("yummy"), "rendering must be 'csound'")
   expect_error(sonopts(rendering = "csound", i = 1, blah = "blarg",
                        bloop = "blarf"),
                "Unrecognized csound parameters 'blah', 'bloop'")
-  expect_error(sonopts(rendering = "audio", samp.rate = 321, i = 20),
-               "Unrecognized audio parameters 'i'")
 })
 
 testlist <- structure(list(rendering = "csound",

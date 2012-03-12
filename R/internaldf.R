@@ -11,7 +11,6 @@
 ##' applying statistical tranformations
 ##' 
 ##' @rdname internaldf
-##' @name internaldf
 ##' @aliases .getScore .getSonlayerMappings .getSonlayerData
 ##' .getSonlayerScore
 ##' @param x A \code{sonify} object
@@ -23,6 +22,7 @@
 ##' @keywords internal
 ##' @export
 .getScore <- function(x) {
+  
   ## Returns a data.frame score that the render method
   ## uses to actually create the sound for the sonification
 

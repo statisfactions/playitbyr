@@ -65,14 +65,8 @@
 ##'
 ##' \item{csInstance}{An instance of Csound that can be used to
 ##' continue or close the current performance.}
-##'
-##' If \code{rendering = "audio"}, there is only one parameter to identify:
-##'
-##' \item{samp.rate}{The sampling rate in Hertz. For instance, CD
-##' quality is 44100 Hertz.}
 ##' }
-##' @param rendering The rendering type. Only \code{"audio"} and
-##' \code{"csound"} are currently supported.
+##' @param rendering The rendering type. Only \code{"csound"} is currently supported.
 ##' @param \dots Additional named parameters for setting rendering
 ##' options. See Details.
 ##' @export
@@ -82,9 +76,7 @@ sonopts <- function(rendering = "csound", ...) {
   ## Check parameters valid
   if(rendering %in% "csound")
     mismatch <- names(out)[!(names(out) %in% names(formals(createPerformance)))]
-  else if(rendering %in% "audio")
-    mismatch <- names(out)[!(names(out) %in% "samp.rate")]
-  else stop("rendering must be 'csound' or 'audio'")
+  else stop("rendering must be 'csound'")
   
   if(length(mismatch)>0)
     stop("Unrecognized ", rendering, " parameters ",

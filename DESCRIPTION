@@ -7,7 +7,6 @@ Author: Ethan Brown
 Maintainer: Ethan Brown <ethancbrown+playitbyr@gmail.com>
 Depends:
     R (>= 2.12.0),
-    audio,
     csound
 Description: playitbyr is a flexible toolkit for data
     analysis and exploration in R. The functions allow the
@@ -19,8 +18,6 @@ LazyLoad: yes
 Collate:
     'aaa.R'
     'checkSonify.R'
-    'create-audioSample.R'
-    'getPlayer.R'
     'getShapeDef.R'
     'internaldf.R'
     'internalsonify.R'
@@ -35,7 +32,6 @@ Collate:
     'getDefaultMappings.R'
     'scorePreprocessor.dotplot.R'
     'scorePreprocessor.csound.R'
-    'render.audio.R'
     'render.csound.R'
     'sonopts.R'
     'expscale.R'

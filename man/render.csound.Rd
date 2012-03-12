@@ -6,8 +6,7 @@
 \alias{render.csound}
 \title{Rendering sound using csound}
 \usage{
-  render.csound(x, opts, file = "", audioSample = FALSE,
-    ...)
+  render.csound(x, opts, file = "", ...)
 
   csound_layer(sonlayerscore, ...)
 
@@ -27,17 +26,10 @@
   \item{x}{A \code{score} object created by
   \code{\link{.getScore}}}
 
-  \item{opts}{the options of the original sonify object.
-  Currently most options are ignored besides for
-  \code{rendering}.}
+  \item{opts}{the options of the original sonify object.}
 
   \item{file}{the file to save the rendering to. The
   default,\code{""}, plays the sonification in real time.}
-
-  \item{audioSample}{Logical indicating whether to return
-  an \code{audioSample} object containing the from the
-  object. This is only currently available when rendering
-  using \code{"audio"}.}
 }
 \description{
   \code{render.csound} uses the csound package to render a
