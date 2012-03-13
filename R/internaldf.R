@@ -122,7 +122,7 @@
   ## Any additional score processing done by shape-specific methods to
   ## scorePreprocessor. NOTE: all scorePreprocessor methods must
   ## calculate length of sonification
-  out <- scorePreprocessor(out)
+  out <- scorePreprocessor(out, opts)
 
   if(is.null(attributes(out)$length))
     stop("scorePreprocessor.", shape,
@@ -338,11 +338,12 @@
 ##' @param sonlayerscore The score generated for a specific
 ##' \code{sonlayer} by \code{.getSonlayerScore()}
 ##' @param opts The options passed as shape parameters in a \code{sonlayer}
+##' @param \dots Other things to pass to scorePreprocessor. Currently ignored.
 ##' @return A score after shape-specific processing has been completed.
 ##' @note all scorePreprocessor methods must calculate length of
 ##' sonification and return that as an attribute \code{length} of the
 ##' data frame.
-scorePreprocessor <- function(sonlayerscore) UseMethod("scorePreprocessor")
+scorePreprocessor <- function(sonlayerscore, opts, ...) UseMethod("scorePreprocessor")
 
   
 removenull <- function(x) {

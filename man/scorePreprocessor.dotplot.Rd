@@ -2,11 +2,15 @@
 \alias{scorePreprocessor.dotplot}
 \title{Score preprocessing for shape 'dotplot'}
 \usage{
-  \method{scorePreprocessor}{dotplot} (sonlayerscore)
+  \method{scorePreprocessor}{dotplot} (sonlayerscore, opts,
+    ...)
 }
 \arguments{
   \item{sonlayerscore}{The score generated for a specific
   \code{sonlayer} by \code{.getSonlayerScore()}}
+
+  \item{opts}{The options passed as shape parameters in a
+  \code{sonlayer}}
 }
 \value{
   A sonlayer score with the transformations described in

@@ -9,7 +9,7 @@
 ##' @method scorePreprocessor scatter
 ##' @inheritParams scorePreprocessor
 ##' @return A sonlayer score with the transformations described in the 'Description' field
-scorePreprocessor.scatter <- function(sonlayerscore) {
+scorePreprocessor.scatter <- function(sonlayerscore, opts, ...) {
   ## We need to transform the "tempo" or "time" data into actual start
   ## times and tranform the durations accordingly
 

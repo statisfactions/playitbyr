@@ -2,7 +2,7 @@
 \alias{scorePreprocessor}
 \title{Generic method for preprocessing score layers}
 \usage{
-  scorePreprocessor(sonlayerscore)
+  scorePreprocessor(sonlayerscore, opts, ...)
 }
 \arguments{
   \item{sonlayerscore}{The score generated for a specific
@@ -10,6 +10,9 @@
 
   \item{opts}{The options passed as shape parameters in a
   \code{sonlayer}}
+
+  \item{\dots}{Other things to pass to scorePreprocessor.
+  Currently ignored.}
 }
 \value{
   A score after shape-specific processing has been

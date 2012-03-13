@@ -9,7 +9,7 @@
 ##' @method scorePreprocessor dotplot
 ##' @inheritParams scorePreprocessor
 ##' @return A sonlayer score with the transformations described in the 'Description' field
-scorePreprocessor.dotplot <- function(sonlayerscore) {
+scorePreprocessor.dotplot <- function(sonlayerscore, opts, ...) {
   ## We need to transform the "tempo" or "time" data into actual start
   ## times and tranform the durations accordingly
 
