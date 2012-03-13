@@ -29,3 +29,11 @@ set.seed(719)
 ## dotplot.rda
 x <- sonify(iris[1:10,], sonaes(time = Petal.Length)) + shape_dotplot()
 sonsave(x, "playitbyr/inst/testdata/test-dotplot.wav")
+
+set.seed(719)
+x <- sonify(iris[1:10,], sonaes(pitch = Sepal.Width, indx = Petal.Width, time = 1:10)) +
+  shape_scatter() + scale_indx_continuous(c(1, 20)) +
+  scale_pitch_continuous(c(8, 10),c(3.5, 3.9))
+sonsave(x, "playitbyr/inst/testdata/test-removeoutlimits.wav")
+
+

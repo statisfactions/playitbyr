@@ -31,7 +31,7 @@
     scale <- .fixFacetScales(x)
   else
     scale <- .getScales(x)
-  p
+  
   ## Create a score for each sonlayer and put together in list
   score <- lapply(1:length(x$sonlayers),
                   function(layernum) .getSonlayerScore(x, layernum, scale))
@@ -59,6 +59,16 @@
   opts <- .getSonlayerShapeOptions(x, sonlayernum)
 
   ## TODO around here need to EXCLUDE data outside max min on ANY PARAMETER
+  datal <- lapply(names(map), function(param) {
+    column <- .getColumn(map, param, data)
+    lims <- scale[[param]]$limits
+    if(!is.null(lims))
+      column[column < min(lims) | column > max(lims)] <- NA
+    return(column)
+  })
+  
+  data <- as.data.frame(removenull(datal))
+  names(data) <- unlist(map)
 
   if(!is.null(x$sonfacet)) {
     if(x$sonfacet$facet %in% names(data)) {
