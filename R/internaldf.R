@@ -55,13 +55,18 @@
 
 ##' @rdname internaldf
 .getSonlayerScore <- function(x, sonlayernum, scale) {
+
   data <- .getSonlayerData(x, sonlayernum, transform = TRUE)
+  map <- .getSonlayerMappings(x, sonlayernum, remove.null = TRUE) 
+  set <- .getSonlayerSettings(x, sonlayernum, remove.null = TRUE)
+  shape <- .getSonlayerShape(x, sonlayernum)
+
   if(!is.null(x$sonfacet)) {
     if(x$sonfacet$facet %in% names(data)) {
     datal <- split(data, data[[x$sonfacet$facet]], drop = TRUE)
     nl <- length(datal)
     scorel <- lapply(datal, function(d)
-                     .getSonlayerScoreFacet(x, sonlayernum, d, scale))
+                     .getSonlayerScoreFacet(map, set, shape, data, scale))
     facetend <- sapply(scorel, function(s) attr(s, "length"))
     facetend <- facetend + (0:(nl-1))*x$sonfacet$pause
     scorelshift <- lapply(1:nl, function(fn) {
@@ -73,11 +78,11 @@
     score <- do.call(rbind, scorelshift)
     attr(score, "length") <- facetend[nl]
   }} else {
-    score <- .getSonlayerScoreFacet(x, sonlayernum, data, scale)
+    score <- .getSonlayerScoreFacet(map, set, shape, data, scale)
   }
 
   ## Set shape to pass to shape and rendering methods
-  class(score) <- c(.getSonlayerShape(x, sonlayernum),  "data.frame")
+  class(score) <- c(shape,  "data.frame")
 
   ## Add shape options, if any, to pass to rendering methods
   attr(score, "shape_params") <- .getSonlayerShapeOptions(x, sonlayernum)
@@ -86,15 +91,10 @@
 }
 
 ##' @rdname internaldf
-.getSonlayerScoreFacet <- function(x, sonlayernum, data, scale) {
+.getSonlayerScoreFacet <- function(map, set, shape, data, scale) {
   ## Returns an output data.frame with all the information needed to
   ## render the sonlayernum-th sonlayer of x.  The output is in a
   ## format rather similar to a Csound score.
-
-  ## Get mappings and stat-transformed data
-  map <- .getSonlayerMappings(x, sonlayernum, remove.null = TRUE) 
-  set <- .getSonlayerSettings(x, sonlayernum, remove.null = TRUE)
-  shape <- .getSonlayerShape(x, sonlayernum)
 
   n <- nrow(data) # length of output score
 
@@ -123,7 +123,7 @@
   out <- as.data.frame(out)
   
   ## Set shape to pass to shape and rendering methods
-  class(out) <- c(.getSonlayerShape(x, sonlayernum),  "data.frame")
+  class(out) <- c(shape,  "data.frame")
 
   ## Any additional score processing done by shape-specific methods to
   ## scorePreprocessor. NOTE: all scorePreprocessor methods must
@@ -131,7 +131,7 @@
   out <- scorePreprocessor(out)
 
   if(is.null(attributes(out)$length))
-    stop("scorePreprocessor.", .getSonlayerShape(x, sonlayernum),
+    stop("scorePreprocessor.", shape,
          " failed to add required 'length' attribute.")
 
   return(out)
