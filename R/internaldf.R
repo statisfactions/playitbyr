@@ -10,15 +10,11 @@
 ##' every shape has a single output row for each input data row after
 ##' applying statistical tranformations
 ##' 
-##' @rdname internaldf
-##' @aliases .getScore .getSonlayerMappings .getSonlayerData
-##' .getSonlayerScore
+##' @rdname getScore
+##' @aliases .getScore
 ##' @param x A \code{sonify} object
-##' @param sonlayernum The layer number of the \code{sonify}
-##' object. This is a placeholder for future implementation of a
-##' layering functionality (modeled after \code{ggplot2} objects).
-##' @return The end product of all this is a \code{data.frame} object
-##' that is used as an input to the rendering process
+##' @return The end product of all this is a list of \code{data.frame}
+##' objects that is used as an input to the rendering process
 ##' @keywords internal
 ##' @export
 .getScore <- function(x) {
@@ -35,7 +31,7 @@
     scale <- .fixFacetScales(x)
   else
     scale <- .getScales(x)
-  
+  p
   ## Create a score for each sonlayer and put together in list
   score <- lapply(1:length(x$sonlayers),
                   function(layernum) .getSonlayerScore(x, layernum, scale))
@@ -53,13 +49,16 @@
   return(score)
 }
 
-##' @rdname internaldf
+## @rdname internaldf
 .getSonlayerScore <- function(x, sonlayernum, scale) {
 
   data <- .getSonlayerData(x, sonlayernum, transform = TRUE)
   map <- .getSonlayerMappings(x, sonlayernum, remove.null = TRUE) 
   set <- .getSonlayerSettings(x, sonlayernum, remove.null = TRUE)
   shape <- .getSonlayerShape(x, sonlayernum)
+  opts <- .getSonlayerShapeOptions(x, sonlayernum)
+
+  ## TODO around here need to EXCLUDE data outside max min on ANY PARAMETER
 
   if(!is.null(x$sonfacet)) {
     if(x$sonfacet$facet %in% names(data)) {
@@ -78,7 +77,7 @@
     score <- do.call(rbind, scorelshift)
     attr(score, "length") <- facetend[nl]
   }} else {
-    score <- .getSonlayerScoreFacet(map, set, shape, data, scale)
+    score <- .getSonlayerScoreFacet(map, set, shape, data, scale, opts)
   }
 
   ## Set shape to pass to shape and rendering methods
@@ -90,8 +89,8 @@
   score
 }
 
-##' @rdname internaldf
-.getSonlayerScoreFacet <- function(map, set, shape, data, scale) {
+## @rdname internaldf
+.getSonlayerScoreFacet <- function(map, set, shape, data, scale, opts) {
   ## Returns an output data.frame with all the information needed to
   ## render the sonlayernum-th sonlayer of x.  The output is in a
   ## format rather similar to a Csound score.
@@ -106,12 +105,7 @@
   ## If map gives data.frame column, rescale that column.
   ## If map gives anything else, create new variable and then rescale column.
   out <- lapply(names(map), function(param) {
-    if(length(map[[param]]) == 1 && map[[param]] %in% names(data))
-      column <- data[[map[[param]]]]
-    else
-      column <- eval(map[[param]])
-    if(!is.numeric(column))
-      column <- as.numeric(factor(column))
+    column <- .getColumn(map, param, data)
     return(.rescaleDataByParam(scale, param, column))
   })
 
@@ -137,13 +131,23 @@
   return(out)
 }
 
+.getColumn <- function(map, param, data) {
+  if(length(map[[param]]) == 1 && map[[param]] %in% names(data))
+    column <- data[[map[[param]]]]
+  else
+    column <- eval(map[[param]])
+  if(!is.numeric(column))
+    column <- as.numeric(factor(column))
+  return(column)
+}
 
-##' @rdname internaldf
-##' @param remove.null Logical indicating whether to remove missing
-##' mappings from the returned list of mappings. .getSonlayerScore
-##' calls this with TRUE to avoid cluttering calculations; but
-##' .checkSonify calls this with FALSE since it bases its approach on
-##' having the null slots in.
+
+## @rdname internaldf
+## @param remove.null Logical indicating whether to remove missing
+## mappings from the returned list of mappings. .getSonlayerScore
+## calls this with TRUE to avoid cluttering calculations; but
+## .checkSonify calls this with FALSE since it bases its approach on
+## having the null slots in.
 .getSonlayerMappings <- function(x, sonlayernum, remove.null = TRUE) {
   ## x: a sonify object, returns the current aesthetic mappings as a
   ##  named list. This assign aesthetic mappings based on sonlayer
@@ -170,9 +174,9 @@
   return(outmap)
 }
 
-##' @rdname internaldf
-##' @param transform A logical indicating whether to perform the
-##' given statistical transformation (stat) to the layer.
+## @rdname internaldf
+## @param transform A logical indicating whether to perform the
+## given statistical transformation (stat) to the layer.
 .getSonlayerData <- function(x, sonlayernum, transform = TRUE) {
   ## x: a sonify object, returns the current data to be sonified,
   ## after applying statistic if defined.
@@ -193,7 +197,7 @@
   return(outdata)
 }
 
-##' @rdname internaldf
+## @rdname internaldf
 .getSonlayerSettings <- function(x, sonlayernum, remove.null = TRUE) {
   ## Get sonlayer SETTINGS (as opposed to mappings)
   shape <- .getSonlayerShape(x, sonlayernum)
@@ -220,22 +224,22 @@
   return(outset)
 }
 
-##' @rdname internaldf
-##' @section Not yet implemented: .getSonlayerStat currently just returns
-##' NULL. It is intended that it will eventually return a function
-##' that .getSonlayerData can use to transform a data.frame, or NULL
-##' if no tranformation is requested. This function (and its only call
-##' in .getSonlayerData) will likely change soon.
+## @rdname internaldf
+## @section Not yet implemented: .getSonlayerStat currently just returns
+## NULL. It is intended that it will eventually return a function
+## that .getSonlayerData can use to transform a data.frame, or NULL
+## if no tranformation is requested. This function (and its only call
+## in .getSonlayerData) will likely change soon.
 .getSonlayerStat <- function(x, sonlayernum) NULL
 
-##' @rdname internaldf
+## @rdname internaldf
 .getSonlayerShape <- function(x, sonlayernum) {
   x$sonlayers[[sonlayernum]]$shape$shape
 }
 
-##' @rdname internaldf
-##' @param param The sound parameter
-##' @param column The data.frame column (vector) to be rescaled
+## @rdname internaldf
+## @param param The sound parameter
+## @param column The data.frame column (vector) to be rescaled
 .rescaleDataByParam <- function(scale, param, column) {
   ##Apply function
   column <- scale[[param]]$scaling.function(column, limits = scale[[param]]$limits, soundlimits = scale[[param]]$soundlimits)
@@ -243,7 +247,7 @@
   return(column)
 }
 
-##' @rdname internaldf
+## @rdname internaldf
 .getScales <- function(x) {
   shapes <- unique(sapply(1:length(x$sonlayers),
                             function(y) .getSonlayerShape(x, y)))
@@ -259,12 +263,7 @@
     map <- .getSonlayerMappings(x, i)
     data <- .getSonlayerData(x, i)
     extremes <- lapply(names(map), function(param) {
-      if(length(map[[param]]) == 1 && map[[param]] %in% names(data))
-        column <- data[[map[[param]]]]
-      else
-        column <- eval(map[[param]])
-      if(!is.numeric(column))
-        column <- as.numeric(factor(column))
+      column <- .getColumn(map, param, data)
       return(param = c(min(column), max(column)))
     })
     names(extremes) <- names(map)
@@ -284,9 +283,9 @@
 
 
 
-##' @rdname internaldf
-##' @param shapes A character vector of names of shapes included in
-##' the \code{sonify} object
+## @rdname internaldf
+## @param shapes A character vector of names of shapes included in
+## the \code{sonify} object
 .getDefaultScalings <- function(shapes) {
   ## Get the data.frame of all soundparameters
   soundparams <- .getSoundParams(shapes)
@@ -312,13 +311,13 @@
   return(out)
 }
 
-##' @rdname internaldf
-##' @param shapename The name of the shape to get the defaults for
+## @rdname internaldf
+## @param shapename The name of the shape to get the defaults for
 .getDefaultShapeOptions <- function(shapename) {
   .getShapeDef(shapename)$options
 }
 
-##' @rdname internaldf
+## @rdname internaldf
 .getSonlayerShapeOptions <- function(x, sonlayernum) {
   shape <- .getSonlayerShape(x, sonlayernum)
   out <- .getDefaultShapeOptions(shape)
@@ -331,10 +330,15 @@
 }
                 
 
-
-##' @rdname internaldf
+##' Generic method for preprocessing score layers
+##'
+##' Generic to do extra needed processing and calulation for a
+##' specific sonlayer shape.
+##' 
 ##' @param sonlayerscore The score generated for a specific
 ##' \code{sonlayer} by \code{.getSonlayerScore()}
+##' @param opts The options passed as shape parameters in a \code{sonlayer}
+##' @return A score after shape-specific processing has been completed.
 ##' @note all scorePreprocessor methods must calculate length of
 ##' sonification and return that as an attribute \code{length} of the
 ##' data frame.
