@@ -5,7 +5,7 @@ require(tuneR)
 context("dotplot")
 
 test_that("dotplot matches", {
-  x <- sonify(iris[1:10,], sonaes(time = Petal.Length)) + shape_dotplot() + scale_time_continuous(c(0, 5))
+  x <- sonify(iris[1:10,], sonaes(time = Petal.Length)) + shape_dotplot(jitter = 0.3)
   out <- tempfile()
   sonsave(x, out)
   curr <- readWave(out)

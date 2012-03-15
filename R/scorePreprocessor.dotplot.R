@@ -31,15 +31,13 @@ scorePreprocessor.dotplot <- function(sonlayerscore, opts, ...) {
   }
 
   ## add jitter effect
-  avdur <- mean(sonlayerscore$dur)
-  sonsplit <- split(sonlayerscore, sonlayerscore$start)
+  if(!is.null(opts$jitter))
+  sonsplit <- split(sonlayerscore, 10^(-5)*(sonlayerscore$start) + sonlayerscore$pitch)
   sonlayerscore <- do.call(rbind, lapply(sonsplit, function(x) {
     if(nrow(x) > 1)
-      x$start <- abs(x$start + rnorm(nrow(x), sd = avdur/2))
+      x$start <- abs(x$start + rnorm(nrow(x), mean = 0, sd = opts$jitter))
     return(x)
   }))
-  
-
   
   attr(sonlayerscore, "length") <- sonlayerscore$start[n] + sonlayerscore$dur[n] # length in seconds
 

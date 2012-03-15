@@ -31,9 +31,15 @@
 ##' parameter, you set the mapping for the layer or the \code{sonify}
 ##' object using \code{\link{sonaes}} (see examples).
 ##'
+##' @param jitter The maximum size, in seconds, of how much to jitter
+##' time by when there are multiple notes at the same pitch and time
+##' (the sonic equivalent of overplotting). The default, 0, means no
+##' jitter occurs.
 ##' @param \dots data, settings, and mappings to pass to
 ##' \code{\link{sonlayer}}
-##' @return A \code{sonscaling} object 
+##' 
+##' @return A \code{sonscaling} object
+##' 
 ##' @export
-shape_scatter <- function(...) sonlayer("scatter",...)
+shape_scatter <- function(jitter = 0, ...) sonlayer("scatter", jitter = jitter, ...)
 

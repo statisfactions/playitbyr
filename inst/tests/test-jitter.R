@@ -1,0 +1,4 @@
+require(tuneR)
+
+context("jitter")
+
