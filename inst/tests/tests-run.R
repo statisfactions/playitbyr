@@ -19,4 +19,4 @@ test_file("playitbyr/inst/tests/test-setting.R")
 test_file("playitbyr/inst/tests/test-shape-scatter.R")
 test_file("playitbyr/inst/tests/test-sonify.R")
 test_file("playitbyr/inst/tests/test-shape-dotplot.R")
-
+test_file("playitbyr/inst/tests/test-facet.R")

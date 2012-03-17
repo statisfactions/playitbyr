@@ -58,7 +58,7 @@
   shape <- .getSonlayerShape(x, sonlayernum)
   opts <- .getSonlayerShapeOptions(x, sonlayernum)
 
-  ## TODO around here need to EXCLUDE data outside max min on ANY PARAMETER
+  ## Exclude data outside max min on any parameter
   datal <- lapply(names(map), function(param) {
     column <- .getColumn(map, param, data)
     lims <- scale[[param]]$limits
@@ -66,28 +66,28 @@
       column[column < min(lims) | column > max(lims)] <- NA
     return(column)
   })
-  
-  data <- as.data.frame(removenull(datal))
-  names(data) <- unlist(map)
+
+  dataclean <- as.data.frame(removenull(datal))
+  names(dataclean) <- unlist(map)
 
   if(!is.null(x$sonfacet)) {
     if(x$sonfacet$facet %in% names(data)) {
-    datal <- split(data, data[[x$sonfacet$facet]], drop = TRUE)
-    nl <- length(datal)
-    scorel <- lapply(datal, function(d)
-                     .getSonlayerScoreFacet(map, set, shape, data, scale))
-    facetend <- sapply(scorel, function(s) attr(s, "length"))
+      datal <- split(dataclean, data[[x$sonfacet$facet]], drop = TRUE)
+      nl <- length(datal)
+      scorel <- lapply(datal, function(d)
+                     .getSonlayerScoreFacet(map, set, shape, d, scale, opts))
+    facetend <- cumsum(sapply(scorel, function(s) attr(s, "length")))
     facetend <- facetend + (0:(nl-1))*x$sonfacet$pause
     scorelshift <- lapply(1:nl, function(fn) {
       outsc <- scorel[[fn]]
       if(fn > 1) 
-        outsc$start <- outsc$start + facetend[fn]
+        outsc$start <- outsc$start + facetend[fn - 1] + x$sonfacet$pause
       return(outsc)
     })
     score <- do.call(rbind, scorelshift)
     attr(score, "length") <- facetend[nl]
   }} else {
-    score <- .getSonlayerScoreFacet(map, set, shape, data, scale, opts)
+    score <- .getSonlayerScoreFacet(map, set, shape, dataclean, scale, opts)
   }
 
   ## Set shape to pass to shape and rendering methods
