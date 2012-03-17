@@ -1,6 +1,6 @@
 require(tuneR)
 oldwd <- getwd()
-setwd("playitbyr/inst/testdata")
+setwd("testdata")
 
 set.seed(719)
 x <- sonify(iris[11:20,])
@@ -28,7 +28,6 @@ x <- sonify(iris[1:10,], sonaes(time = Sepal.Width)) + shape_scatter(jitter = 0.
 sonsave(x, "test-settingmapping.wav")
 
 set.seed(719)
-## dotplot.rda
 x <- sonify(iris[1:10,], sonaes(time = Petal.Length)) + shape_dotplot(jitter = 0.3)
 sonsave(x, "test-dotplot.wav")
 

@@ -1,10 +1,3 @@
-set.seed(719)
-
-require(tuneR)
-
-require(testthat)
-
-
 context("sonopts()")
 
 test_that("bad parameters give errors", {

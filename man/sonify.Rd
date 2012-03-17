@@ -46,30 +46,12 @@ x <- sonify()
 summary(x)
 \dontrun{x # Throws an error message}
 
-## A more complete specification
-## for a sonify object that uses iris
-## with Petal.Length mapped onto times
-## between 0 and 10 seconds.
-## and Petal.Width mapped onto pitches
-## between pitch values 6 (110 Hz) and 8 (440 Hz),
-x <- sonify(data=iris,
-            sonaes(time=Petal.Length, pitch=Petal.Width),
-            sonscaling(pitch=list(6, 8, linear_scale),
-                       time=list(0, 10, linear_scale)),
-            sonlayers=shape_scatter())
-summary(x)
-\dontrun{x # outputs sound}
-
-## You can hear there is a cluster of low values at the beginning
-## when both Petal.Width and Petal.Length are small, followed
-## by a higher cluster.
-
-## The same, created incrementally
+## Creating a sonification incrementally
 ## and with the "scale_" convenience functions
 x <- sonify(iris)
 x <- x + sonaes(time=Petal.Length, pitch=Petal.Width)
 x <- x + shape_scatter()
-x <- x + scale_pitch_continuous(6, 8) + scale_time_continuous(0, 10)
+x <- x + scale_pitch_continuous(c(6, 8)) + scale_time_continuous(c(0, 10))
 summary(x)
 \dontrun{x # outputs sound}
 }

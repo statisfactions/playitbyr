@@ -33,7 +33,7 @@
 ##' 
 ##' ## Use a different tempo scaling than default
 ##' ## to hear more of the data faster
-##' \dontrun{x + scale_tempo_continuous(300, 1000)}
+##' \dontrun{x + scale_tempo_continuous(c(300, 1000))}
 ##' 
 ##' ## Map Petal.Width onto 'time' instead
 ##' y <- x + sonaes(time=Petal.Width)

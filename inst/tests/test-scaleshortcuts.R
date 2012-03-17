@@ -1,7 +1,3 @@
-set.seed(719)
-
-require(tuneR)
-
 context("scalings")
 
 test_that("scaling function sanity checks", {
@@ -16,8 +12,14 @@ test_that("scaling function sanity checks", {
   expect_error(exp_scale(c(1, 1), c(0, 1), c(1, 2)))
 })
 
-test_that("rest of package can handle NA output from linear_scale or in source dataframe", {
+test_that("removes all events in data that are outside limits on any scaling", {
+  x <- sonify(iris[1:10,], sonaes(pitch = Sepal.Width, indx = Petal.Width, time = 1:10)) +
+    shape_scatter(jitter = 0.3) + scale_indx_continuous(c(1, 20)) +
+      scale_pitch_continuous(c(8, 10), c(3.5, 3.9))
+  soncompare(x, "test-removeoutlimits.wav")
 })
 
 
+test_that("rest of package can handle NA output from linear_scale or in source dataframe", {
+})
 

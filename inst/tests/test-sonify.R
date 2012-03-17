@@ -1,10 +1,3 @@
-set.seed(719)
-
-require(tuneR)
-
-require(testthat)
-
-
 context("sonify()")
 
 test_that("default rendering is csound", {

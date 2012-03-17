@@ -8,7 +8,6 @@
 ##'
 ##' \code{_continuous} scales are a linear scaling, whereas
 ##' \code{_exp} is an exponential scale.
-##'
 ##' @return A \code{sonscaling} object, to be used in \code{sonify} or added
 ##' onto a \code{sonify} object.
 ##' @seealso \code{\link{sonscaling}} for the full syntax and range of
@@ -18,7 +17,11 @@
 ##' \code{\link{+.sonify}} for the addition onto \code{sonify}
 ##' objects.
 ##'
-##' @inheritParams linear_scale
+##' @param limits The limits of the data to train, a numeric vector of length
+##' 2. All data values outside these limits are returned as
+##' \code{NA}. If \code{NULL}, the default, the function takes the
+##' minimum and maximum of the data
+##' @param soundlimits The limits of the sound parameter.
 ##' @param \dots Other parameters (currently ignored)
 ##'
 ##' @rdname scale_time_continuous

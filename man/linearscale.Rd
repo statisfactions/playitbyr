@@ -36,10 +36,10 @@
 }
 \examples{
 x <- 1:10
-linear_scale(x, min=-2, max=-1.5)
+linear_scale(x, soundlimits = c(-2, -1.5))
 
 ## If max<min, it's rescaled in reverse:
-linear_scale(x, min=10, max=1)
+linear_scale(x, soundlimits = c(10, 1))
 }
 \seealso{
   \code{\link{sonscaling}}

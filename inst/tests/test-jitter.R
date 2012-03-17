@@ -1,4 +1,0 @@
-require(tuneR)
-
-context("jitter")
-

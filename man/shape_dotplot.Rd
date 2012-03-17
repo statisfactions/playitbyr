@@ -2,9 +2,14 @@
 \alias{shape_dotplot}
 \title{Create a dotplot layer}
 \usage{
-  shape_dotplot(...)
+  shape_dotplot(jitter = 0, ...)
 }
 \arguments{
+  \item{jitter}{The maximum size, in seconds, of how much
+  to jitter time by when there are multiple notes at the
+  same pitch and time (the sonic equivalent of
+  overplotting). The default, 0, means no jitter occurs.}
+
   \item{\dots}{data, settings, and mappings to pass to
   \code{\link{sonlayer}}}
 }

@@ -18,10 +18,10 @@
 ##' @examples
 ##' 
 ##' x <- 1:10
-##' exp_scale(x, min=-2, max=-1.5)
+##' exp_scale(x, soundlimits = c(-2, -1.5))
 ##' 
 ##' ## If max<min, it's rescaled in reverse:
-##' exp_scale(x, min=10, max=1)
+##' exp_scale(x, soundlimits = c(10, 1))
 ##'
 ##' @export
 exp_scale <- function(x, limits = NULL, soundlimits) {
