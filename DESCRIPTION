@@ -58,3 +58,5 @@ Collate:
     'sonfacet.R'
     'shape-histogram.R'
     'scorePreprocessor.histogram.R'
+    'scorePreprocessor.boxplot.R'
+    'shape-boxplot.R'

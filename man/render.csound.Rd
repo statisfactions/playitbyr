@@ -1,5 +1,6 @@
 \name{render.csound}
 \alias{csound_layer}
+\alias{csound_layer.boxplot}
 \alias{csound_layer.csound}
 \alias{csound_layer.dotplot}
 \alias{csound_layer.histogram}
@@ -18,6 +19,8 @@
   \method{csound_layer}{dotplot} (sonlayerscore, ...)
 
   \method{csound_layer}{histogram} (sonlayerscore, ...)
+
+  \method{csound_layer}{boxplot} (sonlayerscore, ...)
 }
 \arguments{
   \item{\dots}{Currently ignored}
