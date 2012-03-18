@@ -56,3 +56,5 @@ Collate:
     'print.sonify.R'
     'summary.sonify.R'
     'sonfacet.R'
+    'shape-histogram.R'
+    'scorePreprocessor.histogram.R'

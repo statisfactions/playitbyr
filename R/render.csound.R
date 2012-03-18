@@ -76,3 +76,16 @@ csound_layer.dotplot <- function(sonlayerscore, ...) {
 
   return(list(noisegen, out))
  }
+
+##' @rdname render.csound
+##' @method csound_layer histogram
+csound_layer.histogram <- function(sonlayerscore, ...) {
+  sonlayerscorem <- as.matrix(sonlayerscore)
+  out <- scoreMatrices(nrow(sonlayerscorem))
+  namesmatch <- intersect(colnames(sonlayerscorem), colnames(out$FM))
+                            
+  out$FM[, namesmatch] <- sonlayerscorem[, namesmatch]
+  out$FM[, "amp"] <- sonlayerscorem[, "vol"]
+  out$FM[, "cps"] <- .octToFreq(sonlayerscorem[, "pitch"])
+  return(list(out$FM))
+}
