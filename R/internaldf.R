@@ -73,19 +73,9 @@
   if(!is.null(x$sonfacet)) {
     if(x$sonfacet$facet %in% names(data)) {
       datal <- split(dataclean, data[[x$sonfacet$facet]], drop = TRUE)
-      nl <- length(datal)
       scorel <- lapply(datal, function(d)
                      .getSonlayerScoreFacet(map, set, shape, d, scale, opts))
-    facetend <- cumsum(sapply(scorel, function(s) attr(s, "length")))
-    facetend <- facetend + (0:(nl-1))*x$sonfacet$pause
-    scorelshift <- lapply(1:nl, function(fn) {
-      outsc <- scorel[[fn]]
-      if(fn > 1) 
-        outsc$start <- outsc$start + facetend[fn - 1] + x$sonfacet$pause
-      return(outsc)
-    })
-    score <- do.call(rbind, scorelshift)
-    attr(score, "length") <- facetend[nl]
+      score <- facetjoin(scorel, x$sonfacet$pause)
   }} else {
     score <- .getSonlayerScoreFacet(map, set, shape, dataclean, scale, opts)
   }
@@ -363,3 +353,29 @@ removenull <- function(x) {
   names(out) <- newnames
   out
 }
+
+facetjoin <- function(scorel, pause, lengths = NULL) {
+  ## if lengths is null, assume that we are getting the lengths from
+  ## the elements of scorel, and (below) adding on that attribute ourselves
+  if(is.null(lengths))
+    facetend <- cumsum(sapply(scorel, function(s) attr(s, "length")))
+  else
+    facetend <- cumsum(lengths)
+
+  nl <- length(scorel)
+
+  facetend <- facetend + (0:(nl-1))*pause
+  scorelshift <- lapply(1:nl, function(fn) {
+      outsc <- scorel[[fn]]
+      if(fn > 1) 
+        outsc$start <- outsc$start + facetend[fn - 1] + pause
+      return(outsc)
+    })
+  score <- do.call(rbind, scorelshift)
+  
+  if(is.null(lengths))
+    attr(score, "length") <- facetend[nl]
+
+  return(score)
+}
+
