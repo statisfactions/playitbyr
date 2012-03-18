@@ -41,7 +41,10 @@
 ##' \code{\link{sonlayer}}
 ##' 
 ##' @return A \code{sonscaling} object
-##' 
+##' @examples
+##' x <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
+##'    shape_histogram(length = 3, tempo = 1800)
+##' \dontrun{x}
 ##' @export
 shape_histogram <- function(length = 5, tempo = 240, ...) sonlayer("histogram", length = length, tempo = tempo, ...)
 

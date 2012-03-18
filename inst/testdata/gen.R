@@ -1,4 +1,3 @@
-require(tuneR)
 oldwd <- getwd()
 setwd("testdata")
 
@@ -43,6 +42,11 @@ df <- data.frame(pits = c(0, 1, 1, 2, 2, 3),
 x <- sonify(df, sonaes(time = tims, pitch = pits)) + shape_scatter(dur = 1) +
   scale_time_continuous(c(0, 1)) + scale_pitch_continuous(c(8, 8.25)) +
   sonfacet(facs, pause = 1)
-sonsave(x, "test-facet.wav")  
+sonsave(x, "test-facet.wav")
+
+set.seed(719)
+x <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
+    shape_histogram(length = 3, tempo = 1800)
+sonsave(x, "test-shape-histogram.wav")
 
 setwd(oldwd)

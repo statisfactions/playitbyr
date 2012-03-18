@@ -55,4 +55,9 @@
   layer or the \code{sonify} object using
   \code{\link{sonaes}} (see examples).
 }
+\examples{
+x <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
+   shape_histogram(length = 3, tempo = 1800)
+\dontrun{x}
+}
 

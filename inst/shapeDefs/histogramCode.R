@@ -36,7 +36,7 @@ pan <- shapeParam("pan",
 tempo <- shapeParam("tempo",
                     0,
                     Inf,
-                    240,
+                    1200,
                     list(limits = NULL, soundlimits = c(120, 240), linear_scale),
                     NULL,
                     "The desired tempo of events in beats per minute. Either time or tempo, but not both, must be specified for an object to be rendered.")
