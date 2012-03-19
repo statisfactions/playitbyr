@@ -13,16 +13,19 @@
 scorePreprocessor.boxplot <- function(sonlayerscore, opts, ...) {
   ## We need to transform the "tempo" or "time" data into actual start
   ## times and tranform the durations accordingly
-
-  n <- ceiling(opts$tempo*opts$length/60)
-  rows <- sample(1:nrow(sonlayerscore), n, replace = TRUE)
-  out <- sonlayerscore[rows,]
-  dur <- opts$length/n
-  out$time <- NULL
-  out$start <- seq(0, opts$length, by = dur)[-n]
-  out$dur <- dur
-
-  attr(out, "length") <- opts$length
-
+  pitch05 <- quantile(sonlayerscore$pitch, 0.05)
+  pitch25 <- quantile(sonlayerscore$pitch, 0.25)
+  pitch50 <- quantile(sonlayerscore$pitch, 0.5)
+  pitch75 <- quantile(sonlayerscore$pitch, 0.75)
+  pitch95 <- quantile(sonlayerscore$pitch, 0.95)
+  med <- sonlayerscore[1, ]
+  med$pitch <- pitch50
+  scoresplit <- list(sonlayerscore[sonlayerscore$pitch >= pitch05 & sonlayerscore$pitch <= pitch95,],
+                     sonlayerscore[sonlayerscore$pitch >= pitch25 & sonlayerscore$pitch <= pitch75,],
+                     med)
+  scoredone <- lapply(scoresplit, function(x)
+                      scorePreprocessor.histogram(x, opts))
+  out <- facetjoin(scoredone, 0.5)
+## TODO pause as shape option                   
   return(out)
 }

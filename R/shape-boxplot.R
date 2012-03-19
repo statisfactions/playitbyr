@@ -38,6 +38,7 @@
 ##' @param length The overall length, in seconds, of each segment of the boxplot.
 ##' @param tempo The tempo, in beats per minute; i.e. the rapidity
 ##' with which to represent values from the dataset.
+##' @param pause The pause between each segment of the boxplot, in seconds.
 ##' @param \dots data, settings, and mappings to pass to
 ##' \code{\link{sonlayer}}
 ##' 
@@ -47,5 +48,5 @@
 ##'    shape_boxplot(length = 3, tempo = 1800)
 ##' \dontrun{x}
 ##' @export
-shape_boxplot <- function(length = 5, tempo = 240, ...) sonlayer("boxplot", length = length, tempo = tempo, ...)
+shape_boxplot <- function(length = 5, tempo = 240, pause = 0.1, ...) sonlayer("boxplot", length = length, tempo = tempo, pause = pause, ...)
 

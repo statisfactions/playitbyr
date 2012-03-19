@@ -49,4 +49,10 @@ x <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
     shape_histogram(length = 3, tempo = 1800)
 sonsave(x, "test-shape-histogram.wav")
 
+set.seed(719)
+x <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
+  shape_boxplot(length = 1, tempo = 1800)
+sonsave(x, "test-shape-boxplot.wav")
+
+
 setwd(oldwd)

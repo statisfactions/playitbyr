@@ -2,15 +2,18 @@
 \alias{shape_boxplot}
 \title{Create a boxplot layer}
 \usage{
-  shape_boxplot(length = 5, tempo = 240, ...)
+  shape_boxplot(length = 5, tempo = 240, pause = 0.1, ...)
 }
 \arguments{
-  \item{length}{The overall length, in seconds, of the
-  boxplot.}
+  \item{length}{The overall length, in seconds, of each
+  segment of the boxplot.}
 
   \item{tempo}{The tempo, in beats per minute; i.e. the
   rapidity with which to represent values from the
   dataset.}
+
+  \item{pause}{The pause between each segment of the
+  boxplot, in seconds.}
 
   \item{\dots}{data, settings, and mappings to pass to
   \code{\link{sonlayer}}}
