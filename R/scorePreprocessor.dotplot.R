@@ -39,7 +39,7 @@ scorePreprocessor.dotplot <- function(sonlayerscore, opts, ...) {
     return(x)
   }))
   
-  attr(sonlayerscore, "length") <- sonlayerscore$start[n] + sonlayerscore$dur[n] # length in seconds
+  attr(sonlayerscore, "length") <- max(sonlayerscore$start + sonlayerscore$dur) # length in seconds
 
   return(sonlayerscore)
 }

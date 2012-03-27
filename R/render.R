@@ -8,11 +8,11 @@
 ##' @param file the file to save the rendering to. The
 ##' default,\code{""}, plays the sonification in real time.
 ##' @param \dots Arguments to pass to the specific render method.
-##' @return NULL
+##' @return The length of the resulting sonification
 ##'
 ##' @keywords internal
 ##' @export
 render <- function(x, opts, file = "", ...) {
-  out <- render.csound(x, opts, file, ...)
-  return(invisible(out))
+  render.csound(x, opts, file, ...)
+  invisible(attr(x, "length"))
 }

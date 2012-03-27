@@ -67,12 +67,13 @@ csound_layer.dotplot <- function(sonlayerscore, ...) {
   colnames(out) <- allnames
   namesmatch <- intersect(colnames(sonlayerscorem), allnames)
 
-  out[, "inst"] <- 34
+  out[, "inst"] <- instSnare
   out[, namesmatch] <- sonlayerscorem[, namesmatch]
   out[, "p4"] <- 30000
   out[, 7:13] <- t(replicate(nrow(out), c( .5, .2, 1, .5, .5, 1, 1.5)))
 
-  noisegen <-  rbind(c(33, 0, len + 0.2, .5, 1), c(33, 0, 0, 0, 0))
+  noisegen <-  rbind(c(instSnareSupport, 0, len + 0.2, .5, 1),
+                     c(instSnareSupport, 0, 0, 0, 0))
 
   return(list(noisegen, out))
  }

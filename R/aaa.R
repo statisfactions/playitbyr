@@ -1,4 +1,7 @@
 .onLoad <- function(libname, pkgname) {
+  ## defines option for real-time play if not already defined
+  if(is.null(getOption("render_real_time")))
+    options("render_real_time" = TRUE)
 }
 
 loadShapeDefs <- function() {
@@ -26,4 +29,9 @@ loadShapeDefs <- function() {
 ## various functions throughout the package
 allShapeDefs <- loadShapeDefs()
 
-
+## instrument constants
+instFM <- 1
+instsubtractive <- 2
+instSnare <- 34
+instSnareSupport <- 33
+instPlaySound <- 3

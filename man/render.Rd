@@ -17,7 +17,7 @@
   method.}
 }
 \value{
-  NULL
+  The length of the resulting sonification
 }
 \description{
   \code{render} is a generic which takes a \code{score}
