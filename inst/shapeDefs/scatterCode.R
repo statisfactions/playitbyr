@@ -9,9 +9,9 @@ pitch <- shapeParam("pitch",
                     4,
                     15,
                     8,
-                    list(limits = NULL, soundlimits = c(8, 9), linear_scale),
+                    list(limits = NULL, soundlimits = c(8, 9), function(x, limits, soundlimits) linear_scale(x, limits = limits, soundlimits, by = 1/12)),
                     NULL,
-                    "Pitch represented such that 8 represents middle C, 9 represents the octave above, etc. (This is Csound's 'oct' notation")
+                    "Pitch represented such that 8 represents middle C, 9 represents the octave above, etc. (This is Csound's 'oct' notation.) By default this is scaled to the nearest musical pitch.")
 dur <- shapeParam("dur",
                   0,
                   Inf,

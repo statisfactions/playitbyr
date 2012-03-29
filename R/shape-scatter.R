@@ -12,7 +12,8 @@
 ##' \item{pitch}{The pitch of the note, in the Csound
 ##' \href{"http://www.csounds.com/manual/html/cpsoct.html"}{oct
 ##' notation} notation for pitches, where 8 is middle C and 1
-##' represents an octave, to the corresponding frequency in Hertz.}
+##' represents an octave, to the corresponding frequency in Hertz.
+##' By default this is scaled to the nearest musical (chromatic) pitch.}
 ##' \item{dur}{The duration of the note (in seconds).}
 ##' \item{amp}{The volume of the note, as a proportion between 0 and
 ##' 1, where 1 is the maximum volume. Note that a multiple notes that happen
