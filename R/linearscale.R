@@ -17,6 +17,7 @@
 ##' \code{NA}. If \code{NULL}, the default, the function takes the
 ##' minimum and maximum of the data
 ##' @param soundlimits The limits of the sound parameter.
+##' @param by The unit to round the sound parameter to. See examples.
 ##' @return A numeric vector or matrix of the same type as \code{x},
 ##' linearly rescaled in the desired way. If \code{x} only has one
 ##' value, \code{linear_scale} simply returns the midpoint between
@@ -29,9 +30,10 @@
 ##' 
 ##' ## If max<min, it's rescaled in reverse:
 ##' linear_scale(x, soundlimits = c(10, 1))
-## TODO add example of choosing midpoint and document here
+## TODO add example of choosing limits
+## TODO add example of 'by'
 ##' @export
-linear_scale <- function(x, limits = NULL, soundlimits) {
+linear_scale <- function(x, limits = NULL, soundlimits, by = NULL) {
   
   if(soundlimits[1] > soundlimits[2]) {
     ## Allow for reversed polarity
@@ -58,6 +60,12 @@ linear_scale <- function(x, limits = NULL, soundlimits) {
     nrange <- abs(smax - smin)
     out <- ((x-dmin)*nrange/(dmax - dmin) + smin)
  }
+  if(!is.null(by)) {
+    if(!is.numeric(by) | by == 0)
+      stop("'by' must be a positive numeric value, or NULL.")
+    else
+      out <- round(out/by)*by
+  }
   out
 }
 

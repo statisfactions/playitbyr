@@ -2,7 +2,7 @@
 \alias{linear_scale}
 \title{Create a linear parameter scaling with given minimum and maximum}
 \usage{
-  linear_scale(x, limits = NULL, soundlimits)
+  linear_scale(x, limits = NULL, soundlimits, by = NULL)
 }
 \arguments{
   \item{x}{A numeric vector or matrix}
@@ -13,6 +13,9 @@
   the function takes the minimum and maximum of the data}
 
   \item{soundlimits}{The limits of the sound parameter.}
+
+  \item{by}{The unit to round the sound parameter to. See
+  examples.}
 }
 \value{
   A numeric vector or matrix of the same type as \code{x},

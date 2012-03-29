@@ -12,6 +12,13 @@ test_that("scaling function sanity checks", {
   expect_error(exp_scale(c(1, 1), c(0, 1), c(1, 2)))
 })
 
+test_that("scaling function 'by' argument", {
+  expect_error(linear_scale(1:10, soundlimits = c(1, 10), by = 0))
+  expect_error(linear_scale(1:10, soundlimits = c(1, 10), by = NA))
+  expect_equal(c(1, 1, 1.25, 1.25, 1.5, 1.5, 1.5, 1.75, 1.75, 2, 2), linear_scale(0:10, soundlimits = c(1, 2), by = 0.25))
+  expect_equal(c(1, 1, 1.25, 1.25, 1.5, 1.5, 1.5, 1.75, 1.75, 2, 2), exp_scale(10^(0:10), soundlimits = c(1, 2), by = 0.25))
+})
+
 test_that("removes all events in data that are outside limits on any scaling", {
   x <- sonify(iris[1:10,], sonaes(pitch = Sepal.Width, indx = Petal.Width, time = 1:10)) +
     shape_scatter(jitter = 0.3) + scale_indx_continuous(c(1, 20)) +

@@ -24,7 +24,7 @@
 ##' exp_scale(x, soundlimits = c(10, 1))
 ##'
 ##' @export
-exp_scale <- function(x, limits = NULL, soundlimits) {
+exp_scale <- function(x, limits = NULL, soundlimits, by = NULL) {
   ## Exponentially rescales vector x so that "lower" is the minimum
   ## and "upper" the maximum
   dmin <- limits[1]
@@ -38,5 +38,5 @@ exp_scale <- function(x, limits = NULL, soundlimits) {
   lx <- log(x)
   if(!is.null(limits))
      limits <- log(limits)
-  return(linear_scale(lx, limits, soundlimits))
+  return(linear_scale(lx, limits, soundlimits, by))
 }
