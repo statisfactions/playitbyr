@@ -24,8 +24,8 @@
 ##' @param \dots Other parameters (currently ignored)
 ##' @rdname scale_attkp_continuous
 ##' @export
-scale_attkp_continuous <- function(soundlimits, limits = NULL, ...) sonscaling(attkp = list(limits, soundlimits, linear_scale))
+scale_attkp_continuous <- function(soundlimits, limits = NULL, by = NULL, ...) sonscaling(attkp = list(limits, soundlimits, function(x, limits, soundlimits) linear_scale(x, limits = limits, soundlimits, by = by)))
 
 ##' @rdname scale_attkp_continuous
 ##' @export
-scale_attkp_exp <- function(soundlimits, limits = NULL, ...) sonscaling(attkp = list(limits, soundlimits, exp_scale))
+scale_attkp_exp <- function(soundlimits, limits = NULL, by = NULL, ...) sonscaling(attkp = list(limits, soundlimits, function(x, limits, soundlimits) exp_scale(x, limits = limits, soundlimits, by = by)))

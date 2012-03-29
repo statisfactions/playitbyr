@@ -22,14 +22,15 @@
 ##' \code{NA}. If \code{NULL}, the default, the function takes the
 ##' minimum and maximum of the data
 ##' @param soundlimits The limits of the sound parameter.
+##' @param by The unit to round the sound parameter to. See examples.
 ##' @param \dots Other parameters (currently ignored)
 ##'
 ##' @rdname scale_time_continuous
 ##' @export
-scale_time_continuous <- function(soundlimits, limits = NULL, ...)
-  sonscaling(time = list(limits, soundlimits, linear_scale))
+scale_time_continuous <- function(soundlimits, limits = NULL, by = NULL, ...)
+  sonscaling(time = list(limits, soundlimits, function(x, limits, soundlimits) linear_scale(x, limits = limits, soundlimits, by = by)))
 
 ##' @rdname scale_time_continuous
 ##' @export
-scale_time_exp <- function(soundlimits, limits = NULL, ...) sonscaling(time = list(limits, soundlimits, exp_scale))
+scale_time_exp <- function(soundlimits, limits = NULL, by = NULL, ...) sonscaling(time = list(limits, soundlimits, function(x, limits, soundlimits) exp_scale(x, limits = limits, soundlimits, by = by)))
 

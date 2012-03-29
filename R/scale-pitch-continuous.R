@@ -24,12 +24,12 @@
 ##' @param \dots Other parameters (currently ignored)
 ##' @rdname scale_pitch_continuous
 ##' @export
-scale_pitch_continuous <- function(soundlimits, limits = NULL, ...) {
-sonscaling(pitch = list(limits, soundlimits, linear_scale))
+scale_pitch_continuous <- function(soundlimits, limits = NULL, by = NULL, ...) {
+sonscaling(pitch = list(limits, soundlimits, function(x, limits, soundlimits) linear_scale(x, limits = limits, soundlimits, by = by)))
 }
 
 ##' @rdname scale_pitch_continuous
 ##' @export
-scale_pitch_exp <- function(soundlimits, limits = NULL, ...) {
-sonscaling(pitch = list(limits, soundlimits, exp_scale))
+scale_pitch_exp <- function(soundlimits, limits = NULL, by = NULL, ...) {
+sonscaling(pitch = list(limits, soundlimits, function(x, limits, soundlimits) exp_scale(x, limits = limits, soundlimits, by = by)))
 }

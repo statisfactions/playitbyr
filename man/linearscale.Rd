@@ -37,6 +37,13 @@
   included in \pkg{playitbyr}. But it can be used on any
   vector or matrix.
 }
+\note{
+  If \code{by} is specified, unexpected results may happen
+  when \code{soundlimits[2] != (soundlimits[1] + n * by)}
+  for some \code{n}; in these cases the data will be
+  trained to the largest value of \code{(soundlimits[1] + n
+  * by)} less than \code{soundlimits[2]}.
+}
 \examples{
 x <- 1:10
 linear_scale(x, soundlimits = c(-2, -1.5))

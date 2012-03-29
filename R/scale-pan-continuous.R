@@ -24,8 +24,8 @@
 ##' @param \dots Other parameters (currently ignored)
 ##' @rdname scale_pan_continuous
 ##' @export
-scale_pan_continuous <- function(soundlimits, limits = NULL, ...) sonscaling(pan = list(limits, soundlimits, linear_scale))
+scale_pan_continuous <- function(soundlimits, limits = NULL, by = NULL, ...) sonscaling(pan = list(limits, soundlimits, function(x, limits, soundlimits) linear_scale(x, limits = limits, soundlimits, by = by)))
 
 ##' @rdname scale_pan_continuous
 ##' @export
-scale_pan_exp <- function(soundlimits, limits = NULL, ...) sonscaling(pan = list(limits, soundlimits, exp_scale))
+scale_pan_exp <- function(soundlimits, limits = NULL, by = NULL, ...) sonscaling(pan = list(limits, soundlimits, function(x, limits, soundlimits) exp_scale(x, limits = limits, soundlimits, by = by)))

@@ -11,49 +11,49 @@
 ##' @rdname scale_identity
 ##' @export
 scale_time_identity <- function(...)
-  sonscaling(time =  list(limits = NULL, soundlimits = c(0, 0), function(x, min, max) x))
+  sonscaling(time =  list(limits = NULL, soundlimits = c(0, 0), function(x, limits, soundlimits) x))
 
 ##' @rdname scale_identity
 ##' @export
 scale_pitch_identity <- function(chromatic = FALSE, ...) 
-  sonscaling(pitch =  list(limits = NULL, soundlimits = c(0, 0), function(x, min, max) x))
+  sonscaling(pitch =  list(limits = NULL, soundlimits = c(0, 0), function(x, limits, soundlimits) x))
 
 ##' @rdname scale_identity
 ##' @export
 scale_dur_identity <- function(...)
-  sonscaling(dur =  list(limits = NULL, soundlimits = c(0, 0), function(x, min, max) x))
+  sonscaling(dur =  list(limits = NULL, soundlimits = c(0, 0), function(x, limits, soundlimits) x))
 
 ##' @rdname scale_identity
 ##' @export
 scale_vol_identity <- function(...)
-  sonscaling(vol =  list(limits = NULL, soundlimits = c(0, 0), function(x, min, max) x))
+  sonscaling(vol =  list(limits = NULL, soundlimits = c(0, 0), function(x, limits, soundlimits) x))
 
 ##' @rdname scale_identity
 ##' @export
 scale_pan_identity <- function(...)
-  sonscaling(pan =  list(limits = NULL, soundlimits = c(0, 0), function(x, min, max) x))
+  sonscaling(pan =  list(limits = NULL, soundlimits = c(0, 0), function(x, limits, soundlimits) x))
 
 ##' @rdname scale_identity
 ##' @export
 scale_tempo_identity <- function(...)
-  sonscaling(tempo =  list(limits = NULL, soundlimits = c(0, 0), function(x, min, max) x))
+  sonscaling(tempo =  list(limits = NULL, soundlimits = c(0, 0), function(x, limits, soundlimits) x))
 
 ##' @rdname scale_identity
 ##' @export
 scale_attkp_identity <- function(...)
-  sonscaling(attkp =  list(limits = NULL, soundlimits = c(0, 0), function(x, min, max) x))
+  sonscaling(attkp =  list(limits = NULL, soundlimits = c(0, 0), function(x, limits, soundlimits) x))
 
 ##' @rdname scale_identity
 ##' @export
 scale_decayp_identity <- function(...)
-  sonscaling(decayp =  list(limits = NULL, soundlimits = c(0, 0), function(x, min, max) x))
+  sonscaling(decayp =  list(limits = NULL, soundlimits = c(0, 0), function(x, limits, soundlimits) x))
 
 ##' @rdname scale_identity
 ##' @export
 scale_mod_identity <- function(...)
-  sonscaling(mod =  list(limits = NULL, soundlimits = c(0, 0), function(x, min, max) x))
+  sonscaling(mod =  list(limits = NULL, soundlimits = c(0, 0), function(x, limits, soundlimits) x))
 
 ##' @rdname scale_identity
 ##' @export
 scale_indx_identity <- function(...)
-  sonscaling(indx =  list(limits = NULL, soundlimits = c(0, 0), function(x, min, max) x))
+  sonscaling(indx =  list(limits = NULL, soundlimits = c(0, 0), function(x, limits, soundlimits) x))

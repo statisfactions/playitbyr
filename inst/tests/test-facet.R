@@ -14,3 +14,5 @@ test_that("basic faceting works as expected", {
   soncompare(y, "test-facet.wav")
 })
 
+blah <- function (x, limits, soundlimits) 
+  linear_scale(x, limits = NULL, soundlimits, by = eval(by))

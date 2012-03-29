@@ -24,8 +24,8 @@
 ##' @param \dots Other parameters (currently ignored)
 ##' @rdname scale_tempo_continuous
 ##' @export
-scale_tempo_exp <- function(soundlimits, limits = NULL, ...) sonscaling(tempo = list(limits, soundlimits, exp_scale))
+scale_tempo_exp <- function(soundlimits, limits = NULL, by = NULL, ...) sonscaling(tempo = list(limits, soundlimits, function(x, limits, soundlimits) exp_scale(x, limits = limits, soundlimits, by = by)))
 
 ##' @rdname scale_tempo_continuous
 ##' @export
-scale_tempo_continuous <- function(soundlimits, limits = NULL, ...) sonscaling(tempo = list(limits, soundlimits, linear_scale))
+scale_tempo_continuous <- function(soundlimits, limits = NULL, by = NULL, ...) sonscaling(tempo = list(limits, soundlimits, function(x, limits, soundlimits) linear_scale(x, limits = limits, soundlimits, by = by)))

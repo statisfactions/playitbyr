@@ -3,9 +3,11 @@
 \alias{scale_decayp_exp}
 \title{Continuous note decay scales}
 \usage{
-  scale_decayp_exp(soundlimits, limits = NULL, ...)
+  scale_decayp_exp(soundlimits, limits = NULL, by = NULL,
+    ...)
 
-  scale_decayp_continuous(soundlimits, limits = NULL, ...)
+  scale_decayp_continuous(soundlimits, limits = NULL,
+    by = NULL, ...)
 }
 \arguments{
   \item{\dots}{Other parameters (currently ignored)}
@@ -16,6 +18,9 @@
   vector of length 2. All data values outside these limits
   are returned as \code{NA}. If \code{NULL}, the default,
   the function takes the minimum and maximum of the data}
+
+  \item{by}{The unit to round the sound parameter to. See
+  examples.}
 }
 \value{
   A \code{sonscaling} object, to be used in \code{sonify}

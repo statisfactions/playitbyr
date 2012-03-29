@@ -23,6 +23,7 @@
 ##' value, \code{linear_scale} simply returns the midpoint between
 ##' \code{min} and \code{max}.
 ##' @seealso \code{\link{sonscaling}}
+##' @note If \code{by} is specified, unexpected results may happen when \code{soundlimits[2] != (soundlimits[1] + n * by)} for some \code{n}; in these cases the data will be trained to the largest value of \code{(soundlimits[1] + n * by)} less than \code{soundlimits[2]}.
 ##' @examples
 ##' 
 ##' x <- 1:10
@@ -64,7 +65,7 @@ linear_scale <- function(x, limits = NULL, soundlimits, by = NULL) {
     if(!is.numeric(by) | by == 0)
       stop("'by' must be a positive numeric value, or NULL.")
     else
-      out <- round(out/by)*by
+      out <- round((out -smin)/by)*by + smin
   }
   out
 }

@@ -3,9 +3,11 @@
 \alias{scale_indx_exp}
 \title{Continuous modulation index scales}
 \usage{
-  scale_indx_continuous(soundlimits, limits = NULL, ...)
+  scale_indx_continuous(soundlimits, limits = NULL,
+    by = NULL, ...)
 
-  scale_indx_exp(soundlimits, limits = NULL, ...)
+  scale_indx_exp(soundlimits, limits = NULL, by = NULL,
+    ...)
 }
 \arguments{
   \item{\dots}{Other parameters (currently ignored)}
@@ -16,6 +18,9 @@
   vector of length 2. All data values outside these limits
   are returned as \code{NA}. If \code{NULL}, the default,
   the function takes the minimum and maximum of the data}
+
+  \item{by}{The unit to round the sound parameter to. See
+  examples.}
 }
 \value{
   A \code{sonscaling} object, to be used in \code{sonify}

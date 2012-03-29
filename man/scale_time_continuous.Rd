@@ -3,9 +3,11 @@
 \alias{scale_time_exp}
 \title{Continuous time scales}
 \usage{
-  scale_time_continuous(soundlimits, limits = NULL, ...)
+  scale_time_continuous(soundlimits, limits = NULL,
+    by = NULL, ...)
 
-  scale_time_exp(soundlimits, limits = NULL, ...)
+  scale_time_exp(soundlimits, limits = NULL, by = NULL,
+    ...)
 }
 \arguments{
   \item{limits}{The limits of the data to train, a numeric
@@ -14,6 +16,9 @@
   the function takes the minimum and maximum of the data}
 
   \item{soundlimits}{The limits of the sound parameter.}
+
+  \item{by}{The unit to round the sound parameter to. See
+  examples.}
 
   \item{\dots}{Other parameters (currently ignored)}
 }
