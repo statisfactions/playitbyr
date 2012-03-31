@@ -31,15 +31,9 @@ scorePreprocessor.scatter <- function(sonlayerscore, opts, ...) {
   }
 
   ## Scale durations by total time divided by number of notes
-  sonlayerscore$dur <- (sonlayerscore$dur) * (total/n)
-
-  ## (NOTE: this is somewhat questionable whether this is the right
-  ## thing to do; it's a little arbitrary and makes scaling duration
-  ## less intuitively related to what's specified in x$scaling.  I
-  ## have chosen to do it this way b/c it means you can easily set a
-  ## different scaling for the time and duration will automagically
-  ## scale down without having to set it separately, which seems
-  ## annoying.)
+  if(!is.null(opts$relative))
+    if(opts$relative)
+      sonlayerscore$dur <- (sonlayerscore$dur) * (total/n)
 
   ## away in the next version when we integrate closer with ggplot2
   if(!is.null(opts$jitter))

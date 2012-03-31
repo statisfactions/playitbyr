@@ -14,7 +14,7 @@
 ##' notation} notation for pitches, where 8 is middle C and 1
 ##' represents an octave, to the corresponding frequency in Hertz.
 ##' By default this is scaled to the nearest musical (chromatic) pitch.}
-##' \item{dur}{The duration of the note (in seconds).}
+##' \item{dur}{The duration of the note (relative to the total time if \code{relative = TRUE}, in seconds otherwise).}
 ##' \item{amp}{The volume of the note, as a proportion between 0 and
 ##' 1, where 1 is the maximum volume. Note that a multiple notes that happen
 ##' at the same time could add up to more than one, causing distortion an
@@ -36,11 +36,19 @@
 ##' time by when there are multiple notes at the same pitch and time
 ##' (the sonic equivalent of overplotting). The default, 0, means no
 ##' jitter occurs.
+##' @param relative Make the duration relative to the overall length
+##' of the sonification? The default, \code{TRUE}, means that the
+##' sonification will scale durations relative to the length of the
+##' overall sonification (it estimates how long a \dQuote{beat} is and
+##' then rescales duration in relation to that). Otherwise, durations
+##' remain constant even if the sonification is much longer or shorter
+##' (which may mean that note durations must be fiddled with so they
+##' don't overlap). 
 ##' @param \dots data, settings, and mappings to pass to
 ##' \code{\link{sonlayer}}
 ##' 
 ##' @return A \code{sonscaling} object
 ##' 
 ##' @export
-shape_scatter <- function(jitter = 0, ...) sonlayer("scatter", jitter = jitter, ...)
+shape_scatter <- function(jitter = 0, relative = TRUE, ...) sonlayer("scatter", jitter = jitter, relative = relative, ...)
 

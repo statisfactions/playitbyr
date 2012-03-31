@@ -14,3 +14,8 @@ test_that("all FM + envelope parameters in shape_scatter are exposed", {
   soncompare(x, "test-shape-scatter.wav")
 })
 
+test_that("relative = FALSE works", {
+  x <- sonify(iris[40:50,]) + sonaes(time = Petal.Length) +
+    shape_scatter(relative = FALSE, dur = 2.6)
+  expect_true(all(.getScore(x)[[1]]$dur == 2.6))
+})
