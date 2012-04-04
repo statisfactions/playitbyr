@@ -2,6 +2,7 @@
 \alias{csound_layer}
 \alias{csound_layer.boxplot}
 \alias{csound_layer.csound}
+\alias{csound_layer.curvepair}
 \alias{csound_layer.dotplot}
 \alias{csound_layer.histogram}
 \alias{csound_layer.scatter}
@@ -19,6 +20,8 @@
   \method{csound_layer}{dotplot} (sonlayerscore, ...)
 
   \method{csound_layer}{histogram} (sonlayerscore, ...)
+
+  \method{csound_layer}{boxplot} (sonlayerscore, ...)
 
   \method{csound_layer}{boxplot} (sonlayerscore, ...)
 }
