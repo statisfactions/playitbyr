@@ -38,8 +38,9 @@ sonlayer <- function(shape="scatter", stat=NULL,
 
   ## Check shape params given
   shape_params <- list(...)
-  ## TODO need to update and re-enable this
-  ## .checkSoundParams(names(shape_params), shape)
+  nonsound_params <- names(formals(paste("shape_", shape, sep = ""))) # grabs the other parameters specified in the 'shape_' shortcut function for checking
+  sound_params <- setdiff(shape_params, nonsound_params)
+  .checkSoundParams(names(sound_params), shape)
 
   dataname <- deparse(substitute(data)) # Used by summary.sonify()
 
