@@ -4,8 +4,8 @@
 ##'
 ##' @param object A \code{sonify} object
 ##' @param \dots Ignored.
-##' @return \code{summary.sonify} prints a brief summary of the name
-##' of the dataset to be sonified, and the specified mappings and
+##' @return \code{summary.sonify} prints a brief summary, including 
+##' info about the dataset to be sonified, and the specified mappings and
 ##' scalings of sonic values to data parameters.
 ##' 
 ##' @seealso \code{\link{sonify}} for the creation of these objects

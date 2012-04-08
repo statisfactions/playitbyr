@@ -10,9 +10,9 @@
   \item{\dots}{Ignored.}
 }
 \value{
-  \code{summary.sonify} prints a brief summary of the name
-  of the dataset to be sonified, and the specified mappings
-  and scalings of sonic values to data parameters.
+  \code{summary.sonify} prints a brief summary, including
+  info about the dataset to be sonified, and the specified
+  mappings and scalings of sonic values to data parameters.
 }
 \description{
   Summarizes the structure of a sonify object in ways
