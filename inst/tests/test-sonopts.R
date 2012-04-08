@@ -20,7 +20,7 @@ test_that("sonopt list outputs as expected", {
 })
                      
 test_that("sonopt works with `+.sonify`", {
-  testsonify <- structure(list(data = NULL, dataname = "NULL",
+  testsonify <- structure(list(data = NULL,
                                mapping = structure(list(), class = "sonaes"), 
                                scales = structure(list(), class = "sonscaling"),
                                sonlayers = NULL, opts = testlist, sonfacet = NULL),

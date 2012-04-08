@@ -42,11 +42,9 @@ sonlayer <- function(shape="scatter", stat=NULL,
   sound_params <- setdiff(shape_params, nonsound_params)
   .checkSoundParams(names(sound_params), shape)
 
-  dataname <- deparse(substitute(data)) # Used by summary.sonify()
-
-  l <- list(list(shape, shape_params), list(stat, stat_params), data, dataname, mapping)
+  l <- list(list(shape, shape_params), list(stat, stat_params), data, mapping)
   
-  names(l) <- c("shape", "stat", "data", "dataname", "mapping")
+  names(l) <- c("shape", "stat", "data", "mapping")
   names(l$stat) <- c("stat", "stat_params")
   names(l$shape) <- c("shape", "shape_params")
   class(l) <- "sonlayer"

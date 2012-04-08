@@ -19,8 +19,6 @@ summary.sonify <- function(object, ...) {
 
   cat((paste("Summary of sonify object '", deparse(substitute(object)), "':\n\n", sep="")))
 
-  cat("The data to be sonified:\n", paste("$dataname \n",
-                                          object$dataname, "\n\n"))
   cat("Matchup of sonic values to data columns or constants:\n",
       "      $mapping")
   cat("           Column or Value\n"  )

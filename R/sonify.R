@@ -50,13 +50,11 @@ sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling(), sonlayers =
   ## to be sonified, the mappings of data to sound parameters, the scaling
   ## of parameters, and additional options.
 
-  dataname <- deparse(substitute(data)) # Used by summary.sonify()
-
   if("sonlayer" %in% class(sonlayers))
     sonlayers <- list(sonlayers)
   
-  s <- list(data, dataname, mapping, scales, sonlayers, opts, sonfacet) 
-  names(s) <- c("data", "dataname", "mapping", "scales", "sonlayers", "opts", "sonfacet")
+  s <- list(data, mapping, scales, sonlayers, opts, sonfacet) 
+  names(s) <- c("data", "mapping", "scales", "sonlayers", "opts", "sonfacet")
   class(s) <- "sonify"
   .checkData(s)
   s
