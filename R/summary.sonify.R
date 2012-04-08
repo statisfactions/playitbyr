@@ -12,30 +12,50 @@
 ##' @method summary sonify
 ##' @export
 summary.sonify <- function(object, ...) {
-  mins <- as.vector(lapply(object$scales, function(y) y$min), "character")
-  maxs <- as.vector(lapply(object$scales, function(y) y$max), "character")
-  firstspaces <- sapply(names(object$scales), function(y) paste(rep(" ",17 - nchar(y)), collapse=""))
-  secondspaces <- sapply(mins, function(y) paste(rep(" ",8 - nchar(y)), collapse=""))
+  wrap <- function(x) paste(
+                        paste(strwrap(x, exdent = 2), collapse = "\n"),
+                        "\n", sep =""
+                        )
+  
+  defaults <- function() {
+    paste(mapply(function(x, n) {
+      paste(n, deparse(x), sep="=")
+    }, object$mapping, names(object$mapping)), collapse=", ")
+  }
 
-  cat((paste("Summary of sonify object '", deparse(substitute(object)), "':\n\n", sep="")))
+  clist <- function(l) {
+    paste(paste(names(l), l, sep=" = ", collapse=", "), sep="")
+  }
 
-  cat("Matchup of sonic values to data columns or constants:\n",
-      "      $mapping")
-  cat("           Column or Value\n"  )
-  cat("--------------------------------------------\n")
-  cat(paste("        $", names(object$mapping), " ",
-            firstspaces,
-            as.vector(object$mapping, "character"),
-            sep="", collapse="\n"), "\n\n")
+  datamap <- function(x) {
+    if (!is.null(x$data)) {
+      output <- paste(
+                  "data:     ", paste(names(x$data), collapse=", "), 
+                  " [", nrow(x$data), "x", ncol(x$data), "] ", 
+                  "\n", sep="")
+      cat(wrap(output))
+    }
+    if (length(x$mapping) > 0) {
+      cat("mapping:  ", clist(x$mapping), "\n", sep="")    
+    }
+  }
 
-  cat("Desired min/max for sonic parameters:\n",
-      "      $scales")
-  cat("           Min      Max\n")
-  cat("--------------------------------------------\n")
-  cat(paste("        $", names(object$scales),
-            firstspaces, mins, secondspaces, maxs,
-            collapse="\n", sep=""))
-  cat("\n")
+  datamap(object)
+  cat("faceting: ")
+  print(object$sonfacet)
+  if (length(object$sonlayers) > 0)
+    cat("-----------------------------------\n")
+  lapply(object$sonlayers, function(x) {
+    cat("shape_", x$shape$shape, ":  ", clist(x$shape$shape_params), "\n", sep="")
+    datamap(x)
+  })
 
+  cat("-----------------------------------\n")
+  cat("minimum and maximum values of shape parameters:\n\n")
+  scales <- .getScales(object)
+  minmaxes <- do.call(rbind, (lapply(scales, function(y) y$soundlimits)))
+  colnames(minmaxes) <- c("Min", "Max")
+  print(minmaxes)
+  invisible(NULL)
 }
 
