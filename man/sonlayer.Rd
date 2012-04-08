@@ -2,19 +2,13 @@
 \alias{sonlayer}
 \title{Creating individual layers for sonify objects}
 \usage{
-  sonlayer(shape = "scatter", stat = NULL,
-    stat_params = NULL, data = NULL, mapping = NULL, ...)
+  sonlayer(shape = "scatter", data = NULL, mapping = NULL,
+    ...)
 }
 \arguments{
   \item{shape}{A character string representing the overall
   style of the audio plot (analogous to \code{geom}s from
   the \pkg{ggplot2} package).}
-
-  \item{stat}{The statistic to be calculated for the layer
-  (currently ignored)}
-
-  \item{stat_params}{Additional parameters specific to the
-  stat (currently ignored)}
 
   \item{data}{The \code{data.frame} to be sonified for this
   layer. If blank, the data from the parent \code{sonify}

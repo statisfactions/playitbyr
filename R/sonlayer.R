@@ -19,8 +19,6 @@
 ##' @param shape A character string representing the overall style of
 ##' the audio plot (analogous to \code{geom}s from the \pkg{ggplot2}
 ##' package).
-##' @param stat The statistic to be calculated for the layer (currently ignored)
-##' @param stat_params Additional parameters specific to the stat (currently ignored)
 ##' @param data The \code{data.frame} to be sonified for this
 ##' layer. If blank, the data from the parent \code{sonify} object is
 ##' used.
@@ -31,10 +29,16 @@
 ##' shortcut functions, the \code{shape_}\kbd{shapename} functions, currently: \code{\link{shape_scatter}}
 # currently excluded \code{\link{shape_csound}}, \code{\link{shape_dotplot}}
 
-sonlayer <- function(shape="scatter", stat=NULL,
-                     stat_params=NULL, data=NULL, mapping=NULL, ...) {
+sonlayer <- function(shape="scatter", data=NULL, mapping=NULL, ...) {
   if(!(shape %in% .getShapeNames()))
      stop("'", deparse(shape),"' is not a valid shape name. See .getShapeNames.")
+
+  ## these 'stat' parameters are placeholders right now
+  ## @param stat The statistic to be calculated for the layer (currently ignored)
+  ## @param stat_params Additional parameters specific to the stat (currently ignored)
+  
+  stat <- NULL
+  stat_params <- NULL
 
   ## Check shape params given
   shape_params <- list(...)
