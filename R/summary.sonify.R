@@ -43,6 +43,7 @@ summary.sonify <- function(object, ...) {
   datamap(object)
   cat("faceting: ")
   print(object$sonfacet)
+  ## TODO act more gracefully for arbitrary sonlayers without shape specified
   if (length(object$sonlayers) > 0) {
     cat("-----------------------------------\n")
     lapply(object$sonlayers, function(x) {
