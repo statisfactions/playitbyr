@@ -22,9 +22,8 @@
   ## Returns a data.frame score that the render method
   ## uses to actually create the sound for the sonification
 
-  ## Check to make sure there are layers to render
-  if(is.null(x$sonlayers))
-    stop("Cannot render sound without any sonlayers.")
+
+  .checkSonify(x)
 
   ## get scales; train if faceting
   if(!is.null(x$sonfacet) && x$sonfacet$scales == "fixed") 
@@ -102,10 +101,12 @@
     return(NULL)
 
   ## Create output score:
-  ## If map gives data.frame column, rescale that column.
+  ## If map gives data.frame column, coerce to numeric and rescale that column.
   ## If map gives anything else, create new variable and then rescale column.
   out <- lapply(names(map), function(param) {
     column <- .getColumn(map, param, data)
+    if(!is.numeric(column))
+      column <- as.numeric(as.factor(column))
     return(.rescaleDataByParam(scale, param, column))
   })
 

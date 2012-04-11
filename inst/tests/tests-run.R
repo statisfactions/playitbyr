@@ -1,7 +1,7 @@
 require(tuneR)
 comppath <- "testdata"
 
-soncompare <- function(x, comppath, seed = 719, basepath = "~/sonification/testdata/") {
+soncompare <<- function(x, comppath, seed = 719, basepath = "~/sonification/testdata/") {
   set.seed(seed)
   outfile <- paste(tempfile(), ".wav", sep="")
   sonsave(x,outfile)
@@ -11,14 +11,14 @@ soncompare <- function(x, comppath, seed = 719, basepath = "~/sonification/testd
   expect_equal(curr, comp)
 }
 
-test_file("playitbyr/inst/tests/test-sonopts.R")
-test_file("playitbyr/inst/tests/test-mapping.R")
-test_file("playitbyr/inst/tests/test-scaleshortcuts.R")
-test_file("playitbyr/inst/tests/test-render.R")
-test_file("playitbyr/inst/tests/test-setting.R")
-test_file("playitbyr/inst/tests/test-shape-scatter.R")
-test_file("playitbyr/inst/tests/test-sonify.R")
-test_file("playitbyr/inst/tests/test-shape-dotplot.R")
-test_file("playitbyr/inst/tests/test-facet.R")
-test_file("playitbyr/inst/tests/test-shape-histogram.R")
-test_file("playitbyr/inst/tests/test-play.R")
+test_file("test-sonopts.R")
+test_file("test-mapping.R")
+test_file("test-scaleshortcuts.R")
+test_file("test-render.R")
+test_file("test-setting.R")
+test_file("test-shape-scatter.R")
+test_file("test-sonify.R")
+test_file("test-shape-dotplot.R")
+test_file("test-facet.R")
+test_file("test-shape-histogram.R")
+test_file("test-play.R")

@@ -13,12 +13,8 @@
 sonsave <- function(what, where, play = FALSE, out = "dac", ...) {
   if(where == "")
     stop("'where' cannot be an empty string")
-  length <- print(what, file = where, ...)
-  if(play) {
-    createPerformance(i = list(matrix(c(3, 0, length,
-                        paste("\"", where, "\"", sep  = "")),
-                        nrow = 1)), out = out,
-                      orcfile = system.file("orc/playitbyr.orc", package = "playitbyr"))
-  }
+  length <- print(what, file = where, render_real_time = FALSE, play = play, out = out, ...)
+
   invisible(length)
 }
+    

@@ -9,8 +9,7 @@
 ##' values is the heart of making the sonification happen and making
 ##' it possible to render. But {sonaes} does not check to make sure that all mappings
 ##' are filled in, since the user can add on more mappings (using
-##' \code{\link{+.sonify}}) interactively. However, this is checked by
-##' \code{\link{.checkSonify}} when the object is to be rendered.
+##' \code{\link{+.sonify}}) interactively. 
 ##' 
 ##' Also, every item that is mapped to a \code{data.frame} column in a
 ##' \code{sonify} object must also have a scale associated with it before

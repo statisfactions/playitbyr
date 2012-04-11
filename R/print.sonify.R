@@ -31,11 +31,34 @@ print.sonify <- function(x, ...) {
   else
     realtime <- getOption("render_real_time")
 
+  if("play" %in% names(dots))
+    play <- dots$play
+  else
+    play <- TRUE
+
+
+  
   if(!realtime) {
-    out <- tempfile()
-    length <- sonsave(x, out, play = TRUE)
+    if("file" %in% names(dots))
+      outfile <- dots$file
+    else
+      outfile <- tempfile()
+
+    if("out" %in% names(dots))
+      out <- dots$out
+    else
+      out <- "dac"
+    
+      
+    length <- render(.getScore(x), opts = x$opts, file = outfile)
+    if("play" %in% names(dots) & dots$play == TRUE)
+      createPerformance(i = list(matrix(c(3, 0, length,
+                        paste("\"", outfile, "\"", sep  = "")),
+                        nrow = 1)), out = out,
+                                orcfile = system.file("orc/playitbyr.orc", package = "playitbyr"),
+                      realTime = FALSE)
   } else {
-    length <- render(.getScore(x), opts = x$opts, ...)
+    length <- render(.getScore(x), opts = x$opts)
   }
   invisible(length)
 }

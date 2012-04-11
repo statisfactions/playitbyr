@@ -18,4 +18,5 @@
   \code{\link{sonscaling}} all give more details on how to
   correctly form a \code{sonify} object.
 }
+\keyword{internal}
 
