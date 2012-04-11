@@ -43,19 +43,20 @@ summary.sonify <- function(object, ...) {
   datamap(object)
   cat("faceting: ")
   print(object$sonfacet)
-  if (length(object$sonlayers) > 0)
+  if (length(object$sonlayers) > 0) {
     cat("-----------------------------------\n")
-  lapply(object$sonlayers, function(x) {
-    cat("shape_", x$shape$shape, ":  ", clist(x$shape$shape_params), "\n", sep="")
-    datamap(x)
-  })
-
-  cat("-----------------------------------\n")
-  cat("minimum and maximum values of shape parameters:\n\n")
-  scales <- .getScales(object)
-  minmaxes <- do.call(rbind, (lapply(scales, function(y) y$soundlimits)))
-  colnames(minmaxes) <- c("Min", "Max")
-  print(minmaxes)
-  invisible(NULL)
+    lapply(object$sonlayers, function(x) {
+      cat("shape_", x$shape$shape, ":  ", clist(x$shape$shape_params), "\n", sep="")
+      datamap(x)
+    })
+    cat("-----------------------------------\n")
+    cat("minimum and maximum values of shape parameters:\n\n")
+    scales <- .getScales(object)
+    minmaxes <- do.call(rbind, (lapply(scales, function(y) y$soundlimits)))
+    colnames(minmaxes) <- c("Min", "Max")
+    print(minmaxes)
+    invisible(NULL)
+  }
+  else
+    cat("No layers present\n")
 }
-
