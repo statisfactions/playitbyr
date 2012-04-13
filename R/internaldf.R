@@ -243,9 +243,9 @@
 ## @param column The data.frame column (vector) to be rescaled
 .rescaleDataByParam <- function(scale, param, column) {
   ##Apply function
-  column <- scale[[param]]$scaling.function(column, limits = scale[[param]]$limits, soundlimits = scale[[param]]$soundlimits)
+  outcolumn <- scale[[param]]$scaling.function(column, limits = scale[[param]]$limits, soundlimits = scale[[param]]$soundlimits)
 
-  return(column)
+  return(outcolumn)
 }
 
 ## @rdname internaldf

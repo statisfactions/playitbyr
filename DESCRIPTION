@@ -60,5 +60,5 @@ Collate:
     'scorePreprocessor.histogram.R'
     'scorePreprocessor.boxplot.R'
     'shape-boxplot.R'
-    'shape-curvepair.R'
-    'scorePreprocessor.curvepair.R'
+    'scorePreprocessor.surface.R'
+    'shape-surface.R'

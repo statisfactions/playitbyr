@@ -9,6 +9,7 @@ test_that("scaling function sanity checks", {
   expect_equal(c(NA, 2, 3, NA), exp_scale(c(1, 10, 100, -5), c(10, 100) , c(2, 3)))
   expect_equal(c(2, 2), linear_scale(c(1, 1), c(0, 1), c(1, 2)))
   expect_equal(c(2, 2), exp_scale(c(1, 1), c(0.1, 1), c(1, 2)))
+  expect_equal(c(15, 1, 1),  linear_scale(c(1, 2, 2), limits = c(1, 2), soundlimits = c(15, 1)))
   expect_error(exp_scale(c(1, 1), c(0, 1), c(1, 2)))
 })
 

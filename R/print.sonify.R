@@ -51,7 +51,8 @@ print.sonify <- function(x, ...) {
     
       
     length <- render(.getScore(x), opts = x$opts, file = outfile)
-    if("play" %in% names(dots) & dots$play == TRUE)
+
+    if((!("play" %in% names(dots)) || dots$play == FALSE) & !realtime)
       createPerformance(i = list(matrix(c(3, 0, length,
                         paste("\"", outfile, "\"", sep  = "")),
                         nrow = 1)), out = out,

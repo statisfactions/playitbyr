@@ -39,6 +39,8 @@ linear_scale <- function(x, limits = NULL, soundlimits, by = NULL) {
   if(soundlimits[1] > soundlimits[2]) {
     ## Allow for reversed polarity
     x <- -x
+    if(!is.null(limits))
+      limits <- -rev(limits)
     soundlimits <- rev(soundlimits)
   }
   if(is.null(limits))
