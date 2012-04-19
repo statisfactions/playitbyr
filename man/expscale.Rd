@@ -43,6 +43,8 @@ exp_scale(x, soundlimits = c(-2, -1.5))
 exp_scale(x, soundlimits = c(10, 1))
 }
 \seealso{
-  \code{\link{sonscaling}}
+  \code{\link{linear_scale}} for more details on how
+  scaling functions work
 }
+\keyword{internal}
 

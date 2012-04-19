@@ -8,13 +8,14 @@
 ##' This simple function does the important work of actually rescaling the
 ##' given data of a \code{sonify} object into the range of the given sonic
 ##' parameter, which is why it's included in \pkg{playitbyr}. But it can be
-##' used on any vector or matrix.
+##' used on any vector or matrix. 
 ##'
 ##' @rdname expscale
 ##' @inheritParams linear_scale
 ##' @return A numeric vector or matrix of the same type as \code{x}, exponentially
 ##' rescaled in the desired way.
-##' @seealso \code{\link{sonscaling}}
+##' @keywords internal
+##' @seealso \code{\link{linear_scale}} for more details on how scaling functions work
 ##' @examples
 ##' 
 ##' x <- 1:10
