@@ -53,22 +53,25 @@ linear_scale <- function(x, limits = NULL, soundlimits, by = NULL) {
   dmin <- lims[1]
   dmax <- lims[2]
 
-  ## return NA if outside range
+  ## NA if outside range
   x[x < dmin | x > dmax] <- NA
   
-  if(length(unique(x)) == 1 & is.null(limits)) {
+  if(length(unique(na.omit(x))) == 1) {
     ## allow for all the same, choose midpoint if no limits given
     out <- rep(mean(soundlimits), length(x))
+    out[is.na(x)] <- NA
   } else {
     nrange <- abs(smax - smin)
     out <- ((x-dmin)*nrange/(dmax - dmin) + smin)
  }
   if(!is.null(by)) {
-    if(!is.numeric(by) | by == 0)
+    if(!is.numeric(by) | by <= 0)
       stop("'by' must be a positive numeric value, or NULL.")
     else
       out <- round((out -smin)/by)*by + smin
   }
+
+
   out
 }
 

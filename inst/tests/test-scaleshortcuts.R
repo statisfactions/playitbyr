@@ -7,10 +7,17 @@ test_that("scaling function sanity checks", {
   expect_equal(rep(5, 5), exp_scale(rep(22, 5), NULL, c(0, 10)))
   expect_equal(1:3, exp_scale(c(1, 10, 100), NULL, c(1, 3)))
   expect_equal(c(NA, 2, 3, NA), exp_scale(c(1, 10, 100, -5), c(10, 100) , c(2, 3)))
-  expect_equal(c(2, 2), linear_scale(c(1, 1), c(0, 1), c(1, 2)))
-  expect_equal(c(2, 2), exp_scale(c(1, 1), c(0.1, 1), c(1, 2)))
+  expect_equal(c(1.5, 1.5), linear_scale(c(1, 1), c(0, 1), c(1, 2)))
+  expect_equal(c(1.5, 1.5), exp_scale(c(1, 1), c(0.1, 1), c(1, 2)))
   expect_equal(c(15, 1, 1),  linear_scale(c(1, 2, 2), limits = c(1, 2), soundlimits = c(15, 1)))
   expect_error(exp_scale(c(1, 1), c(0, 1), c(1, 2)))
+  ## NaN issue
+  expect_equal(rep(5.5, 10), linear_scale(rep(1, 10), limits = c(1, 1), soundlimits = c(10, 1)))
+  expect_equal(as.numeric(rep(NA, 10)), linear_scale(rep(1, 10), limits = c(2, 2), soundlimits = c(10, 1)))
+  expect_equal(c(rep(5.5, 5), rep(NA, 5)), linear_scale(c(rep(1, 5), rep(2, 5)),
+                                                        limits = c(1, 1),
+                                                        soundlimits = c(10, 1)))
+  expect_equal(rep(5.5, 10), exp_scale(rep(1, 10), limits = c(1, 1), soundlimits = c(10, 1)))
 })
 
 test_that("removes all events in data that are outside limits on any scaling", {
