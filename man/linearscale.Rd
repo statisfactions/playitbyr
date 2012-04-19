@@ -50,8 +50,19 @@ linear_scale(x, soundlimits = c(-2, -1.5))
 
 ## If max<min, it's rescaled in reverse:
 linear_scale(x, soundlimits = c(10, 1))
+
+## If 'limits' is specified, these are taken as the maximum and
+## minimum of the data to be rescaled to
+linear_scale(x, limits = c(-10, 10), soundlimits = c(10, 0))
+
+## any values outside of 'limits' are therefore NA in result
+linear_scale(x, limits = c(1, 2), soundlimits = c(1, 10))
+
+## 'by' rounds values appropriately
+linear_scale(x, soundlimits = c(1, 2), by = .25)
 }
 \seealso{
   \code{\link{sonscaling}}
 }
+\keyword{internal}
 

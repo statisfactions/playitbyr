@@ -23,6 +23,7 @@
 ##' value, \code{linear_scale} simply returns the midpoint between
 ##' \code{min} and \code{max}.
 ##' @seealso \code{\link{sonscaling}}
+##' @keywords internal
 ##' @note If \code{by} is specified, unexpected results may happen when \code{soundlimits[2] != (soundlimits[1] + n * by)} for some \code{n}; in these cases the data will be trained to the largest value of \code{(soundlimits[1] + n * by)} less than \code{soundlimits[2]}.
 ##' @examples
 ##' 
@@ -31,8 +32,16 @@
 ##' 
 ##' ## If max<min, it's rescaled in reverse:
 ##' linear_scale(x, soundlimits = c(10, 1))
-## TODO add example of choosing limits
-## TODO add example of 'by'
+##'
+##' ## If 'limits' is specified, these are taken as the maximum and
+##' ## minimum of the data to be rescaled to
+##' linear_scale(x, limits = c(-10, 10), soundlimits = c(10, 0))
+##'
+##' ## any values outside of 'limits' are therefore NA in result
+##' linear_scale(x, limits = c(1, 2), soundlimits = c(1, 10))
+##'
+##' ## 'by' rounds values appropriately
+##' linear_scale(x, soundlimits = c(1, 2), by = .25)
 ##' @export
 linear_scale <- function(x, limits = NULL, soundlimits, by = NULL) {
   
