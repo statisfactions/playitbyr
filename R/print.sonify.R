@@ -8,12 +8,24 @@
 ##' @aliases print.sonify
 ##' @param x, A \code{sonify} object
 ##' 
-##' @param \dots The additional argument \code{render_real_time} can
-##' be specified here; by default, option \code{"render_real_time"} is
-##' used, but the choice here overrides that option.
+##' @param \dots Additional optional arguments:
+##' 
+##' \code{render_real_time}: Render the sonification in real time? If
+##' \code{TRUE}, the sonification is rendered in real time (which is
+##' faster but may not work as well on slower computers); if
+##' \code{FALSE} the sonification is rendered to a file on disk before
+##' playing. The default behavior is given by the option
+##' \code{"render_real_time"}
 ##'
-##' The additional argument \code{non_real_time_test}, if included, allows
-##' testing of the csound player. 
+##' \code{file}: The file to render to (if \code{render_real_time =
+##' FALSE}). The default is a temporary file.
+##'
+##' \code{play}: If rendering to a file, should the file then be
+##' played? Default is \code{TRUE}.
+##'
+##' \code{playout}: If playing from a file, what channel should be
+##' used for output? Default is "dac", the default audio out (detected
+##' by Csound).
 ##' 
 ##' @return \code{print.sonify} is called for its side-effect, which
 ##' is to actually render the object to a sound. It does, however,
@@ -23,43 +35,33 @@
 ##' @method print sonify
 ##' @export
 print.sonify <- function(x, ...) {
-  dots <- list(...)
+  prargs <- printargs(...)
   opts <- x$opts
   
-  if("render_real_time" %in% names(dots)) 
-    realtime <- dots$render_real_time
-  else
-    realtime <- getOption("render_real_time")
+  if(!(prargs$render_real_time)) {    
+    length <- render(.getScore(x), opts = x$opts, file = prargs$file)
 
-  if("play" %in% names(dots))
-    play <- dots$play
-  else
-    play <- TRUE
-
-
-  
-  if(!realtime) {
-    if("file" %in% names(dots))
-      outfile <- dots$file
-    else
-      outfile <- tempfile()
-
-    if("out" %in% names(dots))
-      out <- dots$out
-    else
-      out <- "dac"
-    
-      
-    length <- render(.getScore(x), opts = x$opts, file = outfile)
-
-    if((!("play" %in% names(dots)) || dots$play == FALSE) & !realtime)
+    if(prargs$play)
       createPerformance(i = list(matrix(c(3, 0, length,
-                        paste("\"", outfile, "\"", sep  = "")),
-                        nrow = 1)), out = out,
+                        paste("\"", prargs$file, "\"", sep  = "")),
+                        nrow = 1)), out = prargs$playout,
                                 orcfile = system.file("orc/playitbyr.orc", package = "playitbyr"),
                       realTime = FALSE)
   } else {
-    length <- render(.getScore(x), opts = x$opts)
+    length <- render(.getScore(x), opts = x$opts, file = prargs$file)
   }
   invisible(length)
 }
+
+printargs <- function(render_real_time = getOption("render_real_time"),
+                      file = ifelse(render_real_time, "dac", tempfile()),
+                      play = TRUE,
+                      playout = "dac", ...)
+  list(render_real_time = render_real_time,
+       file = file,
+       play = play,
+       playout = playout)
+
+
+
+

@@ -13,7 +13,7 @@
 sonsave <- function(what, where, play = FALSE, out = "dac", ...) {
   if(where == "")
     stop("'where' cannot be an empty string")
-  length <- print(what, file = where, render_real_time = FALSE, play = play, out = out, ...)
+  length <- print(what, file = where, render_real_time = FALSE, play = play, playout = out, ...)
 
   invisible(length)
 }
