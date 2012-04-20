@@ -42,7 +42,7 @@
 ##' @param \dots data, settings, and mappings to pass to
 ##' \code{\link{sonlayer}}
 ##' 
-##' @return A \code{sonscaling} object
+##' @return A \code{sonlayer} object
 ##' @examples
 ##' x <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
 ##'    shape_boxplot(length = 3, tempo = 1800)

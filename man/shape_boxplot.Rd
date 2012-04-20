@@ -19,7 +19,7 @@
   \code{\link{sonlayer}}}
 }
 \value{
-  A \code{sonscaling} object
+  A \code{sonlayer} object
 }
 \description{
   Creates a boxplot layer

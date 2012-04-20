@@ -47,7 +47,7 @@
 ##' @param \dots data, settings, and mappings to pass to
 ##' \code{\link{sonlayer}}
 ##' 
-##' @return A \code{sonscaling} object
+##' @return A \code{sonlayer} object
 ##' 
 ##' @export
 shape_scatter <- function(jitter = 0, relative = TRUE, ...) sonlayer("scatter", jitter = jitter, relative = relative, ...)

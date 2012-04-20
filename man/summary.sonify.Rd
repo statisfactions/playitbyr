@@ -18,6 +18,14 @@
   Summarizes the structure of a sonify object in ways
   useful for seeing what the output will be.
 }
+\examples{
+summary(sonify(iris, sonaes(time = Sepal.Length, pitch = Sepal.Width)) +
+        shape_scatter() + shape_dotplot())
+}
+\author{
+  Closely based on \code{\link{summary.ggplot}} by Hadley
+  Wickham
+}
 \seealso{
   \code{\link{sonify}} for the creation of these objects
 }

@@ -14,7 +14,7 @@
   \code{\link{sonlayer}}}
 }
 \value{
-  A \code{sonscaling} object
+  A \code{sonlayer} object
 }
 \description{
   Creates a dotplot layer using the sound of a snare drum.
@@ -46,5 +46,17 @@
   to \emph{map} a parameter, you set the mapping for the
   layer or the \code{sonify} object using
   \code{\link{sonaes}} (see examples).
+
+  ##'
+}
+\examples{
+x <- sonify(iris[1:10,], sonaes(time = Petal.Length)) + shape_dotplot(jitter = 0.3)
+\dontrun{print(x)}
+}
+\author{
+  Originally contributed by
+  \href{http://datasearch2.uts.edu.au/feit/staff/listing/details.cfm?StaffId=7920}{Sam
+  Ferguson}. Csound instrument created by
+  \href{http://csounds.com/mikelson}{Hans Mikelson}.
 }
 
