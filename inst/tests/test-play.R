@@ -3,7 +3,7 @@ require(tuneR)
 context("play wav through csound")
 
 test_that("rendering is real time by default", {
-  expect_true(getOption("render_real_time"))
+  expect_false(getOption("render_real_time"))
 })
 
 test_that("sonsave play out is same as sonsave output", {

@@ -1,7 +1,7 @@
 .onLoad <- function(libname, pkgname) {
   ## defines option for real-time play if not already defined
   if(is.null(getOption("render_real_time")))
-    options("render_real_time" = TRUE)
+    options("render_real_time" = FALSE)
 }
 
 loadShapeDefs <- function() {
