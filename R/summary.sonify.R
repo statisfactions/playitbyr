@@ -10,7 +10,7 @@
 ##' 
 ##' @seealso \code{\link{sonify}} for the creation of these objects
 ##' @method summary sonify
-##' @author Closely based on \code{\link{summary.ggplot}} by Hadley Wickham
+##' @author Closely based on \code{summary.ggplot} by Hadley Wickham
 ##' @examples
 ##' summary(sonify(iris, sonaes(time = Sepal.Length, pitch = Sepal.Width)) +
 ##'         shape_scatter() + shape_dotplot())

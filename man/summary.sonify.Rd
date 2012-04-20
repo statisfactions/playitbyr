@@ -23,8 +23,7 @@ summary(sonify(iris, sonaes(time = Sepal.Length, pitch = Sepal.Width)) +
         shape_scatter() + shape_dotplot())
 }
 \author{
-  Closely based on \code{\link{summary.ggplot}} by Hadley
-  Wickham
+  Closely based on \code{summary.ggplot} by Hadley Wickham
 }
 \seealso{
   \code{\link{sonify}} for the creation of these objects
