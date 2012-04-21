@@ -55,6 +55,11 @@ x <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
 sonsave(x, "test-shape-boxplot.wav")
 
 set.seed(719)
+x <- sonify(iris[1:10,], sonaes(time = Sepal.Width)) + shape_scatter(pitch = 9)
+sonsave(x, "test-settingmapping2.wav")
 
+set.seed(719)
+x <- sonify(iris[1:10,], sonaes(time = Sepal.Width, pitch = 9)) + shape_scatter()
+sonsave(x, "test-settingmapping3.wav")
 
 setwd(oldwd)

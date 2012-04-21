@@ -133,8 +133,9 @@
 }
 
 .getColumn <- function(map, param, data) {
+  ## if the length if map
   if(length(map[[param]]) == 1 && map[[param]] %in% names(data))
-    column <- data[[map[[param]]]]
+    column <- data[[as.character(map[[param]])]]
   else
     column <- eval(map[[param]])
   if(!is.numeric(column))

@@ -4,7 +4,7 @@
 ##' \code{geom_point}.
 ##'
 ##' The audio scatterplot is implemented by a simple
-##' frequency-modulation synthesis (through csound). The following
+##' frequency-modulation synthesis (through Csound). The following
 ##' parameters are available for setting or mapping:
 ##'
 ##' \describe{
@@ -17,14 +17,14 @@
 ##' \item{dur}{The duration of the note (relative to the total time if \code{relative = TRUE}, in seconds otherwise).}
 ##' \item{amp}{The volume of the note, as a proportion between 0 and
 ##' 1, where 1 is the maximum volume. Note that a multiple notes that happen
-##' at the same time could add up to more than one, causing distortion an
+##' at the same time could add up to more than one, causing distortion and
 ##' clipping.}
 ##' \item{attkp}{The proportion of the note's length devoted to the initial (linear)
 ##' attack.}
 ##' \item{decayp}{The proportion of the note's length devoted to the (linear) decay.}
-##' \item{mod}{The modulating frequency, given as a \emph{multiple}
-##' of the carrier tone.}
-##' \item{indx}{The index of modulation.}
+##' \item{indx}{The index of modulation. This affects the distortion of the tone; \code{indx = 0} is a sine wave, whereas higher indices of modulation give increasingly complex tones.}
+##' \item{mod}{The modulating frequency, given as a multiple
+##' of the primary frequency (i.e. given by \code{pitch}.}
 ##' }
 ##'
 ##' To \emph{set} a sound parameter to a value, you simply include it
@@ -46,8 +46,24 @@
 ##' don't overlap). 
 ##' @param \dots data, settings, and mappings to pass to
 ##' \code{\link{sonlayer}}
-##' 
+##'
 ##' @return A \code{sonlayer} object
+##'
+##' @examples
+##'
+##' ## Setting the pitch equal to 8 (C), and using iris$Sepal.Width
+##' ## to generate the timings of notes##' 
+##' x <- sonify(iris[1:10,], sonaes(time = Sepal.Width)) + shape_scatter(pitch = 9)
+##' \dontrun{x}
+##'
+##' ## Instead, /mapping/ the pitch to 9.
+##' x <- sonify(iris[1:10,], sonaes(time = Sepal.Width)) + shape_scatter(pitch = 9)
+##' \dontrun{x}
+##' ## If a value in the mapping
+##' ## is a vector and is not a name of the data column, playitbyr
+##' ## creates a new column with that value. This is then scaled,
+##' ## producing an unexpected F# here when you might expect the same
+##' ## sound as above!
 ##' 
 ##' @export
 shape_scatter <- function(jitter = 0, relative = TRUE, ...) sonlayer("scatter", jitter = jitter, relative = relative, ...)
