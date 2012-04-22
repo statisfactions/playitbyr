@@ -26,15 +26,33 @@
   .checkSonify(x)
 
   ## get scales; train if faceting
-  if(!is.null(x$sonfacet) && x$sonfacet$scales == "fixed") 
-    scale <- .fixFacetScales(x)
-  else
+  if(!is.null(x$sonfacet) && x$sonfacet$scales == "fixed") {
+    scale <- .fixFacetScales(x) 
+  } else 
     scale <- .getScales(x)
   
-  ## Create a score for each sonlayer and put together in list
-  score <- lapply(1:length(x$sonlayers),
+  ## Create a list of facet scores for each sonlayer and put together in list
+  scorefacet <- lapply(1:length(x$sonlayers),
                   function(layernum) .getSonlayerScore(x, layernum, scale))
 
+  ## get lengths of facets for each layer and put in data.frame
+  lengthfacets <- as.data.frame(lapply(scorefacet, function(y)
+                                       sapply(y, function(z) attributes(z)$length)))
+  
+  lengths <- sapply(1:nrow(lengthfacets), function(y) max(lengthfacets[y,]))
+
+  score <- lapply(scorefacet, function(y) {
+    if(length(y) > 1) {
+      out <- facetjoin(y, pause = x$sonfacet$pause, lengths = lengths)
+      class(out) <- c(class(y), "data.frame")
+      attr(out, "shape_params") <- attributes(y)$shape_params
+    } else
+      out <- y[[1]]
+    out
+  })
+
+    
+                  
   ## Get the total length in seconds of the sonification (i.e. the
   ## longest of the layers) and pass as an attribute.
   length <- max(sapply(score, function(y) attributes(y)$length))
@@ -74,18 +92,17 @@
       datal <- split(dataclean, data[[x$sonfacet$facet]], drop = TRUE)
       scorel <- lapply(datal, function(d)
                      .getSonlayerScoreFacet(map, set, shape, d, scale, opts))
-      score <- facetjoin(scorel, x$sonfacet$pause)
   }} else {
-    score <- .getSonlayerScoreFacet(map, set, shape, dataclean, scale, opts)
+    scorel <- list(.getSonlayerScoreFacet(map, set, shape, dataclean, scale, opts))
   }
 
   ## Set shape to pass to shape and rendering methods
-  class(score) <- c(shape,  "data.frame")
+  class(scorel) <- c(shape)
 
   ## Add shape options, if any, to pass to rendering methods
-  attr(score, "shape_params") <- .getSonlayerShapeOptions(x, sonlayernum)
+  attr(scorel, "shape_params") <- .getSonlayerShapeOptions(x, sonlayernum)
   ## TODO subtract out sound params from this function
-  score
+  scorel
 }
 
 ## @rdname internaldf
@@ -358,7 +375,8 @@ removenull <- function(x) {
 
 facetjoin <- function(scorel, pause, lengths = NULL) {
   ## if lengths is null, assume that we are getting the lengths from
-  ## the elements of scorel, and (below) adding on that attribute ourselves
+  ## the elements of scorel, and (below) adding on that attribute
+  ## ourselves.
   if(is.null(lengths))
     facetend <- cumsum(sapply(scorel, function(s) attr(s, "length")))
   else
@@ -374,9 +392,8 @@ facetjoin <- function(scorel, pause, lengths = NULL) {
       return(outsc)
     })
   score <- do.call(rbind, scorelshift)
-  
-  if(is.null(lengths))
-    attr(score, "length") <- facetend[nl]
+
+  attr(score, "length") <- facetend[nl]
 
   return(score)
 }
