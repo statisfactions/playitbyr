@@ -15,17 +15,19 @@
 ##'
 ##' \describe{
 ##' \item{time}{The starting time of the snare sound (in seconds).}
-##' \item{dur}{The duration of the drum sound (in seconds).}
-##' \item{pitch}{The pitch of the drum sound, in the Csound
+##' \item{pitch}{The pitch of the note, in the Csound
 ##' \href{"http://www.csounds.com/manual/html/cpsoct.html"}{oct
 ##' notation} notation for pitches, where 8 is middle C and 1
-##' represents an octave, to the corresponding frequency in Hertz.}
+##' represents an octave, to the corresponding frequency in Hertz.  By
+##' default this is scaled to the nearest musical (chromatic)
+##' pitch. (See \code{\link{scale_pitch_continuous}}.)}
+##' \item{dur}{The duration of the note (relative to the total time if \code{relative = TRUE}, in seconds otherwise).}
 ##' }
 ##'
 ##' To \emph{set} a sound parameter to a value, you simply include it
 ##' as an extra argument in \code{shape_scatter}; to \emph{map} a
 ##' parameter, you set the mapping for the layer or the \code{sonify}
-##' object using \code{\link{sonaes}} (see examples).
+##' object using \code{\link{sonaes}} (see examples in \code{\link{shape_scatter}}).
 ##'
 ##' @param jitter The maximum size, in seconds, of how much to jitter
 ##' time by when there are multiple notes at the same pitch and time
@@ -38,6 +40,7 @@
 ##' \code{\link{sonlayer}} (see Details)
 ##' @return A \code{sonlayer} object
 ##' @author Originally contributed by \href{http://datasearch2.uts.edu.au/feit/staff/listing/details.cfm?StaffId=7920}{Sam Ferguson}. Csound instrument created by \href{http://csounds.com/mikelson}{Hans Mikelson}.
+##' @references S. Ferguson, W. Martens and D. Cabrera, ``Statistical Sonification for Exploratory Data Analysis'', in \emph{The Sonification Handbook},  ed. Hermann, Hunt, Neuhoff. Available: \url{http://sonification.de/handbook/}
 ##' @examples
 ##' x <- sonify(iris[1:10,], sonaes(time = Petal.Length)) + shape_dotplot(jitter = 0.3)
 ##' \dontrun{print(x)}

@@ -109,4 +109,27 @@ x <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(relative = FALS
   scale_time_continuous(c(0, 5))
 sonsave(x, "test-shape-scatter6.wav")
 
+set.seed(719)
+  x <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
+    shape_histogram(length = 5, tempo = 1800) # plays the same thing for longer
+  sonsave(x, "test-shape-histogram1.wav")
+
+set.seed(719)
+x <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
+  shape_histogram(length = 3, tempo = 1200) #  same length as original but fewer pitches
+sonsave(x, "test-shape-histogram2.wav")
+
+set.seed(719)
+  x <- sonify(iris, sonaes(pitch = Sepal.Length)) +
+    shape_boxplot(length = 2, tempo = 1800) # plays the same thing for longer
+  sonsave(x, "test-shape-boxplot1.wav")
+
+set.seed(719)
+x <- sonify(iris, sonaes(pitch = Sepal.Length)) +
+  shape_boxplot(length = 1, tempo = 1200) #  same length as original but fewer pitches
+sonsave(x, "test-shape-boxplot2.wav")
+
+
+
+
 setwd(oldwd)
