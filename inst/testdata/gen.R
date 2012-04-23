@@ -71,7 +71,8 @@ structure(list(start = c(0, 0.324859987161938, 0, 0.324859987161938,
 "21.1", "111", "211", "22", "11.11", "21.11", "22.1", "11.2", 
 "21.2", "22.2"))
 dds <-
-structure(list(start = c(0, 0, 0, 0, 0), reps = c(1, 2, 3, 4, 
+
+  structure(list(start = c(0, 0, 0, 0, 0), reps = c(1, 2, 3, 4, 
 5)), .Names = c("start", "reps"), class = "data.frame", row.names = c(NA, 
 -5L))
 x <- sonify() + scale_time_identity() +
@@ -81,5 +82,31 @@ x <- sonify() + scale_time_identity() +
   shape_dotplot(data = dds, relative = FALSE,
                 mapping = sonaes(time = start), dur = 2)
 sonsave(x, "test-sonfacet2.wav")
+
+x <- sonify(iris, sonaes(time = Petal.Width, pitch = Petal.Length)) +
+  shape_scatter() # no jitter
+sonsave(x, "test-shape-scatter.wav")
+set.seed(719)
+x <- sonify(iris, sonaes(time = Petal.Width, pitch = Petal.Length)) +
+  shape_scatter(jitter = 0.3) # substantial jitter, fuzzes out overlap
+sonsave(x, "test-shape-scatter2.wav")
+
+## relative = TRUE: rescales duration to fit overall length (usually easier to hear)
+d <- cbind(airquality, row = rownames(airquality))
+x <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(dur = 3) +
+  scale_time_continuous(c(0, 10))
+sonsave(x, "test-shape-scatter3.wav")
+x <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(dur = 3) +
+  scale_time_continuous(c(0, 5))
+sonsave(x, "test-shape-scatter4.wav")
+
+## relative = FALSE: duration is in seconds and is not scaled to fit overall length
+## (creates lots of overlap)
+x <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(relative = FALSE, dur = 3) +
+  scale_time_continuous(c(0, 10))
+sonsave(x, "test-shape-scatter5.wav")
+x <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(relative = FALSE, dur = 3) +
+  scale_time_continuous(c(0, 5))
+sonsave(x, "test-shape-scatter6.wav")
 
 setwd(oldwd)

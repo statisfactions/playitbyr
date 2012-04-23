@@ -32,7 +32,7 @@
 }
 \details{
   The audio scatterplot is implemented by a simple
-  frequency-modulation synthesis (through csound). The
+  frequency-modulation synthesis (through Csound). The
   following parameters are available for setting or
   mapping:
 
@@ -42,24 +42,69 @@
   \href{"http://www.csounds.com/manual/html/cpsoct.html"}{oct
   notation} notation for pitches, where 8 is middle C and 1
   represents an octave, to the corresponding frequency in
-  Hertz. By default this is scaled to the nearest musical
-  (chromatic) pitch.} \item{dur}{The duration of the note
-  (relative to the total time if \code{relative = TRUE}, in
-  seconds otherwise).} \item{amp}{The volume of the note,
-  as a proportion between 0 and 1, where 1 is the maximum
-  volume. Note that a multiple notes that happen at the
-  same time could add up to more than one, causing
-  distortion an clipping.} \item{attkp}{The proportion of
-  the note's length devoted to the initial (linear)
-  attack.} \item{decayp}{The proportion of the note's
-  length devoted to the (linear) decay.} \item{mod}{The
-  modulating frequency, given as a \emph{multiple} of the
-  carrier tone.} \item{indx}{The index of modulation.} }
+  Hertz.  By default this is scaled to the nearest musical
+  (chromatic) pitch. (See
+  \code{\link{scale_pitch_continuous}}.)} \item{dur}{The
+  duration of the note (relative to the total time if
+  \code{relative = TRUE}, in seconds otherwise).}
+  \item{amp}{The volume of the note, as a proportion
+  between 0 and 1, where 1 is the maximum volume. Note that
+  a multiple notes that happen at the same time could add
+  up to more than one, causing distortion and clipping.}
+  \item{attkp}{The proportion of the note's length devoted
+  to the initial (linear) attack.} \item{decayp}{The
+  proportion of the note's length devoted to the (linear)
+  decay.} \item{indx}{The index of modulation. This affects
+  the distortion of the tone; \code{indx = 0} is a sine
+  wave, whereas higher indices of modulation give
+  increasingly complex tones.} \item{mod}{The modulating
+  frequency, given as a multiple of the primary frequency
+  (i.e. given by \code{pitch}.} }
 
   To \emph{set} a sound parameter to a value, you simply
   include it as an extra argument in \code{shape_scatter};
   to \emph{map} a parameter, you set the mapping for the
   layer or the \code{sonify} object using
   \code{\link{sonaes}} (see examples).
+}
+\examples{
+x <- sonify(iris, sonaes(time = Petal.Width, pitch = Petal.Length)) +
+  shape_scatter() # no jitter
+\dontrun{x}
+x <- sonify(iris, sonaes(time = Petal.Width, pitch = Petal.Length)) +
+  shape_scatter(jitter = 0.3) # substantial jitter, fuzzes out overlap
+\dontrun{x}
+
+## relative = TRUE: rescales duration to fit overall length (usually easier to hear)
+d <- cbind(airquality, row = rownames(airquality))
+x <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(dur = 3) +
+  scale_time_continuous(c(0, 10))
+\dontrun{x}
+x <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(dur = 3) +
+  scale_time_continuous(c(0, 5))
+\dontrun{x}
+
+## relative = FALSE: duration is in seconds and is not scaled to fit overall length
+## (creates lots of overlap)
+x <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(relative = FALSE, dur = 3) +
+  scale_time_continuous(c(0, 10))
+\dontrun{x}
+x <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(relative = FALSE, dur = 3) +
+  scale_time_continuous(c(0, 5))
+\dontrun{x}
+
+## Setting the pitch equal to 8 (C), and using iris$Sepal.Width
+## to generate the timings of notes##'
+x <- sonify(iris[1:10,], sonaes(time = Sepal.Width)) + shape_scatter(pitch = 9)
+\dontrun{x}
+
+## Instead, /mapping/ the pitch to 9.
+x <- sonify(iris[1:10,], sonaes(time = Sepal.Width)) + shape_scatter(pitch = 9)
+\dontrun{x}
+## If a value in the mapping
+## is a vector and is not a name of the data column, playitbyr
+## creates a new column with that value. This is then scaled,
+## producing an unexpected F# (8.5) here when you might expect the same
+## sound as above!
 }
 
