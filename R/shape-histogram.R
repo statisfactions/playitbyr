@@ -49,5 +49,5 @@
 ##' \dontrun{x}
 ##' @export
 shape_histogram <- function(length = 5, tempo = 240, data = NULL,
-                          mapping = NULL, ...) sonlayer("histogram", length = length, tempo = tempo, data, mapping, ...)
+                          mapping = NULL, ...) sonlayer("histogram", length = length, tempo = tempo, data = data, mapping = mapping, ...)
 

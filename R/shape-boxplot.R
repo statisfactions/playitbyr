@@ -51,5 +51,5 @@
 ##' \dontrun{x}
 ##' @export
 shape_boxplot <- function(length = 5, tempo = 240, pause = 0.1, data = NULL,
-                          mapping = NULL, ...) sonlayer("boxplot", length = length, tempo = tempo, pause = pause, data, mapping, ...)
+                          mapping = NULL, ...) sonlayer("boxplot", length = length, tempo = tempo, pause = pause, data = data, mapping = mapping, ...)
 

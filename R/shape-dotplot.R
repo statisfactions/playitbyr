@@ -43,5 +43,5 @@
 ##' \dontrun{print(x)}
 ##' @export
 shape_dotplot <- function(jitter = 0, data = NULL,
-                          mapping = NULL, ...) sonlayer("dotplot", jitter = jitter, data, mapping, ...)
+                          mapping = NULL, ...) sonlayer("dotplot", jitter = jitter, data = data, mapping = mapping, ...)
 

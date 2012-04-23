@@ -96,5 +96,5 @@
 ##' 
 ##' @export
 shape_scatter <- function(jitter = 0, relative = TRUE, data = NULL,
-                          mapping = NULL, ...) sonlayer("scatter", jitter = jitter, relative = relative, data, mapping, ...)
+                          mapping = NULL, ...) sonlayer("scatter", jitter = jitter, relative = relative, data = data, mapping = mapping, ...)
 
