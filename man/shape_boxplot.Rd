@@ -2,7 +2,8 @@
 \alias{shape_boxplot}
 \title{Create a boxplot layer}
 \usage{
-  shape_boxplot(length = 5, tempo = 240, pause = 0.1, ...)
+  shape_boxplot(length = 5, tempo = 240, pause = 0.1,
+    data = NULL, mapping = NULL, ...)
 }
 \arguments{
   \item{length}{The overall length, in seconds, of each
@@ -15,8 +16,14 @@
   \item{pause}{The pause between each segment of the
   boxplot, in seconds.}
 
-  \item{\dots}{data, settings, and mappings to pass to
-  \code{\link{sonlayer}}}
+  \item{\dots}{settings to pass to \code{\link{sonlayer}}
+  (see Details)}
+
+  \item{data}{The \code{data.frame} to be sonified for this
+  layer. If blank, the data from the parent \code{sonify}
+  object is used.}
+
+  \item{mapping}{A \code{\link{sonaes}} object.}
 }
 \value{
   A \code{sonlayer} object

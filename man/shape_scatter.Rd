@@ -2,7 +2,8 @@
 \alias{shape_scatter}
 \title{Create a scatterplot layer}
 \usage{
-  shape_scatter(jitter = 0, relative = TRUE, ...)
+  shape_scatter(jitter = 0, relative = TRUE, data = NULL,
+    mapping = NULL, ...)
 }
 \arguments{
   \item{jitter}{The maximum size, in seconds, of how much
@@ -20,8 +21,14 @@
   may mean that note durations must be fiddled with so they
   don't overlap).}
 
-  \item{\dots}{data, settings, and mappings to pass to
-  \code{\link{sonlayer}}}
+  \item{\dots}{settings to pass to \code{\link{sonlayer}}
+  (see Details)}
+
+  \item{data}{The \code{data.frame} to be sonified for this
+  layer. If blank, the data from the parent \code{sonify}
+  object is used.}
+
+  \item{mapping}{A \code{\link{sonaes}} object.}
 }
 \value{
   A \code{sonlayer} object

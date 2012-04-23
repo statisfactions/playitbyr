@@ -44,9 +44,12 @@
 ##' then rescales duration in relation to that). Otherwise, durations
 ##' remain constant even if the sonification is much longer or shorter
 ##' (which may mean that note durations must be fiddled with so they
-##' don't overlap). 
-##' @param \dots data, settings, and mappings to pass to
-##' \code{\link{sonlayer}}
+##' don't overlap).
+##'
+##' @inheritParams sonlayer
+##' 
+##' @param \dots settings to pass to
+##' \code{\link{sonlayer}} (see Details)
 ##'
 ##' @return A \code{sonlayer} object
 ##'
@@ -92,5 +95,6 @@
 ##' ## sound as above!
 ##' 
 ##' @export
-shape_scatter <- function(jitter = 0, relative = TRUE, ...) sonlayer("scatter", jitter = jitter, relative = relative, ...)
+shape_scatter <- function(jitter = 0, relative = TRUE, data = NULL,
+                          mapping = NULL, ...) sonlayer("scatter", jitter = jitter, relative = relative, data, mapping, ...)
 

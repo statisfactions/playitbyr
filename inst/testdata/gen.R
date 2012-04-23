@@ -85,7 +85,7 @@ sonsave(x, "test-sonfacet2.wav")
 
 x <- sonify(iris, sonaes(time = Petal.Width, pitch = Petal.Length)) +
   shape_scatter() # no jitter
-sonsave(x, "test-shape-scatter.wav")
+sonsave(x, "test-shape-scatter1.wav")
 set.seed(719)
 x <- sonify(iris, sonaes(time = Petal.Width, pitch = Petal.Length)) +
   shape_scatter(jitter = 0.3) # substantial jitter, fuzzes out overlap

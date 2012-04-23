@@ -37,8 +37,10 @@
 ##' @param length The overall length, in seconds, of the histogram.
 ##' @param tempo The tempo, in beats per minute; i.e. the rapidity
 ##' with which to represent values from the dataset.
-##' @param \dots data, settings, and mappings to pass to
-##' \code{\link{sonlayer}}
+##' @inheritParams sonlayer
+##' 
+##' @param \dots settings to pass to
+##' \code{\link{sonlayer}} (see Details)
 ##' 
 ##' @return A \code{sonlayer} object
 ##' @examples
@@ -46,5 +48,6 @@
 ##'    shape_histogram(length = 3, tempo = 1800)
 ##' \dontrun{x}
 ##' @export
-shape_histogram <- function(length = 5, tempo = 240, ...) sonlayer("histogram", length = length, tempo = tempo, ...)
+shape_histogram <- function(length = 5, tempo = 240, data = NULL,
+                          mapping = NULL, ...) sonlayer("histogram", length = length, tempo = tempo, data, mapping, ...)
 

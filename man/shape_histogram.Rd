@@ -2,7 +2,8 @@
 \alias{shape_histogram}
 \title{Create a histogram layer}
 \usage{
-  shape_histogram(length = 5, tempo = 240, ...)
+  shape_histogram(length = 5, tempo = 240, data = NULL,
+    mapping = NULL, ...)
 }
 \arguments{
   \item{length}{The overall length, in seconds, of the
@@ -12,8 +13,14 @@
   rapidity with which to represent values from the
   dataset.}
 
-  \item{\dots}{data, settings, and mappings to pass to
-  \code{\link{sonlayer}}}
+  \item{\dots}{settings to pass to \code{\link{sonlayer}}
+  (see Details)}
+
+  \item{data}{The \code{data.frame} to be sonified for this
+  layer. If blank, the data from the parent \code{sonify}
+  object is used.}
+
+  \item{mapping}{A \code{\link{sonaes}} object.}
 }
 \value{
   A \code{sonlayer} object

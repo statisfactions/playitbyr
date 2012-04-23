@@ -23,7 +23,7 @@ test_that("relative = FALSE works", {
 test_that("shape_scatter examples work", {
 x <- sonify(iris, sonaes(time = Petal.Width, pitch = Petal.Length)) +
   shape_scatter() # no jitter
-soncompare(x, "test-shape-scatter.wav")
+soncompare(x, "test-shape-scatter1.wav")
 x <- sonify(iris, sonaes(time = Petal.Width, pitch = Petal.Length)) +
   shape_scatter(jitter = 0.3) # substantial jitter, fuzzes out overlap
 soncompare(x, "test-shape-scatter2.wav")

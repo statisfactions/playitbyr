@@ -27,17 +27,21 @@
 ##' parameter, you set the mapping for the layer or the \code{sonify}
 ##' object using \code{\link{sonaes}} (see examples).
 ##'
-##' ##' @param jitter The maximum size, in seconds, of how much to jitter
+##' @param jitter The maximum size, in seconds, of how much to jitter
 ##' time by when there are multiple notes at the same pitch and time
 ##' (the sonic equivalent of overplotting). The default, 0, means no
 ##' jitter occurs.
+##' 
+##' @inheritParams sonlayer
+##' 
 ##' @param \dots data, settings, and mappings to pass to
-##' \code{\link{sonlayer}}
+##' \code{\link{sonlayer}} (see Details)
 ##' @return A \code{sonlayer} object
 ##' @author Originally contributed by \href{http://datasearch2.uts.edu.au/feit/staff/listing/details.cfm?StaffId=7920}{Sam Ferguson}. Csound instrument created by \href{http://csounds.com/mikelson}{Hans Mikelson}.
 ##' @examples
 ##' x <- sonify(iris[1:10,], sonaes(time = Petal.Length)) + shape_dotplot(jitter = 0.3)
 ##' \dontrun{print(x)}
 ##' @export
-shape_dotplot <- function(jitter = 0, ...) sonlayer("dotplot", jitter = jitter, ...)
+shape_dotplot <- function(jitter = 0, data = NULL,
+                          mapping = NULL, ...) sonlayer("dotplot", jitter = jitter, data, mapping, ...)
 

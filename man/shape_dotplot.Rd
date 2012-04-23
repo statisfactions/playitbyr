@@ -2,7 +2,8 @@
 \alias{shape_dotplot}
 \title{Create a dotplot layer}
 \usage{
-  shape_dotplot(jitter = 0, ...)
+  shape_dotplot(jitter = 0, data = NULL, mapping = NULL,
+    ...)
 }
 \arguments{
   \item{jitter}{The maximum size, in seconds, of how much
@@ -11,7 +12,13 @@
   overplotting). The default, 0, means no jitter occurs.}
 
   \item{\dots}{data, settings, and mappings to pass to
-  \code{\link{sonlayer}}}
+  \code{\link{sonlayer}} (see Details)}
+
+  \item{data}{The \code{data.frame} to be sonified for this
+  layer. If blank, the data from the parent \code{sonify}
+  object is used.}
+
+  \item{mapping}{A \code{\link{sonaes}} object.}
 }
 \value{
   A \code{sonlayer} object
@@ -46,8 +53,6 @@
   to \emph{map} a parameter, you set the mapping for the
   layer or the \code{sonify} object using
   \code{\link{sonaes}} (see examples).
-
-  ##'
 }
 \examples{
 x <- sonify(iris[1:10,], sonaes(time = Petal.Length)) + shape_dotplot(jitter = 0.3)
