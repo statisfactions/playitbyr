@@ -29,11 +29,9 @@ test_that("scaling function sanity checks", {
   expect_equal(10:1, linear_scale(x, soundlimits = c(10, 1)))
   expect_equal(c(1, 10, rep(NA, 8)), linear_scale(x, limits = c(1, 2), soundlimits = c(1, 10)))
   expect_equal(rep(seq(1, 2, length.out = 5), each = 2), linear_scale(x, soundlimits = c(1, 2), by = .25))
+  expect_equal(c(1, NA, 2), linear_scale(c(1, NA, 2), NULL, soundlimits = c(1, 2)))
+  expect_equal(c(1, NA, 2), exp_scale(c(1, NA, 2), NULL, soundlimits = c(1, 2)))
 })
-
-
-
-
 
 test_that("removes all events in data that are outside limits on any scaling", {
   x <- sonify(iris[1:10,], sonaes(pitch = Sepal.Width, indx = Petal.Width, time = 1:10)) +

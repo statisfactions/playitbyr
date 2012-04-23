@@ -53,7 +53,7 @@ linear_scale <- function(x, limits = NULL, soundlimits, by = NULL) {
     soundlimits <- rev(soundlimits)
   }
   if(is.null(limits))
-    lims <- c(min(x), max(x))
+    lims <- c(min(x, na.rm = T), max(x, na.rm = T))
   else
     lims <- limits
   
