@@ -2,8 +2,9 @@
 ##' 
 ##' \code{sonscaling()} is invoked in the call to \code{sonify} or
 ##' added onto it in order to specify precisely how the data
-##' parameters are mapped onto sonic parameters. Currently, only
-##' continuous scales are supported.
+##' parameters are mapped onto sonic parameters. It is most easy to
+##' use via the \code{scale_} convenience functions, such as
+##' \code{\link{scale_time_continuous}}.
 ##' 
 ##' Each argument of \code{sonscaling} is in the form of a list, where
 ##' the first element is the minimum value of the sonic parameter, the
@@ -19,6 +20,7 @@
 ##' \code{\link{sonaes}} for defining the which data columns get
 ##' mapped onto these sonic parameters; 
 ##' \code{\link{linear_scale}} for an example of a scaling function.
+##' @keywords internal
 ##' @export
 sonscaling <- function(...) {
 

@@ -14,8 +14,9 @@
   \code{sonscaling()} is invoked in the call to
   \code{sonify} or added onto it in order to specify
   precisely how the data parameters are mapped onto sonic
-  parameters. Currently, only continuous scales are
-  supported.
+  parameters. It is most easy to use via the \code{scale_}
+  convenience functions, such as
+  \code{\link{scale_time_continuous}}.
 }
 \details{
   Each argument of \code{sonscaling} is in the form of a
@@ -32,4 +33,5 @@
   \code{\link{linear_scale}} for an example of a scaling
   function.
 }
+\keyword{internal}
 

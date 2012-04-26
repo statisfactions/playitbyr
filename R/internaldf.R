@@ -362,6 +362,7 @@
 ##' @note all scorePreprocessor methods must calculate length of
 ##' sonification and return that as an attribute \code{length} of the
 ##' data frame.
+##' @keywords internal
 scorePreprocessor <- function(sonlayerscore, opts, ...) UseMethod("scorePreprocessor")
 
   

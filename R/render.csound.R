@@ -10,6 +10,7 @@
 ##' \code{render_options} that can be used with this rendering
 ##' technique; all the arguments of \code{createPerformance} can be
 ##' passed as options.
+##' @keywords internal
 render.csound <- function(x, opts, file = "", ...) {
   len <- attr(x, "length")
   i <- lapply(x, function(y) csound_layer(y, len = len))

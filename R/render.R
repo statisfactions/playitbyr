@@ -11,7 +11,6 @@
 ##' @return The length of the resulting sonification
 ##'
 ##' @keywords internal
-##' @export
 render <- function(x, opts, file = "", ...) {
   render.csound(x, opts, file, ...)
   invisible(attr(x, "length"))

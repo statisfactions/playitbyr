@@ -50,4 +50,5 @@
   rendering technique; all the arguments of
   \code{createPerformance} can be passed as options.
 }
+\keyword{internal}
 

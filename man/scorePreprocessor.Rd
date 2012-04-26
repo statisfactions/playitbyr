@@ -27,4 +27,5 @@
   sonification and return that as an attribute
   \code{length} of the data frame.
 }
+\keyword{internal}
 

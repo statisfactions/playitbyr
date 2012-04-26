@@ -21,7 +21,9 @@
 }
 \description{
   This function creates layers to be added onto a
-  \code{sonify} object.
+  \code{sonify} object. It is most easy to use through the
+  \code{shape_} convenience functions, such as
+  \code{\link{shape_scatter}}.
 }
 \section{Conflicting defaults on \code{sonlayer} scalings}{
   Each shape has its own default scalings (see
@@ -42,4 +44,5 @@
   shortcut functions, the \code{shape_}\kbd{shapename}
   functions, currently: \code{\link{shape_scatter}}
 }
+\keyword{internal}
 

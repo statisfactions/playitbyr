@@ -1,7 +1,8 @@
 ##' Creating individual layers for sonify objects
 ##'
 ##' This function creates layers to be added onto a \code{sonify}
-##' object.
+##' object. It is most easy to use through the \code{shape_}
+##' convenience functions, such as \code{\link{shape_scatter}}.
 ##' 
 ##' @section Conflicting defaults on \code{sonlayer} scalings: Each shape has
 ##' its own default scalings (see \code{link{.getShapeDef}} to view
@@ -24,7 +25,7 @@
 ##' used.
 ##' @param mapping A \code{\link{sonaes}} object.
 ##' @param \dots Additional options and settings specific to the shape
-##'
+##' @keywords internal
 ##' @seealso This functionality is most easily accessed through its
 ##' shortcut functions, the \code{shape_}\kbd{shapename} functions, currently: \code{\link{shape_scatter}}
 # currently excluded \code{\link{shape_csound}}, \code{\link{shape_dotplot}}
