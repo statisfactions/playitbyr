@@ -6,7 +6,7 @@
 ##' 
 ##'
 ##' @aliases print.sonify
-##' @param x, A \code{sonify} object
+##' @param x A \code{sonify} object
 ##' 
 ##' @param \dots Additional optional arguments:
 ##' 
@@ -15,7 +15,7 @@
 ##' faster but may not work as well on slower computers); if
 ##' \code{FALSE} the sonification is rendered to a file on disk before
 ##' playing. The default behavior is given by the option
-##' \code{"render_real_time"}
+##' \dQuote{\code{render_real_time}}
 ##'
 ##' \code{file}: The file to render to (if \code{render_real_time =
 ##' FALSE}). The default is a temporary file.
@@ -24,12 +24,12 @@
 ##' played? Default is \code{TRUE}.
 ##'
 ##' \code{playout}: If playing from a file, what channel should be
-##' used for output? Default is "dac", the default audio out (detected
-##' by Csound).
+##' used for output? This string is passed to the Csound \code{-o}
+##' option. Default is \code{"dac"}, the default audio out.
 ##' 
 ##' @return \code{print.sonify} is called for its side-effect, which
-##' is to actually render the object to a sound. It does, however,
-##' return the length of the resulting sonification.
+##' is to actually render the object to a sound. It invisibly returns
+##' the length of the resulting sonification.
 ##' 
 ##' @seealso \code{\link{sonify}} for the creation of these objects
 ##' @method print sonify
