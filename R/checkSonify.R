@@ -20,7 +20,10 @@
   
   if(!("sonify" %in% class(x)))
     stop("'",xname,"' is not a 'sonify' object.")
-  
+
+  ## is the facet actually in the sonify object?
+  if(!x$sonfacet$facet %in% names(data))
+    warning("The specified facet variable '", x$sonfacet$facet, "' is not in the default data for sonification (i.e. that specified in the call to 'sonify()'; unexpected things may happen!")
   ## Do any layers of x contain data?
   layers.null <- all(sapply(x$sonlayers, function(y) is.null(y["data"])))
   if(is.null(x$data) & layers.null)
