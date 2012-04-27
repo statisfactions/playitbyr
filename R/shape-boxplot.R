@@ -1,6 +1,7 @@
 ##' Create a boxplot layer
 ##'
-##' Creates a boxplot layer
+##' Gives a sense of the distribution of values by sampling at
+##' increasingly narrow percentiles around the median.
 ##'
 ##' The audio boxplot is implemented by a simple frequency-modulation
 ##' synthesis (through csound), representing a univariate view of the

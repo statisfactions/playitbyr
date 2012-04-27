@@ -29,7 +29,8 @@
   A \code{sonlayer} object
 }
 \description{
-  Creates a boxplot layer
+  Gives a sense of the distribution of values by sampling
+  at increasingly narrow percentiles around the median.
 }
 \details{
   The audio boxplot is implemented by a simple
