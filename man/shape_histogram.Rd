@@ -76,15 +76,15 @@
   \code{\link{shape_scatter}}).
 }
 \examples{
-x <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
+x1 <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
    shape_histogram(length = 3, tempo = 1800)
-\dontrun{x}
-x <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
+\dontrun{x1}
+x2 <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
   shape_histogram(length = 5, tempo = 1800) # plays the same thing for longer
-\dontrun{x}
-x <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
+\dontrun{x2}
+x3 <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
   shape_histogram(length = 3, tempo = 1200) #  same length as original but fewer pitches
-\dontrun{x}
+\dontrun{x3}
 }
 \references{
   S. Ferguson, W. Martens and D. Cabrera, ``Statistical

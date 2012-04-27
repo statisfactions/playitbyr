@@ -55,39 +55,39 @@
 ##'
 ##' @examples
 ##'
-##' x <- sonify(iris, sonaes(time = Petal.Width, pitch = Petal.Length)) +
+##' x1 <- sonify(iris, sonaes(time = Petal.Width, pitch = Petal.Length)) +
 ##'   shape_scatter() # no jitter
-##' \dontrun{x}
-##' x <- sonify(iris, sonaes(time = Petal.Width, pitch = Petal.Length)) +
+##' \dontrun{x1}
+##' x2 <- sonify(iris, sonaes(time = Petal.Width, pitch = Petal.Length)) +
 ##'   shape_scatter(jitter = 0.3) # substantial jitter, fuzzes out overlap
-##' \dontrun{x}
+##' \dontrun{x2}
 ##' 
 ##' ## relative = TRUE: rescales duration to fit overall length (usually easier to hear)
 ##' d <- cbind(airquality, row = rownames(airquality))
-##' x <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(dur = 3) +
+##' x3 <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(dur = 3) +
 ##'   scale_time_continuous(c(0, 10))
-##' \dontrun{x}
-##' x <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(dur = 3) +
+##' \dontrun{x3}
+##' x4 <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(dur = 3) +
 ##'   scale_time_continuous(c(0, 5))
-##' \dontrun{x}
+##' \dontrun{x4}
 ##' 
 ##' ## relative = FALSE: duration is in seconds and is not scaled to fit overall length
 ##' ## (creates lots of overlap)
-##' x <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(relative = FALSE, dur = 3) +
+##' x5 <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(relative = FALSE, dur = 3) +
 ##'   scale_time_continuous(c(0, 10))
-##' \dontrun{x}
-##' x <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(relative = FALSE, dur = 3) +
+##' \dontrun{x5}
+##' x6 <- sonify(d, sonaes(time = row, pitch = Temp)) + shape_scatter(relative = FALSE, dur = 3) +
 ##'   scale_time_continuous(c(0, 5))
-##' \dontrun{x}
+##' \dontrun{x6}
 ##' 
 ##' ## Setting the pitch equal to 8 (C), and using iris$Sepal.Width
 ##' ## to generate the timings of notes##' 
-##' x <- sonify(iris[1:10,], sonaes(time = Sepal.Width)) + shape_scatter(pitch = 9)
-##' \dontrun{x}
+##' x7 <- sonify(iris[1:10,], sonaes(time = Sepal.Width)) + shape_scatter(pitch = 9)
+##' \dontrun{x7}
 ##'
 ##' ## Instead, /mapping/ the pitch to 9.
-##' x <- sonify(iris[1:10,], sonaes(time = Sepal.Width)) + shape_scatter(pitch = 9)
-##' \dontrun{x}
+##' x8 <- sonify(iris[1:10,], sonaes(time = Sepal.Width)) + shape_scatter(pitch = 9)
+##' \dontrun{x8}
 ##' ## If a value in the mapping
 ##' ## is a vector and is not a name of the data column, playitbyr
 ##' ## creates a new column with that value. This is then scaled,
