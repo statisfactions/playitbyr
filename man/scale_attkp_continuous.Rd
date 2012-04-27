@@ -39,12 +39,4 @@
   \code{_continuous} scales are a linear scaling, whereas
   \code{_exp} is an exponential scale.
 }
-\seealso{
-  \code{\link{sonscaling}} for the full syntax and range of
-  possibilities for specifying scaling of \code{sonify}
-  objects; \code{\link{linear_scale}}
-  \code{\link{exp_scale}} for the pre-defined scaling
-  functions which this incorporates; \code{\link{+.sonify}}
-  for the addition onto \code{sonify} objects.
-}
 

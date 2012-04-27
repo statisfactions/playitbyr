@@ -3,6 +3,11 @@
 ##' Printing a sonify object renders it to sound (analogously to how
 ##' printing \code{ggplot} objects renders them to screen in the
 ##' \href{http://had.co.nz/ggplot2}{ggplot2} package).
+##'
+##' In interactive use, you can simply type the name of the
+##' \code{sonify} object to sonify it. In loops, functions, and
+##' \code{\link{source}}-ing use, however, you need to explicitly call
+##' print by using \code{print(x)} to print the object \code{x}.
 ##' 
 ##'
 ##' @aliases print.sonify
@@ -31,7 +36,7 @@
 ##' is to actually render the object to a sound. It invisibly returns
 ##' the length of the resulting sonification.
 ##' 
-##' @seealso \code{\link{sonify}} for the creation of these objects
+##' @seealso \code{\link{sonify}} for the creation of these objects, \code{\link{sonsave}} for a convenience function for saving to a sound file
 ##' @method print sonify
 ##' @export
 print.sonify <- function(x, ...) {

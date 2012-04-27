@@ -31,18 +31,11 @@
   function]}) are intended to be added onto a \code{sonify}
   object to specify how \kbd{[data parameter]} from the
   data (a column of the data) is to be mapped to sonic
-  parameters (here, \code{"vol"}).
+  parameters (here, \code{"vol"}, the proportion of the
+  maximum volume of the note, as a number between 0 and 1).
 }
 \details{
   \code{_continuous} scales are a linear scaling, whereas
   \code{_exp} is an exponential scale.
-}
-\seealso{
-  \code{\link{sonscaling}} for the full syntax and range of
-  possibilities for specifying scaling of \code{sonify}
-  objects; \code{\link{linear_scale}}
-  \code{\link{exp_scale}} for the pre-defined scaling
-  functions which this incorporates; \code{\link{+.sonify}}
-  for the addition onto \code{sonify} objects.
 }
 

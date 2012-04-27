@@ -12,13 +12,6 @@
 ##'
 ##' @return A \code{sonscaling} object, to be used in \code{sonify} or
 ##' added onto a \code{sonify} object.
-##' 
-##' @seealso \code{\link{sonscaling}} for the full syntax and range of
-##' possibilities for specifying scaling of \code{sonify} objects;
-##' \code{\link{linear_scale}} \code{\link{exp_scale}} for the
-##' pre-defined scaling functions which this incorporates;
-##' \code{\link{+.sonify}} for the addition onto \code{sonify}
-##' objects.
 ##'
 ##' @inheritParams scale_time_continuous
 ##' @param \dots Other parameters (currently ignored)

@@ -4,19 +4,13 @@
 ##' \code{scale_}\kbd{[sound parameter]}\code{_}\kbd{[scaling
 ##' function]}) are intended to be added onto a \code{sonify} object
 ##' to specify how \kbd{[data parameter]} from the data (a column of
-##' the data) is to be mapped to sonic parameters.
+##' the data) is to be mapped to sonic parameters (here
+##' \code{"time"}, the starting time of the note in seconds).
 ##'
 ##' \code{_continuous} scales are a linear scaling, whereas
 ##' \code{_exp} is an exponential scale.
 ##' @return A \code{sonscaling} object, to be used in \code{sonify} or added
 ##' onto a \code{sonify} object.
-##' @seealso \code{\link{sonscaling}} for the full syntax and range of
-##' possibilities for specifying scaling of \code{sonify} objects;
-##' \code{\link{linear_scale}} \code{\link{exp_scale}} for the
-##' pre-defined scaling functions which this incorporates;
-##' \code{\link{+.sonify}} for the addition onto \code{sonify}
-##' objects.
-##'
 ##' @param limits The limits of the data to train, a numeric vector of length
 ##' 2. All data values outside these limits are returned as
 ##' \code{NA}. If \code{NULL}, the default, the function takes the
