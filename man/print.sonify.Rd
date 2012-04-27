@@ -9,25 +9,25 @@
 
   \item{\dots}{Additional optional arguments:
 
-  \code{render_real_time}: Render the sonification in real
-  time? If \code{TRUE}, the sonification is rendered in
-  real time (which is faster but may not work as well on
-  slower computers); if \code{FALSE} the sonification is
-  rendered to a file on disk before playing. The default
-  behavior is given by the option
-  \dQuote{\code{render_real_time}}
+  \describe{ \item{\code{render_real_time}}{Render the
+  sonification in real time? If \code{TRUE}, the
+  sonification is rendered in real time (which is faster
+  but may not work as well on slower computers); if
+  \code{FALSE} the sonification is rendered to a file on
+  disk before playing. The default behavior is given by the
+  option \dQuote{\code{render_real_time}}.}
 
-  \code{file}: The file to render to (if
+  \item{\code{file}}{The file to render to (if
   \code{render_real_time = FALSE}). The default is a
-  temporary file.
+  temporary file.}
 
-  \code{play}: If rendering to a file, should the file then
-  be played? Default is \code{TRUE}.
+  \item{\code{play}}{If rendering to a file, should the
+  file then be played? Default is \code{TRUE}.}
 
-  \code{playout}: If playing from a file, what channel
-  should be used for output? This string is passed to the
-  Csound \code{-o} option. Default is \code{"dac"}, the
-  default audio out.}
+  \item{\code{playout}}{If playing from a file, what
+  channel should be used for output? This string is passed
+  to the Csound \code{-o} option. Default is \code{"dac"},
+  the default audio out.} }}
 }
 \value{
   \code{print.sonify} is called for its side-effect, which

@@ -15,6 +15,8 @@
 ##'
 ##' @inheritParams scale_time_continuous
 ##' @param \dots Other parameters (currently ignored)
+##' @seealso \code{\link{shape_scatter}}, which has more information
+##' about this parameter
 ##' @rdname scale_pitch_continuous
 ##' @export
 scale_pitch_continuous <- function(soundlimits, limits = NULL, by = NULL, ...) {
@@ -26,3 +28,6 @@ sonscaling(pitch = list(limits, soundlimits, function(x, limits, soundlimits) li
 scale_pitch_exp <- function(soundlimits, limits = NULL, by = NULL, ...) {
 sonscaling(pitch = list(limits, soundlimits, function(x, limits, soundlimits) exp_scale(x, limits = limits, soundlimits, by = by)))
 }
+
+
+##' 

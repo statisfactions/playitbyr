@@ -14,6 +14,8 @@
 ##' added onto a \code{sonify} object.
 ##'
 ##' @inheritParams scale_time_continuous
+##' @seealso \code{\link{shape_scatter}}, which has more information
+##' about this parameter
 ##' @param \dots Other parameters (currently ignored)
 ##' @rdname scale_indx_continuous
 ##' @export
@@ -22,3 +24,6 @@ scale_indx_continuous <- function(soundlimits, limits = NULL, by = NULL, ...) so
 ##' @rdname scale_indx_continuous
 ##' @export
 scale_indx_exp <- function(soundlimits, limits = NULL, by = NULL, ...) sonscaling(indx = list(limits, soundlimits, function(x, limits, soundlimits) exp_scale(x, limits = limits, soundlimits, by = by)))
+
+
+##' 

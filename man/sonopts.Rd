@@ -2,27 +2,23 @@
 \alias{sonopts}
 \title{Sonification rendering options}
 \usage{
-  sonopts(rendering = "csound", ...)
+  sonopts(...)
 }
 \arguments{
-  \item{rendering}{The rendering type. Only \code{"csound"}
-  is currently supported.}
-
-  \item{\dots}{Additional named parameters for setting
-  rendering options. See Details.}
+  \item{\dots}{Named parameters for setting rendering
+  options. See Details.}
 }
 \description{
-  Set options for a single sonification
+  Set advanced options for a sonification
 }
 \details{
   Use this function if you want to modify a few settings
   for a single sonification.
 
-  When \code{rendering = "csound"}, the default, the
-  following options are available, which mirror the input
-  arguments to \code{\link{createPerformance}} from the
-  \pkg{csound} package. Note that most of these will be
-  \strong{ignored} for many shapes, since they set these
+  The following options are available, which mirror the
+  input arguments to \code{\link{createPerformance}} from
+  the \pkg{csound} package.  Note that most of these will
+  be \strong{ignored} for many shapes, since they set these
   options themselves on the back end.
 
   \describe{ \item{i}{Usually this is not specified, since
@@ -83,5 +79,13 @@
 
   \item{csInstance}{An instance of Csound that can be used
   to continue or close the current performance.} }
+}
+\note{
+  By default, a rendering is saved to a file and then
+  immediately played for compatibility with slower systems.
+  If you have a faster computer and want to play the
+  sonification as you render it, you can set
+  \code{options("render_real_time" = TRUE)}. (It is
+  \code{FALSE} by default.)
 }
 

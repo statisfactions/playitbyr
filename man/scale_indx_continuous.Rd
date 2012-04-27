@@ -39,4 +39,8 @@
   \code{_continuous} scales are a linear scaling, whereas
   \code{_exp} is an exponential scale.
 }
+\seealso{
+  \code{\link{shape_scatter}}, which has more information
+  about this parameter
+}
 

@@ -16,6 +16,8 @@
 ##' 
 ##' @inheritParams scale_time_continuous
 ##' @param \dots Other parameters (currently ignored)
+##' @seealso \code{\link{shape_scatter}}, which has more information
+##' about this parameter
 ##' @rdname scale_vol_continuous
 ##' @export
 scale_vol_exp <- function(soundlimits, limits = NULL, by = NULL, ...) sonscaling(vol = list(limits, soundlimits, function(x, limits, soundlimits) exp_scale(x, limits = limits, soundlimits, by = by)))
@@ -23,3 +25,6 @@ scale_vol_exp <- function(soundlimits, limits = NULL, by = NULL, ...) sonscaling
 ##' @rdname scale_vol_continuous
 ##' @export
 scale_vol_continuous <- function(soundlimits, limits = NULL, by = NULL, ...) sonscaling(vol = list(limits, soundlimits, function(x, limits, soundlimits) linear_scale(x, limits = limits, soundlimits, by = by)))
+
+
+##' 

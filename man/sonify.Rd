@@ -4,7 +4,7 @@
 \usage{
   sonify(data = NULL, mapping = sonaes(),
     scales = sonscaling(), sonlayers = NULL,
-    opts = sonopts(rendering = "csound"), sonfacet = NULL)
+    opts = sonopts(), sonfacet = NULL)
 }
 \arguments{
   \item{data}{a \code{data.frame} with the data to be

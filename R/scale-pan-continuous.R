@@ -15,6 +15,8 @@
 ##'
 ##' @inheritParams scale_time_continuous
 ##' @param \dots Other parameters (currently ignored)
+##' @seealso \code{\link{shape_scatter}}, which has more information
+##' about this parameter
 ##' @rdname scale_pan_continuous
 ##' @export
 scale_pan_continuous <- function(soundlimits, limits = NULL, by = NULL, ...) sonscaling(pan = list(limits, soundlimits, function(x, limits, soundlimits) linear_scale(x, limits = limits, soundlimits, by = by)))
@@ -22,3 +24,6 @@ scale_pan_continuous <- function(soundlimits, limits = NULL, by = NULL, ...) son
 ##' @rdname scale_pan_continuous
 ##' @export
 scale_pan_exp <- function(soundlimits, limits = NULL, by = NULL, ...) sonscaling(pan = list(limits, soundlimits, function(x, limits, soundlimits) exp_scale(x, limits = limits, soundlimits, by = by)))
+
+
+##' 

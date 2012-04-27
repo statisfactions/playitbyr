@@ -19,6 +19,8 @@
 ##' @param by The unit to round the sound parameter to. See examples.
 ##' @param \dots Other parameters (currently ignored)
 ##'
+##' @seealso \code{\link{shape_scatter}}, which has more information
+##' about this parameter
 ##' @rdname scale_time_continuous
 ##' @export
 scale_time_continuous <- function(soundlimits, limits = NULL, by = NULL, ...)
@@ -28,3 +30,6 @@ scale_time_continuous <- function(soundlimits, limits = NULL, by = NULL, ...)
 ##' @export
 scale_time_exp <- function(soundlimits, limits = NULL, by = NULL, ...) sonscaling(time = list(limits, soundlimits, function(x, limits, soundlimits) exp_scale(x, limits = limits, soundlimits, by = by)))
 
+
+
+##' 

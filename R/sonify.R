@@ -109,7 +109,7 @@
 ##' \dontrun{x # outputs sound}
 ##'
 ##' @export
-sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling(), sonlayers = NULL, opts = sonopts(rendering = "csound"), sonfacet = NULL) {
+sonify <- function(data=NULL, mapping=sonaes(), scales=sonscaling(), sonlayers = NULL, opts = sonopts(), sonfacet = NULL) {
   ## Creates a \code{sonify} object, which is a list containing the \code{data.frame}
   ## to be sonified, the mappings of data to sound parameters, the scaling
   ## of parameters, and additional options.

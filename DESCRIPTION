@@ -13,6 +13,13 @@ Description: playitbyr is a flexible toolkit for data analysis and exploration
     pitch, tempo, and rhythm, and output sound and sound files.
 URL: http://playitbyr.org/
 License: GPL (>= 2)
+SystemRequirements: A valid copy of the Csound library must
+    be present. Csound can be downloaded from
+    <http://www.csounds.com>. The library is included in the
+    default Windows and Mac OS X distributions; binary Linux
+    distributions often package the library separately from
+    the executible file, so for instance on Debian and
+    Ubuntu you would need the "libcsound64-dev" package.
 LazyLoad: yes
 Collate:
     'aaa.R'

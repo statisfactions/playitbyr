@@ -14,24 +14,25 @@
 ##' @param x A \code{sonify} object
 ##' 
 ##' @param \dots Additional optional arguments:
-##' 
-##' \code{render_real_time}: Render the sonification in real time? If
+##'
+##' \describe{
+##' \item{\code{render_real_time}}{Render the sonification in real time? If
 ##' \code{TRUE}, the sonification is rendered in real time (which is
 ##' faster but may not work as well on slower computers); if
 ##' \code{FALSE} the sonification is rendered to a file on disk before
 ##' playing. The default behavior is given by the option
-##' \dQuote{\code{render_real_time}}
+##' \dQuote{\code{render_real_time}}.}
 ##'
-##' \code{file}: The file to render to (if \code{render_real_time =
-##' FALSE}). The default is a temporary file.
+##' \item{\code{file}}{The file to render to (if \code{render_real_time =
+##' FALSE}). The default is a temporary file.}
 ##'
-##' \code{play}: If rendering to a file, should the file then be
-##' played? Default is \code{TRUE}.
+##' \item{\code{play}}{If rendering to a file, should the file then be
+##' played? Default is \code{TRUE}.}
 ##'
-##' \code{playout}: If playing from a file, what channel should be
+##' \item{\code{playout}}{If playing from a file, what channel should be
 ##' used for output? This string is passed to the Csound \code{-o}
-##' option. Default is \code{"dac"}, the default audio out.
-##' 
+##' option. Default is \code{"dac"}, the default audio out.}
+##' }
 ##' @return \code{print.sonify} is called for its side-effect, which
 ##' is to actually render the object to a sound. It invisibly returns
 ##' the length of the resulting sonification.

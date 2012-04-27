@@ -5,7 +5,8 @@
 ##'
 ##' @return A \code{data.frame} with each row representing one of the
 ##' shapes available for sonification, a brief description of the
-##' shape, and the parameters available for sonification. 
+##' shape, and the parameters available for sonification.
+##' @keywords internal
 ##' @export
 shape_descriptions <- function() {
   descriptions <- sapply(allShapeDefs, function(x) x$description)

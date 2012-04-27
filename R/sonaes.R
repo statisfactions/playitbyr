@@ -5,18 +5,13 @@
 ##' intended be added to a \code{sonify} object (or included in its
 ##' construction).
 ##' 
-##' Setting sonic parameters to \code{data.frame} columns or constant
-##' values is the heart of making the sonification happen and making
-##' it possible to render. But {sonaes} does not check to make sure that all mappings
-##' are filled in, since the user can add on more mappings (using
-##' \code{\link{+.sonify}}) interactively. 
-##' 
-##' Also, every item that is mapped to a \code{data.frame} column in a
-##' \code{sonify} object must also have a scale associated with it before
-##' rendering; see \code{\link{sonscaling}}.
+##' Setting sonic parameters to \code{data.frame} columns is the heart
+##' of making the sonification. The sound parameters that can be the
+##' arguments of \code{sonaes} depend on the kinds of layers present;
+##' see \code{\link{sonify}} for a list of the possible kinds of
+##' layers.
 ##'
-##' @seealso \code{\link{sonify}}, \code{\link{sonscaling}},
-##' \code{\link{.octToFreq} }.  Also, see \code{\link[ggplot2]{aes}}
+##' @seealso \code{\link{sonify}}. Also, see \code{\link[ggplot2]{aes}}
 ##' from the \pkg{ggplot2} package, which inspired this function.
 ##' @examples
 ##' 

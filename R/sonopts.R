@@ -1,15 +1,15 @@
 ##' Sonification rendering options
 ##'
-##' Set options for a single sonification
+##' Set advanced options for a sonification
 ##'
 ##' Use this function if you want to modify a few settings for a
 ##' single sonification.
 ##'
-##' When \code{rendering = "csound"}, the default, the following
-##' options are available, which mirror the input arguments to
-##' \code{\link{createPerformance}} from the \pkg{csound} package.
-##' Note that most of these will be \strong{ignored} for many shapes,
-##' since they set these options themselves on the back end.
+##' The following options are available, which mirror the input
+##' arguments to \code{\link{createPerformance}} from the \pkg{csound}
+##' package.  Note that most of these will be \strong{ignored} for
+##' many shapes, since they set these options themselves on the back
+##' end.
 ##' 
 # Parameter list imported from createPerformance on Friday, December 16, 2011
 ##' \describe{
@@ -66,23 +66,22 @@
 ##' \item{csInstance}{An instance of Csound that can be used to
 ##' continue or close the current performance.}
 ##' }
-##' @param rendering The rendering type. Only \code{"csound"} is currently supported.
-##' @param \dots Additional named parameters for setting rendering
+##' @param \dots Named parameters for setting rendering
 ##' options. See Details.
+##' @note By default, a rendering is saved to a file and then
+##' immediately played for compatibility with slower systems. If you have a faster computer and want to play the sonification as you render it, you can set \code{options("render_real_time" = TRUE)}. (It is \code{FALSE} by default.)
 ##' @export
-sonopts <- function(rendering = "csound", ...) {
+sonopts <- function(...) {
   out <- list(...)
 
   ## Check parameters valid
-  if(rendering %in% "csound")
-    mismatch <- names(out)[!(names(out) %in% names(formals(createPerformance)))]
-  else stop("rendering must be 'csound'")
-  
+  mismatch <- names(out)[!(names(out) %in% names(formals(createPerformance)))]
+    
   if(length(mismatch)>0)
-    stop("Unrecognized ", rendering, " parameters ",
+    stop("Unrecognized rendering parameters ",
          paste(paste("'", mismatch, "'", sep = ""), collapse = ", "))
 
-  out <- c(rendering = rendering, out)
+  out <- c(rendering = "csound", out)
   class(out) <- "sonopts"
   return(out)
 }
