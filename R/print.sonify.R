@@ -50,15 +50,23 @@ print.sonify <- function(x, ...) {
   prargs <- printargs(...)
   opts <- x$opts
   
-  if(!(prargs$render_real_time)) {    
-    length <- render(.getScore(x), opts = x$opts, file = prargs$file)
+  if(!(prargs$render_real_time)) {
+    ## need to navigate to deal with windows silliness
+    filebase <- basename(prargs$file)
+    filedir <- dirname(prargs$file)
+    oldwd <- getwd()
+    setwd(filedir)
+    
+    length <- render(.getScore(x), opts = x$opts, file = filebase)
 
     if(prargs$play)
       createPerformance(i = list(matrix(c(3, 0, length,
-                        paste("\"", prargs$file, "\"", sep  = "")),
+                        paste("\"", filebase, "\"", sep  = "")),
                         nrow = 1)), out = prargs$playout,
                                 orcfile = system.file("orc/playitbyr.orc", package = "playitbyr"),
                       realTime = FALSE)
+
+    setwd(oldwd)
   } else {
     length <- render(.getScore(x), opts = x$opts, file = prargs$file)
   }
