@@ -1,7 +1,7 @@
 \name{scale_vol_exp}
 \alias{scale_vol_continuous}
 \alias{scale_vol_exp}
-\title{Continuous vol scales}
+\title{Continuous note volume scales}
 \usage{
   scale_vol_exp(soundlimits, limits = NULL, by = NULL, ...)
 
@@ -18,8 +18,7 @@
   are returned as \code{NA}. If \code{NULL}, the default,
   the function takes the minimum and maximum of the data}
 
-  \item{by}{The unit to round the sound parameter to. See
-  examples.}
+  \item{by}{The unit to round the sound parameter to.}
 }
 \value{
   A \code{sonscaling} object, to be used in \code{sonify}

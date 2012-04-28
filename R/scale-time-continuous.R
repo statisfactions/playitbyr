@@ -1,4 +1,4 @@
-##' Continuous time scales
+##' Continuous scales for note starting times
 ##'
 ##' These shortcut functions (with the notation
 ##' \code{scale_}\kbd{[sound parameter]}\code{_}\kbd{[scaling
@@ -16,7 +16,7 @@
 ##' \code{NA}. If \code{NULL}, the default, the function takes the
 ##' minimum and maximum of the data
 ##' @param soundlimits The limits of the sound parameter.
-##' @param by The unit to round the sound parameter to. See examples.
+##' @param by The unit to round the sound parameter to.
 ##' @param \dots Other parameters (currently ignored)
 ##'
 ##' @seealso \code{\link{shape_scatter}}, which has more information

@@ -2,8 +2,8 @@
 \alias{shape_boxplot}
 \title{Create a boxplot layer}
 \usage{
-  shape_boxplot(length = 5, tempo = 240, pause = 0.1,
-    data = NULL, mapping = NULL, ...)
+  shape_boxplot(length = 5, tempo = 240, pause = 0.1, ...,
+    data = NULL, mapping = NULL)
 }
 \arguments{
   \item{length}{The overall length, in seconds, of each
@@ -26,7 +26,8 @@
   \item{mapping}{A \code{\link{sonaes}} object.}
 }
 \value{
-  A \code{sonlayer} object
+  A \code{sonlayer} object that can be added onto a
+  \code{\link{sonify}} object.
 }
 \description{
   Gives a sense of the distribution of values by sampling
@@ -37,10 +38,10 @@
   frequency-modulation synthesis (through csound),
   representing a univariate view of the data by rapidly
   playing pitches in the 5th to 95th percentile, then the
-  interquartile range (25th to 75th), all sampled from the
-  dataset. (It is essentially \code{\link{shape_histogram}}
-  evaluated separately on each of these subsets of the
-  data.)
+  interquartile range (25th to 75th), then the median, all
+  sampled from the dataset. (It is essentially
+  \code{\link{shape_histogram}} evaluated separately on
+  each of these subsets of the data.)
 
   Only \code{pitch} is intended to be used for mapping but
   the remainder of the same parameters available in
@@ -70,7 +71,7 @@
   wave, whereas higher indices of modulation give
   increasingly complex tones.} \item{mod}{The modulating
   frequency, given as a multiple of the primary frequency
-  (i.e. given by \code{pitch}.} }
+  (i.e. given by \code{pitch}).} }
 
   To \emph{set} a sound parameter to a value, you simply
   include it as an extra argument in \code{shape_scatter};
@@ -88,7 +89,7 @@ x2 <- sonify(iris, sonaes(pitch = Sepal.Length)) +
 \dontrun{x2}
 x3 <- sonify(iris, sonaes(pitch = Sepal.Length)) +
   shape_boxplot(length = 1, tempo = 1200) #  same length as original but fewer pitches
-\dontrun{x3}
+\dontrun{x3}G
 }
 \references{
   S. Ferguson, W. Martens and D. Cabrera, ``Statistical

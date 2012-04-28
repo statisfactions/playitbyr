@@ -57,7 +57,7 @@
 
   \item{\code{\link{shape_boxplot}}}{Gives a sense of the
   distribution of values (represented by pitch) by sampling
-  the dataset increasingly narrow percentiles around the
+  the dataset in increasingly narrow percentiles around the
   median}
 
   \item{\code{\link{shape_csound}}}{A layer that can use an

@@ -8,6 +8,14 @@
 ##' \code{"decayp"}, the percentage of the note devoted to the
 ##' decay/fade out).
 ##'
+##' In \code{\link{shape_scatter}}, there are 3 phases of a note: the
+##' attack (the initial fade-in of the note), sustain (where the note
+##' is held), and the decay (the final fade-out of the
+##' note. \code{decayp} is the percentage of the note devoted to the
+##' decay; so a note with \code{decayp} would have a very abrupt
+##' ending, whereas a note with \code{decayp = 0.5} would gradually
+##' fade out.
+##'
 ##' \code{_continuous} scales are a linear scaling, whereas
 ##' \code{_exp} is an exponential scale.
 ##'

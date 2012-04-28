@@ -2,8 +2,8 @@
 \alias{shape_dotplot}
 \title{Create a dotplot layer}
 \usage{
-  shape_dotplot(jitter = 0, data = NULL, mapping = NULL,
-    ...)
+  shape_dotplot(jitter = 0, ..., data = NULL,
+    mapping = NULL)
 }
 \arguments{
   \item{jitter}{The maximum size, in seconds, of how much
@@ -21,7 +21,8 @@
   \item{mapping}{A \code{\link{sonaes}} object.}
 }
 \value{
-  A \code{sonlayer} object
+  A \code{sonlayer} object that can be added onto a
+  \code{\link{sonify}} object.
 }
 \description{
   Creates a dotplot layer using the sound of a snare drum.

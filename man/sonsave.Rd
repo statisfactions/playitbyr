@@ -22,7 +22,7 @@
   Returns the filename of the saved file.
 }
 \description{
-  Convenience function to save a \code{sonify} object to an
-  audio (\code{.wav}) file
+  Convenience function to save a \code{\link{sonify}}
+  object to an audio (\code{.wav}) file
 }
 

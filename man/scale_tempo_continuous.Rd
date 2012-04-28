@@ -19,8 +19,7 @@
   are returned as \code{NA}. If \code{NULL}, the default,
   the function takes the minimum and maximum of the data}
 
-  \item{by}{The unit to round the sound parameter to. See
-  examples.}
+  \item{by}{The unit to round the sound parameter to.}
 }
 \value{
   A \code{sonscaling} object, to be used in \code{sonify}
@@ -32,7 +31,7 @@
   function]}) are intended to be added onto a \code{sonify}
   object to specify how \kbd{[data parameter]} from the
   data (a column of the data) is to be mapped to sonic
-  parameters (here, \code{"tempo"}).
+  parameters (here, \code{"tempo"} in beats per minute).
 }
 \details{
   \code{_continuous} scales are a linear scaling, whereas

@@ -2,8 +2,8 @@
 \alias{shape_scatter}
 \title{Create a scatterplot layer}
 \usage{
-  shape_scatter(jitter = 0, relative = TRUE, data = NULL,
-    mapping = NULL, ...)
+  shape_scatter(jitter = 0, relative = TRUE, ...,
+    data = NULL, mapping = NULL)
 }
 \arguments{
   \item{jitter}{The maximum size, in seconds, of how much
@@ -31,7 +31,8 @@
   \item{mapping}{A \code{\link{sonaes}} object.}
 }
 \value{
-  A \code{sonlayer} object
+  A \code{sonlayer} object that can be added onto a
+  \code{\link{sonify}} object.
 }
 \description{
   Creates a scatterplot layer; the audio analogue of
@@ -66,7 +67,7 @@
   wave, whereas higher indices of modulation give
   increasingly complex tones.} \item{mod}{The modulating
   frequency, given as a multiple of the primary frequency
-  (i.e. given by \code{pitch}.} }
+  (i.e. given by \code{pitch}).} }
 
   To \emph{set} a sound parameter to a value, you simply
   include it as an extra argument in \code{shape_scatter};

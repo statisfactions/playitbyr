@@ -9,11 +9,12 @@
   \code{sonlayer}. See Details.}
 }
 \value{
-  A \code{sonlayer} object
+  A \code{sonlayer} object that can be added onto a
+  \code{\link{sonify}} object.
 }
 \description{
   Creates a layer that can use an arbitrary csound file as
-  its orchestra.
+  its orchestra (for advanced Csound users).
 }
 \details{
   The orchestra file is not actually specified in the

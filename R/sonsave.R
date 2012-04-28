@@ -1,6 +1,6 @@
 ##' Save sonifications to an audio file
 ##'
-##' Convenience function to save a \code{sonify} object to an audio
+##' Convenience function to save a \code{\link{sonify}} object to an audio
 ##' (\code{.wav}) file
 ##'
 ##' @export

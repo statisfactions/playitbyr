@@ -38,13 +38,13 @@
 ##' 
 ##' @param \dots data, settings, and mappings to pass to
 ##' \code{\link{sonlayer}} (see Details)
-##' @return A \code{sonlayer} object
+##' @return A \code{sonlayer} object that can be added onto a \code{\link{sonify}} object.
 ##' @author Originally contributed by \href{http://datasearch2.uts.edu.au/feit/staff/listing/details.cfm?StaffId=7920}{Sam Ferguson}. Csound instrument created by \href{http://csounds.com/mikelson}{Hans Mikelson}.
 ##' @references S. Ferguson, W. Martens and D. Cabrera, ``Statistical Sonification for Exploratory Data Analysis'', in \emph{The Sonification Handbook},  ed. Hermann, Hunt, Neuhoff. Available: \url{http://sonification.de/handbook/}
 ##' @examples
 ##' x <- sonify(iris[1:10,], sonaes(time = Petal.Length)) + shape_dotplot(jitter = 0.3)
 ##' \dontrun{print(x)}
 ##' @export
-shape_dotplot <- function(jitter = 0, data = NULL,
-                          mapping = NULL, ...) sonlayer("dotplot", jitter = jitter, data = data, mapping = mapping, ...)
+shape_dotplot <- function(jitter = 0, ..., data = NULL,
+                          mapping = NULL) sonlayer("dotplot", jitter = jitter, data = data, mapping = mapping, ...)
 

@@ -1,4 +1,4 @@
-##' Continuous dur scales
+##' Continuous note duration scales
 ##'
 ##' These shortcut functions (with the notation
 ##' \code{scale_}\kbd{[sound parameter]}\code{_}\kbd{[scaling

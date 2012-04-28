@@ -4,18 +4,17 @@
 ##' indicate that a given parameter is not to be scaled; the values
 ##' given in the input data should be take as the given sound values.
 ##'
-##' @param chromatic Should pitches be rounded to chromatic
-##' values? Default \code{TRUE}
 ##' @param \dots Ignored.
 ##' 
 ##' @rdname scale_identity
 ##' @export
+##' 
 scale_time_identity <- function(...)
   sonscaling(time =  list(limits = NULL, soundlimits = c(0, 0), function(x, limits, soundlimits) x))
 
 ##' @rdname scale_identity
 ##' @export
-scale_pitch_identity <- function(chromatic = FALSE, ...) 
+scale_pitch_identity <- function(...) 
   sonscaling(pitch =  list(limits = NULL, soundlimits = c(0, 0), function(x, limits, soundlimits) x))
 
 ##' @rdname scale_identity

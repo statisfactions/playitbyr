@@ -34,7 +34,7 @@
 ##' \item{decayp}{The proportion of the note's length devoted to the (linear) decay.}
 ##' \item{indx}{The index of modulation. This affects the distortion of the tone; \code{indx = 0} is a sine wave, whereas higher indices of modulation give increasingly complex tones.}
 ##' \item{mod}{The modulating frequency, given as a multiple
-##' of the primary frequency (i.e. given by \code{pitch}.}
+##' of the primary frequency (i.e. given by \code{pitch}).}
 ##' }
 ##'
 ##' To \emph{set} a sound parameter to a value, you simply include it
@@ -50,7 +50,7 @@
 ##' @param \dots settings to pass to
 ##' \code{\link{sonlayer}} (see Details)
 ##' 
-##' @return A \code{sonlayer} object
+##' @return A \code{sonlayer} object that can be added onto a \code{\link{sonify}} object.
 ##' @references S. Ferguson, W. Martens and D. Cabrera, ``Statistical Sonification for Exploratory Data Analysis'', in \emph{The Sonification Handbook},  ed. Hermann, Hunt, Neuhoff. Available: \url{http://sonification.de/handbook/}
 ##' @examples
 ##' x1 <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
@@ -63,6 +63,6 @@
 ##'   shape_histogram(length = 3, tempo = 1200) #  same length as original but fewer pitches
 ##' \dontrun{x3}
 ##' @export
-shape_histogram <- function(length = 5, tempo = 240, data = NULL,
-                          mapping = NULL, ...) sonlayer("histogram", length = length, tempo = tempo, data = data, mapping = mapping, ...)
+shape_histogram <- function(length = 5, tempo = 240, ..., data = NULL,
+                          mapping = NULL) sonlayer("histogram", length = length, tempo = tempo, data = data, mapping = mapping, ...)
 

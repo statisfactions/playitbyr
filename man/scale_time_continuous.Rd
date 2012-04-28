@@ -1,7 +1,7 @@
 \name{scale_time_continuous}
 \alias{scale_time_continuous}
 \alias{scale_time_exp}
-\title{Continuous time scales}
+\title{Continuous scales for note starting times}
 \usage{
   scale_time_continuous(soundlimits, limits = NULL,
     by = NULL, ...)
@@ -17,8 +17,7 @@
 
   \item{soundlimits}{The limits of the sound parameter.}
 
-  \item{by}{The unit to round the sound parameter to. See
-  examples.}
+  \item{by}{The unit to round the sound parameter to.}
 
   \item{\dots}{Other parameters (currently ignored)}
 }

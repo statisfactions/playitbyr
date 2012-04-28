@@ -2,7 +2,7 @@
 ##'
 ##' Allows creation of \sQuote{facets} for a sonification, i.e. to
 ##' separately sonify different groups of a dataset, one after another.
-##' Analogous to \pkg{ggplot2}'s \code{facet_wrap}.
+##' Analogous to \pkg{ggplot2}'s \code{\link[ggplot2]{facet_wrap}}. 
 ##'
 ##' When added onto a \code{sonify} object, this function splits the
 ##' data by the variable given in \code{facets} and creates separate

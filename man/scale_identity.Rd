@@ -13,7 +13,7 @@
 \usage{
   scale_time_identity(...)
 
-  scale_pitch_identity(chromatic = FALSE, ...)
+  scale_pitch_identity(...)
 
   scale_dur_identity(...)
 
@@ -32,9 +32,6 @@
   scale_indx_identity(...)
 }
 \arguments{
-  \item{chromatic}{Should pitches be rounded to chromatic
-  values? Default \code{TRUE}}
-
   \item{\dots}{Ignored.}
 }
 \description{

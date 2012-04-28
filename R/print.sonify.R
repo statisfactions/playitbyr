@@ -37,7 +37,13 @@
 ##' is to actually render the object to a sound. It invisibly returns
 ##' the length of the resulting sonification.
 ##' 
-##' @seealso \code{\link{sonify}} for the creation of these objects, \code{\link{sonsave}} for a convenience function for saving to a sound file
+##' @note By default, a rendering is saved to a file and then
+##' immediately played for compatibility with slower systems. If you
+##' have a faster computer and want to play the sonification as you
+##' render it, you can set \code{options("render_real_time" =
+##' TRUE)}. (It is \code{FALSE} by default.)
+##' 
+##' @seealso \code{\link{sonify}} for the creation of these objects, \code{\link{sonsave}} for a convenience function that saves a sound file, \code{\link{sonopts}} for advanced and low-level rendering options
 ##' @method print sonify
 ##' @export
 print.sonify <- function(x, ...) {

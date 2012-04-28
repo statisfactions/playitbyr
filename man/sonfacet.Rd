@@ -17,7 +17,7 @@
   Allows creation of \sQuote{facets} for a sonification,
   i.e. to separately sonify different groups of a dataset,
   one after another. Analogous to \pkg{ggplot2}'s
-  \code{facet_wrap}.
+  \code{\link[ggplot2]{facet_wrap}}.
 }
 \details{
   When added onto a \code{sonify} object, this function

@@ -5,7 +5,7 @@
 ##' function]}) are intended to be added onto a \code{sonify} object
 ##' to specify how \kbd{[data parameter]} from the data (a column of
 ##' the data) is to be mapped to sonic parameters (here,
-##' \code{"tempo"}).
+##' \code{"tempo"} in beats per minute).
 ##'
 ##' \code{_continuous} scales are a linear scaling, whereas
 ##' \code{_exp} is an exponential scale.

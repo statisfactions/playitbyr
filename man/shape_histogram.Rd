@@ -2,8 +2,8 @@
 \alias{shape_histogram}
 \title{Create a histogram layer}
 \usage{
-  shape_histogram(length = 5, tempo = 240, data = NULL,
-    mapping = NULL, ...)
+  shape_histogram(length = 5, tempo = 240, ...,
+    data = NULL, mapping = NULL)
 }
 \arguments{
   \item{length}{The overall length, in seconds, of the
@@ -23,7 +23,8 @@
   \item{mapping}{A \code{\link{sonaes}} object.}
 }
 \value{
-  A \code{sonlayer} object
+  A \code{sonlayer} object that can be added onto a
+  \code{\link{sonify}} object.
 }
 \description{
   Creates a histogram layer
@@ -66,7 +67,7 @@
   wave, whereas higher indices of modulation give
   increasingly complex tones.} \item{mod}{The modulating
   frequency, given as a multiple of the primary frequency
-  (i.e. given by \code{pitch}.} }
+  (i.e. given by \code{pitch}).} }
 
   To \emph{set} a sound parameter to a value, you simply
   include it as an extra argument in \code{shape_scatter};
