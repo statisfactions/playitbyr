@@ -1,17 +1,9 @@
 context("sonopts()")
 
-test_that("bad parameters give errors", {
-  expect_error(sonopts("yummy"), "rendering must be 'csound'")
-  expect_error(sonopts(rendering = "csound", i = 1, blah = "blarg",
-                       bloop = "blarf"),
-               "Unrecognized csound parameters 'blah', 'bloop'")
-})
-
 testlist <- structure(list(rendering = "csound",
                  orcfile = "whatwhat.orc",
                    f = list(c(1, 4, 3, 1, 1))), class = "sonopts")
-sonoptsout <- sonopts("csound",
-                      orcfile = "whatwhat.orc",
+sonoptsout <- sonopts(orcfile = "whatwhat.orc",
                       f = list(c(1, 4, 3, 1, 1)))
 
 test_that("sonopt list outputs as expected", {
