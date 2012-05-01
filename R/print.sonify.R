@@ -51,22 +51,26 @@ print.sonify <- function(x, ...) {
   opts <- x$opts
   
   if(!(prargs$render_real_time)) {
-    ## need to navigate to deal with windows silliness
-    filebase <- basename(prargs$file)
-    filedir <- dirname(prargs$file)
-    oldwd <- getwd()
-    setwd(filedir)
-    
-    length <- render(.getScore(x), opts = x$opts, file = filebase)
+    WINDOWS <- .Platform$OS.type == "windows"
+    if(WINDOWS) {
+    ## need to navigate to tempdir deal with windows silliness
+      filename <- basename(prargs$file)
+      filedir <- dirname(prargs$file)
+      oldwd <- getwd()
+      setwd(filedir)
+    } else
+      filename <- prargs$file
+
+    length <- render(.getScore(x), opts = x$opts, file = filename)
 
     if(prargs$play)
       createPerformance(i = list(matrix(c(3, 0, length,
-                        paste("\"", filebase, "\"", sep  = "")),
+                        paste("\"", filename, "\"", sep  = "")),
                         nrow = 1)), out = prargs$playout,
                                 orcfile = system.file("orc/playitbyr.orc", package = "playitbyr"),
                       realTime = FALSE)
-
-    setwd(oldwd)
+    if(WINDOWS) # navigate back in Windows
+      setwd(oldwd)
   } else {
     length <- render(.getScore(x), opts = x$opts, file = prargs$file)
   }
