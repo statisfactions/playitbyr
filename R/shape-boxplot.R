@@ -54,7 +54,7 @@
 ##' @return A \code{sonlayer} object that can be added onto a \code{\link{sonify}} object.
 ##' @references S. Ferguson, W. Martens and D. Cabrera, ``Statistical Sonification for Exploratory Data Analysis'', in \emph{The Sonification Handbook},  ed. Hermann, Hunt, Neuhoff. Available: \url{http://sonification.de/handbook/}
 ##' @examples
-##' x1 <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species)
+##' x1 <- sonify(iris, sonaes(pitch = Sepal.Length)) + sonfacet(Species) +
 ##'    shape_boxplot(length = 1, tempo = 1800)
 ##' \dontrun{x1} # facet by Species
 ##' x2 <- sonify(iris, sonaes(pitch = Sepal.Length)) +
@@ -62,7 +62,7 @@
 ##' \dontrun{x2}
 ##' x3 <- sonify(iris, sonaes(pitch = Sepal.Length)) +
 ##'   shape_boxplot(length = 1, tempo = 1200) #  same length as original but fewer pitches
-##' \dontrun{x3}G
+##' \dontrun{x3}
 ##' @export
 shape_boxplot <- function(length = 5, tempo = 240, pause = 0.1, ..., data = NULL,
                           mapping = NULL) sonlayer("boxplot", length = length, tempo = tempo, pause = pause, data = data, mapping = mapping, ...)
