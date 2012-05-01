@@ -1,5 +1,5 @@
 ## utility function for running these tests
-soncompare <<- function(x, comppath, seed = 719, basepath = "~/sonification/testdata/") {
+soncompare <<- function(x, comppath, seed = 719, basepath = "./") {
   set.seed(seed)
   outfile <- paste(tempfile(), ".wav", sep="")
   sonsave(x,outfile)
