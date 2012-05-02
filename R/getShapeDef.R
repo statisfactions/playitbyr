@@ -17,12 +17,13 @@
     shape <- x
   else shape <- class(x)
   
-  return(allShapeDefs[[shape]])
+  return(.getAllShapeDefs()[[shape]])
 }
 
 ##' @rdname getShapeDef
 ##' @export
-.getShapeNames <- function() names(allShapeDefs)
+.getShapeNames <- function() names(.getAllShapeDefs())
   
-
+.getAllShapeDefs <- function()
+  get("allShapeDefs", envir = .ShapeDefs) 
 

@@ -9,8 +9,8 @@
 ##' @keywords internal
 ##' @export
 shape_descriptions <- function() {
-  descriptions <- sapply(allShapeDefs, function(x) x$description)
-  params <- sapply(allShapeDefs, function(x) paste(names(x$params), collapse=", "))
+  descriptions <- sapply(.getAllShapeDefs(), function(x) x$description)
+  params <- sapply(.getAllShapeDefs(), function(x) paste(names(x$params), collapse=", "))
   return(cbind(descriptions, params))
 }
   

@@ -17,9 +17,9 @@
 .getSoundParams <- function(shapes = .getShapeNames()) {
   ## Get all param names and condense into a single vector with unique
   ## elements
-  paramnames <- lapply(allShapeDefs, function(x) names(x$params))
-  paramlengths <- lapply(names(allShapeDefs), function(x)
-                         rep(x, length(allShapeDefs[[x]]$params)))
+  paramnames <- lapply(.getAllShapeDefs(), function(x) names(x$params))
+  paramlengths <- lapply(names(.getAllShapeDefs()), function(x)
+                         rep(x, length(.getAllShapeDefs()[[x]]$params)))
   
   params <- cbind(do.call(c, paramnames), do.call(c, paramlengths))
   params <- as.data.frame(params, stringsAsFactors=F)
