@@ -43,3 +43,7 @@ scorePreprocessor.dotplot <- function(sonlayerscore, opts, ...) {
 
   return(sonlayerscore)
 }
+
+scorePreprocessor.horsie <- scorePreprocessor.dotplot
+
+

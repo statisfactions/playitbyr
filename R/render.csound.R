@@ -57,6 +57,24 @@ csound_layer.csound <- function(sonlayerscore, ...) {
   list(as.matrix(sonlayerscore))
 }
 
+## the badass horsie version of dotplot
+csound_layer.horsie <- function(sonlayerscore, ...) {
+  sonlayerscorem <- as.matrix(sonlayerscore)
+  allnames <- c("inst", "start", "dur", "filename")
+  out <- matrix(nrow = nrow(sonlayerscorem), ncol = 4)
+  colnames(out) <- allnames
+  namesmatch <- intersect(colnames(sonlayerscorem), allnames)
+
+  filename <- system.file("wav/horseclean.wav", package = "playitbyr")
+
+  out[, "filename"] <- paste("\"", filename, "\"", sep  = "")
+  out[, "inst"] <- 3
+  out[, namesmatch] <- sonlayerscorem[, namesmatch]
+  out[, "dur"] <- 0.9
+
+  return(list(out))
+}
+
 ##' @rdname render.csound
 ##' @method csound_layer dotplot
 csound_layer.dotplot <- function(sonlayerscore, ...) {

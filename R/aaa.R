@@ -25,12 +25,11 @@
 
     ## Coerce current environment to list and return
     allShapes <- as.list(environment())
+    allShapes$horsie <- allShapes$dotplot
     return(allShapes)
   }
   assign("allShapeDefs", loadShapeDefs(), envir = .ShapeDefs)
 }
-
-
 
 ## instrument constants
 instFM <- 1
