@@ -25,5 +25,5 @@
 .getShapeNames <- function() names(.getAllShapeDefs())
   
 .getAllShapeDefs <- function()
-  get("allShapeDefs", envir = .ShapeDefs) 
+  get("allShapeDefs", envir = .ShapeDefsHorse) 
 

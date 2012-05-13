@@ -1,7 +1,7 @@
 Package: playitbyhoof
 Type: Package
 Title: Representing and exploring data through equestrian adventures
-Version: 0.2-1
+Version: 0.2-3
 Date: 2012-05-01
 Author: Ethan Brown
 Maintainer: Ethan Brown <ethancbrown@gmail.com>
@@ -12,7 +12,7 @@ Description: playitbyhoof is a flexible toolkit for data sonification; this is
     the special horse addition.
 URL: http://playitbyr.org/
 License: GPL (>= 2)
-SystemRequirements: playitbyr creates sound using the csound package,
+SystemRequirements: playitbyhoof creates sound using the csound package,
     which requires the free and open source software synthesizer
     Csound, available at <http://csound.sourceforge.net/>. See
     <http://playitbyr.org/csound.html> for more guidance on setting up

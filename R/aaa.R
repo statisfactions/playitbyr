@@ -1,4 +1,4 @@
-.ShapeDefs <- new.env()
+.ShapeDefsHorse <- new.env()
 
 ## Actually create the list containing all shapeDefs for use in
 ## various functions throughout the packag
@@ -13,7 +13,7 @@
     ## load them.
 
     ## Get file paths of all .rda files with saved shape information
-    shapefiles <- dir(system.file("shapeDefs", package="playitbyr"),
+    shapefiles <- dir(system.file("shapeDefs", package="playitbyhoof"),
                       full.names=T, pattern = "^.*\\.rda$")
     ## and load them
     for(i in shapefiles) load(i)
@@ -28,7 +28,7 @@
     allShapes$horsie <- allShapes$dotplot
     return(allShapes)
   }
-  assign("allShapeDefs", loadShapeDefs(), envir = .ShapeDefs)
+  assign("allShapeDefs", loadShapeDefs(), envir = .ShapeDefsHorse)
 }
 
 ## instrument constants

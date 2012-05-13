@@ -23,7 +23,7 @@ render.csound <- function(x, opts, file = "", ...) {
   else
     opts$i <- i
 
-  opts$orcfile <- system.file("orc/playitbyr.orc", package = "playitbyr")
+  opts$orcfile <- system.file("orc/playitbyr.orc", package = "playitbyhoof")
   opts$out <- file
   opts$rendering <- NULL
   do.call(createPerformance, opts)
@@ -65,7 +65,7 @@ csound_layer.horsie <- function(sonlayerscore, ...) {
   colnames(out) <- allnames
   namesmatch <- intersect(colnames(sonlayerscorem), allnames)
 
-  filename <- system.file("wav/horseclean.wav", package = "playitbyr")
+  filename <- system.file("wav/horseclean.wav", package = "playitbyhoof")
 
   out[, "filename"] <- paste("\"", filename, "\"", sep  = "")
   out[, "inst"] <- 3

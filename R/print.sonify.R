@@ -67,7 +67,7 @@ print.sonify <- function(x, ...) {
       createPerformance(i = list(matrix(c(3, 0, length,
                         paste("\"", filename, "\"", sep  = "")),
                         nrow = 1)), out = prargs$playout,
-                                orcfile = system.file("orc/playitbyr.orc", package = "playitbyr"),
+                                orcfile = system.file("orc/playitbyr.orc", package = "playitbyhoof"),
                       realTime = FALSE)
     if(WINDOWS) # navigate back in Windows
       setwd(oldwd)
