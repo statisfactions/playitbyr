@@ -14,54 +14,10 @@ Description: playitbyr is a flexible toolkit for data sonification,
     rhythm, and output sound and sound files.
 URL: http://playitbyr.org/
 License: GPL (>= 2)
-SystemRequirements: playitbyr creates sound using the csound package,
+SystemRequirements: playitbyr creates sound using the csound package, currently broken, 
     which requires the free and open source software synthesizer
-    Csound, available at <http://csound.sourceforge.net/>. See
+    Csound, available at <http://csound.com/download/>. See
     <http://playitbyr.org/csound.html> for more guidance on setting up
-    Csound.
+    Csound. The current version is a hack.
 LazyLoad: yes
-Collate:
-    'aaa.R'
-    'checkSonify.R'
-    'getShapeDef.R'
-    'internaldf.R'
-    'internalsonify.R'
-    'linearscale.R'
-    'octToFreq.R'
-    'render.R'
-    'sonaes.R'
-    'sonify.R'
-    'sonlayer.R'
-    'sonscaling.R'
-    'getSoundParams.R'
-    'getDefaultMappings.R'
-    'scorePreprocessor.dotplot.R'
-    'scorePreprocessor.csound.R'
-    'render.csound.R'
-    'sonopts.R'
-    'expscale.R'
-    'scorePreprocessor.scatter.R'
-    'sonsave.R'
-    'shape-descriptions.R'
-    'scale-attkp-continuous.R'
-    'scale-decayp-continuous.R'
-    'scale-dur-continuous.R'
-    'scale-identity.R'
-    'scale-indx-continuous.R'
-    'scale-mod-continuous.R'
-    'scale-pan-continuous.R'
-    'scale-pitch-continuous.R'
-    'scale-tempo-continuous.R'
-    'scale-time-continuous.R'
-    'scale-vol-continuous.R'
-    'shape-csound.R'
-    'shape-dotplot.R'
-    'shape-scatter.R'
-    'add-sonify.R'
-    'print.sonify.R'
-    'summary.sonify.R'
-    'sonfacet.R'
-    'shape-histogram.R'
-    'scorePreprocessor.histogram.R'
-    'scorePreprocessor.boxplot.R'
-    'shape-boxplot.R'
+RoxygenNote: 7.2.3
